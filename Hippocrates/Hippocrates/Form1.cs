@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
-
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using MySql.Data.Types;
 namespace Hippocrates
 {
     public partial class Form1 : MetroForm
