@@ -7,18 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MetroFramework.Forms;
-using MySql.Data;
-using MySql.Data.MySqlClient;
-using MySql.Data.Types;
 using Hippocrates.Data;
-namespace Hippocrates
+namespace HippocratesPatient
 {
-    public partial class Form1 : MetroForm
+    public partial class Form1 : Form
     {
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();  
         }
     }
 }
