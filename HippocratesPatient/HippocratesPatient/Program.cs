@@ -15,7 +15,12 @@ namespace HippocratesPatient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            Form1 view = new Form1();
+            Model.Model model = new Model.Model();
+            Controller.IController controller = new Controller.Controller(model, view);
+
+            Application.Run(view);
         }
     }
 }
