@@ -15,6 +15,7 @@ namespace Hippocrates.Data
         public int smena;
         public DateTime datum_rodjenja;
         public DomZdravlja radiU;
+        public List<int> lista_ocena;
 
         public IzabraniLekar(string jmbg, string ime, string srednje_slovo, string prezime, DateTime datum_rodjenja, DomZdravlja radiU, int smena)
         {
@@ -88,6 +89,10 @@ namespace Hippocrates.Data
             {
                 datum_rodjenja = value;
             }
+        }
+        public void dodajOcenu(int ocena)
+        {
+            lista_ocena.Add(ocena);
         }
     }
 }
