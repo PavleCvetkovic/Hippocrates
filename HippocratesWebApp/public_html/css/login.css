@@ -2,8 +2,18 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
+  text-align: center;
 }
-
+.btn{
+    background-color: #009263;
+    border: none;
+}
+img{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top:30px;
+}
 .form-signin {
   max-width: 330px;
   padding: 15px;

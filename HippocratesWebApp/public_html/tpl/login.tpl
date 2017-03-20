@@ -15,7 +15,8 @@
   <body>
 
     <div class="container">
-
+      <h1>Hippocrates</h1>
+      <img src="images/logo.jpg" />
       <form class="form-signin">
         <h2 class="form-signin-heading">Molimo prijavite se</h2>
         <input type="number" id="JMBG" class="form-control" placeholder="JMBG" required autofocus>
