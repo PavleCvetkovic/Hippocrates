@@ -74,6 +74,12 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRaspored.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRaspored.Designer.cs">
+      <DependentUpon>FormRaspored.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRaspored.resx">
+      <DependentUpon>FormRaspored.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
