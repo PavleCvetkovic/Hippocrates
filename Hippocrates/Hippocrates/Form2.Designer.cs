@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,12 +44,17 @@
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.GeneralControl = new MetroFramework.Controls.MetroTabControl();
             this.tab_pogled_baze = new MetroFramework.Controls.MetroTabPage();
-            this.dataGridView7 = new System.Windows.Forms.DataGridView();
+            this.metro_grid_view = new MetroFramework.Controls.MetroGrid();
+            this.btn_obican_pogled_Pacijent = new System.Windows.Forms.Button();
+            this.btn_obican_pogled_MedicOsoblje = new System.Windows.Forms.Button();
+            this.btn_obican_pogled_Lekar = new System.Windows.Forms.Button();
+            this.btn_dom_zdravlja_obicanPogled = new System.Windows.Forms.Button();
+            this.dGV_pogled_u_bazu = new System.Windows.Forms.DataGridView();
             this.tab_za_unosenje = new MetroFramework.Controls.MetroTabPage();
             this.TabControl_za_unos = new MetroFramework.Controls.MetroTabControl();
             this.tab_nov_domZdravlja = new MetroFramework.Controls.MetroTabPage();
             this.btn_unosDomaZdr = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dGV_unosenje_DZ = new System.Windows.Forms.DataGridView();
             this.tb_opstina_doma_zdravlja = new System.Windows.Forms.TextBox();
             this.tb_adresa_doma_zdravlja = new System.Windows.Forms.TextBox();
             this.lbl_opstina_dz = new System.Windows.Forms.Label();
@@ -59,36 +66,36 @@
             this.lbl_MBR_doma_zdravlja = new System.Windows.Forms.Label();
             this.tb_MBR_doma_zdravlja = new System.Windows.Forms.TextBox();
             this.tab_za_unosenje_novog_lekara = new MetroFramework.Controls.MetroTabPage();
+            this.checkB_Druga_smena = new System.Windows.Forms.CheckBox();
+            this.chekcB_Prva_smena = new System.Windows.Forms.CheckBox();
+            this.tb_srednje_slovo = new System.Windows.Forms.TextBox();
             this.dTP_lekara = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dGV_unosenje_lekar = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_Unesi_lekara = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_pass_lekara_unos = new System.Windows.Forms.TextBox();
             this.tb_prezime_lekara = new System.Windows.Forms.TextBox();
             this.lblPassLekara = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_ime_lekara_unos = new System.Windows.Forms.TextBox();
             this.lblImeLekara = new System.Windows.Forms.Label();
             this.tb_mbrzu_lekara = new System.Windows.Forms.TextBox();
             this.lblMBRZULekara = new System.Windows.Forms.Label();
             this.lblJMBGLekara = new System.Windows.Forms.Label();
             this.tb_jmbg_lekara = new System.Windows.Forms.TextBox();
             this.tab_nov_pacijent = new MetroFramework.Controls.MetroTabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dGV_unosenje_pacijent = new System.Windows.Forms.DataGridView();
             this.dTP_pacijenta = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.btn_unesi_pacijenta = new System.Windows.Forms.Button();
             this.tb_opstina = new System.Windows.Forms.TextBox();
             this.tb_prezime_pacijenta = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.tb_ime_lekara = new System.Windows.Forms.TextBox();
+            this.tb_ime_pac = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tb_LBO_pacujenta = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -102,21 +109,21 @@
             this.tb_MBR_za_brisanje = new System.Windows.Forms.TextBox();
             this.rB_brisanje_pomocu_MBR = new System.Windows.Forms.RadioButton();
             this.btn_brisanje_dz = new System.Windows.Forms.Button();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dGV_brisanje_dz = new System.Windows.Forms.DataGridView();
             this.tab_obrisi_lekara = new MetroFramework.Controls.MetroTabPage();
             this.gb_alternativa_za_brisanje_lekara = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.tB_JMBG_brisanje_lekara = new System.Windows.Forms.TextBox();
             this.rB_alternativno_brisanje_lekara = new System.Windows.Forms.RadioButton();
             this.btn_obrisi_lekara = new System.Windows.Forms.Button();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.dGV_lekar_brisanje = new System.Windows.Forms.DataGridView();
             this.tab_brisanje_pacijenta = new MetroFramework.Controls.MetroTabPage();
             this.btn_brisanje_pacijenta = new System.Windows.Forms.Button();
             this.gb_alternativa_za_brisanje_pacijenta = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
             this.tb_JMBG_brisanja_pacijenta = new System.Windows.Forms.TextBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.dGV_pacijent_brisanje = new System.Windows.Forms.DataGridView();
             this.tab_za_azuriranje = new MetroFramework.Controls.MetroTabPage();
             this.metroTabControl2 = new MetroFramework.Controls.MetroTabControl();
             this.Tab_azuriranje_domaZdravlja = new MetroFramework.Controls.MetroTabPage();
@@ -171,33 +178,36 @@
             this.label37 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.dGV_pacijenti_azuriranje = new System.Windows.Forms.DataGridView();
-            this.r = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tb_srednjeSlovo = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.dTP_Vazi_do = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.GeneralControl.SuspendLayout();
             this.tab_pogled_baze.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metro_grid_view)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_pogled_u_bazu)).BeginInit();
             this.tab_za_unosenje.SuspendLayout();
             this.TabControl_za_unos.SuspendLayout();
             this.tab_nov_domZdravlja.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_DZ)).BeginInit();
             this.tab_za_unosenje_novog_lekara.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_lekar)).BeginInit();
             this.tab_nov_pacijent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_pacijent)).BeginInit();
             this.tab_za_brisanje_podataka.SuspendLayout();
             this.tabControl_za_brisanje.SuspendLayout();
             this.tab_brisanje_dz.SuspendLayout();
             this.gb_alternativa_za_brisanje_dz.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_brisanje_dz)).BeginInit();
             this.tab_obrisi_lekara.SuspendLayout();
             this.gb_alternativa_za_brisanje_lekara.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_lekar_brisanje)).BeginInit();
             this.tab_brisanje_pacijenta.SuspendLayout();
             this.gb_alternativa_za_brisanje_pacijenta.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_pacijent_brisanje)).BeginInit();
             this.tab_za_azuriranje.SuspendLayout();
             this.metroTabControl2.SuspendLayout();
             this.Tab_azuriranje_domaZdravlja.SuspendLayout();
@@ -209,7 +219,6 @@
             this.Tab_azuriranje_pacijenata.SuspendLayout();
             this.pnl_azuriranje_pacijenti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_pacijenti_azuriranje)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.r)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -332,14 +341,19 @@
             this.GeneralControl.Controls.Add(this.tab_za_azuriranje);
             this.GeneralControl.Location = new System.Drawing.Point(200, 93);
             this.GeneralControl.Name = "GeneralControl";
-            this.GeneralControl.SelectedIndex = 0;
+            this.GeneralControl.SelectedIndex = 2;
             this.GeneralControl.Size = new System.Drawing.Size(1020, 706);
             this.GeneralControl.TabIndex = 4;
             this.GeneralControl.UseSelectable = true;
             // 
             // tab_pogled_baze
             // 
-            this.tab_pogled_baze.Controls.Add(this.dataGridView7);
+            this.tab_pogled_baze.Controls.Add(this.metro_grid_view);
+            this.tab_pogled_baze.Controls.Add(this.btn_obican_pogled_Pacijent);
+            this.tab_pogled_baze.Controls.Add(this.btn_obican_pogled_MedicOsoblje);
+            this.tab_pogled_baze.Controls.Add(this.btn_obican_pogled_Lekar);
+            this.tab_pogled_baze.Controls.Add(this.btn_dom_zdravlja_obicanPogled);
+            this.tab_pogled_baze.Controls.Add(this.dGV_pogled_u_bazu);
             this.tab_pogled_baze.HorizontalScrollbarBarColor = true;
             this.tab_pogled_baze.HorizontalScrollbarHighlightOnWheel = false;
             this.tab_pogled_baze.HorizontalScrollbarSize = 10;
@@ -352,13 +366,96 @@
             this.tab_pogled_baze.VerticalScrollbarHighlightOnWheel = false;
             this.tab_pogled_baze.VerticalScrollbarSize = 10;
             // 
-            // dataGridView7
+            // metro_grid_view
             // 
-            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView7.Location = new System.Drawing.Point(1, 3);
-            this.dataGridView7.Name = "dataGridView7";
-            this.dataGridView7.Size = new System.Drawing.Size(1006, 658);
-            this.dataGridView7.TabIndex = 2;
+            this.metro_grid_view.AllowUserToResizeRows = false;
+            this.metro_grid_view.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metro_grid_view.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.metro_grid_view.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.metro_grid_view.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metro_grid_view.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.metro_grid_view.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metro_grid_view.DefaultCellStyle = dataGridViewCellStyle5;
+            this.metro_grid_view.EnableHeadersVisualStyles = false;
+            this.metro_grid_view.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.metro_grid_view.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metro_grid_view.Location = new System.Drawing.Point(0, 267);
+            this.metro_grid_view.Name = "metro_grid_view";
+            this.metro_grid_view.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metro_grid_view.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.metro_grid_view.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.metro_grid_view.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.metro_grid_view.Size = new System.Drawing.Size(663, 268);
+            this.metro_grid_view.TabIndex = 7;
+            // 
+            // btn_obican_pogled_Pacijent
+            // 
+            this.btn_obican_pogled_Pacijent.Location = new System.Drawing.Point(393, 14);
+            this.btn_obican_pogled_Pacijent.Name = "btn_obican_pogled_Pacijent";
+            this.btn_obican_pogled_Pacijent.Size = new System.Drawing.Size(125, 23);
+            this.btn_obican_pogled_Pacijent.TabIndex = 6;
+            this.btn_obican_pogled_Pacijent.Text = "Pacijent";
+            this.btn_obican_pogled_Pacijent.UseVisualStyleBackColor = true;
+            this.btn_obican_pogled_Pacijent.Click += new System.EventHandler(this.btn_obican_pogled_Pacijent_Click);
+            // 
+            // btn_obican_pogled_MedicOsoblje
+            // 
+            this.btn_obican_pogled_MedicOsoblje.Location = new System.Drawing.Point(262, 14);
+            this.btn_obican_pogled_MedicOsoblje.Name = "btn_obican_pogled_MedicOsoblje";
+            this.btn_obican_pogled_MedicOsoblje.Size = new System.Drawing.Size(125, 23);
+            this.btn_obican_pogled_MedicOsoblje.TabIndex = 5;
+            this.btn_obican_pogled_MedicOsoblje.Text = "Medicinsko osoblje";
+            this.btn_obican_pogled_MedicOsoblje.UseVisualStyleBackColor = true;
+            this.btn_obican_pogled_MedicOsoblje.Click += new System.EventHandler(this.btn_obican_pogled_MedicOsoblje_Click);
+            // 
+            // btn_obican_pogled_Lekar
+            // 
+            this.btn_obican_pogled_Lekar.Location = new System.Drawing.Point(131, 14);
+            this.btn_obican_pogled_Lekar.Name = "btn_obican_pogled_Lekar";
+            this.btn_obican_pogled_Lekar.Size = new System.Drawing.Size(125, 23);
+            this.btn_obican_pogled_Lekar.TabIndex = 4;
+            this.btn_obican_pogled_Lekar.Text = "Lekar";
+            this.btn_obican_pogled_Lekar.UseVisualStyleBackColor = true;
+            this.btn_obican_pogled_Lekar.Click += new System.EventHandler(this.btn_obican_pogled_Lekar_Click);
+            // 
+            // btn_dom_zdravlja_obicanPogled
+            // 
+            this.btn_dom_zdravlja_obicanPogled.Location = new System.Drawing.Point(0, 14);
+            this.btn_dom_zdravlja_obicanPogled.Name = "btn_dom_zdravlja_obicanPogled";
+            this.btn_dom_zdravlja_obicanPogled.Size = new System.Drawing.Size(125, 23);
+            this.btn_dom_zdravlja_obicanPogled.TabIndex = 3;
+            this.btn_dom_zdravlja_obicanPogled.Text = "Dom zdravlja";
+            this.btn_dom_zdravlja_obicanPogled.UseVisualStyleBackColor = true;
+            this.btn_dom_zdravlja_obicanPogled.Click += new System.EventHandler(this.btn_dom_zdravlja_obicanPogled_Click);
+            // 
+            // dGV_pogled_u_bazu
+            // 
+            this.dGV_pogled_u_bazu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_pogled_u_bazu.Location = new System.Drawing.Point(1, 43);
+            this.dGV_pogled_u_bazu.Name = "dGV_pogled_u_bazu";
+            this.dGV_pogled_u_bazu.Size = new System.Drawing.Size(1008, 218);
+            this.dGV_pogled_u_bazu.TabIndex = 2;
             // 
             // tab_za_unosenje
             // 
@@ -382,15 +479,16 @@
             this.TabControl_za_unos.Controls.Add(this.tab_nov_pacijent);
             this.TabControl_za_unos.Location = new System.Drawing.Point(3, 0);
             this.TabControl_za_unos.Name = "TabControl_za_unos";
-            this.TabControl_za_unos.SelectedIndex = 0;
+            this.TabControl_za_unos.SelectedIndex = 2;
             this.TabControl_za_unos.Size = new System.Drawing.Size(996, 668);
             this.TabControl_za_unos.TabIndex = 2;
             this.TabControl_za_unos.UseSelectable = true;
+            this.TabControl_za_unos.SelectedIndexChanged += new System.EventHandler(this.TabControl_za_unos_SelectedIndexChanged);
             // 
             // tab_nov_domZdravlja
             // 
             this.tab_nov_domZdravlja.Controls.Add(this.btn_unosDomaZdr);
-            this.tab_nov_domZdravlja.Controls.Add(this.dataGridView1);
+            this.tab_nov_domZdravlja.Controls.Add(this.dGV_unosenje_DZ);
             this.tab_nov_domZdravlja.Controls.Add(this.tb_opstina_doma_zdravlja);
             this.tab_nov_domZdravlja.Controls.Add(this.tb_adresa_doma_zdravlja);
             this.tab_nov_domZdravlja.Controls.Add(this.lbl_opstina_dz);
@@ -421,14 +519,15 @@
             this.btn_unosDomaZdr.TabIndex = 13;
             this.btn_unosDomaZdr.Text = "Unesi podatke";
             this.btn_unosDomaZdr.UseVisualStyleBackColor = true;
+            this.btn_unosDomaZdr.Click += new System.EventHandler(this.btn_unosDomaZdr_Click);
             // 
-            // dataGridView1
+            // dGV_unosenje_DZ
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 284);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(971, 339);
-            this.dataGridView1.TabIndex = 12;
+            this.dGV_unosenje_DZ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_unosenje_DZ.Location = new System.Drawing.Point(14, 284);
+            this.dGV_unosenje_DZ.Name = "dGV_unosenje_DZ";
+            this.dGV_unosenje_DZ.Size = new System.Drawing.Size(971, 339);
+            this.dGV_unosenje_DZ.TabIndex = 12;
             // 
             // tb_opstina_doma_zdravlja
             // 
@@ -527,19 +626,20 @@
             // 
             // tab_za_unosenje_novog_lekara
             // 
+            this.tab_za_unosenje_novog_lekara.Controls.Add(this.checkB_Druga_smena);
+            this.tab_za_unosenje_novog_lekara.Controls.Add(this.chekcB_Prva_smena);
+            this.tab_za_unosenje_novog_lekara.Controls.Add(this.tb_srednje_slovo);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.dTP_lekara);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.label7);
-            this.tab_za_unosenje_novog_lekara.Controls.Add(this.dataGridView2);
+            this.tab_za_unosenje_novog_lekara.Controls.Add(this.dGV_unosenje_lekar);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.label6);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.label4);
-            this.tab_za_unosenje_novog_lekara.Controls.Add(this.comboBox2);
-            this.tab_za_unosenje_novog_lekara.Controls.Add(this.comboBox1);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.btn_Unesi_lekara);
-            this.tab_za_unosenje_novog_lekara.Controls.Add(this.textBox1);
+            this.tab_za_unosenje_novog_lekara.Controls.Add(this.tb_pass_lekara_unos);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.tb_prezime_lekara);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.lblPassLekara);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.label5);
-            this.tab_za_unosenje_novog_lekara.Controls.Add(this.textBox3);
+            this.tab_za_unosenje_novog_lekara.Controls.Add(this.tb_ime_lekara_unos);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.lblImeLekara);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.tb_mbrzu_lekara);
             this.tab_za_unosenje_novog_lekara.Controls.Add(this.lblMBRZULekara);
@@ -556,6 +656,37 @@
             this.tab_za_unosenje_novog_lekara.VerticalScrollbarBarColor = true;
             this.tab_za_unosenje_novog_lekara.VerticalScrollbarHighlightOnWheel = false;
             this.tab_za_unosenje_novog_lekara.VerticalScrollbarSize = 10;
+            // 
+            // checkB_Druga_smena
+            // 
+            this.checkB_Druga_smena.AutoSize = true;
+            this.checkB_Druga_smena.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkB_Druga_smena.Location = new System.Drawing.Point(648, 88);
+            this.checkB_Druga_smena.Name = "checkB_Druga_smena";
+            this.checkB_Druga_smena.Size = new System.Drawing.Size(41, 24);
+            this.checkB_Druga_smena.TabIndex = 34;
+            this.checkB_Druga_smena.Text = "2.";
+            this.checkB_Druga_smena.UseVisualStyleBackColor = true;
+            // 
+            // chekcB_Prva_smena
+            // 
+            this.chekcB_Prva_smena.AutoSize = true;
+            this.chekcB_Prva_smena.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chekcB_Prva_smena.Location = new System.Drawing.Point(602, 88);
+            this.chekcB_Prva_smena.Name = "chekcB_Prva_smena";
+            this.chekcB_Prva_smena.Size = new System.Drawing.Size(41, 24);
+            this.chekcB_Prva_smena.TabIndex = 33;
+            this.chekcB_Prva_smena.Text = "1.";
+            this.chekcB_Prva_smena.UseVisualStyleBackColor = true;
+            // 
+            // tb_srednje_slovo
+            // 
+            this.tb_srednje_slovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_srednje_slovo.Location = new System.Drawing.Point(813, 11);
+            this.tb_srednje_slovo.MaxLength = 2;
+            this.tb_srednje_slovo.Name = "tb_srednje_slovo";
+            this.tb_srednje_slovo.Size = new System.Drawing.Size(46, 26);
+            this.tb_srednje_slovo.TabIndex = 32;
             // 
             // dTP_lekara
             // 
@@ -577,24 +708,24 @@
             this.label7.TabIndex = 30;
             this.label7.Text = "Unesite datum rodjenja lekara";
             // 
-            // dataGridView2
+            // dGV_unosenje_lekar
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(14, 284);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(971, 339);
-            this.dataGridView2.TabIndex = 29;
+            this.dGV_unosenje_lekar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_unosenje_lekar.Location = new System.Drawing.Point(14, 284);
+            this.dGV_unosenje_lekar.Name = "dGV_unosenje_lekar";
+            this.dGV_unosenje_lekar.Size = new System.Drawing.Size(971, 322);
+            this.dGV_unosenje_lekar.TabIndex = 29;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(642, 65);
+            this.label6.Location = new System.Drawing.Point(598, 65);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(163, 20);
+            this.label6.Size = new System.Drawing.Size(170, 20);
             this.label6.TabIndex = 28;
-            this.label6.Text = "Unesite smenu lekara";
+            this.label6.Text = "Izaberite smenu lekara";
             // 
             // label4
             // 
@@ -607,54 +738,6 @@
             this.label4.TabIndex = 27;
             this.label4.Text = "Unesite srednje slovo lekara";
             // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "1.",
-            "2."});
-            this.comboBox2.Location = new System.Drawing.Point(813, 57);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(44, 28);
-            this.comboBox2.TabIndex = 26;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"});
-            this.comboBox1.Location = new System.Drawing.Point(813, 9);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(44, 28);
-            this.comboBox1.TabIndex = 25;
-            // 
             // btn_Unesi_lekara
             // 
             this.btn_Unesi_lekara.Location = new System.Drawing.Point(679, 245);
@@ -663,14 +746,15 @@
             this.btn_Unesi_lekara.TabIndex = 24;
             this.btn_Unesi_lekara.Text = "Unesi podatke";
             this.btn_Unesi_lekara.UseVisualStyleBackColor = true;
+            this.btn_Unesi_lekara.Click += new System.EventHandler(this.btn_Unesi_lekara_Click);
             // 
-            // textBox1
+            // tb_pass_lekara_unos
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(314, 186);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(213, 26);
-            this.textBox1.TabIndex = 23;
+            this.tb_pass_lekara_unos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pass_lekara_unos.Location = new System.Drawing.Point(314, 186);
+            this.tb_pass_lekara_unos.Name = "tb_pass_lekara_unos";
+            this.tb_pass_lekara_unos.Size = new System.Drawing.Size(213, 26);
+            this.tb_pass_lekara_unos.TabIndex = 23;
             // 
             // tb_prezime_lekara
             // 
@@ -702,13 +786,13 @@
             this.label5.TabIndex = 20;
             this.label5.Text = "Unesite prezime lekara";
             // 
-            // textBox3
+            // tb_ime_lekara_unos
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(314, 101);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(213, 26);
-            this.textBox3.TabIndex = 19;
+            this.tb_ime_lekara_unos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_ime_lekara_unos.Location = new System.Drawing.Point(314, 101);
+            this.tb_ime_lekara_unos.Name = "tb_ime_lekara_unos";
+            this.tb_ime_lekara_unos.Size = new System.Drawing.Size(213, 26);
+            this.tb_ime_lekara_unos.TabIndex = 19;
             // 
             // lblImeLekara
             // 
@@ -761,17 +845,19 @@
             // 
             // tab_nov_pacijent
             // 
-            this.tab_nov_pacijent.Controls.Add(this.dataGridView3);
+            this.tab_nov_pacijent.Controls.Add(this.dTP_Vazi_do);
+            this.tab_nov_pacijent.Controls.Add(this.label38);
+            this.tab_nov_pacijent.Controls.Add(this.tb_srednjeSlovo);
+            this.tab_nov_pacijent.Controls.Add(this.dGV_unosenje_pacijent);
             this.tab_nov_pacijent.Controls.Add(this.dTP_pacijenta);
             this.tab_nov_pacijent.Controls.Add(this.label8);
             this.tab_nov_pacijent.Controls.Add(this.label10);
-            this.tab_nov_pacijent.Controls.Add(this.comboBox4);
             this.tab_nov_pacijent.Controls.Add(this.btn_unesi_pacijenta);
             this.tab_nov_pacijent.Controls.Add(this.tb_opstina);
             this.tab_nov_pacijent.Controls.Add(this.tb_prezime_pacijenta);
             this.tab_nov_pacijent.Controls.Add(this.label11);
             this.tab_nov_pacijent.Controls.Add(this.label12);
-            this.tab_nov_pacijent.Controls.Add(this.tb_ime_lekara);
+            this.tab_nov_pacijent.Controls.Add(this.tb_ime_pac);
             this.tab_nov_pacijent.Controls.Add(this.label13);
             this.tab_nov_pacijent.Controls.Add(this.tb_LBO_pacujenta);
             this.tab_nov_pacijent.Controls.Add(this.label14);
@@ -789,13 +875,13 @@
             this.tab_nov_pacijent.VerticalScrollbarHighlightOnWheel = false;
             this.tab_nov_pacijent.VerticalScrollbarSize = 10;
             // 
-            // dataGridView3
+            // dGV_unosenje_pacijent
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(14, 284);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(971, 339);
-            this.dataGridView3.TabIndex = 49;
+            this.dGV_unosenje_pacijent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_unosenje_pacijent.Location = new System.Drawing.Point(14, 284);
+            this.dGV_unosenje_pacijent.Name = "dGV_unosenje_pacijent";
+            this.dGV_unosenje_pacijent.Size = new System.Drawing.Size(971, 339);
+            this.dGV_unosenje_pacijent.TabIndex = 49;
             // 
             // dTP_pacijenta
             // 
@@ -822,47 +908,11 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.White;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(622, 23);
+            this.label10.Location = new System.Drawing.Point(542, 23);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(228, 20);
             this.label10.TabIndex = 45;
             this.label10.Text = "Unesite srednje slovo pacijenta";
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z"});
-            this.comboBox4.Location = new System.Drawing.Point(856, 15);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(33, 28);
-            this.comboBox4.TabIndex = 43;
             // 
             // btn_unesi_pacijenta
             // 
@@ -872,6 +922,7 @@
             this.btn_unesi_pacijenta.TabIndex = 42;
             this.btn_unesi_pacijenta.Text = "Unesi podatke";
             this.btn_unesi_pacijenta.UseVisualStyleBackColor = true;
+            this.btn_unesi_pacijenta.Click += new System.EventHandler(this.btn_unesi_pacijenta_Click);
             // 
             // tb_opstina
             // 
@@ -911,13 +962,13 @@
             this.label12.TabIndex = 38;
             this.label12.Text = "Unesite prezime pacijenta";
             // 
-            // tb_ime_lekara
+            // tb_ime_pac
             // 
-            this.tb_ime_lekara.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_ime_lekara.Location = new System.Drawing.Point(320, 107);
-            this.tb_ime_lekara.Name = "tb_ime_lekara";
-            this.tb_ime_lekara.Size = new System.Drawing.Size(213, 26);
-            this.tb_ime_lekara.TabIndex = 37;
+            this.tb_ime_pac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_ime_pac.Location = new System.Drawing.Point(320, 107);
+            this.tb_ime_pac.Name = "tb_ime_pac";
+            this.tb_ime_pac.Size = new System.Drawing.Size(213, 26);
+            this.tb_ime_pac.TabIndex = 37;
             // 
             // label13
             // 
@@ -990,7 +1041,7 @@
             this.tabControl_za_brisanje.Controls.Add(this.tab_brisanje_pacijenta);
             this.tabControl_za_brisanje.Location = new System.Drawing.Point(-1, -2);
             this.tabControl_za_brisanje.Name = "tabControl_za_brisanje";
-            this.tabControl_za_brisanje.SelectedIndex = 0;
+            this.tabControl_za_brisanje.SelectedIndex = 2;
             this.tabControl_za_brisanje.Size = new System.Drawing.Size(1010, 668);
             this.tabControl_za_brisanje.TabIndex = 3;
             this.tabControl_za_brisanje.UseSelectable = true;
@@ -999,7 +1050,7 @@
             // 
             this.tab_brisanje_dz.Controls.Add(this.gb_alternativa_za_brisanje_dz);
             this.tab_brisanje_dz.Controls.Add(this.btn_brisanje_dz);
-            this.tab_brisanje_dz.Controls.Add(this.dataGridView4);
+            this.tab_brisanje_dz.Controls.Add(this.dGV_brisanje_dz);
             this.tab_brisanje_dz.HorizontalScrollbarBarColor = true;
             this.tab_brisanje_dz.HorizontalScrollbarHighlightOnWheel = false;
             this.tab_brisanje_dz.HorizontalScrollbarSize = 10;
@@ -1057,26 +1108,26 @@
             // btn_brisanje_dz
             // 
             this.btn_brisanje_dz.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_brisanje_dz.Location = new System.Drawing.Point(837, 578);
+            this.btn_brisanje_dz.Location = new System.Drawing.Point(837, 565);
             this.btn_brisanje_dz.Name = "btn_brisanje_dz";
             this.btn_brisanje_dz.Size = new System.Drawing.Size(157, 45);
             this.btn_brisanje_dz.TabIndex = 3;
             this.btn_brisanje_dz.Text = "Obrisi dom zdravlja";
             this.btn_brisanje_dz.UseVisualStyleBackColor = true;
             // 
-            // dataGridView4
+            // dGV_brisanje_dz
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(9, 10);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(985, 512);
-            this.dataGridView4.TabIndex = 2;
+            this.dGV_brisanje_dz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_brisanje_dz.Location = new System.Drawing.Point(9, 10);
+            this.dGV_brisanje_dz.Name = "dGV_brisanje_dz";
+            this.dGV_brisanje_dz.Size = new System.Drawing.Size(985, 512);
+            this.dGV_brisanje_dz.TabIndex = 2;
             // 
             // tab_obrisi_lekara
             // 
             this.tab_obrisi_lekara.Controls.Add(this.gb_alternativa_za_brisanje_lekara);
             this.tab_obrisi_lekara.Controls.Add(this.btn_obrisi_lekara);
-            this.tab_obrisi_lekara.Controls.Add(this.dataGridView5);
+            this.tab_obrisi_lekara.Controls.Add(this.dGV_lekar_brisanje);
             this.tab_obrisi_lekara.HorizontalScrollbarBarColor = true;
             this.tab_obrisi_lekara.HorizontalScrollbarHighlightOnWheel = false;
             this.tab_obrisi_lekara.HorizontalScrollbarSize = 10;
@@ -1141,19 +1192,19 @@
             this.btn_obrisi_lekara.Text = "Obrisi lekara";
             this.btn_obrisi_lekara.UseVisualStyleBackColor = true;
             // 
-            // dataGridView5
+            // dGV_lekar_brisanje
             // 
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(9, 10);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(985, 512);
-            this.dataGridView5.TabIndex = 2;
+            this.dGV_lekar_brisanje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_lekar_brisanje.Location = new System.Drawing.Point(9, 10);
+            this.dGV_lekar_brisanje.Name = "dGV_lekar_brisanje";
+            this.dGV_lekar_brisanje.Size = new System.Drawing.Size(985, 512);
+            this.dGV_lekar_brisanje.TabIndex = 2;
             // 
             // tab_brisanje_pacijenta
             // 
             this.tab_brisanje_pacijenta.Controls.Add(this.btn_brisanje_pacijenta);
             this.tab_brisanje_pacijenta.Controls.Add(this.gb_alternativa_za_brisanje_pacijenta);
-            this.tab_brisanje_pacijenta.Controls.Add(this.dataGridView6);
+            this.tab_brisanje_pacijenta.Controls.Add(this.dGV_pacijent_brisanje);
             this.tab_brisanje_pacijenta.HorizontalScrollbarBarColor = true;
             this.tab_brisanje_pacijenta.HorizontalScrollbarHighlightOnWheel = false;
             this.tab_brisanje_pacijenta.HorizontalScrollbarSize = 10;
@@ -1218,13 +1269,13 @@
             this.radioButton1.Text = "Brisanje pomocu JMBG-a";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // dataGridView6
+            // dGV_pacijent_brisanje
             // 
-            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView6.Location = new System.Drawing.Point(9, 10);
-            this.dataGridView6.Name = "dataGridView6";
-            this.dataGridView6.Size = new System.Drawing.Size(985, 512);
-            this.dataGridView6.TabIndex = 2;
+            this.dGV_pacijent_brisanje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_pacijent_brisanje.Location = new System.Drawing.Point(9, 10);
+            this.dGV_pacijent_brisanje.Name = "dGV_pacijent_brisanje";
+            this.dGV_pacijent_brisanje.Size = new System.Drawing.Size(985, 512);
+            this.dGV_pacijent_brisanje.TabIndex = 2;
             // 
             // tab_za_azuriranje
             // 
@@ -1861,15 +1912,40 @@
             this.dGV_pacijenti_azuriranje.Size = new System.Drawing.Size(985, 355);
             this.dGV_pacijenti_azuriranje.TabIndex = 2;
             // 
-            // r
+            // tb_srednjeSlovo
             // 
-            this.r.ContainerControl = this;
+            this.tb_srednjeSlovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_srednjeSlovo.Location = new System.Drawing.Point(776, 23);
+            this.tb_srednjeSlovo.MaxLength = 2;
+            this.tb_srednjeSlovo.Name = "tb_srednjeSlovo";
+            this.tb_srednjeSlovo.Size = new System.Drawing.Size(29, 26);
+            this.tb_srednjeSlovo.TabIndex = 50;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.BackColor = System.Drawing.Color.White;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(542, 71);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(228, 20);
+            this.label38.TabIndex = 51;
+            this.label38.Text = "Unesite srednje slovo pacijenta";
+            // 
+            // dTP_Vazi_do
+            // 
+            this.dTP_Vazi_do.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTP_Vazi_do.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dTP_Vazi_do.Location = new System.Drawing.Point(769, 71);
+            this.dTP_Vazi_do.Name = "dTP_Vazi_do";
+            this.dTP_Vazi_do.Size = new System.Drawing.Size(213, 22);
+            this.dTP_Vazi_do.TabIndex = 52;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1243, 822);
+            this.ClientSize = new System.Drawing.Size(1243, 780);
             this.Controls.Add(this.GeneralControl);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
@@ -1885,32 +1961,33 @@
             this.panel2.PerformLayout();
             this.GeneralControl.ResumeLayout(false);
             this.tab_pogled_baze.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metro_grid_view)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_pogled_u_bazu)).EndInit();
             this.tab_za_unosenje.ResumeLayout(false);
             this.TabControl_za_unos.ResumeLayout(false);
             this.tab_nov_domZdravlja.ResumeLayout(false);
             this.tab_nov_domZdravlja.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_DZ)).EndInit();
             this.tab_za_unosenje_novog_lekara.ResumeLayout(false);
             this.tab_za_unosenje_novog_lekara.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_lekar)).EndInit();
             this.tab_nov_pacijent.ResumeLayout(false);
             this.tab_nov_pacijent.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_pacijent)).EndInit();
             this.tab_za_brisanje_podataka.ResumeLayout(false);
             this.tabControl_za_brisanje.ResumeLayout(false);
             this.tab_brisanje_dz.ResumeLayout(false);
             this.gb_alternativa_za_brisanje_dz.ResumeLayout(false);
             this.gb_alternativa_za_brisanje_dz.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_brisanje_dz)).EndInit();
             this.tab_obrisi_lekara.ResumeLayout(false);
             this.gb_alternativa_za_brisanje_lekara.ResumeLayout(false);
             this.gb_alternativa_za_brisanje_lekara.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_lekar_brisanje)).EndInit();
             this.tab_brisanje_pacijenta.ResumeLayout(false);
             this.gb_alternativa_za_brisanje_pacijenta.ResumeLayout(false);
             this.gb_alternativa_za_brisanje_pacijenta.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_pacijent_brisanje)).EndInit();
             this.tab_za_azuriranje.ResumeLayout(false);
             this.metroTabControl2.ResumeLayout(false);
             this.Tab_azuriranje_domaZdravlja.ResumeLayout(false);
@@ -1925,7 +2002,6 @@
             this.pnl_azuriranje_pacijenti.ResumeLayout(false);
             this.pnl_azuriranje_pacijenti.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_pacijenti_azuriranje)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.r)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1961,42 +2037,38 @@
         private System.Windows.Forms.TextBox tb_adresa_doma_zdravlja;
         private System.Windows.Forms.Label lbl_opstina_dz;
         private System.Windows.Forms.Label lbl_adresa_dz;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dGV_unosenje_DZ;
         private System.Windows.Forms.Button btn_unosDomaZdr;
         private System.Windows.Forms.Button btn_Unesi_lekara;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_pass_lekara_unos;
         private System.Windows.Forms.TextBox tb_prezime_lekara;
         private System.Windows.Forms.Label lblPassLekara;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label lblImeLekara;
         private System.Windows.Forms.TextBox tb_mbrzu_lekara;
         private System.Windows.Forms.Label lblMBRZULekara;
         private System.Windows.Forms.Label lblJMBGLekara;
         private System.Windows.Forms.TextBox tb_jmbg_lekara;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dGV_unosenje_lekar;
         private System.Windows.Forms.DateTimePicker dTP_lekara;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dTP_pacijenta;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Button btn_unesi_pacijenta;
         private System.Windows.Forms.TextBox tb_opstina;
         private System.Windows.Forms.TextBox tb_prezime_pacijenta;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tb_ime_lekara;
+        private System.Windows.Forms.TextBox tb_ime_pac;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox tb_LBO_pacujenta;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tb_JMBG_pacijenta;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dGV_unosenje_pacijent;
         private MetroFramework.Controls.MetroTabControl tabControl_za_brisanje;
         private MetroFramework.Controls.MetroTabPage tab_brisanje_dz;
         private MetroFramework.Controls.MetroTabPage tab_obrisi_lekara;
@@ -2005,20 +2077,19 @@
         private MetroFramework.Controls.MetroTabPage Tab_azuriranje_domaZdravlja;
         private MetroFramework.Controls.MetroTabPage Tab_azuriranje_lekara;
         private MetroFramework.Controls.MetroTabPage Tab_azuriranje_pacijenata;
-        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dGV_brisanje_dz;
         private System.Windows.Forms.Button btn_brisanje_dz;
         private System.Windows.Forms.RadioButton rB_brisanje_pomocu_MBR;
-        private System.Windows.Forms.ErrorProvider r;
         private System.Windows.Forms.GroupBox gb_alternativa_za_brisanje_dz;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tb_MBR_za_brisanje;
-        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.DataGridView dGV_lekar_brisanje;
         private System.Windows.Forms.Button btn_obrisi_lekara;
         private System.Windows.Forms.GroupBox gb_alternativa_za_brisanje_lekara;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox tB_JMBG_brisanje_lekara;
         private System.Windows.Forms.RadioButton rB_alternativno_brisanje_lekara;
-        private System.Windows.Forms.DataGridView dataGridView6;
+        private System.Windows.Forms.DataGridView dGV_pacijent_brisanje;
         private System.Windows.Forms.GroupBox gb_alternativa_za_brisanje_pacijenta;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox tb_JMBG_brisanja_pacijenta;
@@ -2074,6 +2145,18 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox textBox7;
         private MetroFramework.Controls.MetroTabPage tab_pogled_baze;
-        private System.Windows.Forms.DataGridView dataGridView7;
+        private System.Windows.Forms.DataGridView dGV_pogled_u_bazu;
+        private System.Windows.Forms.Button btn_obican_pogled_Pacijent;
+        private System.Windows.Forms.Button btn_obican_pogled_MedicOsoblje;
+        private System.Windows.Forms.Button btn_obican_pogled_Lekar;
+        private System.Windows.Forms.Button btn_dom_zdravlja_obicanPogled;
+        private MetroFramework.Controls.MetroGrid metro_grid_view;
+        private System.Windows.Forms.TextBox tb_ime_lekara_unos;
+        private System.Windows.Forms.TextBox tb_srednje_slovo;
+        private System.Windows.Forms.CheckBox checkB_Druga_smena;
+        private System.Windows.Forms.CheckBox chekcB_Prva_smena;
+        private System.Windows.Forms.TextBox tb_srednjeSlovo;
+        private System.Windows.Forms.DateTimePicker dTP_Vazi_do;
+        private System.Windows.Forms.Label label38;
     }
 }
