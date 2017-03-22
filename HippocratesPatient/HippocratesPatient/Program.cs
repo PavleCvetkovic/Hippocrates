@@ -17,8 +17,8 @@ namespace HippocratesPatient
             Application.SetCompatibleTextRenderingDefault(false);
 
             Form1 view = new Form1();
-            Model.Model model = new Model.Model();
-            Controller.IController controller = new Controller.Controller(model, view);
+            Model.Model model = new Model.Model(view); // Model has a reference to view
+            Controller.IController controller = new Controller.Controller(model, view); // Controller has a reference to Model AND View
 
             Application.Run(view);
         }

@@ -9,8 +9,9 @@ namespace HippocratesPatient.Model
     public interface IModel
     {
         bool ConnectToDatabase(string constring);
-        bool validateJMBG(string s);
-        bool validateLBO(string s);
+        bool ValidateJMBG(string s);
+        bool ValidateLBO(string s);
+        View.IView GetView();
 
     }
 }

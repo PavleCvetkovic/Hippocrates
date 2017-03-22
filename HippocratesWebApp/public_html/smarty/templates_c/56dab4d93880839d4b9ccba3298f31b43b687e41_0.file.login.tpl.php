@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-20 18:48:33
+/* Smarty version 3.1.30, created on 2017-03-21 20:11:41
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\login.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d015f1667ec7_49013743',
+  'unifunc' => 'content_58d17aedc58145_44173909',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d015f1667ec7_49013743 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d17aedc58145_44173909 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html lang="en">
   <head>

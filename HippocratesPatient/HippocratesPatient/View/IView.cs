@@ -9,8 +9,8 @@ namespace HippocratesPatient.View
     public interface IView
     {
         void AddListener(Controller.IController ic);
-        string getJMBG();
-        string getLBO();
+        string GetJMBG();
+        string GetLBO();
         void Message(string s);
     }
 }
