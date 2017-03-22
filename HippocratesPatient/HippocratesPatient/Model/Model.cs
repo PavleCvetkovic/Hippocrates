@@ -43,7 +43,7 @@ namespace HippocratesPatient.Model
 
                 if (rdr.Read() != true) // only one JMBG and LBO combination
                     return false;
-
+                
                 rdr.Close();
 
             }

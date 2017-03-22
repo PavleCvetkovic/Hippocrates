@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HippocratesPatient
 {
-    public partial class AppointmentForm : MetroFramework.Forms.MetroForm//, View.IView
+    public partial class ZahtevZaIzborLekara : MetroFramework.Forms.MetroForm
     {
-        public AppointmentForm()
+        public ZahtevZaIzborLekara(string jmbg_prethodni_lekar)
         {
             InitializeComponent();
         }

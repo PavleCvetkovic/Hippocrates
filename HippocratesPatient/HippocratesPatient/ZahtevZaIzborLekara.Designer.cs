@@ -1,6 +1,6 @@
 ﻿namespace HippocratesPatient
 {
-    partial class AppointmentForm
+    partial class ZahtevZaIzborLekara
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // AppointmentForm
+            // ZahtevZaIzborLekara
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 364);
-            this.Name = "AppointmentForm";
-            this.Text = "AppointmentForm";
+            this.ClientSize = new System.Drawing.Size(300, 300);
+            this.Name = "ZahtevZaIzborLekara";
+            this.Text = "Izbor novog lekara";
             this.ResumeLayout(false);
 
         }

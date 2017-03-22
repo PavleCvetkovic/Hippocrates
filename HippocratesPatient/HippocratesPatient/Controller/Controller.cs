@@ -47,11 +47,14 @@ namespace HippocratesPatient.Controller
 
         public void OnSuccessfulConnection() // Successful connection to database
         {
-            // Open new form
-            AppointmentForm appointment_view = new AppointmentForm();
+            // Open new form with tabs 
+            // Izbor zeljenog lekara, vakcina, dijagnostifikovano, izbor termina
+            PacijentForm pacijent_form = new PacijentForm(view.GetJMBG(), view.GetLBO());
+
+            pacijent_form.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            pacijent_form.Show();
+
             
-            appointment_view.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            appointment_view.Show();
         }
 
     }
