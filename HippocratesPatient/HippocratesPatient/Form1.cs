@@ -27,12 +27,12 @@ namespace HippocratesPatient
             controller = ic;
         }
 
-        public string getJMBG()
+        public string GetJMBG()
         {
             return metroTextBox1.Text;
         }
 
-        public string getLBO()
+        public string GetLBO()
         {
             return metroTextBox2.Text;
         }
@@ -45,6 +45,7 @@ namespace HippocratesPatient
         private void metroButton1_Click(object sender, EventArgs e)
         {
             controller.OnLogin();
+            //controller.OnSuccessfulConnection(); // OnSuccessfulConnection is called in OnLogin function
         }
     }
 }

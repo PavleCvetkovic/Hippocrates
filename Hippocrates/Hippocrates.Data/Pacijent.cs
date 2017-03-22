@@ -19,6 +19,7 @@ namespace Hippocrates.Data
         public IzabraniLekar izabrani_lekar;
         public List<Vakcina> lista_vakcina;
         public List<Dijagnoza> lista_dijagnoza;
+        public int pravo_da_zakaze;
 
         public Pacijent(string jmbg, string lbo, string ime, string prezime, string srednje_slovo, DateTime datum_rodjenja, string opstina, DateTime osiguranje_vazi_do, IzabraniLekar izabrani_lekar)
         {
@@ -33,6 +34,7 @@ namespace Hippocrates.Data
             this.izabrani_lekar = izabrani_lekar;
             lista_vakcina = new List<Vakcina>();
             lista_dijagnoza = new List<Dijagnoza>();
+            this.pravo_da_zakaze = 1; // inicijalna vrednost
         }
         public string Ime
         {

@@ -11,7 +11,7 @@ namespace HippocratesPatient.Controller
     {
         IModel model;
         IView view;
-        
+
         public Controller(IModel model, IView view)
         {
             this.model = model;
@@ -27,15 +27,32 @@ namespace HippocratesPatient.Controller
         public void OnLogin()
         {
             string constring = "";
-            string jmbg = view.getJMBG();
-            string lbo = view.getLBO();
-            if (model.validateJMBG(jmbg) && model.validateLBO(lbo))
+            string jmbg = view.GetJMBG();
+            string lbo = view.GetLBO();
+
+            if (model.ValidateJMBG(jmbg) && model.ValidateLBO(lbo))
                 if (model.ConnectToDatabase(constring))
-                    view.Message("Connected");
+                {
+                    view.Message("Connected to database");
+                    // check for JMBG and LBO in database
+                    OnSuccessfulConnection();
+
+                }
                 else
-                    view.Message("Error during connection");
+                    view.Message("Error during database connection");
             else
                 view.Message("Validation not okay");
+            
         }
+
+        public void OnSuccessfulConnection() // Successful connection to database
+        {
+            // Open new form
+            AppointmentForm appointment_view = new AppointmentForm();
+            
+            appointment_view.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            appointment_view.Show();
+        }
+
     }
 }
