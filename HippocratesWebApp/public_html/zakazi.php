@@ -23,6 +23,16 @@ $minut=$_GET['minut'];
 $napomena=$_GET['napomena'];
 $godina=date("Y");
 $termin=new Termin($sat,$minut,new Datum($dan,$mesec,$godina));
+$statusZakazivanja="USPEŠNO STE ZAKAZALI TERMIN";
+$status=zakazi($_SESSION['JMBG'],$termin,$napomena);
+$terminText=$termin->datum->dan.'/'.$termin->datum->mesec.'/'.$termin->datum->godina." ".$termin->sat.":".$termin->minut;
+if($status==FALSE)
+    $statusZakazivanja="NEMATE PRAVO DA ZAKAŽETE";
+$smarty=new MySmarty();
+$smarty->assign("statusZakazivanja",$statusZakazivanja);
+$smarty->assign("status",$status);
+$smarty->assign("terminText",$terminText);
+$smarty->display("zakazi.tpl");
 
-zakazi($_SESSION['JMBG'],$termin,$napomena);
+
 ?>

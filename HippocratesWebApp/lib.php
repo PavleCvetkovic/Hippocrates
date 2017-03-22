@@ -1,6 +1,9 @@
 <?php
 include_once 'IzabraniLekar.php';
 include_once 'Pacijent.php';
+include_once 'Terapija.php';
+include_once 'Dijagnoza.php';
+include_once 'Dijagnostifikovano.php';
 function check_login($jmbg,$lbo){
     $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
     $con->set_charset('utf8mb4');
@@ -51,6 +54,79 @@ function vratiIzabranogLekara($matbrpacijenta){
         $con->close();
     }
 }
+function vratiDijagnoze($matbrp){
+    $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        // u slucaju greske odstampati odgovarajucu poruku
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $res=$con->query("SELECT * FROM DIJAGNOSTIFIKOVANO,DIJAGNOZA WHERE DIJAGNOSTIFIKOVANO.MATBRP='$matbrp' AND DIJAGNOZA.ŠIFRA=DIJAGNOSTIFIKOVANO.ŠIFRA_DIJAGNOZE;");
+        if ($res) {
+            $nizdijagnoza=array();
+            $k=0;
+            while($row=$res->fetch_assoc()){
+                $dijagnoza=new Dijagnostifikovano($row['ŠIFRA_DIJAGNOZE'],$row['IME'],$row['DATUM']);
+                $nizdijagnoza[$k++]=$dijagnoza;
+            }
+            return $nizdijagnoza;
+        }
+        $con->close();
+        }
+}
+function vratiTerapije($matbrp){
+    $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        // u slucaju greske odstampati odgovarajucu poruku
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $res=$con->query("SELECT * FROM TERAPIJA WHERE MATBRP='$matbrp';");
+        if ($res) {
+            $nizterapija=array();
+            $k=0;
+            while($row=$res->fetch_assoc()){
+                $terapija= new Terapija($row['OPIS'],$row['DATUM_OD'],$row['DATUM_DO']);
+                $sifradijagnoze=$row['ŠIFRA_DIJAGNOZE'];
+                $res2=$con->query("SELECT * FROM DIJAGNOZA WHERE ŠIFRA='$sifradijagnoze';");
+                $row2=$res2->fetch_assoc();
+                $dijagnoza=new Dijagnoza($row2['ŠIFRA'],$row2['IME']);
+                $terapija->dijagnoza=$dijagnoza;
+                $nizterapija[$k++]=$terapija;
+            }
+            return $nizterapija;
+        }
+        $con->close();
+}
+}
+function vratiZakazaneTermine($matbrp){
+    $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        // u slucaju greske odstampati odgovarajucu poruku
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $danas=date("Y")."-".date("m").'-'.date("d");
+        $res=$con->query("SELECT * FROM TERMIN WHERE MATBRP='$matbrp' AND DATUM>='$danas'ORDER BY DATUM DESC;");
+        if ($res) {
+            $nizTermina=array();
+            $k=0;
+            while($row=$res->fetch_assoc()){
+                $vreme=$row['VREME'];
+                $sat=floor($vreme/100);
+                $minut=$vreme%100;
+               $termin=new Termin($sat,$minut,$row['DATUM']);
+               $termin->dodajNapomenu($row['NAPOMENA']);
+               $nizTermina[$k++]=$termin;
+            }
+            return $nizTermina;
+        }   
+        $con->close();
+    }
+}
 function slobodanTermin($matbrl,Datum $datum,$vreme){
     $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
     $con->set_charset('utf8mb4');
@@ -76,6 +152,19 @@ function slobodanTermin($matbrl,Datum $datum,$vreme){
         $con->close();
     }
 }
+function otkazi($matbrp,$datum){
+    $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        // u slucaju greske odstampati odgovarajucu poruku
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $con->query("DELETE FROM TERMIN WHERE MATBRP=$matbrp AND DATUM='$datum'");
+        $con->query("UPDATE PACIJENT SET PRAVO_DA_ZAKAŽE=1;");
+        $con->close();     
+    }
+}
 function zakazi($matbrp,Termin $termin,$napomena){
     $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
     $con->set_charset('utf8mb4');
@@ -96,17 +185,19 @@ function zakazi($matbrp,Termin $termin,$napomena){
                 $sqlquery="INSERT INTO `TERMIN`(`MATBRL`, `MATBRP`, `DATUM`, `VREME`, `NAPOMENA`) VALUES('$matbrl','$matbrp','$datum->godina-$datum->mesec-$datum->dan',$vreme,'$napomena');";
                 $res2=$con->query($sqlquery);
                 if($res2===TRUE)
-                    print("USPESNO STE ZAKAZALI TERMIN");
+                    return true;
                 else{
-                    print(mysqli_error($con));
+                    return false;
                     }
                 $sqlquery="UPDATE PACIJENT SET PRAVO_DA_ZAKAŽE=0 WHERE JMBG=$matbrp";
                 $res=$con->query($sqlquery);
+                return false;
             }
             else{
-                print("NEMATE PRAVO DA ZAKAZETE");
+                return false;
             }
             $con->close();
+            
     }
 }
 }

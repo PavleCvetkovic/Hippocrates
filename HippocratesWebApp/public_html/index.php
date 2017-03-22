@@ -19,7 +19,7 @@ else if($_SESSION['isValid']==false){
     
 if(!isset($_GET['dan']))
 {
-    if(date(H)>20)
+    if(date("H")>=20)
         $datum=new Datum (date('d')+1, date('m'),date('Y'));
     else
         $datum=new Datum(date('d'),date('m'),date('Y'));

@@ -18,20 +18,23 @@
 
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li>
+               <li>
                     <a href="index.php">Zakaži</a>
                 </li>
                 <li>
-                    <a href="#">Terapije</a>
+                    <a href="zakazanitermini.php">Zakazani termini</a>
                 </li>
                 <li>
-                    <a href="#">Dijagnoze</a>
+                    <a href="terapije.php">Terapije</a>
                 </li>
                 <li>
-                    <a href="#">Vakcine</a>
+                    <a href="dijagnoze.php">Dijagnoze</a>
                 </li>
                 <li>
-                    <a href="#">Promeni lekara</a>
+                    <a href="vakcine.php">Vakcine</a>
+                </li>
+                <li>
+                    <a href="promenilekara.php">Promeni lekara</a>
                 </li>
                 <li>
                   <a href="logout.php">Izloguj se</a>

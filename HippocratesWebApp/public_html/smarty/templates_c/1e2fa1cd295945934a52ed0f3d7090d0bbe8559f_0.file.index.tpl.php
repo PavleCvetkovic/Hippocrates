@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-21 23:37:27
+/* Smarty version 3.1.30, created on 2017-03-22 15:18:12
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d1ab27904c45_69717305',
+  'unifunc' => 'content_58d287a49493e7_88929001',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1e2fa1cd295945934a52ed0f3d7090d0bbe8559f' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\index.tpl',
-      1 => 1490135814,
+      1 => 1490191320,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d1ab27904c45_69717305 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d287a49493e7_88929001 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -42,20 +42,23 @@ function content_58d1ab27904c45_69717305 (Smarty_Internal_Template $_smarty_tpl)
 
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li>
+               <li>
                     <a href="index.php">Zakaži</a>
                 </li>
                 <li>
-                    <a href="#">Terapije</a>
+                    <a href="zakazanitermini.php">Zakazani termini</a>
                 </li>
                 <li>
-                    <a href="#">Dijagnoze</a>
+                    <a href="terapije.php">Terapije</a>
                 </li>
                 <li>
-                    <a href="#">Vakcine</a>
+                    <a href="dijagnoze.php">Dijagnoze</a>
                 </li>
                 <li>
-                    <a href="#">Promeni lekara</a>
+                    <a href="vakcine.php">Vakcine</a>
+                </li>
+                <li>
+                    <a href="promenilekara.php">Promeni lekara</a>
                 </li>
                 <li>
                   <a href="logout.php">Izloguj se</a>
