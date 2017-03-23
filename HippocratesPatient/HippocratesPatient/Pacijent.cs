@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Hippocrates;
+using MetroFramework;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -192,9 +193,10 @@ namespace HippocratesPatient
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
-            //Hippocrates.FormRaspored f = new Hippocrates.FormRaspored();
-
-            MetroMessageBox.Show(this, "This is a message in MetroBox");
+            //MetroMessageBox.Show(this, "This is a message in MetroBox");
+            FormRaspored raspored_form = new FormRaspored(jmbg_lekara);
+            raspored_form.StartPosition = FormStartPosition.CenterScreen;
+            raspored_form.Show();
         }
 
         private void PacijentForm_Load(object sender, EventArgs e)
