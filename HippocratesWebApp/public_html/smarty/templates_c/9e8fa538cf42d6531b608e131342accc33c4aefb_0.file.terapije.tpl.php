@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-22 17:02:07
+/* Smarty version 3.1.30, created on 2017-03-23 01:27:44
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\terapije.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d29fffe0dfb6_98002926',
+  'unifunc' => 'content_58d316800dfac4_58636881',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e8fa538cf42d6531b608e131342accc33c4aefb' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\terapije.tpl',
-      1 => 1490198526,
+      1 => 1490228838,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d29fffe0dfb6_98002926 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d316800dfac4_58636881 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -38,7 +38,7 @@ function content_58d29fffe0dfb6_98002926 (Smarty_Internal_Template $_smarty_tpl)
 
 <body>
 
-    <div id="wrapper">
+    <div id="wrapper" class="toggled">
 
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">

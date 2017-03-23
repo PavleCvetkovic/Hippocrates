@@ -110,7 +110,7 @@ function vratiZakazaneTermine($matbrp){
     }
     else{
         $danas=date("Y")."-".date("m").'-'.date("d");
-        $res=$con->query("SELECT * FROM TERMIN WHERE MATBRP='$matbrp' AND DATUM>='$danas'ORDER BY DATUM DESC;");
+        $res=$con->query("SELECT DATE_FORMAT(DATUM, '%d/%m/%Y') AS DATUM,VREME,NAPOMENA FROM TERMIN WHERE MATBRP='$matbrp' AND DATUM>='$danas'ORDER BY DATUM DESC;");
         if ($res) {
             $nizTermina=array();
             $k=0;
@@ -118,6 +118,7 @@ function vratiZakazaneTermine($matbrp){
                 $vreme=$row['VREME'];
                 $sat=floor($vreme/100);
                 $minut=$vreme%100;
+                
                $termin=new Termin($sat,$minut,$row['DATUM']);
                $termin->dodajNapomenu($row['NAPOMENA']);
                $nizTermina[$k++]=$termin;

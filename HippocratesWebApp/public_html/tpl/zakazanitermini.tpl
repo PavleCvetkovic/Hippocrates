@@ -14,8 +14,7 @@
 
 <body>
 
-    <div id="wrapper">
-
+    <div id="wrapper" class="toggled">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li>

@@ -18,7 +18,10 @@ else if($_SESSION['isValid']==false){
     
 $smarty= new MySmarty(); 
 if(isset($_GET['datum'])){
-    otkazi($_SESSION['JMBG'],$_GET['datum']);
+    $datum=$_GET['datum'];
+    //glupi format za u bazu
+    $datum=date("Y-m-d",strtotime(str_replace('/', '-', $datum)));
+    otkazi($_SESSION['JMBG'],$datum);
 }
 $statusOtkazivanja="Uspešno ste otkazali termin za ".$_GET['datum'] ;
 

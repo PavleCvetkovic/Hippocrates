@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-22 21:03:59
+/* Smarty version 3.1.30, created on 2017-03-23 01:28:38
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\zakazanitermini.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d2d8af1565a0_96638771',
+  'unifunc' => 'content_58d316b69cb1b9_68674167',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7348a650622f3a772e5c99e0a1921ea8994f9e78' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\zakazanitermini.tpl',
-      1 => 1490213036,
+      1 => 1490228911,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d2d8af1565a0_96638771 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d316b69cb1b9_68674167 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -38,8 +38,7 @@ function content_58d2d8af1565a0_96638771 (Smarty_Internal_Template $_smarty_tpl)
 
 <body>
 
-    <div id="wrapper">
-
+    <div id="wrapper" class="toggled">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li>
