@@ -43,7 +43,8 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metrogridVakcine = new MetroFramework.Controls.MetroGrid();
             this.tabTermin = new MetroFramework.Controls.MetroTabPage();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
+            this.metroLabelPravoZaZakazivanje = new MetroFramework.Controls.MetroLabel();
+            this.metroButtonZakaziteTermin = new MetroFramework.Controls.MetroButton();
             this.tabDijagnoze = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroGridDijagnoze = new MetroFramework.Controls.MetroGrid();
@@ -59,6 +60,9 @@
             // 
             // metroTabGlobal
             // 
+            this.metroTabGlobal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroTabGlobal.Controls.Add(this.tabIzabraniLekar);
             this.metroTabGlobal.Controls.Add(this.tabVakcine);
             this.metroTabGlobal.Controls.Add(this.tabTermin);
@@ -189,7 +193,8 @@
             // 
             // tabTermin
             // 
-            this.tabTermin.Controls.Add(this.metroButton2);
+            this.tabTermin.Controls.Add(this.metroLabelPravoZaZakazivanje);
+            this.tabTermin.Controls.Add(this.metroButtonZakaziteTermin);
             this.tabTermin.HorizontalScrollbarBarColor = true;
             this.tabTermin.HorizontalScrollbarHighlightOnWheel = false;
             this.tabTermin.HorizontalScrollbarSize = 10;
@@ -202,15 +207,24 @@
             this.tabTermin.VerticalScrollbarHighlightOnWheel = false;
             this.tabTermin.VerticalScrollbarSize = 10;
             // 
-            // metroButton2
+            // metroLabelPravoZaZakazivanje
             // 
-            this.metroButton2.Location = new System.Drawing.Point(0, 214);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(436, 23);
-            this.metroButton2.TabIndex = 3;
-            this.metroButton2.Text = "Zakazite termin";
-            this.metroButton2.UseSelectable = true;
-            this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
+            this.metroLabelPravoZaZakazivanje.AutoSize = true;
+            this.metroLabelPravoZaZakazivanje.Location = new System.Drawing.Point(3, 18);
+            this.metroLabelPravoZaZakazivanje.Name = "metroLabelPravoZaZakazivanje";
+            this.metroLabelPravoZaZakazivanje.Size = new System.Drawing.Size(184, 19);
+            this.metroLabelPravoZaZakazivanje.TabIndex = 4;
+            this.metroLabelPravoZaZakazivanje.Text = "ovde ide pravo za zakazivanje";
+            // 
+            // metroButtonZakaziteTermin
+            // 
+            this.metroButtonZakaziteTermin.Location = new System.Drawing.Point(0, 214);
+            this.metroButtonZakaziteTermin.Name = "metroButtonZakaziteTermin";
+            this.metroButtonZakaziteTermin.Size = new System.Drawing.Size(436, 23);
+            this.metroButtonZakaziteTermin.TabIndex = 3;
+            this.metroButtonZakaziteTermin.Text = "Zakazite termin";
+            this.metroButtonZakaziteTermin.UseSelectable = true;
+            this.metroButtonZakaziteTermin.Click += new System.EventHandler(this.metroButton2_Click);
             // 
             // tabDijagnoze
             // 
@@ -307,6 +321,7 @@
             this.tabVakcine.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metrogridVakcine)).EndInit();
             this.tabTermin.ResumeLayout(false);
+            this.tabTermin.PerformLayout();
             this.tabDijagnoze.ResumeLayout(false);
             this.tabDijagnoze.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridDijagnoze)).EndInit();
@@ -326,10 +341,11 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroGrid metrogridVakcine;
         private MetroFramework.Controls.MetroTabPage tabTermin;
-        private MetroFramework.Controls.MetroButton metroButton2;
+        private MetroFramework.Controls.MetroButton metroButtonZakaziteTermin;
         private MetroFramework.Controls.MetroTabPage tabDijagnoze;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroGrid metroGridDijagnoze;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel metroLabelPravoZaZakazivanje;
     }
 }

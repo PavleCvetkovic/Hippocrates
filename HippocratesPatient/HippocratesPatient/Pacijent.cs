@@ -1,4 +1,4 @@
-﻿using Hippocrates;
+﻿using MetroFramework;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,8 @@ namespace HippocratesPatient
     {
         private string jmbg, lbo, jmbg_lekara;
         private string puno_ime;
+        //private int pravo_da_zakaze;
+        private byte pravo_da_zakaze;
         private string connection = "server=139.59.132.29;user=paja;charset=utf8;database=Hippocrates;port=3306;password=pajapro1234;protocol=TCP";
         //private MySqlDataAdapter daCountry;
         //private DataSet dsCountry;
@@ -28,8 +30,25 @@ namespace HippocratesPatient
             metroLabel1.Text = jmbg + " " + lbo;
             //this.Text = GetNameAndSurname(jmbg, lbo);
             puno_ime = this.Text;
+            UpdateAppointment(pravo_da_zakaze);
         }
 
+        private void UpdateAppointment(byte priviledge)
+        {
+            if (pravo_da_zakaze >= 1)
+            {
+                metroLabelPravoZaZakazivanje.Text = "Imate pravo da zakazete termin";
+                metroLabelPravoZaZakazivanje.ForeColor = System.Drawing.Color.Aqua;
+                metroLabelPravoZaZakazivanje.BackColor = System.Drawing.Color.Aqua;
+                metroButtonZakaziteTermin.Enabled = true;
+            }
+            else
+            {
+                metroLabelPravoZaZakazivanje.Text = "Nemate pravo da zakazete termin";
+                metroLabelPravoZaZakazivanje.ForeColor = System.Drawing.Color.Red;
+                metroButtonZakaziteTermin.Enabled = false;
+            }
+        }
         private string GetNameAndSurname(string jmbg, string lbo)
         {
             string to_return = "Not found";
@@ -44,7 +63,7 @@ namespace HippocratesPatient
                 conn.Open();
                 // Copy to local 
                 // Perform database operations
-                string sql = "select ime, prezime, matbrl from PACIJENT where jmbg = '" + jmbg + "' and lbo = '" + lbo + "'";
+                string sql = "select ime, prezime, matbrl, PRAVO_DA_ZAKAŽE from PACIJENT where jmbg = '" + jmbg + "' and lbo = '" + lbo + "'";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
@@ -54,13 +73,14 @@ namespace HippocratesPatient
                 {
                     to_return = rdr[0].ToString() + " " + rdr[1].ToString();
                     jmbg_lekara = rdr[2].ToString();
+                    pravo_da_zakaze = Byte.Parse(rdr[3].ToString());
                 }
                 rdr.Close();
 
             }
             catch (Exception ex)
             {
-                to_return = "Error during database reading";
+                to_return = pravo_da_zakaze.ToString() + "Error during database reading in GetNameAndSurname" + ex.Message.ToString();
             }
             finally
             {
@@ -172,18 +192,17 @@ namespace HippocratesPatient
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
-            FormRaspored raspored_form = new FormRaspored(jmbg_lekara);
-            raspored_form.StartPosition = FormStartPosition.CenterScreen;
-            raspored_form.Show();
+            //Hippocrates.FormRaspored f = new Hippocrates.FormRaspored();
 
+            MetroMessageBox.Show(this, "This is a message in MetroBox");
         }
 
         private void PacijentForm_Load(object sender, EventArgs e)
         {
             GetVakcineData();
             GetDijagnozeData();
-
             this.Text = GetNameAndSurname(jmbg, lbo);
+            UpdateAppointment(pravo_da_zakaze); // UpdateAppointment MORA ISPOD GetNameAndSurname jer se tu vrsi inicijalizacija za "pravo_da_zakaze"
             metrolabInfoLekar.Text = GetDoctorNameAndSurname(jmbg_lekara);
             metroTabGlobal.SelectedIndex = 0; // Show 'Izabrani Lekar' tab
         }
