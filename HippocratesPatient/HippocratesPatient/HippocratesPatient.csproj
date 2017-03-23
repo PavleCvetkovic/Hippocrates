@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormRaspored.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRaspored.designer.cs">
+      <DependentUpon>FormRaspored.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pacijent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     <Compile Include="ZahtevZaIzborLekara.Designer.cs">
       <DependentUpon>ZahtevZaIzborLekara.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormRaspored.resx">
+      <DependentUpon>FormRaspored.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pacijent.resx">
       <DependentUpon>Pacijent.cs</DependentUpon>
     </EmbeddedResource>
