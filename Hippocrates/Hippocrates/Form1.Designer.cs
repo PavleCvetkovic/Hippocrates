@@ -33,7 +33,10 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lbl_KorisnickoIme = new System.Windows.Forms.Label();
             this.lbl_Lozinka = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +55,7 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(26, 119);
+            this.textBox1.Location = new System.Drawing.Point(26, 131);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(199, 29);
             this.textBox1.TabIndex = 2;
@@ -71,7 +74,7 @@
             this.lbl_KorisnickoIme.AutoSize = true;
             this.lbl_KorisnickoIme.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_KorisnickoIme.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.lbl_KorisnickoIme.Location = new System.Drawing.Point(28, 92);
+            this.lbl_KorisnickoIme.Location = new System.Drawing.Point(28, 105);
             this.lbl_KorisnickoIme.Name = "lbl_KorisnickoIme";
             this.lbl_KorisnickoIme.Size = new System.Drawing.Size(97, 24);
             this.lbl_KorisnickoIme.TabIndex = 4;
@@ -88,6 +91,26 @@
             this.lbl_Lozinka.TabIndex = 5;
             this.lbl_Lozinka.Text = "Password";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Lucida Calligraphy", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.SeaGreen;
+            this.label1.Location = new System.Drawing.Point(123, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(147, 24);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Hippocrates";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Hippocrates.Properties.Resources.logoHipoDesktopApp;
+            this.pictureBox2.Location = new System.Drawing.Point(22, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(82, 78);
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Hippocrates.Properties.Resources.newData;
@@ -103,6 +126,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(404, 340);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbl_Lozinka);
             this.Controls.Add(this.lbl_KorisnickoIme);
@@ -110,7 +135,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btn_login);
             this.Name = "Form1";
-            this.Text = "Hippocrates";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -124,6 +149,8 @@
         private System.Windows.Forms.Label lbl_KorisnickoIme;
         private System.Windows.Forms.Label lbl_Lozinka;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
