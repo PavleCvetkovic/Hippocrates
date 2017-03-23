@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using Hippocrates.Data;
 using HippocratesPatient.Controller;
+using MetroFramework;
 
 namespace HippocratesPatient
 {
@@ -39,7 +40,11 @@ namespace HippocratesPatient
 
         public void Message(string s)
         {
-            MessageBox.Show(s, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //MetroMessageBox
+            //MetroMessageBox.Show(this, s, "Obavestenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            //StandardMessageBox
+            //MessageBox.Show(s, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
