@@ -4,6 +4,7 @@ include_once 'Pacijent.php';
 include_once 'Terapija.php';
 include_once 'Dijagnoza.php';
 include_once 'Dijagnostifikovano.php';
+include_once 'Vakcina.php';
 function check_login($jmbg,$lbo){
     $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
     $con->set_charset('utf8mb4');
@@ -28,6 +29,26 @@ function check_login($jmbg,$lbo){
         $con->close();
     }
 }
+function vratiVakcine($matbrp){
+    $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $res=$con->query("SELECT OPIS,ŠIFRA,IME FROM VAKCINA,PRIMIO_VAKCINU WHERE PRIMIO_VAKCINU.JMBGP='$matbrp' AND PRIMIO_VAKCINU.SIFRA_VAKCINE=VAKCINA.ŠIFRA
+");
+        $nizvakcina=array();
+        $k=0;
+        while($row=$res->fetch_assoc()){
+                $vakcina=new Vakcina($row['ŠIFRA'],$row['IME'],$row['OPIS']);
+                $nizvakcina[$k++]=$vakcina;
+            }
+            $con->close();
+            return $nizvakcina;
+    }
+}
+//preradi
 function vratiIzabranogLekara($matbrpacijenta){
      $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
      $con->set_charset('utf8mb4');
@@ -62,7 +83,7 @@ function vratiDijagnoze($matbrp){
         print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
     }
     else{
-        $res=$con->query("SELECT * FROM DIJAGNOSTIFIKOVANO,DIJAGNOZA WHERE DIJAGNOSTIFIKOVANO.MATBRP='$matbrp' AND DIJAGNOZA.ŠIFRA=DIJAGNOSTIFIKOVANO.ŠIFRA_DIJAGNOZE;");
+        $res=$con->query("SELECT ŠIFRA_DIJAGNOZE,IME,DATE_FORMAT(DATUM, '%d/%m/%Y') AS DATUM FROM DIJAGNOSTIFIKOVANO,DIJAGNOZA WHERE DIJAGNOSTIFIKOVANO.MATBRP='$matbrp' AND DIJAGNOZA.ŠIFRA=DIJAGNOSTIFIKOVANO.ŠIFRA_DIJAGNOZE;");
         if ($res) {
             $nizdijagnoza=array();
             $k=0;
@@ -83,7 +104,7 @@ function vratiTerapije($matbrp){
         print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
     }
     else{
-        $res=$con->query("SELECT * FROM TERAPIJA WHERE MATBRP='$matbrp';");
+        $res=$con->query("SELECT ŠIFRA_DIJAGNOZE,DATE_FORMAT(DATUM_OD, '%d/%m/%Y') AS DATUM_OD,DATE_FORMAT(DATUM_DO, '%d/%m/%Y') AS DATUM_DO,OPIS FROM TERAPIJA WHERE MATBRP='$matbrp';");
         if ($res) {
             $nizterapija=array();
             $k=0;

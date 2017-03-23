@@ -8,7 +8,12 @@ include_once '../Pacijent.php';
 include_once '../IzabraniLekar.php';
 include_once '../Termin.php';
 session_start();
-if(!isset($_SESSION['JMBG'])||!isset($_SESSION['isValid'])){
+if(!isset($_SESSION['isValid'])){
+    header("Location: login.php");
+    die();
+}
+
+/*if(!isset($_SESSION['JMBG'])||!isset($_SESSION['isValid'])){
     header("Location: login.php");  
     die();
 }
@@ -16,7 +21,7 @@ else if($_SESSION['isValid']==false){
         header("Location: login.php");
         die();
     }
-    
+    */
 if(!isset($_GET['dan']))
 {
     if(date("H")>=20)

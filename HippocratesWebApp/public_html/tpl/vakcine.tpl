@@ -1,27 +1,3 @@
-<?php
-/* Smarty version 3.1.30, created on 2017-03-23 22:21:59
-  from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\otkazi.tpl" */
-
-/* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
-  'version' => '3.1.30',
-  'unifunc' => 'content_58d43c770cf843_55469745',
-  'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    '571259f97b33885bceef9379cda44711b9b42fc3' => 
-    array (
-      0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\otkazi.tpl',
-      1 => 1490228934,
-      2 => 'file',
-    ),
-  ),
-  'includes' => 
-  array (
-  ),
-),false)) {
-function content_58d43c770cf843_55469745 (Smarty_Internal_Template $_smarty_tpl) {
-?>
 <html>
 
 <head>
@@ -68,33 +44,55 @@ function content_58d43c770cf843_55469745 (Smarty_Internal_Template $_smarty_tpl)
 
 
         <div id="page-content-wrapper">
+            
             <div class="container-fluid">
                 <div class="row">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a>
+                    <h1>Vakcine koje ste primili</h1>
                     <div class="col-lg-12">
-                        <h3><?php echo $_smarty_tpl->tpl_vars['statusOtkazivanja']->value;?>
-</h3>
+                        <table class="table-sm table table-hover table-striped table-responsive ">
+                            <thead class="theadboja">
+                                <tr>
+                                    <th>
+                                        ŠIFRA
+                                    </th>
+                                    <th>
+                                        IME
+                                    </th>
+                                    <th>
+                                        OPIS
+                                    </th>
+                                </tr>
+                            </thead>
+                                [[foreach $nizVakcina as $vakcina]]
+                                <tr>
+                                    <td>
+                                        [[$vakcina->sifra]]
+                                    </td>
+                                    <td>
+                                        [[$vakcina->ime]]
+                                    </td>
+                                    <td>
+                                        [[$vakcina->opis]]
+                                    </td>
+                                </tr>
+                                [[/foreach]]
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-     <?php echo '<script'; ?>
- src="bootstrap-3.3.7-dist/js/jquery.js"><?php echo '</script'; ?>
->
+     <script src="bootstrap-3.3.7-dist/js/jquery.js"></script>
 
-    <?php echo '<script'; ?>
- src="bootstrap-3.3.7-dist/js/bootstrap.min.js"><?php echo '</script'; ?>
->
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-    <?php echo '<script'; ?>
->
+    <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-    <?php echo '</script'; ?>
->
+    </script>
 </body>
-</html><?php }
-}
+</html>

@@ -11,11 +11,9 @@ if(!isset($_SESSION['isValid'])){
     header("Location: login.php");
     die();
 }
-
+    
+$nizVakcina=vratiVakcine($_SESSION['JMBG']);
 $smarty=new MySmarty();
-
-$listatermina= vratiZakazaneTermine($_SESSION['JMBG']);
-
-$smarty->assign("nizTermina",$listatermina);
-$smarty->display("zakazanitermini.tpl");
+$smarty->assign("nizVakcina",$nizVakcina);
+$smarty->display("vakcine.tpl");
 ?>

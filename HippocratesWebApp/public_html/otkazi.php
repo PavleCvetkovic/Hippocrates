@@ -7,14 +7,10 @@ include_once '../Pacijent.php';
 include_once '../IzabraniLekar.php';
 include_once '../Termin.php';
 session_start();
-if(!isset($_SESSION['JMBG'])||!isset($_SESSION['isValid'])){
-    header("Location: login.php");  
+if(!isset($_SESSION['isValid'])){
+    header("Location: login.php");
     die();
 }
-else if($_SESSION['isValid']==false){
-        header("Location: login.php");
-        die();
-    }
     
 $smarty= new MySmarty(); 
 if(isset($_GET['datum'])){

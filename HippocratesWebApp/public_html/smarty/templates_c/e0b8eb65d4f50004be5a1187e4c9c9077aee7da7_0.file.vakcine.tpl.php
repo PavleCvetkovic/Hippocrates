@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-23 22:21:59
-  from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\otkazi.tpl" */
+/* Smarty version 3.1.30, created on 2017-03-23 23:06:06
+  from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\vakcine.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d43c770cf843_55469745',
+  'unifunc' => 'content_58d446ce4c4e47_91892913',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '571259f97b33885bceef9379cda44711b9b42fc3' => 
+    'e0b8eb65d4f50004be5a1187e4c9c9077aee7da7' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\otkazi.tpl',
-      1 => 1490228934,
+      0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\vakcine.tpl',
+      1 => 1490306145,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d43c770cf843_55469745 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d446ce4c4e47_91892913 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -68,12 +68,53 @@ function content_58d43c770cf843_55469745 (Smarty_Internal_Template $_smarty_tpl)
 
 
         <div id="page-content-wrapper">
+            
             <div class="container-fluid">
                 <div class="row">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a>
+                    <h1>Vakcine koje ste primili</h1>
                     <div class="col-lg-12">
-                        <h3><?php echo $_smarty_tpl->tpl_vars['statusOtkazivanja']->value;?>
-</h3>
+                        <table class="table-sm table table-hover table-striped table-responsive ">
+                            <thead class="theadboja">
+                                <tr>
+                                    <th>
+                                        ŠIFRA
+                                    </th>
+                                    <th>
+                                        IME
+                                    </th>
+                                    <th>
+                                        OPIS
+                                    </th>
+                                </tr>
+                            </thead>
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['nizVakcina']->value, 'vakcina');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['vakcina']->value) {
+?>
+                                <tr>
+                                    <td>
+                                        <?php echo $_smarty_tpl->tpl_vars['vakcina']->value->sifra;?>
+
+                                    </td>
+                                    <td>
+                                        <?php echo $_smarty_tpl->tpl_vars['vakcina']->value->ime;?>
+
+                                    </td>
+                                    <td>
+                                        <?php echo $_smarty_tpl->tpl_vars['vakcina']->value->opis;?>
+
+                                    </td>
+                                </tr>
+                                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>

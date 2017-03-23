@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-22 20:18:06
+/* Smarty version 3.1.30, created on 2017-03-23 22:21:03
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\zakazi.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d2cdeeb6e1e4_41962722',
+  'unifunc' => 'content_58d43c3f4dd846_94504440',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c02ad0d1874675433ccf64263ce068978435439d' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\zakazi.tpl',
-      1 => 1490191327,
+      1 => 1490228935,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d2cdeeb6e1e4_41962722 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d43c3f4dd846_94504440 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -38,7 +38,7 @@ function content_58d2cdeeb6e1e4_41962722 (Smarty_Internal_Template $_smarty_tpl)
 
 <body>
 
-    <div id="wrapper">
+    <div id="wrapper" class="toggled">
 
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
