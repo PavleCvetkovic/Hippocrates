@@ -543,6 +543,7 @@ namespace Hippocrates
         #region pomocnePromenljive
         private string mbr_za_menjanje;
         private string jmbg_lekara_zaMenjanje;
+        private string jmbg_pacijenta_zaMenjanje;
         string s;
         string s2;
         string s3;
@@ -732,7 +733,7 @@ namespace Hippocrates
         #endregion
 
         #region tab_za_azuriranje_pacijenta
-
+        private int pravo_da_zakaze;
         private void dGV_pacijenti_azuriranje_SelectionChanged(object sender, EventArgs e)
         {
             int rowindex = dGV_pacijenti_azuriranje.CurrentCell.RowIndex;
@@ -745,18 +746,75 @@ namespace Hippocrates
             s7 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[6].Value.ToString();
             s8 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[7].Value.ToString();
             s9 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[8].Value.ToString();
-            
+            s10 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[9].Value.ToString();
+            jmbg_pacijenta_zaMenjanje = s;
+
+            tb_pacijent_azuriranje_jmbg.Text = s;
+            tb_pacijent_azuriranje_lbo.Text = s8;
+            tb_pacijent_azuriranje_ime.Text = s2;
+            tb_pacijent_azuriranje_prezime.Text = s4;
+            tb_pacijent_azuriranje_opstina.Text = s6;
+            dTP_pacijent_azuriranje.Value = DateTime.Parse(s5);
+            tb_pacijent_azuriranje_srednjeSlovo.Text = s3;
+            tb_pacijent_azuriranje_MATBRL.Text = s9;
+            dTP_vaziDo_pacijent.Value = DateTime.Parse(s10);
+            if (Int32.Parse(s7) == 1)
+            {
+                cB_pravo_da_zakaze.Checked = true;
+                pravo_da_zakaze = 1;
+            }
+            else
+            {
+                pravo_da_zakaze = 0;
+                cB_pravo_da_zakaze.Checked = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!cB_pravo_da_zakaze.Checked)
+            {
+                pravo_da_zakaze = 0;
+            }
+            else
+            {
+                pravo_da_zakaze = 1;
+            }
+            try
+            {
+                conn.Open();
+                string commandSqlUpdate = "UPDATE PACIJENT SET JMBG='" + tb_pacijent_azuriranje_jmbg.Text + "',IME='" + tb_pacijent_azuriranje_ime.Text + "',SREDNJE_SLOVO='" + tb_pacijent_azuriranje_srednjeSlovo.Text + "',PREZIME='" + tb_pacijent_azuriranje_prezime.Text + "',DATUM_ROĐENJA='" + dTP_pacijent_azuriranje.Value.ToString("yyyy-MM-dd") + "',OPŠTINA='" + tb_pacijent_azuriranje_opstina.Text + "',PRAVO_DA_ZAKAŽE='" + pravo_da_zakaze + "',LBO='" + tb_pacijent_azuriranje_lbo.Text + "',MATBRL='" + tb_pacijent_azuriranje_MATBRL.Text + "',VAŽI_DO='" + dTP_vaziDo_pacijent.Value.ToString("yyyy-MM-dd") + "' WHERE JMBG='" + jmbg_pacijenta_zaMenjanje + "'";
+                MySqlCommand mcc = new MySqlCommand(commandSqlUpdate, conn);
+                mcc.ExecuteNonQuery();
+                MessageBox.Show("Uspesno ste azurirali pacijenta u bazi podatka");
+                //--- 
+                string sqlcommand = "SELECT * FROM PACIJENT";
+                adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
 
+                dataSet = new DataSet();
+                adapter.Fill(dataSet, "PACIJENT");
+                dGV_pacijenti_azuriranje.DataSource = dataSet;
+                dGV_pacijenti_azuriranje.DataMember = "PACIJENT";
+
+
+
+                //---- 
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                conn.Close();
+                MessageBox.Show("Problem" + ex);
+            }
         }
 
+
+
         #endregion
 
         #endregion
 
-
+        
     }
 }
