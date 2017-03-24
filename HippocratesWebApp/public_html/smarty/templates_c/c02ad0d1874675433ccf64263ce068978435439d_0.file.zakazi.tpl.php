@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-23 22:21:03
+/* Smarty version 3.1.30, created on 2017-03-24 15:10:54
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\zakazi.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d43c3f4dd846_94504440',
+  'unifunc' => 'content_58d528ee7fc075_06520666',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c02ad0d1874675433ccf64263ce068978435439d' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\zakazi.tpl',
-      1 => 1490228935,
+      1 => 1490358961,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d43c3f4dd846_94504440 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d528ee7fc075_06520666 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -59,6 +59,9 @@ function content_58d43c3f4dd846_94504440 (Smarty_Internal_Template $_smarty_tpl)
                 </li>
                 <li>
                     <a href="promenilekara.php">Promeni lekara</a>
+                </li>
+                <li>
+                    <a href="podesavanja.php">Podešavanja</a>
                 </li>
                 <li>
                   <a href="logout.php">Izloguj se</a>

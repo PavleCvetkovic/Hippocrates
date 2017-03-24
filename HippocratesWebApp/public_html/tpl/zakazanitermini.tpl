@@ -36,6 +36,9 @@
                     <a href="promenilekara.php">Promeni lekara</a>
                 </li>
                 <li>
+                    <a href="podesavanja.php">Podešavanja</a>
+                </li>
+                <li>
                   <a href="logout.php">Izloguj se</a>
                 </li>
             </ul>

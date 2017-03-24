@@ -13,28 +13,23 @@ if(!isset($_SESSION['isValid'])){
     die();
 }
 
-/*if(!isset($_SESSION['JMBG'])||!isset($_SESSION['isValid'])){
-    header("Location: login.php");  
-    die();
-}
-else if($_SESSION['isValid']==false){
-        header("Location: login.php");
-        die();
-    }
-    */
 if(!isset($_GET['dan']))
 {
-    if(date("H")>=20)
-        $datum=new Datum (date('d')+1, date('m'),date('Y'));
-    else
-        $datum=new Datum(date('d'),date('m'),date('Y'));
+   $izabranilekar= vratiIzabranogLekara($_SESSION['JMBG']);
+   if($izabranilekar->smena==1&&date('H')>=14)
+       $datum=new Datum (date('d')+1, date('m'),date('Y'));
+   else if($izabranilekar->smena==2&&date('H')>=20)
+       $datum=new Datum (date('d')+1, date('m'),date('Y'));
+   else
+       $datum=new Datum(date('d'),date('m'),date('Y'));
+
 }
 else
     $datum=new Datum($_GET['dan'],$_GET['mesec'],date('Y'));
 if($datum->mesec<date('m'))
-    header("Location: index.php");
-if(($datum->mesec==date('m'))&&($datum->dan< date('d')))
-    header("Location: index.php");
+    $datum=new Datum($_GET['dan'],$_GET['mesec'],date('Y')+1);  
+if($datum->mesec==date('m')&&$datum->dan<date('d'))
+    $datum=new Datum($_GET['dan'],$_GET['mesec'],date('Y')+1); 
 if(!checkdate($datum->mesec, $datum->dan, $datum->godina))
     header("Location: index.php");
 

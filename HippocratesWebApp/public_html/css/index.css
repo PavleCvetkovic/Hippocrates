@@ -1,9 +1,10 @@
  body {
     overflow-x: hidden;
  }
- h1{
+ h1, h3{
      text-align:center;
  }
+
  .theadboja{
      background: #009263;
  }

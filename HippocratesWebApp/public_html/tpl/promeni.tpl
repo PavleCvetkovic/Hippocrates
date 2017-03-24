@@ -47,41 +47,18 @@
 
 
         <div id="page-content-wrapper">
-            
             <div class="container-fluid">
                 <div class="row">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a>
-                    <h1>Vakcine koje ste primili</h1>
                     <div class="col-lg-12">
-                        <table class="table-sm table table-hover table-striped table-responsive ">
-                            <thead class="theadboja">
-                                <tr>
-                                    <th>
-                                        ŠIFRA
-                                    </th>
-                                    <th>
-                                        IME
-                                    </th>
-                                    <th>
-                                        OPIS
-                                    </th>
-                                </tr>
-                            </thead>
-                                [[foreach $nizVakcina as $vakcina]]
-                                <tr>
-                                    <td>
-                                        [[$vakcina->sifra]]
-                                    </td>
-                                    <td>
-                                        [[$vakcina->ime]]
-                                    </td>
-                                    <td>
-                                        [[$vakcina->opis]]
-                                    </td>
-                                </tr>
-                                [[/foreach]]
-                            </thead>
-                        </table>
+                        <h3>
+                            [[if $status]]
+                               Usprešno ste podneli zahtev za promenu izabranog lekara.
+                            [[else]]
+                               Zahtev koji ste podneli još uvek nije obrađen.
+                            [[/if]]
+                            
+                        </h3>
                     </div>
                 </div>
             </div>

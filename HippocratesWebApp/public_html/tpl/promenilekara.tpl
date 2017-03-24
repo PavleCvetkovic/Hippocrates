@@ -51,34 +51,44 @@
             <div class="container-fluid">
                 <div class="row">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a>
-                    <h1>Vakcine koje ste primili</h1>
+                    <h1>Zahtev za promenu lekara</h1>
+                    <h3>[[$domZdravlja->ime]], [[$domZdravlja->adresa]], [[$domZdravlja->lokacija]]</h3>
                     <div class="col-lg-12">
                         <table class="table-sm table table-hover table-striped table-responsive ">
                             <thead class="theadboja">
                                 <tr>
                                     <th>
-                                        ŠIFRA
-                                    </th>
-                                    <th>
                                         IME
                                     </th>
                                     <th>
-                                        OPIS
+                                        PREZIME
+                                    </th>
+                                    <th>
+                                        OCENA
+                                    </th>
+                                    <th>
+                                        PODNESI ZAHTEV
                                     </th>
                                 </tr>
                             </thead>
-                                [[foreach $nizVakcina as $vakcina]]
-                                <tr>
-                                    <td>
-                                        [[$vakcina->sifra]]
-                                    </td>
-                                    <td>
-                                        [[$vakcina->ime]]
-                                    </td>
-                                    <td>
-                                        [[$vakcina->opis]]
-                                    </td>
-                                </tr>
+                                [[foreach $nizLekara as $lekar]]
+                                <form action="promeni.php" method="POST">
+                                    <tr>
+                                        <td>
+                                            [[$lekar->ime]]
+                                        </td>
+                                        <td>
+                                            [[$lekar->prezime]]
+                                        </td>
+                                        <td>
+                                            [[$lekar->ocena]]
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="MATBRL" value="[[$lekar->jmbg]]" />
+                                            <input type="submit" value="PROMENI" />
+                                        </td>
+                                    </tr>
+                                </form>
                                 [[/foreach]]
                             </thead>
                         </table>

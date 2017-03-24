@@ -7,6 +7,7 @@ class IzabraniLekar {
     public $datum_rodjenja;
     public $mbrzu;
     public $smena;
+    public $ocena;// dodaj setter
     
     public function __construct($jmbg,$ime,$srednje_slovo,$prezime,$datum_rodjenja,$mbrzu,$smena){
         $this->jmbg=$jmbg;

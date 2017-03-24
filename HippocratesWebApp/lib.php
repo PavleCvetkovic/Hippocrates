@@ -5,6 +5,7 @@ include_once 'Terapija.php';
 include_once 'Dijagnoza.php';
 include_once 'Dijagnostifikovano.php';
 include_once 'Vakcina.php';
+include_once 'DomZdravlja.php';
 function check_login($jmbg,$lbo){
     $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
     $con->set_charset('utf8mb4');
@@ -23,10 +24,67 @@ function check_login($jmbg,$lbo){
         }
         else
         {
-            print("QUERY FAILED");
             return false;
         }
         $con->close();
+    }
+}
+function zahtevZaPromenu($matbrp,$matbrl){
+    $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
+    $con->set_charset('utf8mb4');
+    if($con->connect_errno){
+        print("Connection errot(".$con->connect_errno."): $con->connect_error");
+    }
+    else {
+        $res=$con->query("SELECT * FROM ZAHTEV_ZA_PROMENU WHERE MATBRP=$matbrp;");
+        
+        if($res->num_rows==0)
+            $res=$con->query("INSERT INTO ZAHTEV_ZA_PROMENU(MATBRP,MATBR_ŽELJENOG) VALUES('$matbrp',$matbrl);");
+        else{
+            $con->close();
+            return false;
+        }
+        $con->close();
+        return true;
+    }
+}
+function vratiLekareIzDomaZdravljaPacijenta($matbrp){
+    $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
+    $con->set_charset('utf8mb4');
+    if($con->connect_errno){
+        print("Connection errot(".$con->connect_errno."): $con->connect_error");
+    }
+    else {
+        $res=$con->query("SELECT DOM_ZDRAVLJA.MBR, IZABRANI_LEKAR.JMBG FROM DOM_ZDRAVLJA,PACIJENT,IZABRANI_LEKAR WHERE PACIJENT.MATBRL=IZABRANI_LEKAR.JMBG AND IZABRANI_LEKAR.MBRZU=DOM_ZDRAVLJA.MBR AND PACIJENT.JMBG='$matbrp';");
+        $row=$res->fetch_assoc();
+        $mbrzu=$row['MBR'];
+        $matbrl=$row['JMBG'];
+        $res=$con->query("SELECT * FROM IZABRANI_LEKAR WHERE MBRZU='$mbrzu' AND JMBG!='$matbrl';");
+        $nizLekara=array();
+        $k=0;
+        while($row=$res->fetch_assoc()){
+            $res2=$con->query("SELECT AVG(OCENA) AS PROSECNA FROM OCENA WHERE MATBRL=".$row['JMBG'].";");
+            $row2=$res2->fetch_assoc();
+            $lekar=new IzabraniLekar($row['JMBG'],$row['IME'],$row['SREDNJE_SLOVO'],$row['PREZIME'],$row['DATUM_ROĐENJA'],$row['MBRZU'],$row['SMENA']);
+            $lekar->ocena=$row2['PROSECNA'];
+            $nizLekara[$k++]=$lekar;
+        }
+        $con->close();
+        return $nizLekara;
+    }
+}
+function vratiDomZdravljaPacijenta($matbrp){
+    $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
+    $con->set_charset("utf8mb4");
+    if($con->connect_errno){
+        print("Connection errot(".$con->connect_errno."): $con->connect_error");
+    }
+    else{
+        $res=$con->query("SELECT DOM_ZDRAVLJA.MBR, DOM_ZDRAVLJA.IME, DOM_ZDRAVLJA.LOKACIJA, DOM_ZDRAVLJA.ADRESA, DOM_ZDRAVLJA.OPŠTINA FROM DOM_ZDRAVLJA,PACIJENT,IZABRANI_LEKAR WHERE PACIJENT.MATBRL=IZABRANI_LEKAR.JMBG AND IZABRANI_LEKAR.MBRZU=DOM_ZDRAVLJA.MBR AND PACIJENT.JMBG='$matbrp';");
+        $row=$res->fetch_assoc();
+        $domZdravlja=new DomZdravlja($row['MBR'],$row['IME'],$row['OPŠTINA'],$row['LOKACIJA'],$row['ADRESA']);
+        $con->close(    );
+        return $domZdravlja;
     }
 }
 function vratiVakcine($matbrp){
@@ -48,7 +106,7 @@ function vratiVakcine($matbrp){
             return $nizvakcina;
     }
 }
-//preradi
+
 function vratiIzabranogLekara($matbrpacijenta){
      $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
      $con->set_charset('utf8mb4');
@@ -247,36 +305,5 @@ function vratiPacijenta($matbrpacijenta){
         $con->close();
     }
 }
-function vrati_sve_iz_tabele() {
-    // funkcija za konektovanje na bazu podataka
-    // parametri su server_baze, username, password, ime_baze
-    $con = new mysqli("localhost", "root", "", "ime_baze");
-    if ($con->connect_errno) {
-        // u slucaju greske odstampati odgovarajucu poruku
-        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
-    }
-    else {
-        // $res je rezultat izvrsenja upita
-        $res = $con->query("select * from ime_tabele");
-        if ($res) {
-            $niz = array();
-            // fetch_assoc() pribavlja jedan po jedan red iz rezulata 
-			// u redosledu u kom ga je vratio db server
-            while ($row = $res->fetch_assoc()) {
-				
-				// TODO: DODATI KOD ZA SMESTANJE PODATAKA U ASOCIJATIVNI NIZ!!!!
-
-            }
-            // zatvaranje objekta koji cuva rezultat
-            $res->close();
-            return $niz;
-        }
-        else
-        {
-            print ("Query failed");
-        }
-    }
-}
-
 
 ?>

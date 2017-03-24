@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-24 17:49:45
-  from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\vakcine.tpl" */
+/* Smarty version 3.1.30, created on 2017-03-24 17:59:21
+  from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\promenilekara.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d54e29602643_22943349',
+  'unifunc' => 'content_58d5506990b054_24491801',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'e0b8eb65d4f50004be5a1187e4c9c9077aee7da7' => 
+    '934825c4b073aca3863d2b55c311124989c07347' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\vakcine.tpl',
-      1 => 1490358976,
+      0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\promenilekara.tpl',
+      1 => 1490374757,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d54e29602643_22943349 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d5506990b054_24491801 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -75,41 +75,55 @@ function content_58d54e29602643_22943349 (Smarty_Internal_Template $_smarty_tpl)
             <div class="container-fluid">
                 <div class="row">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a>
-                    <h1>Vakcine koje ste primili</h1>
+                    <h1>Zahtev za promenu lekara</h1>
+                    <h3><?php echo $_smarty_tpl->tpl_vars['domZdravlja']->value->ime;?>
+, <?php echo $_smarty_tpl->tpl_vars['domZdravlja']->value->adresa;?>
+, <?php echo $_smarty_tpl->tpl_vars['domZdravlja']->value->lokacija;?>
+</h3>
                     <div class="col-lg-12">
                         <table class="table-sm table table-hover table-striped table-responsive ">
                             <thead class="theadboja">
                                 <tr>
                                     <th>
-                                        ŠIFRA
-                                    </th>
-                                    <th>
                                         IME
                                     </th>
                                     <th>
-                                        OPIS
+                                        PREZIME
+                                    </th>
+                                    <th>
+                                        OCENA
+                                    </th>
+                                    <th>
+                                        PODNESI ZAHTEV
                                     </th>
                                 </tr>
                             </thead>
                                 <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['nizVakcina']->value, 'vakcina');
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['nizLekara']->value, 'lekar');
 if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['vakcina']->value) {
+foreach ($_from as $_smarty_tpl->tpl_vars['lekar']->value) {
 ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $_smarty_tpl->tpl_vars['vakcina']->value->sifra;?>
+                                <form action="promeni.php" method="POST">
+                                    <tr>
+                                        <td>
+                                            <?php echo $_smarty_tpl->tpl_vars['lekar']->value->ime;?>
 
-                                    </td>
-                                    <td>
-                                        <?php echo $_smarty_tpl->tpl_vars['vakcina']->value->ime;?>
+                                        </td>
+                                        <td>
+                                            <?php echo $_smarty_tpl->tpl_vars['lekar']->value->prezime;?>
 
-                                    </td>
-                                    <td>
-                                        <?php echo $_smarty_tpl->tpl_vars['vakcina']->value->opis;?>
+                                        </td>
+                                        <td>
+                                            <?php echo $_smarty_tpl->tpl_vars['lekar']->value->ocena;?>
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="MATBRL" value="<?php echo $_smarty_tpl->tpl_vars['lekar']->value->jmbg;?>
+" />
+                                            <input type="submit" value="PROMENI" />
+                                        </td>
+                                    </tr>
+                                </form>
                                 <?php
 }
 }
