@@ -19,6 +19,18 @@ namespace Hippocrates
         public Form1()
         {
             InitializeComponent();
+            this.MaximumSize = new System.Drawing.Size(404, 340);
+            this.MinimumSize = new System.Drawing.Size(404, 340);
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
         }
+
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form2 f = new Form2();
+            f.ShowDialog();
+            this.Close();
+        }
+
     }
 }

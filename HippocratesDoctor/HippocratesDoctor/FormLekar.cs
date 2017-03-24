@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Hippocrates.Data;
+using MetroFramework.Forms;
+
 namespace HippocratesDoctor
 {
-    public partial class Form1 : Form
+    public partial class FormLekar : MetroForm
     {
-        public Form1()
+        public FormLekar()
         {
             InitializeComponent();
         }
