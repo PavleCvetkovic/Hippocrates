@@ -30,6 +30,7 @@
         {
             this.metroDateTime1 = new MetroFramework.Controls.MetroDateTime();
             this.pnlPrepodne = new MetroFramework.Controls.MetroPanel();
+            this.metroButton830 = new MetroFramework.Controls.MetroButton();
             this.metroButton1315 = new MetroFramework.Controls.MetroButton();
             this.metroButton1300 = new MetroFramework.Controls.MetroButton();
             this.metroButton1245 = new MetroFramework.Controls.MetroButton();
@@ -81,7 +82,8 @@
             this.metroButton1345 = new MetroFramework.Controls.MetroButton();
             this.metroButton1330 = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.metroButton830 = new MetroFramework.Controls.MetroButton();
+            this.metroLabelLekarInfo = new MetroFramework.Controls.MetroLabel();
+            this.metroLabelSmenaLekara = new MetroFramework.Controls.MetroLabel();
             this.pnlPrepodne.SuspendLayout();
             this.pnlPopodne.SuspendLayout();
             this.SuspendLayout();
@@ -127,13 +129,26 @@
             this.pnlPrepodne.HorizontalScrollbarBarColor = true;
             this.pnlPrepodne.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlPrepodne.HorizontalScrollbarSize = 10;
-            this.pnlPrepodne.Location = new System.Drawing.Point(25, 98);
+            this.pnlPrepodne.Location = new System.Drawing.Point(25, 188);
             this.pnlPrepodne.Name = "pnlPrepodne";
             this.pnlPrepodne.Size = new System.Drawing.Size(648, 118);
             this.pnlPrepodne.TabIndex = 1;
             this.pnlPrepodne.VerticalScrollbarBarColor = true;
             this.pnlPrepodne.VerticalScrollbarHighlightOnWheel = false;
             this.pnlPrepodne.VerticalScrollbarSize = 10;
+            // 
+            // metroButton830
+            // 
+            this.metroButton830.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroButton830.BackColor = System.Drawing.Color.White;
+            this.metroButton830.Location = new System.Drawing.Point(489, 3);
+            this.metroButton830.Name = "metroButton830";
+            this.metroButton830.Size = new System.Drawing.Size(75, 23);
+            this.metroButton830.TabIndex = 28;
+            this.metroButton830.Text = "8:30";
+            this.metroButton830.UseSelectable = true;
             // 
             // metroButton1315
             // 
@@ -489,7 +504,7 @@
             this.pnlPopodne.HorizontalScrollbarBarColor = true;
             this.pnlPopodne.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlPopodne.HorizontalScrollbarSize = 10;
-            this.pnlPopodne.Location = new System.Drawing.Point(23, 222);
+            this.pnlPopodne.Location = new System.Drawing.Point(23, 312);
             this.pnlPopodne.Name = "pnlPopodne";
             this.pnlPopodne.Size = new System.Drawing.Size(648, 118);
             this.pnlPopodne.TabIndex = 2;
@@ -791,24 +806,31 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
-            // metroButton830
+            // metroLabelLekarInfo
             // 
-            this.metroButton830.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroButton830.BackColor = System.Drawing.Color.White;
-            this.metroButton830.Location = new System.Drawing.Point(489, 3);
-            this.metroButton830.Name = "metroButton830";
-            this.metroButton830.Size = new System.Drawing.Size(75, 23);
-            this.metroButton830.TabIndex = 28;
-            this.metroButton830.Text = "8:30";
-            this.metroButton830.UseSelectable = true;
+            this.metroLabelLekarInfo.AutoSize = true;
+            this.metroLabelLekarInfo.Location = new System.Drawing.Point(23, 108);
+            this.metroLabelLekarInfo.Name = "metroLabelLekarInfo";
+            this.metroLabelLekarInfo.Size = new System.Drawing.Size(92, 19);
+            this.metroLabelLekarInfo.TabIndex = 3;
+            this.metroLabelLekarInfo.Text = "ovde ide lekar";
+            // 
+            // metroLabelSmenaLekara
+            // 
+            this.metroLabelSmenaLekara.AutoSize = true;
+            this.metroLabelSmenaLekara.Location = new System.Drawing.Point(23, 146);
+            this.metroLabelSmenaLekara.Name = "metroLabelSmenaLekara";
+            this.metroLabelSmenaLekara.Size = new System.Drawing.Size(141, 19);
+            this.metroLabelSmenaLekara.TabIndex = 4;
+            this.metroLabelSmenaLekara.Text = "ovde ide smena lekara";
             // 
             // FormRaspored
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 365);
+            this.Controls.Add(this.metroLabelSmenaLekara);
+            this.Controls.Add(this.metroLabelLekarInfo);
             this.Controls.Add(this.pnlPopodne);
             this.Controls.Add(this.pnlPrepodne);
             this.Controls.Add(this.metroDateTime1);
@@ -817,6 +839,7 @@
             this.pnlPrepodne.ResumeLayout(false);
             this.pnlPopodne.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -876,5 +899,7 @@
         private MetroFramework.Controls.MetroButton metroButton1330;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroButton metroButton830;
+        private MetroFramework.Controls.MetroLabel metroLabelLekarInfo;
+        private MetroFramework.Controls.MetroLabel metroLabelSmenaLekara;
     }
 }

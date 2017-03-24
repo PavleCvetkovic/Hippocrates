@@ -194,7 +194,7 @@ namespace HippocratesPatient
         private void metroButton2_Click(object sender, EventArgs e)
         {
             //MetroMessageBox.Show(this, "This is a message in MetroBox");
-            FormRaspored raspored_form = new FormRaspored(jmbg_lekara);
+            FormRaspored raspored_form = new FormRaspored(jmbg, GetDoctorNameAndSurname(jmbg_lekara), jmbg_lekara);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
             raspored_form.Show();
         }
