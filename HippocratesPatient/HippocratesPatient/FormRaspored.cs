@@ -146,7 +146,7 @@ namespace Hippocrates
         private void metroButton_Click(object sender, EventArgs e)
         {
             MetroButton metro_button = (MetroButton)sender;
-            MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
             string napomena = "Treba da dodam formu za upis napomene"; // Add form
 
             if (MakeAnApointment(metro_button.Text.Replace(":", string.Empty), napomena)) // Replace(string old_string, string new_string) 11:30 -> 1130

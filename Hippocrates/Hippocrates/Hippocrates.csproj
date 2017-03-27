@@ -130,9 +130,6 @@
     <None Include="Resources\newData.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\dashsmallico.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\logoHipoDesktopApp.png" />
   </ItemGroup>
   <ItemGroup>

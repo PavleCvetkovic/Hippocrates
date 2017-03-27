@@ -73,16 +73,6 @@ namespace Hippocrates.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dashsmallico {
-            get {
-                object obj = ResourceManager.GetObject("dashsmallico", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap logoHipoDesktopApp {
             get {
                 object obj = ResourceManager.GetObject("logoHipoDesktopApp", resourceCulture);

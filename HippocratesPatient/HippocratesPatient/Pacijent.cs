@@ -211,8 +211,9 @@ namespace HippocratesPatient
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            ZahtevZaIzborLekara zahtev_form = new ZahtevZaIzborLekara(jmbg_lekara);
+            ZahtevZaIzborLekara zahtev_form = new ZahtevZaIzborLekara(jmbg ,GetDoctorNameAndSurname(jmbg_lekara), jmbg_lekara);
             zahtev_form.StartPosition = FormStartPosition.CenterScreen;
+            //zahtev_form.MdiParent = this; // To make it impossible to NOT focus
             zahtev_form.Show();
         }
     }
