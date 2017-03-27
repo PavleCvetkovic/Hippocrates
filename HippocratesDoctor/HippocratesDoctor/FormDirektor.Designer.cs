@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FormDirektor
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "FormDirektor";
+            this.ClientSize = new System.Drawing.Size(900, 576);
+            this.Name = "FormDirektor";
+            this.Text = "Administrator Doma Zdravlja";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.btn_login = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tb_username = new System.Windows.Forms.TextBox();
+            this.tb_pass = new System.Windows.Forms.TextBox();
             this.lbl_KorisnickoIme = new System.Windows.Forms.Label();
             this.lbl_Lozinka = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,22 +52,22 @@
             this.btn_login.UseVisualStyleBackColor = false;
             this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
             // 
-            // textBox1
+            // tb_username
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(26, 131);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(199, 29);
-            this.textBox1.TabIndex = 2;
+            this.tb_username.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_username.Location = new System.Drawing.Point(26, 131);
+            this.tb_username.Name = "tb_username";
+            this.tb_username.Size = new System.Drawing.Size(199, 29);
+            this.tb_username.TabIndex = 2;
             // 
-            // textBox2
+            // tb_pass
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(26, 189);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(199, 29);
-            this.textBox2.TabIndex = 3;
-            this.textBox2.UseSystemPasswordChar = true;
+            this.tb_pass.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pass.Location = new System.Drawing.Point(26, 189);
+            this.tb_pass.Name = "tb_pass";
+            this.tb_pass.Size = new System.Drawing.Size(199, 29);
+            this.tb_pass.TabIndex = 3;
+            this.tb_pass.UseSystemPasswordChar = true;
             // 
             // lbl_KorisnickoIme
             // 
@@ -113,7 +113,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Hippocrates.Properties.Resources.newData;
+            this.pictureBox1.Image = global::Hippocrates.Properties.Resources.loginScreenPicture;
             this.pictureBox1.Location = new System.Drawing.Point(244, 82);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(165, 257);
@@ -131,8 +131,8 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbl_Lozinka);
             this.Controls.Add(this.lbl_KorisnickoIme);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tb_pass);
+            this.Controls.Add(this.tb_username);
             this.Controls.Add(this.btn_login);
             this.Name = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -144,8 +144,8 @@
 
         #endregion
         private System.Windows.Forms.Button btn_login;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tb_username;
+        private System.Windows.Forms.TextBox tb_pass;
         private System.Windows.Forms.Label lbl_KorisnickoIme;
         private System.Windows.Forms.Label lbl_Lozinka;
         private System.Windows.Forms.PictureBox pictureBox1;

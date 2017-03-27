@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -124,16 +125,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\1489616488_9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\newData.jpg" />
+    <None Include="Resources\logoHipoDesktopAppZaForm2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logoHipoDesktopApp.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logoHipoDesktopAppZaForm2.png" />
+    <None Include="Resources\loginScreenPicture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashsmallico.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

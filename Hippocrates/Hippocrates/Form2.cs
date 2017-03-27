@@ -165,6 +165,17 @@ namespace Hippocrates
                     MySqlCommand mcc = new MySqlCommand(commandSqlUnos, conn);
                     mcc.ExecuteNonQuery();
                     MessageBox.Show("Uspesno ste uneli nov dom zdravlja u bazu podatka");
+                    //---
+                    string sqlcommand = "SELECT * FROM DOM_ZDRAVLJA";
+                    adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                    MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                    dataSet = new DataSet();
+                    adapter.Fill(dataSet, "DOM_ZDRAVLJA");
+                    dGV_unosenje_DZ.DataSource = dataSet;
+                    dGV_unosenje_DZ.DataMember = "DOM_ZDRAVLJA";
+
+                    //---
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -262,6 +273,19 @@ namespace Hippocrates
                 MySqlCommand mcc = new MySqlCommand(commandSqlUnos, conn);
                 mcc.ExecuteNonQuery();
                 MessageBox.Show("Uspesno ste uneli novog lekara u bazu podatka");
+                //---
+                string sqlcommand = "SELECT * FROM IZABRANI_LEKAR";
+                adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                dataSet = new DataSet();
+                adapter.Fill(dataSet, "IZABRANI_LEKAR");
+                dGV_unosenje_lekar.DataSource = dataSet;
+                dGV_unosenje_lekar.DataMember = "IZABRANI_LEKAR";
+
+
+
+                //----
                 conn.Close();
             }
             catch (Exception ex)
@@ -307,10 +331,23 @@ namespace Hippocrates
             try
             {
                 conn.Open();
-                string commandSqlUnos = "INSERT INTO IZABRANI_LEKAR (JMBG,IME,SREDNJE_SLOVO,PREZIME,DATUM_ROĐENJA,OPSTINA,PRAVO_DA_ZAKAŽE,LBO,VAŽI_DO) VALUES ('" + tb_JMBG_pacijenta.Text + "','" + tb_ime_pac.Text + "','" + tb_srednjeSlovo.Text + "','" + tb_prezime_pacijenta.Text + "','" + dTP_pacijenta.Value.ToString("yyyy-MM-dd") + "','" + tb_opstina.Text + "','" + 1 + "','" + tb_LBO_pacujenta.Text + "','" + dTP_Vazi_do.Value.ToString("yyyy-MM-dd") + "')";
+                string commandSqlUnos = "INSERT INTO PACIJENT (JMBG,IME,SREDNJE_SLOVO,PREZIME,DATUM_ROĐENJA,OPŠTINA,PRAVO_DA_ZAKAŽE,LBO,VAŽI_DO) VALUES ('" + tb_JMBG_pacijenta.Text + "','" + tb_ime_pac.Text + "','" + tb_srednjeSlovo.Text + "','" + tb_prezime_pacijenta.Text + "','" + dTP_pacijenta.Value.ToString("yyyy-MM-dd") + "','" + tb_opstina.Text + "','" + 1 + "','" + tb_LBO_pacujenta.Text + "','" + dTP_Vazi_do.Value.ToString("yyyy-MM-dd") + "')";
                 MySqlCommand mcc = new MySqlCommand(commandSqlUnos, conn);
                 mcc.ExecuteNonQuery();
                 MessageBox.Show("Uspesno ste uneli novog pacijenta u bazu podatka");
+                //--- 
+                string sqlcommand = "SELECT * FROM PACIJENT";
+                adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                dataSet = new DataSet();
+                adapter.Fill(dataSet, "PACIJENT");
+                dGV_unosenje_pacijent.DataSource = dataSet;
+                dGV_unosenje_pacijent.DataMember = "PACIJENT";
+
+
+
+                //---- 
                 conn.Close();
             }
             catch (Exception ex)
@@ -319,10 +356,7 @@ namespace Hippocrates
                 conn.Close();
             }
         }
-        private bool validacija()
-        {
-            return true;
-        }
+       
 
         #endregion
 
@@ -384,16 +418,27 @@ namespace Hippocrates
             string s;
             if (rB_brisanje_pomocu_MBR.Checked)
             {
-                if (tb_MBR_za_brisanje.Text != string.Empty && tb_MBR_za_brisanje.TextLength == 13)
+                if (tb_MBR_za_brisanje.Text != string.Empty && tb_MBR_za_brisanje.TextLength == 5)
                 {
                     s = tb_MBR_za_brisanje.Text;
                     try
                     {
                         conn.Open();
-                        string commandSqlDelete = "DELETE FROM DOM_ZDRAVLJA WHERE JMBG='" + s + "' ";
+                        string commandSqlDelete = "DELETE FROM DOM_ZDRAVLJA WHERE MBR='" + s + "' ";
                         MySqlCommand mcc = new MySqlCommand(commandSqlDelete, conn);
                         mcc.ExecuteNonQuery();
                         MessageBox.Show("Uspesno ste obrisali dom zdravlja iz baze podatka");
+                        //---
+                        string sqlcommand = "SELECT * FROM DOM_ZDRAVLJA";
+                        adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                        MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                        dataSet = new DataSet();
+                        adapter.Fill(dataSet, "DOM_ZDRAVLJA");
+                        dGV_brisanje_dz.DataSource = dataSet;
+                        dGV_brisanje_dz.DataMember = "DOM_ZDRAVLJA";
+                        rB_brisanje_pomocu_MBR.Checked = false;
+                        //---
                         conn.Close();
                     }
                     catch (Exception ex)
@@ -418,6 +463,16 @@ namespace Hippocrates
                     MySqlCommand mcc = new MySqlCommand(commandSqlDelete, conn);
                     mcc.ExecuteNonQuery();
                     MessageBox.Show("Uspesno ste obrisali dom zdravlja iz baze podatka");
+                    //---
+                    string sqlcommand = "SELECT * FROM DOM_ZDRAVLJA";
+                    adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                    MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                    dataSet = new DataSet();
+                    adapter.Fill(dataSet, "DOM_ZDRAVLJA");
+                    dGV_brisanje_dz.DataSource = dataSet;
+                    dGV_brisanje_dz.DataMember = "DOM_ZDRAVLJA";
+                    //---
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -447,6 +502,19 @@ namespace Hippocrates
                         MySqlCommand mcc = new MySqlCommand(commandSqlDelete, conn);
                         mcc.ExecuteNonQuery();
                         MessageBox.Show("Uspesno ste obrisali lekara iz baze podatka");
+                        //---
+                        string sqlcommand = "SELECT * FROM IZABRANI_LEKAR";
+                        adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                        MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                        dataSet = new DataSet();
+                        adapter.Fill(dataSet, "IZABRANI_LEKAR");
+                        dGV_lekar_brisanje.DataSource = dataSet;
+                        dGV_lekar_brisanje.DataMember = "IZABRANI_LEKAR";
+
+
+
+                        //----
                         conn.Close();
                     }
                     catch (Exception ex)
@@ -471,6 +539,19 @@ namespace Hippocrates
                     MySqlCommand mcc = new MySqlCommand(commandSqlDelete, conn);
                     mcc.ExecuteNonQuery();
                     MessageBox.Show("Uspesno ste obrisali lekara iz baze podatka");
+                    //---
+                    string sqlcommand = "SELECT * FROM IZABRANI_LEKAR";
+                    adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                    MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                    dataSet = new DataSet();
+                    adapter.Fill(dataSet, "IZABRANI_LEKAR");
+                    dGV_lekar_brisanje.DataSource = dataSet;
+                    dGV_lekar_brisanje.DataMember = "IZABRANI_LEKAR";
+
+
+
+                    //----
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -498,6 +579,19 @@ namespace Hippocrates
                         MySqlCommand mcc = new MySqlCommand(commandSqlDelete, conn);
                         mcc.ExecuteNonQuery();
                         MessageBox.Show("Uspesno ste obrisali pacijenta iz baze podatka");
+                        //--- 
+                        string sqlcommand = "SELECT * FROM PACIJENT";
+                        adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                        MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                        dataSet = new DataSet();
+                        adapter.Fill(dataSet, "PACIJENT");
+                        dGV_pacijent_brisanje.DataSource = dataSet;
+                        dGV_pacijent_brisanje.DataMember = "PACIJENT";
+
+
+
+                        //---- 
                         conn.Close();
                     }
                     catch (Exception ex)
@@ -523,6 +617,19 @@ namespace Hippocrates
                     MySqlCommand mcc = new MySqlCommand(commandSqlDelete, conn);
                     mcc.ExecuteNonQuery();
                     MessageBox.Show("Uspesno ste obrisali pacijenta iz baze podatka");
+                    //--- 
+                    string sqlcommand = "SELECT * FROM PACIJENT";
+                    adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                    MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                    dataSet = new DataSet();
+                    adapter.Fill(dataSet, "PACIJENT");
+                    dGV_pacijent_brisanje.DataSource = dataSet;
+                    dGV_pacijent_brisanje.DataMember = "PACIJENT";
+
+
+
+                    //---- 
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -538,7 +645,6 @@ namespace Hippocrates
 
         #endregion
 
-        //fali kod za azuriranje pacijenta
         #region tab_za_azuriranje
         #region pomocnePromenljive
         private string mbr_za_menjanje;
@@ -713,7 +819,7 @@ namespace Hippocrates
                 dGV_lekari_azuriranje.DataSource = dataSet;
                 dGV_lekari_azuriranje.DataMember = "IZABRANI_LEKAR";
 
-                conn.Close();
+                
 
                 //----
                 conn.Close();
@@ -815,6 +921,201 @@ namespace Hippocrates
 
         #endregion
 
+        #region validacija_za_unos_u_kontrole
         
+        //tab za unos doma zdravlja
+        private void tb_MBR_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar); 
+        }
+
+        private void tb_ime_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Space);
+        }
+
+        private void tb_lokacija_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_opstina_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_adresa_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Space || char.IsDigit(e.KeyChar));
+        }
+
+        //tab za unos lekara
+        private void tb_jmbg_lekara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_mbrzu_lekara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_ime_lekara_unos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_prezime_lekara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_pass_lekara_unos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar));
+        }
+
+        private void tb_srednje_slovo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        //tab za unos pacijenta
+        private void tb_JMBG_pacijenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_LBO_pacujenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_ime_pac_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_prezime_pacijenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_opstina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_srednjeSlovo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        //tab za brisanje doma zdravlja
+        private void tb_MBR_za_brisanje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        //tab za brisanje lekara
+        private void tB_JMBG_brisanje_lekara_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        //tab za brisanje pacijenta
+        private void tb_JMBG_brisanja_pacijenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        //tab azuriranje doma zdravlja
+        private void tb_azuriranje_MBR_domZ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_azuriranje_Ime_domZ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_azuriranje_lokacija_domZ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_azuriranje_adresa_domZ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Space || char.IsDigit(e.KeyChar));
+        }
+
+        private void tb_azuriranje_opstina_domZ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        //tab za azuriranje lekara
+        private void tb_azuriranje_jmbg_lekar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_azuriranje_mbrzu_lekar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_azuriranje_ime_lekar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_azuriranje_prezime_lekar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_azuriranje_lekar_srednjeSlovo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_azuriranje_pass_lekar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar));
+        }
+
+        //tab za azuriranje pacijenta
+        private void tb_pacijent_azuriranje_jmbg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_pacijent_azuriranje_lbo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_pacijent_azuriranje_ime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_pacijent_azuriranje_prezime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_pacijent_azuriranje_MATBRL_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_pacijent_azuriranje_opstina_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+        #endregion
     }
 }
