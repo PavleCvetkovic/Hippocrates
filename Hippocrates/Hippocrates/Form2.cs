@@ -242,7 +242,7 @@ namespace Hippocrates
 
                 conn.Close();
             }
-            else
+            else if (TabControl_za_unos.SelectedIndex == 2)
             {
                 string sqlcommand = "SELECT * FROM PACIJENT";
                 adapter = new MySqlDataAdapter(sqlcommand, connstr);
@@ -252,6 +252,19 @@ namespace Hippocrates
                 adapter.Fill(dataSet, "PACIJENT");
                 dGV_unosenje_pacijent.DataSource = dataSet;
                 dGV_unosenje_pacijent.DataMember = "PACIJENT";
+
+                conn.Close();
+            }
+            else
+            {
+                string sqlcommand = "SELECT * FROM ADMINISTRATOR_DOM_ZDRAVLJA";
+                adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                dataSet = new DataSet();
+                adapter.Fill(dataSet, "ADMINISTRATOR_DOM_ZDRAVLJA");
+                dGV_unos_AdminDZ.DataSource = dataSet;
+                dGV_unos_AdminDZ.DataMember = "ADMINISTRATOR_DOM_ZDRAVLJA";
 
                 conn.Close();
             }
@@ -356,11 +369,46 @@ namespace Hippocrates
                 conn.Close();
             }
         }
-       
+
 
         #endregion
 
+        #region tab_za_Unos_admina_domZ
+
+        private void btn_unesi_adminaDZ_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                string commandSqlUnos = "INSERT INTO ADMINISTRATOR_DOM_ZDRAVLJA (JMBG,IME,SREDNJE_SLOVO,PREZIME,MBRZU,PASSWORD) VALUES ('" + tb_adminDZ_azuriranje_JMBG.Text + "','" + tb_adminDZ_azuriranje_Ime.Text + "','" + tb_adminDZ_azuriranje_SredSlovo.Text + "','" + tb_adminDZ_azuriranje_Prezime.Text + "','"+ tb_adminDZ_azuriranje_MBRZU .Text+ "','"+ tb_adminDZ_azuriranje_PASS.Text + "')";
+                MySqlCommand mcc = new MySqlCommand(commandSqlUnos, conn);
+                mcc.ExecuteNonQuery();
+                MessageBox.Show("Uspesno ste uneli novog administratora u bazu podatka");
+                //--- 
+                string sqlcommand = "SELECT * FROM ADMINISTRATOR_DOM_ZDRAVLJA";
+                adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                dataSet = new DataSet();
+                adapter.Fill(dataSet, "ADMINISTRATOR_DOM_ZDRAVLJA");
+                dGV_unos_AdminDZ.DataSource = dataSet;
+                dGV_unos_AdminDZ.DataMember = "ADMINISTRATOR_DOM_ZDRAVLJA";
+
+
+
+                //---- 
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problem" + ex);
+                conn.Close();
+            }
+        }
+
         #endregion
+
+            #endregion
 
         #region tab_za_brisanje
 
@@ -395,7 +443,7 @@ namespace Hippocrates
 
                 conn.Close();
             }
-            else
+            else if (tabControl_za_brisanje.SelectedIndex == 2)
             {
                 string sqlcommand = "SELECT * FROM PACIJENT";
                 adapter = new MySqlDataAdapter(sqlcommand, connstr);
@@ -405,6 +453,19 @@ namespace Hippocrates
                 adapter.Fill(dataSet, "PACIJENT");
                 dGV_pacijent_brisanje.DataSource = dataSet;
                 dGV_pacijent_brisanje.DataMember = "PACIJENT";
+
+                conn.Close();
+            }
+             else
+            {
+                string sqlcommand = "SELECT * FROM ADMINISTRATOR_DOM_ZDRAVLJA";
+                adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                dataSet = new DataSet();
+                adapter.Fill(dataSet, "ADMINISTRATOR_DOM_ZDRAVLJA");
+                dGV_adminDZ_brisanje.DataSource = dataSet;
+                dGV_adminDZ_brisanje.DataMember = "ADMINISTRATOR_DOM_ZDRAVLJA";
 
                 conn.Close();
             }
@@ -643,6 +704,82 @@ namespace Hippocrates
 
         #endregion
 
+        #region tab_za_brisanje_admina_domZ
+
+        private void btn_brisanje_admina_DZ_Click(object sender, EventArgs e)
+        {
+
+            string s;
+            if (rB_brisanje_administratora_alternativa.Checked)
+            {
+                if (tb_JMBG_brisanja_administratora.Text != string.Empty && tb_JMBG_brisanja_administratora.TextLength == 13)
+                {
+                    s = tb_JMBG_brisanja_administratora.Text;
+                    try
+                    {
+                        conn.Open();
+                        string commandSqlDelete = "DELETE FROM ADMINISTRATOR_DOM_ZDRAVLJA WHERE JMBG='" + s + "' ";
+                        MySqlCommand mcc = new MySqlCommand(commandSqlDelete, conn);
+                        mcc.ExecuteNonQuery();
+                        MessageBox.Show("Uspesno ste obrisali administratora doma zdravlja iz baze podatka");
+                        //---
+                        string sqlcommand = "SELECT * FROM ADMINISTRATOR_DOM_ZDRAVLJA";
+                        adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                        MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                        dataSet = new DataSet();
+                        adapter.Fill(dataSet, "ADMINISTRATOR_DOM_ZDRAVLJA");
+                        dGV_adminDZ_brisanje.DataSource = dataSet;
+                        dGV_adminDZ_brisanje.DataMember = "ADMINISTRATOR_DOM_ZDRAVLJA";
+                        rB_brisanje_administratora_alternativa.Checked = false;
+                        //---
+                        conn.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Problem" + ex);
+                        conn.Close();
+                    }
+                }
+            }
+            else
+            {
+                int rowindex = dGV_adminDZ_brisanje.CurrentCell.RowIndex;
+                int columnindex = dGV_adminDZ_brisanje.CurrentCell.ColumnIndex;
+
+                s = dGV_adminDZ_brisanje.Rows[rowindex].Cells[columnindex].Value.ToString();
+
+
+                try
+                {
+                    conn.Open();
+                    string commandSqlDelete = "DELETE FROM ADMINISTRATOR_DOM_ZDRAVLJA WHERE JMBG='" + s + "' ";
+                    MySqlCommand mcc = new MySqlCommand(commandSqlDelete, conn);
+                    mcc.ExecuteNonQuery();
+                    MessageBox.Show("Uspesno ste obrisali administratora doma zdravlja iz baze podatka");
+                    //---
+                    string sqlcommand = "SELECT * FROM ADMINISTRATOR_DOM_ZDRAVLJA";
+                    adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                    MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                    dataSet = new DataSet();
+                    adapter.Fill(dataSet, "ADMINISTRATOR_DOM_ZDRAVLJA");
+                    dGV_adminDZ_brisanje.DataSource = dataSet;
+                    dGV_adminDZ_brisanje.DataMember = "ADMINISTRATOR_DOM_ZDRAVLJA";
+                    rB_brisanje_administratora_alternativa.Checked = false;
+                    //---
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Problem" + ex);
+                    conn.Close();
+                }
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region tab_za_azuriranje
@@ -693,7 +830,7 @@ namespace Hippocrates
 
                 conn.Close();
             }
-            else
+            else if (tab_azuriranje.SelectedIndex == 2)
             {
                 string sqlcommand = "SELECT * FROM PACIJENT";
                 adapter = new MySqlDataAdapter(sqlcommand, connstr);
@@ -703,6 +840,19 @@ namespace Hippocrates
                 adapter.Fill(dataSet, "PACIJENT");
                 dGV_pacijenti_azuriranje.DataSource = dataSet;
                 dGV_pacijenti_azuriranje.DataMember = "PACIJENT";
+
+                conn.Close();
+            }
+            else
+            {
+                string sqlcommand = "SELECT * FROM ADMINISTRATOR_DOM_ZDRAVLJA";
+                adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                dataSet = new DataSet();
+                adapter.Fill(dataSet, "ADMINISTRATOR_DOM_ZDRAVLJA");
+                dGV_azuriranje_adminDZ.DataSource = dataSet;
+                dGV_azuriranje_adminDZ.DataMember = "ADMINISTRATOR_DOM_ZDRAVLJA";
 
                 conn.Close();
             }
@@ -919,10 +1069,59 @@ namespace Hippocrates
 
         #endregion
 
+        #region tab_za_azuriranje_adminaDz
+
+        private void btn_azuriranje_adminDz_Click(object sender, EventArgs e)
+        {
+            //ADMINISTRATOR_DOM_ZDRAVLJA
+            try
+            {
+                conn.Open();
+                string commandSqlUpdate = "UPDATE ADMINISTRATOR_DOM_ZDRAVLJA SET JMBG='" + tb_azuriranje_admindz_jmbg.Text + "',IME='" + tb_azuriranje_admindz_ime.Text + "',SREDNJE_SLOVO='" + tb_azuriranje_admindz_srednjeS.Text + "',PREZIME='" + tb_azuriranje_admindz_prezime.Text + "',MBRZU='" + tb_azuriranje_admindz_mbrzu.Text + "',PASSWORD='" + tb_azuriranje_admindz_password.Text + "' WHERE JMBG='" + tb_azuriranje_admindz_jmbg.Text + "'";
+                MySqlCommand mcc = new MySqlCommand(commandSqlUpdate, conn);
+                mcc.ExecuteNonQuery();
+                MessageBox.Show("Uspesno ste azurirali administratora doma zdravlja u bazi podatka");
+                //---
+                string sqlcommand = "SELECT * FROM ADMINISTRATOR_DOM_ZDRAVLJA";
+                adapter = new MySqlDataAdapter(sqlcommand, connstr);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
+
+                dataSet = new DataSet();
+                adapter.Fill(dataSet, "ADMINISTRATOR_DOM_ZDRAVLJA");
+                dGV_azuriranje_adminDZ.DataSource = dataSet;
+                dGV_azuriranje_adminDZ.DataMember = "ADMINISTRATOR_DOM_ZDRAVLJA";
+                //---
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problem" + ex);
+                conn.Close();
+            }
+        }
+        private void dGV_azuriranje_adminDZ_SelectionChanged(object sender, EventArgs e)
+        {
+            int rowindex = dGV_domZdravlja_azuriranje.CurrentCell.RowIndex;
+            s = dGV_azuriranje_adminDZ.Rows[rowindex].Cells[0].Value.ToString();
+            s2 = dGV_azuriranje_adminDZ.Rows[rowindex].Cells[1].Value.ToString();
+            s3 = dGV_azuriranje_adminDZ.Rows[rowindex].Cells[2].Value.ToString();
+            s4 = dGV_azuriranje_adminDZ.Rows[rowindex].Cells[3].Value.ToString();
+            s5 = dGV_azuriranje_adminDZ.Rows[rowindex].Cells[4].Value.ToString();
+            s6 = dGV_azuriranje_adminDZ.Rows[rowindex].Cells[5].Value.ToString();
+            tb_azuriranje_admindz_jmbg.Text = s;
+            tb_azuriranje_admindz_ime.Text = s2;
+            tb_azuriranje_admindz_srednjeS.Text = s3;
+            tb_azuriranje_admindz_prezime.Text = s4;
+            tb_azuriranje_admindz_mbrzu.Text = s5;
+            tb_azuriranje_admindz_password.Text = s6;
+            mbr_za_menjanje = s;
+        }
+        #endregion
+
         #endregion
 
         #region validacija_za_unos_u_kontrole
-        
+
         //tab za unos doma zdravlja
         private void tb_MBR_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1011,6 +1210,37 @@ namespace Hippocrates
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
 
+        //tab za unos admina domaZdravlja
+        private void tb_adminDZ_azuriranje_JMBG_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+        private void tb_adminDZ_azuriranje_Ime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_adminDZ_azuriranje_SredSlovo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_adminDZ_azuriranje_Prezime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_adminDZ_azuriranje_MBRZU_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_adminDZ_azuriranje_PASS_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar));
+        }
+
+
         //tab za brisanje doma zdravlja
         private void tb_MBR_za_brisanje_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1029,6 +1259,11 @@ namespace Hippocrates
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        //tab za brisanje admina DomaZ
+        private void tb_JMBG_brisanja_administratora_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
         //tab azuriranje doma zdravlja
         private void tb_azuriranje_MBR_domZ_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1116,6 +1351,42 @@ namespace Hippocrates
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
+
+
+        //tab za azuriranje admina domaZ
+        private void tb_azuriranje_admindz_jmbg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_azuriranje_admindz_ime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_azuriranje_admindz_srednjeS_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_azuriranje_admindz_prezime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_azuriranje_admindz_mbrzu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_azuriranje_admindz_password_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar));
+        }
+
+
         #endregion
+
+
     }
 }
