@@ -35,10 +35,15 @@ namespace HippocratesDoctor
 
                 if (mtbxLekarSifra.Text == (string)cmd.ExecuteScalar())
                 {
+                    /*
                     FormLekar frmLekar = new FormLekar();
                     frmLekar.FormClosing += new FormClosingEventHandler(showThisForm);
                     this.Visible = false;
-                    frmLekar.ShowDialog();
+                    frmLekar.ShowDialog();*/
+                    this.Hide();
+                    FormLekar f = new FormLekar();
+                    f.ShowDialog();
+                    this.Close();
                 }
                 else
                 {
@@ -76,10 +81,10 @@ namespace HippocratesDoctor
 
                 if (mtbxOsobljeSifra.Text == (string)cmd.ExecuteScalar())
                 {
-                    //frm = new Form();
-                    //frm.FormClosing += new FormClosingEventHandler(showThisForm);
-                    this.Visible = false;
-                    //frm.ShowDialog();
+                    this.Hide();
+                    FormOsoblje f = new FormOsoblje();
+                    f.ShowDialog();
+                    this.Close();
                 }
                 else
                 {
@@ -99,7 +104,7 @@ namespace HippocratesDoctor
         private void mbtnDirektorSubmit_Click(object sender, EventArgs e)
         {
             string conStr =
-                "server=139.59.132.29;user=djeki;charset=utf8;database=Hippocrates;port=3306;password=volimdoroteju1;";
+                "server=139.59.132.29;user=aki;charset=utf8;database=Hippocrates;port=3306;password=jetion123c;";
             MySqlConnection conn = new MySqlConnection(conStr);
 
             try
@@ -111,10 +116,10 @@ namespace HippocratesDoctor
 
                 if (mtbxDirektorSifra.Text == (string)cmd.ExecuteScalar())
                 {
-                    //Form frm = new Form();
-                    //frm.FormClosing += new FormClosingEventHandler(showThisForm);
-                    this.Visible = false;
-                    //frm.ShowDialog();
+                    this.Hide();
+                    FormDirektor f = new FormDirektor(this.mtbxDirektorJMBG.Text);
+                    f.ShowDialog();
+                    this.Close();
                 }
                 else
                 {
