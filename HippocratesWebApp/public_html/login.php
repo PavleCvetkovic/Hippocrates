@@ -3,7 +3,10 @@
     include_once '../lib.php';
     session_start();
     if(isset($_SESSION['isValid'])){
-        header("Location: index.php");
+        if($_SESSION['email']!='' && $_SESSION['telefon']!='')
+            header("Location: index.php");
+        else
+            header("Location: podesavanja.php");
         die();
     }
     if(isset($_POST['JMBG'])&&isset($_POST['LBO'])){ 
@@ -12,7 +15,14 @@
             $_SESSION['JMBG']=$_POST['JMBG']; 
             $_SESSION['LBO']=$_POST['LBO']; 
             $_SESSION['isValid']=true; 
-            header("Location: index.php"); 
+            $_SESSION['email']=vratiEmailPacijenta($_SESSION['JMBG']);
+            $_SESSION['telefon']= vratiTelefonPacijenta($_SESSION['JMBG']);
+            
+            if($_SESSION['email']!='' && $_SESSION['telefon']!='')
+                header("Location: index.php");
+            else
+                header("Location: podesavanja.php");
+            die();
         } 
         else{ 
             session_destroy(); 

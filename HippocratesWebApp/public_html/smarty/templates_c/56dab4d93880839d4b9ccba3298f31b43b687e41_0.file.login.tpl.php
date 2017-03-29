@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-21 20:11:41
+/* Smarty version 3.1.30, created on 2017-03-29 15:33:35
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\login.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d17aedc58145_44173909',
+  'unifunc' => 'content_58dbb7af8313d8_55332956',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '56dab4d93880839d4b9ccba3298f31b43b687e41' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\login.tpl',
-      1 => 1490031507,
+      1 => 1490794414,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d17aedc58145_44173909 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58dbb7af8313d8_55332956 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html lang="en">
   <head>

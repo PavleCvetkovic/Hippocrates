@@ -16,17 +16,16 @@ else{
             header("Location: podesavanja.php");
         
 }
-    
-$smarty= new MySmarty(); 
-if(isset($_GET['datum'])){
-    $datum=$_GET['datum'];
-    //glupi format za u bazu
-    $datum=date("Y-m-d",strtotime(str_replace('/', '-', $datum)));
-    otkazi($_SESSION['JMBG'],$datum);
+$status=vecOcenio($_SESSION['JMBG']);
+if(isset($_POST['ocena'])){
+    if(!$status){
+        ocenilekara($_SESSION['JMBG'],$_POST['ocena']);
+        $status=true;
+        header("Location: index.php");
+    }
 }
-$statusOtkazivanja="Uspešno ste otkazali termin za ".$_GET['datum'] ;
 
-$smarty->assign("statusOtkazivanja",$statusOtkazivanja);
-$smarty->display("otkazi.tpl");
-
+$smarty=new MySmarty();
+$smarty->assign("status",$status);
+$smarty->display("ocenilekara.tpl");
 ?>

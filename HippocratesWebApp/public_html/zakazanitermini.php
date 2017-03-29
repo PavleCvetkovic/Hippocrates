@@ -11,6 +11,11 @@ if(!isset($_SESSION['isValid'])){
     header("Location: login.php");
     die();
 }
+else{
+        if(!(strlen($_SESSION['email'])>0 && strlen($_SESSION['telefon'])>0))
+            header("Location: podesavanja.php");
+        
+}
 
 $smarty=new MySmarty();
 

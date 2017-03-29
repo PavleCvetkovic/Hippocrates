@@ -29,6 +29,63 @@ function check_login($jmbg,$lbo){
         $con->close();
     }
 }
+function ocenilekara($matbrp,$ocena){
+    $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        // u slucaju greske odstampati odgovarajucu poruku
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $lekar=vratiIzabranogLekara($matbrp);
+        $res=$con->query("INSERT INTO OCENA(MATBRP,MATBRL,OCENA) VALUES('$matbrp','$lekar->jmbg','$ocena');");
+
+        $con->close();
+    }
+}
+function vecOcenio($matbrp){
+    $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        // u slucaju greske odstampati odgovarajucu poruku
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $lekar=vratiIzabranogLekara($matbrp);
+        $res=$con->query("SELECT * FROM OCENA WHERE MATBRP='$matbrp' AND MATBRL='$lekar->jmbg'");
+        if($res->num_rows==0)
+            return false;
+        return true;
+        $con->close();
+    }
+    
+}
+function postaviTelefonPacijenta($matbrp,$telefon){
+    $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
+    $con->set_charset('utf8mb4');
+    if($con->connect_errno){
+        print("Connection errot(".$con->connect_errno."): $con->connect_error");
+    }
+    else {
+            $res=$con->query("UPDATE PACIJENT SET KONTAKT_TELEFON='$telefon' WHERE JMBG='$matbrp'");
+        }
+        $con->close();
+        
+    }
+
+
+function postaviEmailPacijenta($matbrp,$email){
+    $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
+    $con->set_charset('utf8mb4');
+    if($con->connect_errno){
+        print("Connection errot(".$con->connect_errno."): $con->connect_error");
+    }
+            $res=$con->query("UPDATE PACIJENT SET EMAIL='$email' WHERE JMBG='$matbrp'");
+       
+        $con->close();
+     
+    }
+
 function zahtevZaPromenu($matbrp,$matbrl){
     $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
     $con->set_charset('utf8mb4');
@@ -87,6 +144,31 @@ function vratiDomZdravljaPacijenta($matbrp){
         return $domZdravlja;
     }
 }
+function vratiTelefonPacijenta($matbrp){
+    $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $res=$con->query("SELECT KONTAKT_TELEFON FROM PACIJENT WHERE JMBG='$matbrp'");
+        if($res)
+            $row=$res->fetch_assoc();
+        return $row["KONTAKT_TELEFON"];
+    }
+}
+function vratiEmailPacijenta($matbrp){
+    $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
+    $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $res=$con->query("SELECT EMAIL FROM PACIJENT WHERE JMBG='$matbrp'");
+        $row=$res->fetch_assoc();
+        return $row["EMAIL"];
+    }
+}
 function vratiVakcine($matbrp){
     $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
     $con->set_charset('utf8mb4');
@@ -106,7 +188,28 @@ function vratiVakcine($matbrp){
             return $nizvakcina;
     }
 }
-
+function vratiSmenuLekaraZaDatum($matbrl,$datum){
+     $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
+     $con->set_charset('utf8mb4');
+    if ($con->connect_errno) {
+        print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
+    }
+    else{
+        $res=$con->query("SELECT SMENA FROM SMENA WHERE MATBRL=$matbrl AND DATUM_OD<='$datum->godina-$datum->mesec-$datum->dan' AND DATUM_DO>='$datum->godina-$datum->mesec-$datum->dan';");
+        if ($res) {
+            $row = $res->fetch_assoc();
+            if($row)
+            {
+               return $row['SMENA'];
+            }
+        }
+        else
+        {
+            print("QUERY FAILED");
+        }
+        $con->close();
+    }
+}
 function vratiIzabranogLekara($matbrpacijenta){
      $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
      $con->set_charset('utf8mb4');
@@ -122,7 +225,7 @@ function vratiIzabranogLekara($matbrpacijenta){
                 $matbrl=$row['MATBRL'];
                 $res2=$con->query("SELECT * FROM IZABRANI_LEKAR WHERE JMBG='$matbrl'");
                 $row2=$res2->fetch_assoc();
-                $lekar=new IzabraniLekar($row2['JMBG'],$row2['IME'],$row2['SREDNJE_SLOVO'],$row2['PREZIME'],$row2['DATUM_ROĐENJA'],$row2['MBRZU'],$row2['SMENA']);
+                $lekar=new IzabraniLekar($row2['JMBG'],$row2['IME'],$row2['SREDNJE_SLOVO'],$row2['PREZIME'],$row2['DATUM_ROĐENJA'],$row2['MBRZU']);
                 return $lekar;
             }
         }
