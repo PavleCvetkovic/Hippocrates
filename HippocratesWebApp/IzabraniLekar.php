@@ -9,13 +9,16 @@ class IzabraniLekar {
     public $smena;
     public $ocena;// dodaj setter
     
-    public function __construct($jmbg,$ime,$srednje_slovo,$prezime,$datum_rodjenja,$mbrzu,$smena){
+    public function __construct($jmbg,$ime,$srednje_slovo,$prezime,$datum_rodjenja,$mbrzu){
         $this->jmbg=$jmbg;
         $this->ime=$ime;
         $this->prezime=$prezime;
         $this->srednje_slovo=$srednje_slovo;
         $this->datum_rodjenja=$datum_rodjenja;
         $this->mbrzu=$mbrzu;
+    }
+    public function setSmena($smena){
         $this->smena=$smena;
     }
 }
+?>

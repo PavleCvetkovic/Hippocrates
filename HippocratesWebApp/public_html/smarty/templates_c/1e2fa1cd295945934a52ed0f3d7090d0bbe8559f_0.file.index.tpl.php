@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-24 13:39:53
+/* Smarty version 3.1.30, created on 2017-03-29 17:24:52
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d5139943dca7_26428521',
+  'unifunc' => 'content_58dbd1c435fdb9_21232593',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1e2fa1cd295945934a52ed0f3d7090d0bbe8559f' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\index.tpl',
-      1 => 1490358979,
+      1 => 1490800740,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d5139943dca7_26428521 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58dbd1c435fdb9_21232593 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -56,6 +56,9 @@ function content_58d5139943dca7_26428521 (Smarty_Internal_Template $_smarty_tpl)
                 </li>
                 <li>
                     <a href="vakcine.php">Vakcine</a>
+                </li>
+                <li>
+                    <a href="ocenilekara.php">Oceni lekara</a>
                 </li>
                 <li>
                     <a href="promenilekara.php">Promeni lekara</a>
@@ -131,6 +134,7 @@ function content_58d5139943dca7_26428521 (Smarty_Internal_Template $_smarty_tpl)
                             </select>
                             <button class="btn btn-default" id="btnizaberi" type="submit">Izaberi</button>
                         </form>
+                        <?php if ($_smarty_tpl->tpl_vars['status']->value) {?>
                         <table class="table-sm table table-hover table-striped table-responsive ">
                             <thead class="theadboja">
                                 <tr>
@@ -189,7 +193,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 ?>
 
                         </table>
-
+                        <?php } else { ?>
+                        <h3>Još uvek nije određena smena lekara za taj datum.</h3>
+                        <?php }?>
                     </div>
                 </div>
             </div>

@@ -33,6 +33,9 @@
                     <a href="vakcine.php">Vakcine</a>
                 </li>
                 <li>
+                    <a href="ocenilekara.php">Oceni lekara</a>
+                </li>
+                <li>
                     <a href="promenilekara.php">Promeni lekara</a>
                 </li>
                 <li>
