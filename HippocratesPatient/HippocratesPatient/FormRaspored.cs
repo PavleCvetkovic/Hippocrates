@@ -11,6 +11,7 @@ using MetroFramework.Forms;
 using MySql.Data.MySqlClient;
 using MetroFramework;
 using MetroFramework.Controls;
+using HippocratesPatient;
 
 namespace Hippocrates
 {
@@ -27,7 +28,7 @@ namespace Hippocrates
             InitializeComponent();
             this.jmbg_pacijenta = jmbg_p;
             this.jmbg_lekara = jmbglek; // Local copy
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
                 Screen.PrimaryScreen.WorkingArea.Height);
             this.MinimumSize = new System.Drawing.Size(698, 365);
@@ -52,9 +53,12 @@ namespace Hippocrates
             try
             {
                 conn.Open();
-                string smena = "SELECT SMENA FROM IZABRANI_LEKAR WHERE JMBG = " + jmbglek;
+                string smena = "select SMENA from SMENA  where MATBRL = '" + jmbglek + "'" +
+                    " and '" + GetDate() + "'between DATUM_OD and DATUM_DO; ";
                 MySqlCommand cmdSmena = new MySqlCommand(smena, conn);
 
+                //short smena_byte = (short)cmdSmena.ExecuteScalar();
+                //smena_lekara = (int)smena_byte;
                 smena_lekara = (int)cmdSmena.ExecuteScalar();
                 UpdateForm(smena_lekara); // Panel showing
 
@@ -148,6 +152,13 @@ namespace Hippocrates
             MetroButton metro_button = (MetroButton)sender;
             //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
             string napomena = "Treba da dodam formu za upis napomene"; // Add form
+            DialogResult dr = MetroMessageBox.Show(this, "Question", "Da li ste sigurni da želite da zakažete " + GetDate() + " " + metro_button.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Cancel)
+                return;
+
+            Napomena_Form nf = new Napomena_Form();
+            nf.ShowDialog();
+            napomena = nf.GetNote;
 
             if (MakeAnApointment(metro_button.Text.Replace(":", string.Empty), napomena)) // Replace(string old_string, string new_string) 11:30 -> 1130
             {
