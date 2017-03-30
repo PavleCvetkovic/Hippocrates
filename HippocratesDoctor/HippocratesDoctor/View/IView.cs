@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Hippocrates.Controller;
 namespace Hippocrates.View
 {
-    interface IView
+    public interface IView
     {
         void setController(IController controller);
     }

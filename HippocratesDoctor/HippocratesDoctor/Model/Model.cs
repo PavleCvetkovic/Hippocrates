@@ -7,7 +7,7 @@ using Hippocrates.Model;
 
 namespace HippocratesDoctor.Model
 {
-    class Model : IModel
+    public class Model : IModel
     {
     }
 }

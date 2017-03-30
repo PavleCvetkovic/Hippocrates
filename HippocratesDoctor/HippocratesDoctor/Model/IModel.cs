@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hippocrates.Model
 {
-    interface IModel
+    public interface IModel
     {
+
     }
 }

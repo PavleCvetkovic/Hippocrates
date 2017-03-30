@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Hippocrates.Controller;
+using Hippocrates.View;
 using MySql.Data.MySqlClient;
 using MetroFramework.Forms;
 
 
 namespace HippocratesDoctor
 {
-    public partial class FormDirektor : MetroForm
+    public partial class FormDirektor : MetroForm, IView
     {
+        private IController _controller;
+
         MySqlDataReader dr;
         string conStr;
         string dom_zdravlja_ime,dom_zdravlja_MBRZU,matbrAdmina;
@@ -200,9 +204,15 @@ namespace HippocratesDoctor
         }
 
 
+        #endregion
+
+        #region MVC
+        public void setController(IController controller)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 
-       
     }
 }
