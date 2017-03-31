@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Hippocrates.Data;
 using MetroFramework.Forms;
 using MySql.Data.MySqlClient;
+using MetroFramework;
 
 namespace HippocratesDoctor
 {
@@ -40,25 +41,25 @@ namespace HippocratesDoctor
                     frmLekar.FormClosing += new FormClosingEventHandler(showThisForm);
                     this.Visible = false;
                     frmLekar.ShowDialog();*/
-                    this.Hide();
-                    FormLekar f = new FormLekar();
+                    //this.Hide();
+                    FormLekar f = new FormLekar(mtbxLekarJMBG.Text);
                     f.ShowDialog();
-                    this.Close();
+                    //this.Close();
                 }
                 else
                 {
-                    throw new Exception("Pogrešan JMBG ili šifra.");
+                    MetroMessageBox.Show(this, "Pogrešan JMBG ili lozinka", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //throw new Exception("Pogrešan JMBG ili šifra.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 conn.Close();
             }
-
         }
 
         private void showThisForm(object sender, EventArgs e)
@@ -81,10 +82,10 @@ namespace HippocratesDoctor
 
                 if (mtbxOsobljeSifra.Text == (string)cmd.ExecuteScalar())
                 {
-                    this.Hide();
+                    //this.Hide();
                     FormOsoblje f = new FormOsoblje();
                     f.ShowDialog();
-                    this.Close();
+                    //this.Close();
                 }
                 else
                 {
@@ -116,10 +117,10 @@ namespace HippocratesDoctor
 
                 if (mtbxDirektorSifra.Text == (string)cmd.ExecuteScalar())
                 {
-                    this.Hide();
+                    //this.Hide();
                     FormDirektor f = new FormDirektor(this.mtbxDirektorJMBG.Text);
                     f.ShowDialog();
-                    this.Close();
+                    //this.Close();
                 }
                 else
                 {

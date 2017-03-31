@@ -69,7 +69,7 @@
             this.metroTabGlobal.Controls.Add(this.tabDijagnoze);
             this.metroTabGlobal.Location = new System.Drawing.Point(24, 129);
             this.metroTabGlobal.Name = "metroTabGlobal";
-            this.metroTabGlobal.SelectedIndex = 2;
+            this.metroTabGlobal.SelectedIndex = 3;
             this.metroTabGlobal.Size = new System.Drawing.Size(443, 282);
             this.metroTabGlobal.TabIndex = 0;
             this.metroTabGlobal.UseSelectable = true;
@@ -112,6 +112,7 @@
             // 
             // metroButton1
             // 
+            this.metroButton1.Enabled = false;
             this.metroButton1.Location = new System.Drawing.Point(-4, 214);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(436, 23);

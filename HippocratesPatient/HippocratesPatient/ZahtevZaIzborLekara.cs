@@ -36,7 +36,8 @@ namespace HippocratesPatient
             MySqlConnection conn = new MySqlConnection(ci.Get_Nikola_Connection_String);
             try
             {
-                string sql = "select JMBG, IME, SREDNJE_SLOVO, PREZIME, SMENA from IZABRANI_LEKAR" +
+                // smena se uzima iz tabele smena
+                string sql = "select JMBG, IME, SREDNJE_SLOVO, PREZIME from IZABRANI_LEKAR" +
                                 " where IZABRANI_LEKAR.MBRZU = (select MBR from DOM_ZDRAVLJA, PACIJENT" +
                                                                 " where DOM_ZDRAVLJA.OPŠTINA = PACIJENT.OPŠTINA " +
                                                                 " and PACIJENT.JMBG = '" + this.jmbg_pacijenta + "')" +
@@ -53,6 +54,7 @@ namespace HippocratesPatient
             }
             catch (Exception ex)
             {
+                MetroMessageBox.Show(this, "Here " + ex.Message);
                 MetroMessageBox.Show(this, "Error", "Greška prilikom preuzimanja dostupnih doktora " + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 success = false;
             }

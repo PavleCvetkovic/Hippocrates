@@ -65,7 +65,7 @@
             this.mTabLogin.Controls.Add(this.mTabOsoblje);
             this.mTabLogin.Location = new System.Drawing.Point(23, 55);
             this.mTabLogin.Name = "mTabLogin";
-            this.mTabLogin.SelectedIndex = 2;
+            this.mTabLogin.SelectedIndex = 1;
             this.mTabLogin.Size = new System.Drawing.Size(409, 396);
             this.mTabLogin.TabIndex = 0;
             this.mTabLogin.UseSelectable = true;
@@ -106,7 +106,7 @@
             this.mbtnDirektorSubmit.Name = "mbtnDirektorSubmit";
             this.mbtnDirektorSubmit.Size = new System.Drawing.Size(75, 23);
             this.mbtnDirektorSubmit.TabIndex = 10;
-            this.mbtnDirektorSubmit.Text = "Submit";
+            this.mbtnDirektorSubmit.Text = "Uloguj se";
             this.mbtnDirektorSubmit.UseSelectable = true;
             this.mbtnDirektorSubmit.Click += new System.EventHandler(this.mbtnDirektorSubmit_Click);
             // 
@@ -116,18 +116,18 @@
             this.metroLabel5.ForeColor = System.Drawing.SystemColors.ControlText;
             this.metroLabel5.Location = new System.Drawing.Point(241, 139);
             this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(35, 19);
+            this.metroLabel5.Size = new System.Drawing.Size(52, 19);
             this.metroLabel5.TabIndex = 9;
-            this.metroLabel5.Text = "Šifra";
+            this.metroLabel5.Text = "Lozinka";
             // 
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
             this.metroLabel6.Location = new System.Drawing.Point(241, 46);
             this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(46, 19);
+            this.metroLabel6.Size = new System.Drawing.Size(43, 19);
             this.metroLabel6.TabIndex = 8;
-            this.metroLabel6.Text = "JMBG:";
+            this.metroLabel6.Text = "JMBG";
             // 
             // mtbxDirektorSifra
             // 
@@ -215,7 +215,7 @@
             this.mbtnLekarSubmit.Name = "mbtnLekarSubmit";
             this.mbtnLekarSubmit.Size = new System.Drawing.Size(75, 23);
             this.mbtnLekarSubmit.TabIndex = 6;
-            this.mbtnLekarSubmit.Text = "Submit";
+            this.mbtnLekarSubmit.Text = "Uloguj se";
             this.mbtnLekarSubmit.UseSelectable = true;
             this.mbtnLekarSubmit.Click += new System.EventHandler(this.mbtnLekarSubmit_Click);
             // 
@@ -225,18 +225,18 @@
             this.metroLabel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.metroLabel2.Location = new System.Drawing.Point(241, 139);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(35, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(52, 19);
             this.metroLabel2.TabIndex = 5;
-            this.metroLabel2.Text = "Šifra";
+            this.metroLabel2.Text = "Lozinka";
             // 
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(241, 46);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(46, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(43, 19);
             this.metroLabel1.TabIndex = 4;
-            this.metroLabel1.Text = "JMBG:";
+            this.metroLabel1.Text = "JMBG";
             // 
             // mtbxLekarSifra
             // 
@@ -252,7 +252,8 @@
             this.mtbxLekarSifra.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbxLekarSifra.CustomButton.UseSelectable = true;
             this.mtbxLekarSifra.CustomButton.Visible = false;
-            this.mtbxLekarSifra.Lines = new string[0];
+            this.mtbxLekarSifra.Lines = new string[] {
+        "12345"};
             this.mtbxLekarSifra.Location = new System.Drawing.Point(182, 180);
             this.mtbxLekarSifra.MaxLength = 32767;
             this.mtbxLekarSifra.Name = "mtbxLekarSifra";
@@ -264,6 +265,7 @@
             this.mtbxLekarSifra.ShortcutsEnabled = true;
             this.mtbxLekarSifra.Size = new System.Drawing.Size(166, 23);
             this.mtbxLekarSifra.TabIndex = 3;
+            this.mtbxLekarSifra.Text = "12345";
             this.mtbxLekarSifra.UseSelectable = true;
             this.mtbxLekarSifra.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbxLekarSifra.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -282,7 +284,8 @@
             this.mtbxLekarJMBG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbxLekarJMBG.CustomButton.UseSelectable = true;
             this.mtbxLekarJMBG.CustomButton.Visible = false;
-            this.mtbxLekarJMBG.Lines = new string[0];
+            this.mtbxLekarJMBG.Lines = new string[] {
+        "0112955445023"};
             this.mtbxLekarJMBG.Location = new System.Drawing.Point(182, 90);
             this.mtbxLekarJMBG.MaxLength = 32767;
             this.mtbxLekarJMBG.Name = "mtbxLekarJMBG";
@@ -294,6 +297,7 @@
             this.mtbxLekarJMBG.ShortcutsEnabled = true;
             this.mtbxLekarJMBG.Size = new System.Drawing.Size(166, 23);
             this.mtbxLekarJMBG.TabIndex = 2;
+            this.mtbxLekarJMBG.Text = "0112955445023";
             this.mtbxLekarJMBG.UseSelectable = true;
             this.mtbxLekarJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbxLekarJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -333,7 +337,7 @@
             this.mbtnOsobljeSubmit.Name = "mbtnOsobljeSubmit";
             this.mbtnOsobljeSubmit.Size = new System.Drawing.Size(75, 23);
             this.mbtnOsobljeSubmit.TabIndex = 10;
-            this.mbtnOsobljeSubmit.Text = "Submit";
+            this.mbtnOsobljeSubmit.Text = "Uloguj se";
             this.mbtnOsobljeSubmit.UseSelectable = true;
             this.mbtnOsobljeSubmit.Click += new System.EventHandler(this.mbtnOsobljeSubmit_Click);
             // 
@@ -343,18 +347,18 @@
             this.metroLabel3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.metroLabel3.Location = new System.Drawing.Point(241, 139);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(35, 19);
+            this.metroLabel3.Size = new System.Drawing.Size(52, 19);
             this.metroLabel3.TabIndex = 9;
-            this.metroLabel3.Text = "Šifra";
+            this.metroLabel3.Text = "Lozinka";
             // 
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
             this.metroLabel4.Location = new System.Drawing.Point(241, 46);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(46, 19);
+            this.metroLabel4.Size = new System.Drawing.Size(43, 19);
             this.metroLabel4.TabIndex = 8;
-            this.metroLabel4.Text = "JMBG:";
+            this.metroLabel4.Text = "JMBG";
             // 
             // mtbxOsobljeSifra
             // 

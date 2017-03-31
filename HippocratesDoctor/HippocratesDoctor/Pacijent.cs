@@ -196,13 +196,13 @@ namespace HippocratesPatient
             //MetroMessageBox.Show(this, "This is a message in MetroBox");
             FormRaspored raspored_form = new FormRaspored(jmbg, GetDoctorNameAndSurname(jmbg_lekara), jmbg_lekara);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
-            raspored_form.ShowDialog();
+            raspored_form.Show();
         }
 
         private void PacijentForm_Load(object sender, EventArgs e)
         {
-            //GetVakcineData();
-            //GetDijagnozeData();
+            GetVakcineData();
+            GetDijagnozeData();
             this.Text = GetNameAndSurname(jmbg, lbo);
             UpdateAppointment(pravo_da_zakaze); // UpdateAppointment MORA ISPOD GetNameAndSurname jer se tu vrsi inicijalizacija za "pravo_da_zakaze"
             metrolabInfoLekar.Text = GetDoctorNameAndSurname(jmbg_lekara);
@@ -211,10 +211,10 @@ namespace HippocratesPatient
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            ZahtevZaIzborLekara zahtev_form = new ZahtevZaIzborLekara(jmbg ,GetDoctorNameAndSurname(jmbg_lekara), jmbg_lekara);
-            zahtev_form.StartPosition = FormStartPosition.CenterScreen;
-            //zahtev_form.MdiParent = this; // To make it impossible to NOT focus
-            zahtev_form.ShowDialog();
+            //ZahtevZaIzborLekara zahtev_form = new ZahtevZaIzborLekara(jmbg ,GetDoctorNameAndSurname(jmbg_lekara), jmbg_lekara);
+            //zahtev_form.StartPosition = FormStartPosition.CenterScreen;
+            ////zahtev_form.MdiParent = this; // To make it impossible to NOT focus
+            //zahtev_form.Show();
         }
     }
 }
