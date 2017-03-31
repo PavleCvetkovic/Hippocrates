@@ -14,14 +14,14 @@ namespace Hippocrates.Data.Mapiranja
         {
             Table("BOLNICA");
 
-            Id(x => x.Mbr, "MBR");
+            Id(x => x.Mbr, "MBR").GeneratedBy.Assigned();
 
             Map(x => x.Ime, "IME");
             Map(x => x.Opstina, "OPŠTINA");
             Map(x => x.Lokacija, "LOKACIJA");
             Map(x => x.Adresa, "ADRESA");
 
-            HasMany(x => x.Specijaliste).KeyColumn("MBRZU").Cascade.All().Inverse().LazyLoad();
+            HasMany(x => x.Specijaliste).KeyColumn("MBRZU").Cascade.SaveUpdate().Inverse().LazyLoad();
         }
     }
 }

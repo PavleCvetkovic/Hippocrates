@@ -43,18 +43,55 @@ namespace Hippocrates
                 Prezime = "prezie",
                 Srednje_slovo = "s"
             };
+            Pacijent pac1 = new Pacijent()
+            {
+                Jmbg = "01",
+                Ime = "Prvo mace",
+                Prezime = "Ide u vodu",
+                Datum_rodjenja = new DateTime(1995, 01, 01),
+                //bez mejla
+                Telefon = "555-333",
+                Lbo = "01",
+                Opstina = "aaaaa",
+                Srednje_slovo = "D",
+                Vazi_do = new DateTime(2017, 12, 30),
+            };
 
-            
+            //dodaj lekara i dom zdravlja
             dz.Lekari.Add(il);
             il.RadiUDomuZdravlja = dz;
+            //dodaj lekaru pacijente
+            il.Pacijenti.Add(pac1);
+            pac1.Lekar = il;
             s.Save(dz);
-            
 
-            /*
-            s.Save(dz);
-            il.RadiUDomuZdravlja = dz;
-            s.Save(il);
-            */
+            s.Flush();
+            s.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Specijalista spec = new Specijalista()
+            {
+                Datum_rodjenja = DateTime.Now,
+                Ime = "specijalac",
+                Prezime = "Aaaa",
+                Jmbg = "123456",
+                Srednje_slovo = "Ž",
+                Titula = "PSIHIJATAR BRE"
+            };
+            Bolnica bol = new Bolnica()
+            {
+                Ime = "Bolnica1",
+                Adresa = "Adresa1",
+                Lokacija = "Lokacija1",
+                Mbr = "1001",
+                Opstina = "Opstina1",
+            };
+            bol.Specijaliste.Add(spec);
+            spec.RadiUBolnici = bol;
+            ISession s = DataLayer.GetSession();
+            s.Save(bol);
             s.Flush();
             s.Close();
         }

@@ -65,6 +65,7 @@
     <Compile Include="Mapiranja\DomZdravljaMapiranja.cs" />
     <Compile Include="Mapiranja\IzabraniLekarMapiranja.cs" />
     <Compile Include="Mapiranja\MedicinskoOsobljeMapiranja.cs" />
+    <Compile Include="Mapiranja\PacijentMapiranja.cs" />
     <Compile Include="Mapiranja\SpecijalistaMapiranja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

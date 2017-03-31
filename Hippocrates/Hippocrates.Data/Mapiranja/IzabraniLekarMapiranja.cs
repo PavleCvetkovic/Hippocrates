@@ -22,6 +22,7 @@ namespace Hippocrates.Data.Mapiranja
             Map(x => x.Password, "PASSWORD");
 
             References(x => x.RadiUDomuZdravlja).Column("MBRZU").LazyLoad();
+            HasMany(x => x.Pacijenti).KeyColumn("MATBRL").LazyLoad().Inverse().Cascade.SaveUpdate();
         }
     }
 }

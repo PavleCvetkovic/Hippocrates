@@ -16,7 +16,13 @@ namespace Hippocrates.Data.Entiteti
         public virtual string Password { get; set; }
 
         public virtual DomZdravlja RadiUDomuZdravlja { get; set; }
+
         public virtual IList<Pacijent> Pacijenti { get; set; }
+
+        public IzabraniLekar()
+        {
+            Pacijenti = new List<Pacijent>();
+        }
 
     }
 }

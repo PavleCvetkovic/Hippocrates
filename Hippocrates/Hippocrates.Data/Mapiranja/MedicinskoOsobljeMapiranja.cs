@@ -14,7 +14,7 @@ namespace Hippocrates.Data.Mapiranja
         {
             Table("MEDICINSKO_OSOBLJE");
 
-            Id(x => x.Jmbg, "JMBG");
+            Id(x => x.Jmbg, "JMBG").GeneratedBy.Assigned();
 
             Map(x => x.Ime, "IME");
             Map(x => x.Prezime, "PREZIME");

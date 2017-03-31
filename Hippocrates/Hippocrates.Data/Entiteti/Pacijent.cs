@@ -8,5 +8,18 @@ namespace Hippocrates.Data.Entiteti
 {
     public class Pacijent
     {
+        public virtual string Jmbg { get; set; }
+        public virtual string Ime { get; set; }
+        public virtual string Srednje_slovo { get; set; }
+        public virtual string Prezime { get; set; }
+        public virtual DateTime Datum_rodjenja { get; set; }
+        public virtual string Opstina { get; set; }
+        public virtual int Pravo_da_zakaze { get; set; }
+        public virtual string Lbo { get; set; }
+        public virtual DateTime Vazi_do { get; set; }
+        public virtual string Email { get; set; }
+        public virtual string Telefon { get; set; }
+        
+        public virtual IzabraniLekar Lekar { get; set; }
     }
 }
