@@ -44,8 +44,8 @@ if($datum->mesec<date('m'))
     $datum=new Datum($_GET['dan'],$_GET['mesec'],date('Y')+1);  
 if($datum->mesec==date('m')&&$datum->dan<date('d'))
     $datum=new Datum($_GET['dan'],$_GET['mesec'],date('Y')+1); 
-/*if(!checkdate($datum->mesec, $datum->dan, $datum->godina))
-    header("Location: index.php");*/
+if(!checkdate($datum->mesec, $datum->dan, $datum->godina))
+    header("Location: index.php");
 
 $izabranilekar= vratiIzabranogLekara($_SESSION['JMBG']);
 $izabranilekar->setSmena(vratiSmenuLekaraZaDatum($izabranilekar->jmbg,$datum));
