@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-29 18:18:51
+/* Smarty version 3.1.30, created on 2017-03-31 17:56:38
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\ocenilekara.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58dbde6b2eb3e1_26621125',
+  'unifunc' => 'content_58de7c369bb568_69745057',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5c75e054d810eb2889ac887c6327cb493c0266ff' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\ocenilekara.tpl',
-      1 => 1490804329,
+      1 => 1490974784,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58dbde6b2eb3e1_26621125 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58de7c369bb568_69745057 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html lang="en">
   <head>

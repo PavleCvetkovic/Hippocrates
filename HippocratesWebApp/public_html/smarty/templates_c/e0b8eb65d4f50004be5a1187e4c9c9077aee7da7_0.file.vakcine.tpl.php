@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-24 17:49:45
+/* Smarty version 3.1.30, created on 2017-03-31 17:56:36
   from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\vakcine.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58d54e29602643_22943349',
+  'unifunc' => 'content_58de7c34e55467_80645385',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e0b8eb65d4f50004be5a1187e4c9c9077aee7da7' => 
     array (
       0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\vakcine.tpl',
-      1 => 1490358976,
+      1 => 1490804105,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58d54e29602643_22943349 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58de7c34e55467_80645385 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 
@@ -56,6 +56,9 @@ function content_58d54e29602643_22943349 (Smarty_Internal_Template $_smarty_tpl)
                 </li>
                 <li>
                     <a href="vakcine.php">Vakcine</a>
+                </li>
+                <li>
+                    <a href="ocenilekara.php">Oceni lekara</a>
                 </li>
                 <li>
                     <a href="promenilekara.php">Promeni lekara</a>

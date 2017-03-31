@@ -24,10 +24,16 @@ if(!isset($_GET['dan']))
    $datum=new Datum(date('d'),date('m'),date('Y'));
    $izabranilekar= vratiIzabranogLekara($_SESSION['JMBG']);
    $izabranilekar->setSmena(vratiSmenuLekaraZaDatum($izabranilekar->jmbg,$datum));
-   if($izabranilekar->smena==1&&date('H')>=14)
-       $datum=new Datum (date('d')+1, date('m'),date('Y'));
-   else if($izabranilekar->smena==2&&date('H')>=20)
-       $datum=new Datum (date('d')+1, date('m'),date('Y'));
+   if($izabranilekar->smena==1&&date('H')>=14){
+       $date=date("d-m-Y");
+       $date=date("d-m-Y",strtotime($date. ' +1 day'));
+       $datum=new Datum (explode('-',$date)[0], explode('-',$date)[1],explode('-',$date)[2]);
+   }
+   else if($izabranilekar->smena==2&&date('H')>=20){
+       $date=date("d-m-Y");
+       $date=date("d-m-Y",strtotime($date. ' +1 day'));
+       $datum=new Datum (explode('-',$date)[0], explode('-',$date)[1],explode('-',$date)[2]);
+   }
    else
        $datum=new Datum(date('d'),date('m'),date('Y'));
 
@@ -38,8 +44,8 @@ if($datum->mesec<date('m'))
     $datum=new Datum($_GET['dan'],$_GET['mesec'],date('Y')+1);  
 if($datum->mesec==date('m')&&$datum->dan<date('d'))
     $datum=new Datum($_GET['dan'],$_GET['mesec'],date('Y')+1); 
-if(!checkdate($datum->mesec, $datum->dan, $datum->godina))
-    header("Location: index.php");
+/*if(!checkdate($datum->mesec, $datum->dan, $datum->godina))
+    header("Location: index.php");*/
 
 $izabranilekar= vratiIzabranogLekara($_SESSION['JMBG']);
 $izabranilekar->setSmena(vratiSmenuLekaraZaDatum($izabranilekar->jmbg,$datum));
