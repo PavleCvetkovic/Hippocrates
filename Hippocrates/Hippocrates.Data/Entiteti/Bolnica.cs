@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hippocrates.Data.Entiteti
 {
-    public class DomZdravlja
+    public class Bolnica
     {
         public virtual string Mbr { get; set; }
         public virtual string Ime { get; set; }
@@ -14,13 +14,11 @@ namespace Hippocrates.Data.Entiteti
         public virtual string Lokacija { get; set; }
         public virtual string Adresa { get; set; }
 
-        public virtual IList<IzabraniLekar> Lekari { get; set; }
-        public virtual IList<MedicinskoOsoblje> MedicinskoOsoblje { get; set; }
+        public virtual IList<Specijalista> Specijaliste { get; set; }
 
-        public DomZdravlja()
+        public Bolnica()
         {
-            Lekari = new List<IzabraniLekar>();
-            MedicinskoOsoblje = new List<MedicinskoOsoblje>();
+            Specijaliste = new List<Specijalista>();
         }
     }
 }

@@ -55,10 +55,17 @@
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
     <Compile Include="DataLayer.cs" />
+    <Compile Include="Entiteti\Bolnica.cs" />
     <Compile Include="Entiteti\DomZdravlja.cs" />
     <Compile Include="Entiteti\IzabraniLekar.cs" />
+    <Compile Include="Entiteti\MedicinskoOsoblje.cs" />
+    <Compile Include="Entiteti\Pacijent.cs" />
+    <Compile Include="Entiteti\Specijalista.cs" />
+    <Compile Include="Mapiranja\BolnicaMapiranja.cs" />
     <Compile Include="Mapiranja\DomZdravljaMapiranja.cs" />
     <Compile Include="Mapiranja\IzabraniLekarMapiranja.cs" />
+    <Compile Include="Mapiranja\MedicinskoOsobljeMapiranja.cs" />
+    <Compile Include="Mapiranja\SpecijalistaMapiranja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

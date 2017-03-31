@@ -22,6 +22,7 @@ namespace Hippocrates.Data.Mapiranja
             Map(x => x.Adresa, "ADRESA");
 
             HasMany(x => x.Lekari).KeyColumn("MBRZU").LazyLoad().Cascade.All().Inverse();
+            HasMany(x => x.MedicinskoOsoblje).KeyColumn("MBRZU").Inverse().Cascade.All().LazyLoad();
         }
     }
 }
