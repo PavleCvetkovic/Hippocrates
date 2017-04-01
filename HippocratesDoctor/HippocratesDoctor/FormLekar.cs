@@ -20,7 +20,7 @@ namespace HippocratesDoctor
     public partial class FormLekar : MetroForm, IView
     {
         private IController _controller;
-        private string jmbg_lekara;
+        private string jmbg_lekara, active_patient_jmbg;
         private int smena_lekara;
         public FormLekar(string jmbg_lekara)
         {
@@ -31,6 +31,8 @@ namespace HippocratesDoctor
             metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
             metroTabGlobal.SelectedIndex = 0; // Show 'Raspored pregleda' first
 
+            metroLabelActivePatient.Text = "Prelaz preko dugmeta za info o terminu";
+
             foreach (Control c in pnlPopodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
@@ -39,9 +41,7 @@ namespace HippocratesDoctor
                     mb.Click += metroButton_Click;
                     mb.MouseHover += metroButton_MouseHover;
                     mb.MouseLeave += metroButton_MouseLeave;
-                    // For color change to be seen
-                    //if (mb != null)
-                    //    mb.UseVisualStyleBackColor = false;
+                    //mb.UseStyleColors = true;
                 }
             }
             foreach (Control c in pnlPrepodne.Controls)
@@ -52,76 +52,15 @@ namespace HippocratesDoctor
                     mb.Click += metroButton_Click;
                     mb.MouseHover += metroButton_MouseHover;
                     mb.MouseLeave += metroButton_MouseLeave;
-                    // For color change to be seen
-                    //if (mb != null)
-                    //    mb.UseVisualStyleBackColor = false;
+                    //mb.UseStyleColors = true;
                 }
             }
-        }
-
-        private void metroButton_MouseLeave(object sender, EventArgs e)
-        {
-            MetroButton metro_button = (MetroButton)sender;
-            metroLabelActivePatient.Text = GetPatientData(metro_button);
-        }
-
-        private void metroButton_MouseHover(object sender, EventArgs e)
-        {
-            MetroButton metro_button = (MetroButton)sender;
-            metroLabelActivePatient.Text = "enter hover (not implemented)";
-        }
-
-        private void metroButton_Click(object sender, EventArgs e)
-        {
-            // Open 'Informacije o pacijentu tab'
-            MetroButton metro_button = (MetroButton)sender;
-            metroTabGlobal.SelectedIndex = 2; // Change tab
-            
         }
 
         public void setController(IController controller)
         {
             this._controller = controller;
         }
-
-        private string GetPatientData(MetroButton metro_button)
-        {
-            return "get patient data (not implemented)";
-            //if (metro_button.Enabled) // Free (no patient info)
-            //    return "No_data";
-            //string to_return = string.Empty;
-            //MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
-            //try
-            //{
-            //    MetroMessageBox.Show(this, "Za dugme " + metro_button.Text + " enable = " + metro_button.Enabled, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            //    conn.Open();
-            //    string sql = "select IME, PREZIME, JMBG from PACIJENT where MATBRL = " +
-            //        "(select MATBRP from TERMIN where MATBRL LIKE '" + jmbg_lekara + "' AND DATUM = '" + GetDate() + "'" +
-            //        "and VREME = '" + metro_button.Text.Replace(":", string.Empty) + "');";
-
-            //    MySqlCommand cmd = new MySqlCommand(sql, conn);
-            //    MySqlDataReader rdr = cmd.ExecuteReader();
-
-            //    // rdr[0] = IME, rdr[1] = PREZIME, rdr[2] = JMBG
-            //    while (rdr.Read())
-            //        to_return = rdr[0].ToString() + " " + rdr[1].ToString() + " " + rdr[2].ToString();
-
-            //    rdr.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MetroMessageBox.Show(this, "Greška prilikom čitanja baze " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    to_return = "Greška prilikom čitanja baze";
-            //}
-            //finally
-            //{
-            //    conn.Close();
-            //    // Database is always closed
-            //}
-
-            //return to_return;
-        } // Not implemented
 
         private string GetDoctorNameAndSurname(string jmbg_lekara)
         {
@@ -182,17 +121,27 @@ namespace HippocratesDoctor
                 MySqlCommand cmd = new MySqlCommand(command, conn);
                 rdr = cmd.ExecuteReader();
 
+                #region Reset all buttons
                 foreach (Control c in pnlPopodne.Controls)
                 {
-                    c.Enabled = true;
-                    c.BackColor = Color.LightCyan; // LightCyan = Free
+                    MetroButton mb = c as MetroButton;
+                    if (mb != null)
+                    {
+                        mb.Highlight = false;
+                        //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    }
 
                 }
-                foreach (Control c in pnlPrepodne.Controls)
+                foreach (Control c in pnlPopodne.Controls)
                 {
-                    c.Enabled = true;
-                    c.BackColor = Color.LightCyan;  // LightCyan = Free
+                    MetroButton mb = c as MetroButton;
+                    if (mb != null)
+                    {
+                        mb.Highlight = false;
+                        //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    }
                 }
+                #endregion
 
                 while (rdr.Read())
                 {
@@ -200,13 +149,23 @@ namespace HippocratesDoctor
                     //MetroMessageBox.Show(this, "Enter while loop in rdr.Read() " + time.ToString(), "rdr.Read()", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     if (time <= 1330)
                     {
-                        this.pnlPrepodne.Controls["metroButton" + time.ToString()].Enabled = false;
-                        this.pnlPrepodne.Controls["metroButton" + time.ToString()].BackColor = Color.LightGoldenrodYellow; // NOT Free
+                        MetroButton mb = this.pnlPrepodne.Controls["metroButton" + time.ToString()] as MetroButton;
+                        if (mb != null)
+                        {
+                            mb.Highlight = true;
+                            //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
+                            //this.pnlPrepodne.Controls["metroButton" + time.ToString()].Enabled = false;
+                        }
                     }
                     else
                     {
-                        this.pnlPopodne.Controls["metroButton" + time.ToString()].Enabled = false;
-                        this.pnlPrepodne.Controls["metroButton" + time.ToString()].BackColor = Color.LightGoldenrodYellow; // NOT Free
+                        MetroButton mb = this.pnlPrepodne.Controls["metroButton" + time.ToString()] as MetroButton;
+                        if (mb != null)
+                        {
+                            mb.Highlight = true;
+                            //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
+                            //this.pnlPopodne.Controls["metroButton" + time.ToString()].Enabled = false;
+                        }
                     }
                 }
                 rdr.Close();
@@ -245,17 +204,59 @@ namespace HippocratesDoctor
                               metroDateTime1.Value.Day.ToString();
         }
 
-        private void metroTab_SelectedIndexChanged(object sender, EventArgs e)
+        private string GetPatientJMBG(string vreme)
         {
-            MetroFramework.Controls.MetroTabControl mtc = sender as MetroFramework.Controls.MetroTabControl;
-
-            //MessageBox.Show("Selected inex changed event" + mtc.SelectedIndex);
-            switch (mtc.SelectedIndex)
+            string to_return = string.Empty;
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
             {
-                case 0: { RefreshControls(jmbg_lekara); break; }
-                case 1: { GetAllPatientBasicInfo(); break; }
-                //case 2: { GetActivePatientInfo(); break; } // Open FullPatientInfo form
+                conn.Open();
+                string comm = "select MATBRP from TERMIN where MATBRL = '" + jmbg_lekara + "'" +
+                    "and DATUM = '" + GetDate() + "' and VREME = '" + vreme + "';";
+                MySqlCommand cmd = new MySqlCommand(comm, conn);
+                to_return = cmd.ExecuteScalar().ToString();
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error during connection (in GetPatientJMBG())" + ex.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return to_return;
+
+        }
+
+        private string GetPatientBasicInfo(string jmbg_pacijenta)
+        {
+            string to_return = string.Empty;
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
+            {
+                conn.Open();
+                string sql = "select JMBG, IME, PREZIME, DATUM_ROĐENJA, LBO from PACIJENT where jmbg = '" + jmbg_pacijenta + "'";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                    to_return = rdr[0].ToString() + " " + rdr[1].ToString() + " " + rdr[2].ToString() + " " + rdr[3].ToString() + " " + rdr[4].ToString();
+
+                rdr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "Greška prilikom čitanja baze " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                to_return = "Error during patient database reading (in GetPatientBasicInfo(jmbg_pacijenta))";
+            }
+            finally
+            {
+                conn.Close();
+                // Database is always closed
+            }
+            return to_return;
         }
 
         private void GetAllPatientBasicInfo()
@@ -290,13 +291,140 @@ namespace HippocratesDoctor
             }
         }
 
+        private void RefreshTerapijeData(string jmbg_pacijenta)
+        {
+            MySqlDataAdapter data_adapter;
+            DataSet data_set;
+            //string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
+            {
+                //label2.Text = "Connecting to MySQL...";
+
+                // Sve terapije nezavisno od izabranog lekara pacijenta
+                string sql = "select * from TERAPIJA where MATBRP = '" + jmbg_pacijenta + "'";
+                data_adapter = new MySqlDataAdapter(sql, conn);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(data_adapter);
+
+                data_set = new DataSet();
+                data_adapter.Fill(data_set, "Terapija");
+                metroGridTerapije.DataSource = data_set;
+                metroGridTerapije.DataMember = "Terapija";
+                for (int i = 0; i < metroGridTerapije.ColumnCount; i++)
+                    metroGridTerapije.Columns[i].Width = metroGridTerapije.Width / metroGridTerapije.ColumnCount;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during connection " + ex.Message.ToString());
+            }
+        }
+
+        private void RefreshVakcineData(string jmbg_pacijenta)
+        {
+            MySqlDataAdapter data_adapter;
+            DataSet data_set;
+            //string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
+            {
+                //label2.Text = "Connecting to MySQL...";
+
+                string sql = "select * from PRIMIO_VAKCINU where JMBGP = '" + jmbg_pacijenta + "'";
+                data_adapter = new MySqlDataAdapter(sql, conn);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(data_adapter);
+
+                data_set = new DataSet();
+                data_adapter.Fill(data_set, "Vakcine");
+                metroGridVakcine.DataSource = data_set;
+                metroGridVakcine.DataMember = "Vakcine";
+                for (int i = 0; i < metroGridVakcine.ColumnCount; i++)
+                    metroGridVakcine.Columns[i].Width = metroGridVakcine.Width / metroGridVakcine.ColumnCount;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during connection " + ex.Message.ToString());
+            }
+
+        }
+
+        private void RefreshDijagnozeData(string jmbg_pacijenta)
+        {
+            MySqlDataAdapter data_adapter;
+            DataSet data_set;
+            //string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
+            {
+                //label2.Text = "Connecting to MySQL...";
+
+                string sql = "select * from DIJAGNOSTIFIKOVANO where MATBRP = '" + jmbg_pacijenta + "'";
+                data_adapter = new MySqlDataAdapter(sql, conn);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(data_adapter);
+
+                data_set = new DataSet();
+                data_adapter.Fill(data_set, "Dijagnoze");
+                metroGridDijagnoze.DataSource = data_set;
+                metroGridDijagnoze.DataMember = "Dijagnoze";
+                for (int i = 0; i < metroGridDijagnoze.ColumnCount; i++)
+                    metroGridDijagnoze.Columns[i].Width = metroGridDijagnoze.Width / metroGridDijagnoze.ColumnCount;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during connection " + ex.Message.ToString());
+            }
+
+        }
+
+        private bool ChangePatientRightForAppointment(string jmbg_pacijenta, bool pravo_da_zakaze) 
+        {
+            bool success = true;
+            int pravo = 1;
+            if (pravo_da_zakaze)
+                pravo = 1;
+            else
+                pravo = 0;
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
+            {
+                conn.Open();
+                string sql = "update PACIJENT set PRAVO_DA_ZAKAŽE = " + pravo + " where JMBG ='" + jmbg_pacijenta + "';";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                success = false;
+            }
+            conn.Close();
+            return success;
+        }
+
+        /////////////
+
+
+        private void metroTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MetroFramework.Controls.MetroTabControl mtc = sender as MetroFramework.Controls.MetroTabControl;
+
+            //MessageBox.Show("Selected inex changed event" + mtc.SelectedIndex);
+            switch (mtc.SelectedIndex)
+            {
+                case 0: { RefreshControls(jmbg_lekara); break; }
+                case 1: { GetAllPatientBasicInfo(); break; }
+            }
+        }
+
         private void metroGridPacijenti_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             MetroGrid mg = sender as MetroGrid;
             if (mg == null)
                 throw new Exception("Error in MetroGrid conversion");
             MetroMessageBox.Show(this, "Za metro grid cell is " + mg.SelectedCells[0].Value.ToString() + " LBO " + mg.SelectedCells[1].Value.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
+
             PacijentForm pf = new PacijentForm(mg.SelectedCells[0].Value.ToString(), mg.SelectedCells[1].Value.ToString()); // jmbg (from MetroGrid), lbo(not needed)
             pf.ShowDialog();
         }
@@ -305,5 +433,69 @@ namespace HippocratesDoctor
         {
             RefreshControls(jmbg_lekara);
         }
+
+        private void metroButton_MouseLeave(object sender, EventArgs e)
+        {
+            MetroButton metro_button = (MetroButton)sender; // Current patient to show
+            metroLabelActivePatient.Text = "Prelaz preko dugmeta za kratak info";
+            metroLabelActivePatient.BackColor = Color.Aqua;
+            metroLabelActivePatient.UseCustomBackColor = true;
+        }
+
+        private void metroButton_MouseHover(object sender, EventArgs e)
+        {
+            MetroButton metro_button = (MetroButton)sender;
+            if (metro_button.Highlight == false) // Slobodan termin
+            {
+                metroLabelActivePatient.Text = "Slobodan termin";
+                metroLabelActivePatient.BackColor = Color.Green;
+            }
+            else
+            {
+                metroLabelActivePatient.Text = "Zakazan termin (klik na dugme za info o pacijentu)";
+                metroLabelActivePatient.BackColor = Color.OrangeRed;
+            }
+            metroLabelActivePatient.UseCustomBackColor = true;
+
+        }
+
+        private void metroTabPacijentInfo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MetroFramework.Controls.MetroTabControl mtc = sender as MetroFramework.Controls.MetroTabControl;
+            //MessageBox.Show("Selected inex changed event" + mtc.SelectedIndex);
+            switch (mtc.SelectedIndex)
+            {
+                case 0: { RefreshDijagnozeData(active_patient_jmbg); break; }
+                case 1: { RefreshVakcineData(active_patient_jmbg); break; }
+                case 2: { RefreshTerapijeData(active_patient_jmbg); break; }
+                case 3: { metroLabelOceniPacijentaInfo.Text = GetPatientBasicInfo(active_patient_jmbg); break; }
+            }
+        }
+
+        private void metroButtonOceniPacijenta_Click(object sender, EventArgs e)
+        {
+            //MetroMessageBox.Show(this, "Da li ste sigurni da želite da ocenite dolazak pacijenta?", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dr = MetroMessageBox.Show(this, "Da li ste sigurni da želite da ocenite dolazak pacijenta?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Cancel)
+                return;
+
+            bool dolazak = metroCheckBoxDosaoUTerminu.Checked;
+            if (ChangePatientRightForAppointment(active_patient_jmbg, dolazak))
+                MetroMessageBox.Show(this, "Uspešno ocenjen dolazak pacijenta", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MetroMessageBox.Show(this, "Greška prilikom ocenjivanja pacijenta", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        }
+
+        private void metroButton_Click(object sender, EventArgs e)
+        {
+            // Open 'Informacije o pacijentu tab'
+            MetroButton metro_button = (MetroButton)sender;
+            metroTabGlobal.SelectedIndex = 2; // Change tab
+            metroTabPacijentInfo.SelectedIndex = 0; // Informacije o pacijentu -> Dijagnoze
+            active_patient_jmbg = GetPatientJMBG(metro_button.Text.Replace(":", string.Empty));
+            RefreshDijagnozeData(active_patient_jmbg);
+        }
+
     }
 }
