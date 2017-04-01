@@ -22,6 +22,7 @@ namespace HippocratesDoctor
         private IController _controller;
         private string jmbg_lekara, active_patient_jmbg;
         private int smena_lekara;
+        private string sql_search;
         public FormLekar(string jmbg_lekara)
         {
             InitializeComponent();
@@ -30,9 +31,10 @@ namespace HippocratesDoctor
             metroDateTime1.MinDate = System.DateTime.Today;
             metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
             metroTabGlobal.SelectedIndex = 0; // Show 'Raspored pregleda' first
-
+            metroComboBoxIzborPretrage.SelectedIndex = 1; // LBO default way of search
             metroLabelActivePatient.Text = "Prelaz preko dugmeta za info o terminu";
 
+            //metroButtonPretraziPacijente_Click += metroComboBoxIzborPretrage_SelectedIndexChanged; 
             foreach (Control c in pnlPopodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
@@ -198,12 +200,17 @@ namespace HippocratesDoctor
             }
         }
 
-        private string GetDate()
+        private string GetDate() // Trebalo bi svuda se iskoristi funkcija GetDateFromControl jer univerzalno radi za svaki MetroDateTimePicker
         {
             return metroDateTime1.Value.Year.ToString() + "-" + metroDateTime1.Value.Month.ToString() + "-" +
                               metroDateTime1.Value.Day.ToString();
         }
 
+        private string GetDateFromControl(MetroDateTime mdt)
+        {
+            return mdt.Value.Year.ToString() + "-" + mdt.Value.Month.ToString() + "-" +
+                              mdt.Value.Day.ToString();
+        }
         private string GetPatientJMBG(string vreme)
         {
             string to_return = string.Empty;
@@ -403,8 +410,77 @@ namespace HippocratesDoctor
             return success;
         }
 
-        /////////////
+        private void SearchPatients(string sql)
+        {
+            //Validation Needed
+            //Empty current data grid
+            EmptyMetroDataGrid(metroGridPretragaPacijenata);
 
+            MySqlDataAdapter data_adapter;
+            DataSet data_set;
+            //string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
+            {
+                data_adapter = new MySqlDataAdapter(sql, conn);
+                MySqlCommandBuilder cb = new MySqlCommandBuilder(data_adapter);
+
+                data_set = new DataSet();
+                data_adapter.Fill(data_set, "Pretraga");
+                metroGridPretragaPacijenata.DataSource = data_set;
+                metroGridPretragaPacijenata.DataMember = "Pretraga";
+                for (int i = 0; i < metroGridPretragaPacijenata.ColumnCount; i++)
+                    metroGridPretragaPacijenata.Columns[i].Width = metroGridPretragaPacijenata.Width / metroGridPretragaPacijenata.ColumnCount;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during connection " + ex.Message.ToString());
+            }
+
+        }
+
+        private void EmptyMetroDataGrid(MetroGrid mg)
+        {
+            mg.DataSource = null;
+        }
+
+        private void RefreshSQLString()
+        {
+            switch (metroComboBoxIzborPretrage.SelectedIndex)
+            {
+                case 0:
+                    {
+                        this.sql_search = "select JMBG, IME, SREDNJE_SLOVO, PREZIME, DATUM_ROĐENJA, OPŠTINA, LBO"
+                            + " from PACIJENT where DATUM_ROĐENJA = '" + GetDateFromControl(metroDateTimeDatumParametar) + "'";
+
+                        //MessageBox.Show("datum rodjenja je:" + GetDateFromControl(metroDateTimeDatumParametar));
+
+                        metroDateTimeDatumParametar.Enabled = true;
+                        metroTextBoxUnosParametra.Enabled = false;
+                        break;
+                    }
+
+                case 1:
+                    {
+                        this.sql_search = "select JMBG, IME, SREDNJE_SLOVO, PREZIME, DATUM_ROĐENJA, OPŠTINA, LBO"
+                            + " from PACIJENT where LBO = '" + metroTextBoxUnosParametra.Text + "'";
+                        metroDateTimeDatumParametar.Enabled = false;
+                        metroTextBoxUnosParametra.Enabled = true;
+                        break;
+                    }
+                case 2:
+                    {
+                        this.sql_search = "select JMBG, IME, SREDNJE_SLOVO, PREZIME, DATUM_ROĐENJA, OPŠTINA, LBO"
+                            + " from PACIJENT where OPŠTINA = '" + metroTextBoxUnosParametra.Text + "'";
+                        metroDateTimeDatumParametar.Enabled = false;
+                        metroTextBoxUnosParametra.Enabled = true;
+                        break;
+                    }
+            }
+        }
+
+        /////////////
 
         private void metroTab_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -485,6 +561,20 @@ namespace HippocratesDoctor
             else
                 MetroMessageBox.Show(this, "Greška prilikom ocenjivanja pacijenta", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+        }
+
+        private void metroButtonPretraziPacijente_Click(object sender, EventArgs e)
+        {
+            //string sql = string.Empty;
+            //Validation needed
+            RefreshSQLString();
+            SearchPatients(this.sql_search);
+        }
+
+        private void metroComboBoxIzborPretrage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Validation Needed
+            RefreshSQLString();
         }
 
         private void metroButton_Click(object sender, EventArgs e)
