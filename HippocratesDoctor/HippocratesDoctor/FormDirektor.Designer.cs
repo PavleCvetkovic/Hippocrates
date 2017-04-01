@@ -28,70 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblImeDomaZ = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.tabLekar = new MetroFramework.Controls.MetroTabPage();
+            this.metroGridLekari = new MetroFramework.Controls.MetroGrid();
             this.metroTabControl2 = new MetroFramework.Controls.MetroTabControl();
             this.tabLeakrBrisanje = new MetroFramework.Controls.MetroTabPage();
-            this.btn_lekar_brisanje = new System.Windows.Forms.Button();
-            this.dGV_lekar_brisanje = new System.Windows.Forms.DataGridView();
+            this.metroButtonObrisiLekara = new MetroFramework.Controls.MetroButton();
             this.tabLekarUnos = new MetroFramework.Controls.MetroTabPage();
-            this.cB_smena_lekar_unos_dva = new System.Windows.Forms.CheckBox();
-            this.cB_smena_lekar_unos_jeadn = new System.Windows.Forms.CheckBox();
-            this.dTP_lekar_unos = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tb_unos_lekar_srednjeS = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tb_unos_lekar_password = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tb_unos_lekar_prezime = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tb_unos_lekar_ime = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tb_unos_lekar_jmbg = new System.Windows.Forms.TextBox();
-            this.btn_unosenje_lekara = new System.Windows.Forms.Button();
-            this.dGV_lekar_unos = new System.Windows.Forms.DataGridView();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroDateTimeDatumRodjenja = new MetroFramework.Controls.MetroDateTime();
+            this.metroRadioButtonSmenaPoslepodne = new MetroFramework.Controls.MetroRadioButton();
+            this.metroRadioButtonSmenaPrepodne = new MetroFramework.Controls.MetroRadioButton();
+            this.metroButtonUnesiteLekara = new MetroFramework.Controls.MetroButton();
+            this.metroTextBoxLozinka = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxPrezime = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxIme = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxSrednjeSlovo = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBoxJMBG = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.tabLekarAzuriranje = new MetroFramework.Controls.MetroTabPage();
-            this.btn_azuriranje_lekara = new System.Windows.Forms.Button();
-            this.dGV_lekar_azuriranje = new System.Windows.Forms.DataGridView();
-            this.cB_lekar_azurirnje_smena_dva = new System.Windows.Forms.CheckBox();
-            this.cB_lekar_azurirnje_smena_jedan = new System.Windows.Forms.CheckBox();
-            this.dTP_lekar_azuriranje = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tb_azuriranje_lekar_srednjeS = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tb_azuriranje_lekar_password = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tb_azuriranje_lekar_prezime = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.tb_azuriranje_lekar_ime = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tb_azuriranje_lekar_jmbg = new System.Windows.Forms.TextBox();
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
+            this.metroDateTime2 = new MetroFramework.Controls.MetroDateTime();
+            this.metroRadioButton1 = new MetroFramework.Controls.MetroRadioButton();
+            this.metroRadioButton2 = new MetroFramework.Controls.MetroRadioButton();
+            this.metroButtonAzurirajLekara = new MetroFramework.Controls.MetroButton();
+            this.metroTextBox5 = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBox6 = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBox7 = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBox8 = new MetroFramework.Controls.MetroTextBox();
+            this.metroTextBox9 = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.tabOsoblje = new MetroFramework.Controls.MetroTabPage();
+            this.lblImeDomaZ = new MetroFramework.Controls.MetroLabel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.metroTabControl1.SuspendLayout();
             this.tabLekar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGridLekari)).BeginInit();
             this.metroTabControl2.SuspendLayout();
             this.tabLeakrBrisanje.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_lekar_brisanje)).BeginInit();
             this.tabLekarUnos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_lekar_unos)).BeginInit();
             this.tabLekarAzuriranje.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_lekar_azuriranje)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblImeDomaZ
-            // 
-            this.lblImeDomaZ.AutoSize = true;
-            this.lblImeDomaZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImeDomaZ.Location = new System.Drawing.Point(621, 40);
-            this.lblImeDomaZ.Name = "lblImeDomaZ";
-            this.lblImeDomaZ.Size = new System.Drawing.Size(57, 20);
-            this.lblImeDomaZ.TabIndex = 2;
-            this.lblImeDomaZ.Text = "label1";
             // 
             // metroTabControl1
             // 
@@ -106,6 +97,7 @@
             // 
             // tabLekar
             // 
+            this.tabLekar.Controls.Add(this.metroGridLekari);
             this.tabLekar.Controls.Add(this.metroTabControl2);
             this.tabLekar.HorizontalScrollbarBarColor = true;
             this.tabLekar.HorizontalScrollbarHighlightOnWheel = false;
@@ -119,438 +111,646 @@
             this.tabLekar.VerticalScrollbarHighlightOnWheel = false;
             this.tabLekar.VerticalScrollbarSize = 10;
             // 
+            // metroGridLekari
+            // 
+            this.metroGridLekari.AllowUserToResizeRows = false;
+            this.metroGridLekari.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGridLekari.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.metroGridLekari.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.metroGridLekari.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGridLekari.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            this.metroGridLekari.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGridLekari.DefaultCellStyle = dataGridViewCellStyle23;
+            this.metroGridLekari.EnableHeadersVisualStyles = false;
+            this.metroGridLekari.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.metroGridLekari.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGridLekari.Location = new System.Drawing.Point(7, 265);
+            this.metroGridLekari.Name = "metroGridLekari";
+            this.metroGridLekari.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGridLekari.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            this.metroGridLekari.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.metroGridLekari.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.metroGridLekari.Size = new System.Drawing.Size(831, 221);
+            this.metroGridLekari.TabIndex = 3;
+            this.metroGridLekari.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGridLekari_CellContentClick);
+            // 
             // metroTabControl2
             // 
             this.metroTabControl2.Controls.Add(this.tabLeakrBrisanje);
             this.metroTabControl2.Controls.Add(this.tabLekarUnos);
             this.metroTabControl2.Controls.Add(this.tabLekarAzuriranje);
-            this.metroTabControl2.Location = new System.Drawing.Point(1, 1);
+            this.metroTabControl2.Location = new System.Drawing.Point(3, 4);
             this.metroTabControl2.Name = "metroTabControl2";
             this.metroTabControl2.SelectedIndex = 1;
-            this.metroTabControl2.Size = new System.Drawing.Size(841, 535);
+            this.metroTabControl2.Size = new System.Drawing.Size(842, 275);
             this.metroTabControl2.TabIndex = 2;
             this.metroTabControl2.UseSelectable = true;
             // 
             // tabLeakrBrisanje
             // 
-            this.tabLeakrBrisanje.Controls.Add(this.btn_lekar_brisanje);
-            this.tabLeakrBrisanje.Controls.Add(this.dGV_lekar_brisanje);
+            this.tabLeakrBrisanje.Controls.Add(this.metroButtonObrisiLekara);
             this.tabLeakrBrisanje.HorizontalScrollbarBarColor = true;
             this.tabLeakrBrisanje.HorizontalScrollbarHighlightOnWheel = false;
             this.tabLeakrBrisanje.HorizontalScrollbarSize = 10;
             this.tabLeakrBrisanje.Location = new System.Drawing.Point(4, 38);
             this.tabLeakrBrisanje.Name = "tabLeakrBrisanje";
-            this.tabLeakrBrisanje.Size = new System.Drawing.Size(833, 493);
+            this.tabLeakrBrisanje.Size = new System.Drawing.Size(834, 233);
             this.tabLeakrBrisanje.TabIndex = 0;
-            this.tabLeakrBrisanje.Text = "Brisnje podataka o lekarima";
+            this.tabLeakrBrisanje.Text = "Brisanje podataka o lekarima";
             this.tabLeakrBrisanje.VerticalScrollbarBarColor = true;
             this.tabLeakrBrisanje.VerticalScrollbarHighlightOnWheel = false;
             this.tabLeakrBrisanje.VerticalScrollbarSize = 10;
             // 
-            // btn_lekar_brisanje
+            // metroButtonObrisiLekara
             // 
-            this.btn_lekar_brisanje.Location = new System.Drawing.Point(640, 443);
-            this.btn_lekar_brisanje.Name = "btn_lekar_brisanje";
-            this.btn_lekar_brisanje.Size = new System.Drawing.Size(190, 48);
-            this.btn_lekar_brisanje.TabIndex = 3;
-            this.btn_lekar_brisanje.Text = "Obrisi podatke o lekaru";
-            this.btn_lekar_brisanje.UseVisualStyleBackColor = true;
-            this.btn_lekar_brisanje.Click += new System.EventHandler(this.btn_lekar_brisanje_Click);
-            // 
-            // dGV_lekar_brisanje
-            // 
-            this.dGV_lekar_brisanje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_lekar_brisanje.Location = new System.Drawing.Point(0, 0);
-            this.dGV_lekar_brisanje.Name = "dGV_lekar_brisanje";
-            this.dGV_lekar_brisanje.Size = new System.Drawing.Size(833, 437);
-            this.dGV_lekar_brisanje.TabIndex = 2;
+            this.metroButtonObrisiLekara.Location = new System.Drawing.Point(0, 18);
+            this.metroButtonObrisiLekara.Name = "metroButtonObrisiLekara";
+            this.metroButtonObrisiLekara.Size = new System.Drawing.Size(831, 23);
+            this.metroButtonObrisiLekara.TabIndex = 2;
+            this.metroButtonObrisiLekara.Text = "Obriši lekara";
+            this.metroButtonObrisiLekara.UseSelectable = true;
             // 
             // tabLekarUnos
             // 
-            this.tabLekarUnos.Controls.Add(this.cB_smena_lekar_unos_dva);
-            this.tabLekarUnos.Controls.Add(this.cB_smena_lekar_unos_jeadn);
-            this.tabLekarUnos.Controls.Add(this.dTP_lekar_unos);
-            this.tabLekarUnos.Controls.Add(this.label8);
-            this.tabLekarUnos.Controls.Add(this.label7);
-            this.tabLekarUnos.Controls.Add(this.label6);
-            this.tabLekarUnos.Controls.Add(this.tb_unos_lekar_srednjeS);
-            this.tabLekarUnos.Controls.Add(this.label5);
-            this.tabLekarUnos.Controls.Add(this.tb_unos_lekar_password);
-            this.tabLekarUnos.Controls.Add(this.label4);
-            this.tabLekarUnos.Controls.Add(this.tb_unos_lekar_prezime);
-            this.tabLekarUnos.Controls.Add(this.label3);
-            this.tabLekarUnos.Controls.Add(this.tb_unos_lekar_ime);
-            this.tabLekarUnos.Controls.Add(this.label2);
-            this.tabLekarUnos.Controls.Add(this.tb_unos_lekar_jmbg);
-            this.tabLekarUnos.Controls.Add(this.btn_unosenje_lekara);
-            this.tabLekarUnos.Controls.Add(this.dGV_lekar_unos);
+            this.tabLekarUnos.Controls.Add(this.metroLabel7);
+            this.tabLekarUnos.Controls.Add(this.metroLabel6);
+            this.tabLekarUnos.Controls.Add(this.metroLabel5);
+            this.tabLekarUnos.Controls.Add(this.metroLabel4);
+            this.tabLekarUnos.Controls.Add(this.metroLabel3);
+            this.tabLekarUnos.Controls.Add(this.metroLabel2);
+            this.tabLekarUnos.Controls.Add(this.metroDateTimeDatumRodjenja);
+            this.tabLekarUnos.Controls.Add(this.metroRadioButtonSmenaPoslepodne);
+            this.tabLekarUnos.Controls.Add(this.metroRadioButtonSmenaPrepodne);
+            this.tabLekarUnos.Controls.Add(this.metroButtonUnesiteLekara);
+            this.tabLekarUnos.Controls.Add(this.metroTextBoxLozinka);
+            this.tabLekarUnos.Controls.Add(this.metroTextBoxPrezime);
+            this.tabLekarUnos.Controls.Add(this.metroTextBoxIme);
+            this.tabLekarUnos.Controls.Add(this.metroTextBoxSrednjeSlovo);
+            this.tabLekarUnos.Controls.Add(this.metroTextBoxJMBG);
+            this.tabLekarUnos.Controls.Add(this.metroLabel1);
             this.tabLekarUnos.HorizontalScrollbarBarColor = true;
             this.tabLekarUnos.HorizontalScrollbarHighlightOnWheel = false;
             this.tabLekarUnos.HorizontalScrollbarSize = 10;
             this.tabLekarUnos.Location = new System.Drawing.Point(4, 38);
             this.tabLekarUnos.Name = "tabLekarUnos";
-            this.tabLekarUnos.Size = new System.Drawing.Size(833, 493);
+            this.tabLekarUnos.Size = new System.Drawing.Size(834, 233);
             this.tabLekarUnos.TabIndex = 1;
-            this.tabLekarUnos.Text = "Unosenje podataka o novom lekaru";
+            this.tabLekarUnos.Text = "Unošenje podataka o novom lekaru";
             this.tabLekarUnos.VerticalScrollbarBarColor = true;
             this.tabLekarUnos.VerticalScrollbarHighlightOnWheel = false;
             this.tabLekarUnos.VerticalScrollbarSize = 10;
             // 
-            // cB_smena_lekar_unos_dva
+            // metroLabel7
             // 
-            this.cB_smena_lekar_unos_dva.AutoSize = true;
-            this.cB_smena_lekar_unos_dva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cB_smena_lekar_unos_dva.Location = new System.Drawing.Point(616, 55);
-            this.cB_smena_lekar_unos_dva.Name = "cB_smena_lekar_unos_dva";
-            this.cB_smena_lekar_unos_dva.Size = new System.Drawing.Size(37, 24);
-            this.cB_smena_lekar_unos_dva.TabIndex = 19;
-            this.cB_smena_lekar_unos_dva.Text = "2";
-            this.cB_smena_lekar_unos_dva.UseVisualStyleBackColor = true;
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.Location = new System.Drawing.Point(354, 95);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(97, 19);
+            this.metroLabel7.TabIndex = 35;
+            this.metroLabel7.Text = "Datum rođenja";
             // 
-            // cB_smena_lekar_unos_jeadn
+            // metroLabel6
             // 
-            this.cB_smena_lekar_unos_jeadn.AutoSize = true;
-            this.cB_smena_lekar_unos_jeadn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cB_smena_lekar_unos_jeadn.Location = new System.Drawing.Point(575, 55);
-            this.cB_smena_lekar_unos_jeadn.Name = "cB_smena_lekar_unos_jeadn";
-            this.cB_smena_lekar_unos_jeadn.Size = new System.Drawing.Size(37, 24);
-            this.cB_smena_lekar_unos_jeadn.TabIndex = 18;
-            this.cB_smena_lekar_unos_jeadn.Text = "1";
-            this.cB_smena_lekar_unos_jeadn.UseVisualStyleBackColor = true;
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(354, 56);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(49, 19);
+            this.metroLabel6.TabIndex = 34;
+            this.metroLabel6.Text = "Smena";
             // 
-            // dTP_lekar_unos
+            // metroLabel5
             // 
-            this.dTP_lekar_unos.Location = new System.Drawing.Point(571, 88);
-            this.dTP_lekar_unos.Name = "dTP_lekar_unos";
-            this.dTP_lekar_unos.Size = new System.Drawing.Size(200, 20);
-            this.dTP_lekar_unos.TabIndex = 17;
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(354, 21);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(87, 19);
+            this.metroLabel5.TabIndex = 33;
+            this.metroLabel5.Text = "Srednje slovo";
             // 
-            // label8
+            // metroLabel4
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(448, 88);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(117, 20);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Datum rodjenja";
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(3, 120);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(52, 19);
+            this.metroLabel4.TabIndex = 32;
+            this.metroLabel4.Text = "Lozinka";
             // 
-            // label7
+            // metroLabel3
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(492, 56);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 20);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Smena";
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(0, 88);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(57, 19);
+            this.metroLabel3.TabIndex = 31;
+            this.metroLabel3.Text = "Prezime";
             // 
-            // label6
+            // metroLabel2
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(448, 24);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 20);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Srednje slovo";
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(3, 56);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(31, 19);
+            this.metroLabel2.TabIndex = 30;
+            this.metroLabel2.Text = "Ime";
             // 
-            // tb_unos_lekar_srednjeS
+            // metroDateTimeDatumRodjenja
             // 
-            this.tb_unos_lekar_srednjeS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_unos_lekar_srednjeS.Location = new System.Drawing.Point(572, 21);
-            this.tb_unos_lekar_srednjeS.MaxLength = 2;
-            this.tb_unos_lekar_srednjeS.Name = "tb_unos_lekar_srednjeS";
-            this.tb_unos_lekar_srednjeS.Size = new System.Drawing.Size(42, 26);
-            this.tb_unos_lekar_srednjeS.TabIndex = 12;
-            this.tb_unos_lekar_srednjeS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_unos_lekar_srednjeS_KeyPress);
+            this.metroDateTimeDatumRodjenja.CustomFormat = "yyyy-MM-dd";
+            this.metroDateTimeDatumRodjenja.Location = new System.Drawing.Point(488, 95);
+            this.metroDateTimeDatumRodjenja.MinimumSize = new System.Drawing.Size(0, 29);
+            this.metroDateTimeDatumRodjenja.Name = "metroDateTimeDatumRodjenja";
+            this.metroDateTimeDatumRodjenja.Size = new System.Drawing.Size(200, 29);
+            this.metroDateTimeDatumRodjenja.TabIndex = 29;
             // 
-            // label5
+            // metroRadioButtonSmenaPoslepodne
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(120, 120);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 20);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Password";
+            this.metroRadioButtonSmenaPoslepodne.AutoSize = true;
+            this.metroRadioButtonSmenaPoslepodne.Location = new System.Drawing.Point(626, 64);
+            this.metroRadioButtonSmenaPoslepodne.Name = "metroRadioButtonSmenaPoslepodne";
+            this.metroRadioButtonSmenaPoslepodne.Size = new System.Drawing.Size(85, 15);
+            this.metroRadioButtonSmenaPoslepodne.TabIndex = 28;
+            this.metroRadioButtonSmenaPoslepodne.Text = "Poslepodne";
+            this.metroRadioButtonSmenaPoslepodne.UseSelectable = true;
             // 
-            // tb_unos_lekar_password
+            // metroRadioButtonSmenaPrepodne
             // 
-            this.tb_unos_lekar_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_unos_lekar_password.Location = new System.Drawing.Point(213, 117);
-            this.tb_unos_lekar_password.Name = "tb_unos_lekar_password";
-            this.tb_unos_lekar_password.Size = new System.Drawing.Size(225, 26);
-            this.tb_unos_lekar_password.TabIndex = 10;
-            this.tb_unos_lekar_password.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_unos_lekar_password_KeyPress);
+            this.metroRadioButtonSmenaPrepodne.AutoSize = true;
+            this.metroRadioButtonSmenaPrepodne.Location = new System.Drawing.Point(488, 64);
+            this.metroRadioButtonSmenaPrepodne.Name = "metroRadioButtonSmenaPrepodne";
+            this.metroRadioButtonSmenaPrepodne.Size = new System.Drawing.Size(74, 15);
+            this.metroRadioButtonSmenaPrepodne.TabIndex = 27;
+            this.metroRadioButtonSmenaPrepodne.Text = "Prepodne";
+            this.metroRadioButtonSmenaPrepodne.UseSelectable = true;
             // 
-            // label4
+            // metroButtonUnesiteLekara
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(132, 88);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 20);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Prezime";
+            this.metroButtonUnesiteLekara.Location = new System.Drawing.Point(0, 194);
+            this.metroButtonUnesiteLekara.Name = "metroButtonUnesiteLekara";
+            this.metroButtonUnesiteLekara.Size = new System.Drawing.Size(833, 23);
+            this.metroButtonUnesiteLekara.TabIndex = 26;
+            this.metroButtonUnesiteLekara.Text = "Unesite lekara";
+            this.metroButtonUnesiteLekara.UseSelectable = true;
             // 
-            // tb_unos_lekar_prezime
+            // metroTextBoxLozinka
             // 
-            this.tb_unos_lekar_prezime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_unos_lekar_prezime.Location = new System.Drawing.Point(213, 85);
-            this.tb_unos_lekar_prezime.Name = "tb_unos_lekar_prezime";
-            this.tb_unos_lekar_prezime.Size = new System.Drawing.Size(225, 26);
-            this.tb_unos_lekar_prezime.TabIndex = 8;
-            this.tb_unos_lekar_prezime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_unos_lekar_prezime_KeyPress);
             // 
-            // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(162, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Ime";
             // 
-            // tb_unos_lekar_ime
+            this.metroTextBoxLozinka.CustomButton.Image = null;
+            this.metroTextBoxLozinka.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBoxLozinka.CustomButton.Name = "";
+            this.metroTextBoxLozinka.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBoxLozinka.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxLozinka.CustomButton.TabIndex = 1;
+            this.metroTextBoxLozinka.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxLozinka.CustomButton.UseSelectable = true;
+            this.metroTextBoxLozinka.CustomButton.Visible = false;
+            this.metroTextBoxLozinka.Lines = new string[0];
+            this.metroTextBoxLozinka.Location = new System.Drawing.Point(81, 120);
+            this.metroTextBoxLozinka.MaxLength = 32767;
+            this.metroTextBoxLozinka.Name = "metroTextBoxLozinka";
+            this.metroTextBoxLozinka.PasswordChar = '\0';
+            this.metroTextBoxLozinka.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxLozinka.SelectedText = "";
+            this.metroTextBoxLozinka.SelectionLength = 0;
+            this.metroTextBoxLozinka.SelectionStart = 0;
+            this.metroTextBoxLozinka.ShortcutsEnabled = true;
+            this.metroTextBoxLozinka.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBoxLozinka.TabIndex = 25;
+            this.metroTextBoxLozinka.UseSelectable = true;
+            this.metroTextBoxLozinka.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxLozinka.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            this.tb_unos_lekar_ime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_unos_lekar_ime.Location = new System.Drawing.Point(213, 53);
-            this.tb_unos_lekar_ime.Name = "tb_unos_lekar_ime";
-            this.tb_unos_lekar_ime.Size = new System.Drawing.Size(225, 26);
-            this.tb_unos_lekar_ime.TabIndex = 6;
-            this.tb_unos_lekar_ime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_unos_lekar_ime_KeyPress);
+            // metroTextBoxPrezime
             // 
-            // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(144, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 20);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "JMBG";
             // 
-            // tb_unos_lekar_jmbg
             // 
-            this.tb_unos_lekar_jmbg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_unos_lekar_jmbg.Location = new System.Drawing.Point(213, 21);
-            this.tb_unos_lekar_jmbg.Name = "tb_unos_lekar_jmbg";
-            this.tb_unos_lekar_jmbg.Size = new System.Drawing.Size(225, 26);
-            this.tb_unos_lekar_jmbg.TabIndex = 4;
-            this.tb_unos_lekar_jmbg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_unos_lekar_jmbg_KeyPress);
+            this.metroTextBoxPrezime.CustomButton.Image = null;
+            this.metroTextBoxPrezime.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBoxPrezime.CustomButton.Name = "";
+            this.metroTextBoxPrezime.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBoxPrezime.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxPrezime.CustomButton.TabIndex = 1;
+            this.metroTextBoxPrezime.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxPrezime.CustomButton.UseSelectable = true;
+            this.metroTextBoxPrezime.CustomButton.Visible = false;
+            this.metroTextBoxPrezime.Lines = new string[0];
+            this.metroTextBoxPrezime.Location = new System.Drawing.Point(81, 88);
+            this.metroTextBoxPrezime.MaxLength = 32767;
+            this.metroTextBoxPrezime.Name = "metroTextBoxPrezime";
+            this.metroTextBoxPrezime.PasswordChar = '\0';
+            this.metroTextBoxPrezime.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxPrezime.SelectedText = "";
+            this.metroTextBoxPrezime.SelectionLength = 0;
+            this.metroTextBoxPrezime.SelectionStart = 0;
+            this.metroTextBoxPrezime.ShortcutsEnabled = true;
+            this.metroTextBoxPrezime.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBoxPrezime.TabIndex = 24;
+            this.metroTextBoxPrezime.UseSelectable = true;
+            this.metroTextBoxPrezime.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxPrezime.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // btn_unosenje_lekara
+            // metroTextBoxIme
             // 
-            this.btn_unosenje_lekara.Location = new System.Drawing.Point(617, 193);
-            this.btn_unosenje_lekara.Name = "btn_unosenje_lekara";
-            this.btn_unosenje_lekara.Size = new System.Drawing.Size(213, 34);
-            this.btn_unosenje_lekara.TabIndex = 3;
-            this.btn_unosenje_lekara.Text = "Unesite novog lekara";
-            this.btn_unosenje_lekara.UseVisualStyleBackColor = true;
             // 
-            // dGV_lekar_unos
             // 
-            this.dGV_lekar_unos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_lekar_unos.Location = new System.Drawing.Point(0, 233);
-            this.dGV_lekar_unos.Name = "dGV_lekar_unos";
-            this.dGV_lekar_unos.Size = new System.Drawing.Size(833, 257);
-            this.dGV_lekar_unos.TabIndex = 2;
+            // 
+            this.metroTextBoxIme.CustomButton.Image = null;
+            this.metroTextBoxIme.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBoxIme.CustomButton.Name = "";
+            this.metroTextBoxIme.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBoxIme.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxIme.CustomButton.TabIndex = 1;
+            this.metroTextBoxIme.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxIme.CustomButton.UseSelectable = true;
+            this.metroTextBoxIme.CustomButton.Visible = false;
+            this.metroTextBoxIme.Lines = new string[0];
+            this.metroTextBoxIme.Location = new System.Drawing.Point(81, 56);
+            this.metroTextBoxIme.MaxLength = 32767;
+            this.metroTextBoxIme.Name = "metroTextBoxIme";
+            this.metroTextBoxIme.PasswordChar = '\0';
+            this.metroTextBoxIme.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxIme.SelectedText = "";
+            this.metroTextBoxIme.SelectionLength = 0;
+            this.metroTextBoxIme.SelectionStart = 0;
+            this.metroTextBoxIme.ShortcutsEnabled = true;
+            this.metroTextBoxIme.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBoxIme.TabIndex = 23;
+            this.metroTextBoxIme.UseSelectable = true;
+            this.metroTextBoxIme.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxIme.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBoxSrednjeSlovo
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxSrednjeSlovo.CustomButton.Image = null;
+            this.metroTextBoxSrednjeSlovo.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBoxSrednjeSlovo.CustomButton.Name = "";
+            this.metroTextBoxSrednjeSlovo.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBoxSrednjeSlovo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxSrednjeSlovo.CustomButton.TabIndex = 1;
+            this.metroTextBoxSrednjeSlovo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxSrednjeSlovo.CustomButton.UseSelectable = true;
+            this.metroTextBoxSrednjeSlovo.CustomButton.Visible = false;
+            this.metroTextBoxSrednjeSlovo.Lines = new string[0];
+            this.metroTextBoxSrednjeSlovo.Location = new System.Drawing.Point(488, 21);
+            this.metroTextBoxSrednjeSlovo.MaxLength = 32767;
+            this.metroTextBoxSrednjeSlovo.Name = "metroTextBoxSrednjeSlovo";
+            this.metroTextBoxSrednjeSlovo.PasswordChar = '\0';
+            this.metroTextBoxSrednjeSlovo.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxSrednjeSlovo.SelectedText = "";
+            this.metroTextBoxSrednjeSlovo.SelectionLength = 0;
+            this.metroTextBoxSrednjeSlovo.SelectionStart = 0;
+            this.metroTextBoxSrednjeSlovo.ShortcutsEnabled = true;
+            this.metroTextBoxSrednjeSlovo.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBoxSrednjeSlovo.TabIndex = 22;
+            this.metroTextBoxSrednjeSlovo.UseSelectable = true;
+            this.metroTextBoxSrednjeSlovo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxSrednjeSlovo.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBoxJMBG
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBoxJMBG.CustomButton.Image = null;
+            this.metroTextBoxJMBG.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBoxJMBG.CustomButton.Name = "";
+            this.metroTextBoxJMBG.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBoxJMBG.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBoxJMBG.CustomButton.TabIndex = 1;
+            this.metroTextBoxJMBG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBoxJMBG.CustomButton.UseSelectable = true;
+            this.metroTextBoxJMBG.CustomButton.Visible = false;
+            this.metroTextBoxJMBG.Lines = new string[0];
+            this.metroTextBoxJMBG.Location = new System.Drawing.Point(81, 21);
+            this.metroTextBoxJMBG.MaxLength = 32767;
+            this.metroTextBoxJMBG.Name = "metroTextBoxJMBG";
+            this.metroTextBoxJMBG.PasswordChar = '\0';
+            this.metroTextBoxJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBoxJMBG.SelectedText = "";
+            this.metroTextBoxJMBG.SelectionLength = 0;
+            this.metroTextBoxJMBG.SelectionStart = 0;
+            this.metroTextBoxJMBG.ShortcutsEnabled = true;
+            this.metroTextBoxJMBG.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBoxJMBG.TabIndex = 21;
+            this.metroTextBoxJMBG.UseSelectable = true;
+            this.metroTextBoxJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBoxJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(3, 21);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(43, 19);
+            this.metroLabel1.TabIndex = 20;
+            this.metroLabel1.Text = "JMBG";
             // 
             // tabLekarAzuriranje
             // 
-            this.tabLekarAzuriranje.Controls.Add(this.btn_azuriranje_lekara);
-            this.tabLekarAzuriranje.Controls.Add(this.dGV_lekar_azuriranje);
-            this.tabLekarAzuriranje.Controls.Add(this.cB_lekar_azurirnje_smena_dva);
-            this.tabLekarAzuriranje.Controls.Add(this.cB_lekar_azurirnje_smena_jedan);
-            this.tabLekarAzuriranje.Controls.Add(this.dTP_lekar_azuriranje);
-            this.tabLekarAzuriranje.Controls.Add(this.label9);
-            this.tabLekarAzuriranje.Controls.Add(this.label10);
-            this.tabLekarAzuriranje.Controls.Add(this.label11);
-            this.tabLekarAzuriranje.Controls.Add(this.tb_azuriranje_lekar_srednjeS);
-            this.tabLekarAzuriranje.Controls.Add(this.label12);
-            this.tabLekarAzuriranje.Controls.Add(this.tb_azuriranje_lekar_password);
-            this.tabLekarAzuriranje.Controls.Add(this.label13);
-            this.tabLekarAzuriranje.Controls.Add(this.tb_azuriranje_lekar_prezime);
-            this.tabLekarAzuriranje.Controls.Add(this.label14);
-            this.tabLekarAzuriranje.Controls.Add(this.tb_azuriranje_lekar_ime);
-            this.tabLekarAzuriranje.Controls.Add(this.label15);
-            this.tabLekarAzuriranje.Controls.Add(this.tb_azuriranje_lekar_jmbg);
+            this.tabLekarAzuriranje.Controls.Add(this.metroLabel8);
+            this.tabLekarAzuriranje.Controls.Add(this.metroLabel9);
+            this.tabLekarAzuriranje.Controls.Add(this.metroLabel10);
+            this.tabLekarAzuriranje.Controls.Add(this.metroLabel11);
+            this.tabLekarAzuriranje.Controls.Add(this.metroLabel12);
+            this.tabLekarAzuriranje.Controls.Add(this.metroLabel13);
+            this.tabLekarAzuriranje.Controls.Add(this.metroDateTime2);
+            this.tabLekarAzuriranje.Controls.Add(this.metroRadioButton1);
+            this.tabLekarAzuriranje.Controls.Add(this.metroRadioButton2);
+            this.tabLekarAzuriranje.Controls.Add(this.metroButtonAzurirajLekara);
+            this.tabLekarAzuriranje.Controls.Add(this.metroTextBox5);
+            this.tabLekarAzuriranje.Controls.Add(this.metroTextBox6);
+            this.tabLekarAzuriranje.Controls.Add(this.metroTextBox7);
+            this.tabLekarAzuriranje.Controls.Add(this.metroTextBox8);
+            this.tabLekarAzuriranje.Controls.Add(this.metroTextBox9);
+            this.tabLekarAzuriranje.Controls.Add(this.metroLabel14);
             this.tabLekarAzuriranje.HorizontalScrollbarBarColor = true;
             this.tabLekarAzuriranje.HorizontalScrollbarHighlightOnWheel = false;
             this.tabLekarAzuriranje.HorizontalScrollbarSize = 10;
             this.tabLekarAzuriranje.Location = new System.Drawing.Point(4, 38);
             this.tabLekarAzuriranje.Name = "tabLekarAzuriranje";
-            this.tabLekarAzuriranje.Size = new System.Drawing.Size(833, 493);
+            this.tabLekarAzuriranje.Size = new System.Drawing.Size(834, 233);
             this.tabLekarAzuriranje.TabIndex = 2;
-            this.tabLekarAzuriranje.Text = "Azuriranje podataka o lekaru";
+            this.tabLekarAzuriranje.Text = "Ažuriranje podataka o lekaru";
             this.tabLekarAzuriranje.VerticalScrollbarBarColor = true;
             this.tabLekarAzuriranje.VerticalScrollbarHighlightOnWheel = false;
             this.tabLekarAzuriranje.VerticalScrollbarSize = 10;
             // 
-            // btn_azuriranje_lekara
+            // metroLabel8
             // 
-            this.btn_azuriranje_lekara.Location = new System.Drawing.Point(617, 193);
-            this.btn_azuriranje_lekara.Name = "btn_azuriranje_lekara";
-            this.btn_azuriranje_lekara.Size = new System.Drawing.Size(213, 34);
-            this.btn_azuriranje_lekara.TabIndex = 36;
-            this.btn_azuriranje_lekara.Text = "Azurirajte lekara";
-            this.btn_azuriranje_lekara.UseVisualStyleBackColor = true;
-            this.btn_azuriranje_lekara.Click += new System.EventHandler(this.btn_azuriranje_lekara_Click);
+            this.metroLabel8.AutoSize = true;
+            this.metroLabel8.Location = new System.Drawing.Point(354, 95);
+            this.metroLabel8.Name = "metroLabel8";
+            this.metroLabel8.Size = new System.Drawing.Size(97, 19);
+            this.metroLabel8.TabIndex = 51;
+            this.metroLabel8.Text = "Datum rođenja";
             // 
-            // dGV_lekar_azuriranje
+            // metroLabel9
             // 
-            this.dGV_lekar_azuriranje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_lekar_azuriranje.Location = new System.Drawing.Point(0, 233);
-            this.dGV_lekar_azuriranje.Name = "dGV_lekar_azuriranje";
-            this.dGV_lekar_azuriranje.Size = new System.Drawing.Size(833, 257);
-            this.dGV_lekar_azuriranje.TabIndex = 35;
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.Location = new System.Drawing.Point(354, 56);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(49, 19);
+            this.metroLabel9.TabIndex = 50;
+            this.metroLabel9.Text = "Smena";
             // 
-            // cB_lekar_azurirnje_smena_dva
+            // metroLabel10
             // 
-            this.cB_lekar_azurirnje_smena_dva.AutoSize = true;
-            this.cB_lekar_azurirnje_smena_dva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cB_lekar_azurirnje_smena_dva.Location = new System.Drawing.Point(616, 55);
-            this.cB_lekar_azurirnje_smena_dva.Name = "cB_lekar_azurirnje_smena_dva";
-            this.cB_lekar_azurirnje_smena_dva.Size = new System.Drawing.Size(37, 24);
-            this.cB_lekar_azurirnje_smena_dva.TabIndex = 34;
-            this.cB_lekar_azurirnje_smena_dva.Text = "2";
-            this.cB_lekar_azurirnje_smena_dva.UseVisualStyleBackColor = true;
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(354, 21);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(87, 19);
+            this.metroLabel10.TabIndex = 49;
+            this.metroLabel10.Text = "Srednje slovo";
             // 
-            // cB_lekar_azurirnje_smena_jedan
+            // metroLabel11
             // 
-            this.cB_lekar_azurirnje_smena_jedan.AutoSize = true;
-            this.cB_lekar_azurirnje_smena_jedan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cB_lekar_azurirnje_smena_jedan.Location = new System.Drawing.Point(575, 55);
-            this.cB_lekar_azurirnje_smena_jedan.Name = "cB_lekar_azurirnje_smena_jedan";
-            this.cB_lekar_azurirnje_smena_jedan.Size = new System.Drawing.Size(37, 24);
-            this.cB_lekar_azurirnje_smena_jedan.TabIndex = 33;
-            this.cB_lekar_azurirnje_smena_jedan.Text = "1";
-            this.cB_lekar_azurirnje_smena_jedan.UseVisualStyleBackColor = true;
+            this.metroLabel11.AutoSize = true;
+            this.metroLabel11.Location = new System.Drawing.Point(3, 120);
+            this.metroLabel11.Name = "metroLabel11";
+            this.metroLabel11.Size = new System.Drawing.Size(52, 19);
+            this.metroLabel11.TabIndex = 48;
+            this.metroLabel11.Text = "Lozinka";
             // 
-            // dTP_lekar_azuriranje
+            // metroLabel12
             // 
-            this.dTP_lekar_azuriranje.Location = new System.Drawing.Point(571, 88);
-            this.dTP_lekar_azuriranje.Name = "dTP_lekar_azuriranje";
-            this.dTP_lekar_azuriranje.Size = new System.Drawing.Size(200, 20);
-            this.dTP_lekar_azuriranje.TabIndex = 32;
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.Location = new System.Drawing.Point(0, 88);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(57, 19);
+            this.metroLabel12.TabIndex = 47;
+            this.metroLabel12.Text = "Prezime";
             // 
-            // label9
+            // metroLabel13
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(448, 88);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(117, 20);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Datum rodjenja";
+            this.metroLabel13.AutoSize = true;
+            this.metroLabel13.Location = new System.Drawing.Point(3, 56);
+            this.metroLabel13.Name = "metroLabel13";
+            this.metroLabel13.Size = new System.Drawing.Size(31, 19);
+            this.metroLabel13.TabIndex = 46;
+            this.metroLabel13.Text = "Ime";
             // 
-            // label10
+            // metroDateTime2
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(492, 56);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 20);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "Smena";
+            this.metroDateTime2.Location = new System.Drawing.Point(488, 95);
+            this.metroDateTime2.MinimumSize = new System.Drawing.Size(0, 29);
+            this.metroDateTime2.Name = "metroDateTime2";
+            this.metroDateTime2.Size = new System.Drawing.Size(200, 29);
+            this.metroDateTime2.TabIndex = 45;
             // 
-            // label11
+            // metroRadioButton1
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(448, 24);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(104, 20);
-            this.label11.TabIndex = 29;
-            this.label11.Text = "Srednje slovo";
+            this.metroRadioButton1.AutoSize = true;
+            this.metroRadioButton1.Location = new System.Drawing.Point(626, 64);
+            this.metroRadioButton1.Name = "metroRadioButton1";
+            this.metroRadioButton1.Size = new System.Drawing.Size(85, 15);
+            this.metroRadioButton1.TabIndex = 44;
+            this.metroRadioButton1.Text = "Poslepodne";
+            this.metroRadioButton1.UseSelectable = true;
             // 
-            // tb_azuriranje_lekar_srednjeS
+            // metroRadioButton2
             // 
-            this.tb_azuriranje_lekar_srednjeS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_azuriranje_lekar_srednjeS.Location = new System.Drawing.Point(572, 21);
-            this.tb_azuriranje_lekar_srednjeS.MaxLength = 2;
-            this.tb_azuriranje_lekar_srednjeS.Name = "tb_azuriranje_lekar_srednjeS";
-            this.tb_azuriranje_lekar_srednjeS.Size = new System.Drawing.Size(42, 26);
-            this.tb_azuriranje_lekar_srednjeS.TabIndex = 28;
-            this.tb_azuriranje_lekar_srednjeS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_azuriranje_lekar_srednjeS_KeyPress);
+            this.metroRadioButton2.AutoSize = true;
+            this.metroRadioButton2.Location = new System.Drawing.Point(488, 64);
+            this.metroRadioButton2.Name = "metroRadioButton2";
+            this.metroRadioButton2.Size = new System.Drawing.Size(74, 15);
+            this.metroRadioButton2.TabIndex = 43;
+            this.metroRadioButton2.Text = "Prepodne";
+            this.metroRadioButton2.UseSelectable = true;
             // 
-            // label12
+            // metroButtonAzurirajLekara
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(120, 120);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(78, 20);
-            this.label12.TabIndex = 27;
-            this.label12.Text = "Password";
+            this.metroButtonAzurirajLekara.Location = new System.Drawing.Point(0, 194);
+            this.metroButtonAzurirajLekara.Name = "metroButtonAzurirajLekara";
+            this.metroButtonAzurirajLekara.Size = new System.Drawing.Size(833, 23);
+            this.metroButtonAzurirajLekara.TabIndex = 42;
+            this.metroButtonAzurirajLekara.Text = "Ažurirajte lekara";
+            this.metroButtonAzurirajLekara.UseSelectable = true;
             // 
-            // tb_azuriranje_lekar_password
+            // metroTextBox5
             // 
-            this.tb_azuriranje_lekar_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_azuriranje_lekar_password.Location = new System.Drawing.Point(213, 117);
-            this.tb_azuriranje_lekar_password.Name = "tb_azuriranje_lekar_password";
-            this.tb_azuriranje_lekar_password.Size = new System.Drawing.Size(225, 26);
-            this.tb_azuriranje_lekar_password.TabIndex = 26;
-            this.tb_azuriranje_lekar_password.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_azuriranje_lekar_password_KeyPress);
             // 
-            // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(132, 88);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(66, 20);
-            this.label13.TabIndex = 25;
-            this.label13.Text = "Prezime";
             // 
-            // tb_azuriranje_lekar_prezime
+            this.metroTextBox5.CustomButton.Image = null;
+            this.metroTextBox5.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBox5.CustomButton.Name = "";
+            this.metroTextBox5.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox5.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox5.CustomButton.TabIndex = 1;
+            this.metroTextBox5.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox5.CustomButton.UseSelectable = true;
+            this.metroTextBox5.CustomButton.Visible = false;
+            this.metroTextBox5.Lines = new string[0];
+            this.metroTextBox5.Location = new System.Drawing.Point(81, 120);
+            this.metroTextBox5.MaxLength = 32767;
+            this.metroTextBox5.Name = "metroTextBox5";
+            this.metroTextBox5.PasswordChar = '\0';
+            this.metroTextBox5.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox5.SelectedText = "";
+            this.metroTextBox5.SelectionLength = 0;
+            this.metroTextBox5.SelectionStart = 0;
+            this.metroTextBox5.ShortcutsEnabled = true;
+            this.metroTextBox5.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBox5.TabIndex = 41;
+            this.metroTextBox5.UseSelectable = true;
+            this.metroTextBox5.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox5.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            this.tb_azuriranje_lekar_prezime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_azuriranje_lekar_prezime.Location = new System.Drawing.Point(213, 85);
-            this.tb_azuriranje_lekar_prezime.Name = "tb_azuriranje_lekar_prezime";
-            this.tb_azuriranje_lekar_prezime.Size = new System.Drawing.Size(225, 26);
-            this.tb_azuriranje_lekar_prezime.TabIndex = 24;
-            this.tb_azuriranje_lekar_prezime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_azuriranje_lekar_prezime_KeyPress);
+            // metroTextBox6
             // 
-            // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(162, 56);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(36, 20);
-            this.label14.TabIndex = 23;
-            this.label14.Text = "Ime";
             // 
-            // tb_azuriranje_lekar_ime
             // 
-            this.tb_azuriranje_lekar_ime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_azuriranje_lekar_ime.Location = new System.Drawing.Point(213, 53);
-            this.tb_azuriranje_lekar_ime.Name = "tb_azuriranje_lekar_ime";
-            this.tb_azuriranje_lekar_ime.Size = new System.Drawing.Size(225, 26);
-            this.tb_azuriranje_lekar_ime.TabIndex = 22;
-            this.tb_azuriranje_lekar_ime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_azuriranje_lekar_ime_KeyPress);
+            this.metroTextBox6.CustomButton.Image = null;
+            this.metroTextBox6.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBox6.CustomButton.Name = "";
+            this.metroTextBox6.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox6.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox6.CustomButton.TabIndex = 1;
+            this.metroTextBox6.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox6.CustomButton.UseSelectable = true;
+            this.metroTextBox6.CustomButton.Visible = false;
+            this.metroTextBox6.Lines = new string[0];
+            this.metroTextBox6.Location = new System.Drawing.Point(81, 88);
+            this.metroTextBox6.MaxLength = 32767;
+            this.metroTextBox6.Name = "metroTextBox6";
+            this.metroTextBox6.PasswordChar = '\0';
+            this.metroTextBox6.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox6.SelectedText = "";
+            this.metroTextBox6.SelectionLength = 0;
+            this.metroTextBox6.SelectionStart = 0;
+            this.metroTextBox6.ShortcutsEnabled = true;
+            this.metroTextBox6.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBox6.TabIndex = 40;
+            this.metroTextBox6.UseSelectable = true;
+            this.metroTextBox6.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox6.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label15
+            // metroTextBox7
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(144, 24);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(54, 20);
-            this.label15.TabIndex = 21;
-            this.label15.Text = "JMBG";
             // 
-            // tb_azuriranje_lekar_jmbg
             // 
-            this.tb_azuriranje_lekar_jmbg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_azuriranje_lekar_jmbg.Location = new System.Drawing.Point(213, 21);
-            this.tb_azuriranje_lekar_jmbg.Name = "tb_azuriranje_lekar_jmbg";
-            this.tb_azuriranje_lekar_jmbg.Size = new System.Drawing.Size(225, 26);
-            this.tb_azuriranje_lekar_jmbg.TabIndex = 20;
-            this.tb_azuriranje_lekar_jmbg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_azuriranje_lekar_jmbg_KeyPress);
+            // 
+            this.metroTextBox7.CustomButton.Image = null;
+            this.metroTextBox7.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBox7.CustomButton.Name = "";
+            this.metroTextBox7.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox7.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox7.CustomButton.TabIndex = 1;
+            this.metroTextBox7.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox7.CustomButton.UseSelectable = true;
+            this.metroTextBox7.CustomButton.Visible = false;
+            this.metroTextBox7.Lines = new string[0];
+            this.metroTextBox7.Location = new System.Drawing.Point(81, 56);
+            this.metroTextBox7.MaxLength = 32767;
+            this.metroTextBox7.Name = "metroTextBox7";
+            this.metroTextBox7.PasswordChar = '\0';
+            this.metroTextBox7.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox7.SelectedText = "";
+            this.metroTextBox7.SelectionLength = 0;
+            this.metroTextBox7.SelectionStart = 0;
+            this.metroTextBox7.ShortcutsEnabled = true;
+            this.metroTextBox7.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBox7.TabIndex = 39;
+            this.metroTextBox7.UseSelectable = true;
+            this.metroTextBox7.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox7.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBox8
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBox8.CustomButton.Image = null;
+            this.metroTextBox8.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBox8.CustomButton.Name = "";
+            this.metroTextBox8.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox8.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox8.CustomButton.TabIndex = 1;
+            this.metroTextBox8.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox8.CustomButton.UseSelectable = true;
+            this.metroTextBox8.CustomButton.Visible = false;
+            this.metroTextBox8.Lines = new string[0];
+            this.metroTextBox8.Location = new System.Drawing.Point(488, 21);
+            this.metroTextBox8.MaxLength = 32767;
+            this.metroTextBox8.Name = "metroTextBox8";
+            this.metroTextBox8.PasswordChar = '\0';
+            this.metroTextBox8.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox8.SelectedText = "";
+            this.metroTextBox8.SelectionLength = 0;
+            this.metroTextBox8.SelectionStart = 0;
+            this.metroTextBox8.ShortcutsEnabled = true;
+            this.metroTextBox8.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBox8.TabIndex = 38;
+            this.metroTextBox8.UseSelectable = true;
+            this.metroTextBox8.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox8.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroTextBox9
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBox9.CustomButton.Image = null;
+            this.metroTextBox9.CustomButton.Location = new System.Drawing.Point(201, 1);
+            this.metroTextBox9.CustomButton.Name = "";
+            this.metroTextBox9.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox9.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox9.CustomButton.TabIndex = 1;
+            this.metroTextBox9.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox9.CustomButton.UseSelectable = true;
+            this.metroTextBox9.CustomButton.Visible = false;
+            this.metroTextBox9.Lines = new string[0];
+            this.metroTextBox9.Location = new System.Drawing.Point(81, 21);
+            this.metroTextBox9.MaxLength = 32767;
+            this.metroTextBox9.Name = "metroTextBox9";
+            this.metroTextBox9.PasswordChar = '\0';
+            this.metroTextBox9.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox9.SelectedText = "";
+            this.metroTextBox9.SelectionLength = 0;
+            this.metroTextBox9.SelectionStart = 0;
+            this.metroTextBox9.ShortcutsEnabled = true;
+            this.metroTextBox9.Size = new System.Drawing.Size(223, 23);
+            this.metroTextBox9.TabIndex = 37;
+            this.metroTextBox9.UseSelectable = true;
+            this.metroTextBox9.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox9.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel14
+            // 
+            this.metroLabel14.AutoSize = true;
+            this.metroLabel14.Location = new System.Drawing.Point(3, 21);
+            this.metroLabel14.Name = "metroLabel14";
+            this.metroLabel14.Size = new System.Drawing.Size(43, 19);
+            this.metroLabel14.TabIndex = 36;
+            this.metroLabel14.Text = "JMBG";
             // 
             // tabOsoblje
             // 
@@ -566,33 +766,44 @@
             this.tabOsoblje.VerticalScrollbarHighlightOnWheel = false;
             this.tabOsoblje.VerticalScrollbarSize = 10;
             // 
+            // lblImeDomaZ
+            // 
+            this.lblImeDomaZ.AutoSize = true;
+            this.lblImeDomaZ.Location = new System.Drawing.Point(698, 50);
+            this.lblImeDomaZ.Name = "lblImeDomaZ";
+            this.lblImeDomaZ.Size = new System.Drawing.Size(174, 19);
+            this.lblImeDomaZ.TabIndex = 4;
+            this.lblImeDomaZ.Text = "ovde ide ime doma zdravlja";
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "Text to show";
+            this.notifyIcon1.Visible = true;
+            // 
             // FormDirektor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 673);
-            this.Controls.Add(this.metroTabControl1);
             this.Controls.Add(this.lblImeDomaZ);
+            this.Controls.Add(this.metroTabControl1);
             this.Name = "FormDirektor";
             this.Text = "Administrator panel";
             this.metroTabControl1.ResumeLayout(false);
             this.tabLekar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.metroGridLekari)).EndInit();
             this.metroTabControl2.ResumeLayout(false);
             this.tabLeakrBrisanje.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_lekar_brisanje)).EndInit();
             this.tabLekarUnos.ResumeLayout(false);
             this.tabLekarUnos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_lekar_unos)).EndInit();
             this.tabLekarAzuriranje.ResumeLayout(false);
             this.tabLekarAzuriranje.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_lekar_azuriranje)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label lblImeDomaZ;
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
         private MetroFramework.Controls.MetroTabPage tabLekar;
         private MetroFramework.Controls.MetroTabControl metroTabControl2;
@@ -600,41 +811,41 @@
         private MetroFramework.Controls.MetroTabPage tabLekarUnos;
         private MetroFramework.Controls.MetroTabPage tabLekarAzuriranje;
         private MetroFramework.Controls.MetroTabPage tabOsoblje;
-        private System.Windows.Forms.DataGridView dGV_lekar_brisanje;
-        private System.Windows.Forms.Button btn_lekar_brisanje;
-        private System.Windows.Forms.DataGridView dGV_lekar_unos;
-        private System.Windows.Forms.Button btn_unosenje_lekara;
-        private System.Windows.Forms.TextBox tb_unos_lekar_jmbg;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tb_unos_lekar_srednjeS;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tb_unos_lekar_password;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tb_unos_lekar_prezime;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tb_unos_lekar_ime;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dTP_lekar_unos;
-        private System.Windows.Forms.CheckBox cB_smena_lekar_unos_jeadn;
-        private System.Windows.Forms.CheckBox cB_smena_lekar_unos_dva;
-        private System.Windows.Forms.CheckBox cB_lekar_azurirnje_smena_dva;
-        private System.Windows.Forms.CheckBox cB_lekar_azurirnje_smena_jedan;
-        private System.Windows.Forms.DateTimePicker dTP_lekar_azuriranje;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox tb_azuriranje_lekar_srednjeS;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tb_azuriranje_lekar_password;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox tb_azuriranje_lekar_prezime;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox tb_azuriranje_lekar_ime;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox tb_azuriranje_lekar_jmbg;
-        private System.Windows.Forms.DataGridView dGV_lekar_azuriranje;
-        private System.Windows.Forms.Button btn_azuriranje_lekara;
+        private MetroFramework.Controls.MetroLabel lblImeDomaZ;
+        private MetroFramework.Controls.MetroGrid metroGridLekari;
+        private MetroFramework.Controls.MetroButton metroButtonObrisiLekara;
+        private MetroFramework.Controls.MetroLabel metroLabel7;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroDateTime metroDateTimeDatumRodjenja;
+        private MetroFramework.Controls.MetroRadioButton metroRadioButtonSmenaPoslepodne;
+        private MetroFramework.Controls.MetroRadioButton metroRadioButtonSmenaPrepodne;
+        private MetroFramework.Controls.MetroButton metroButtonUnesiteLekara;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxLozinka;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxPrezime;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxIme;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxSrednjeSlovo;
+        private MetroFramework.Controls.MetroTextBox metroTextBoxJMBG;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel metroLabel8;
+        private MetroFramework.Controls.MetroLabel metroLabel9;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
+        private MetroFramework.Controls.MetroLabel metroLabel11;
+        private MetroFramework.Controls.MetroLabel metroLabel12;
+        private MetroFramework.Controls.MetroLabel metroLabel13;
+        private MetroFramework.Controls.MetroDateTime metroDateTime2;
+        private MetroFramework.Controls.MetroRadioButton metroRadioButton1;
+        private MetroFramework.Controls.MetroRadioButton metroRadioButton2;
+        private MetroFramework.Controls.MetroButton metroButtonAzurirajLekara;
+        private MetroFramework.Controls.MetroTextBox metroTextBox5;
+        private MetroFramework.Controls.MetroTextBox metroTextBox6;
+        private MetroFramework.Controls.MetroTextBox metroTextBox7;
+        private MetroFramework.Controls.MetroTextBox metroTextBox8;
+        private MetroFramework.Controls.MetroTextBox metroTextBox9;
+        private MetroFramework.Controls.MetroLabel metroLabel14;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
