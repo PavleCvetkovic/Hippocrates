@@ -159,10 +159,12 @@
             // metroRadioButtonSmenaPrepodne
             // 
             this.metroRadioButtonSmenaPrepodne.AutoSize = true;
+            this.metroRadioButtonSmenaPrepodne.Checked = true;
             this.metroRadioButtonSmenaPrepodne.Location = new System.Drawing.Point(170, 112);
             this.metroRadioButtonSmenaPrepodne.Name = "metroRadioButtonSmenaPrepodne";
             this.metroRadioButtonSmenaPrepodne.Size = new System.Drawing.Size(74, 15);
             this.metroRadioButtonSmenaPrepodne.TabIndex = 52;
+            this.metroRadioButtonSmenaPrepodne.TabStop = true;
             this.metroRadioButtonSmenaPrepodne.Text = "Prepodne";
             this.metroRadioButtonSmenaPrepodne.UseSelectable = true;
             // 
@@ -184,6 +186,7 @@
             this.metroButtonObrisiSelektovanuSmenu.TabIndex = 55;
             this.metroButtonObrisiSelektovanuSmenu.Text = "Obriši selektovanu smenu";
             this.metroButtonObrisiSelektovanuSmenu.UseSelectable = true;
+            this.metroButtonObrisiSelektovanuSmenu.Click += new System.EventHandler(this.metroButtonObrisiSelektovanuSmenu_Click);
             // 
             // metroButtonAzurirajSmenu
             // 
@@ -193,6 +196,7 @@
             this.metroButtonAzurirajSmenu.TabIndex = 56;
             this.metroButtonAzurirajSmenu.Text = "Ažuriraj selektovanu smenu";
             this.metroButtonAzurirajSmenu.UseSelectable = true;
+            this.metroButtonAzurirajSmenu.Click += new System.EventHandler(this.metroButtonAzurirajSmenu_Click);
             // 
             // SmenaLekara
             // 

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroTabControlGlobal = new MetroFramework.Controls.MetroTabControl();
             this.tabLekar = new MetroFramework.Controls.MetroTabPage();
             this.metroTabControl2 = new MetroFramework.Controls.MetroTabControl();
@@ -41,6 +41,13 @@
             this.tabLekarAzuriranje = new MetroFramework.Controls.MetroTabPage();
             this.metroButtonAzurirajLekara = new MetroFramework.Controls.MetroButton();
             this.tabOsoblje = new MetroFramework.Controls.MetroTabPage();
+            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.metroButtonObrisiOsobu = new MetroFramework.Controls.MetroButton();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.metroButtonUnesiOsobu = new MetroFramework.Controls.MetroButton();
+            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.metroButtonAzurirajOsobu = new MetroFramework.Controls.MetroButton();
             this.lblImeDomaZ = new MetroFramework.Controls.MetroLabel();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
@@ -54,17 +61,8 @@
             this.metroTextBoxSrednjeSlovo = new MetroFramework.Controls.MetroTextBox();
             this.metroDateTimeDatumRodjenja = new MetroFramework.Controls.MetroDateTime();
             this.metroTextBoxIme = new MetroFramework.Controls.MetroTextBox();
-            this.metroRadioButtonSmenaPoslepodne = new MetroFramework.Controls.MetroRadioButton();
             this.metroTextBoxPrezime = new MetroFramework.Controls.MetroTextBox();
-            this.metroRadioButtonSmenaPrepodne = new MetroFramework.Controls.MetroRadioButton();
             this.metroTextBoxLozinka = new MetroFramework.Controls.MetroTextBox();
-            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
-            this.metroButtonObrisiOsobu = new MetroFramework.Controls.MetroButton();
-            this.metroButtonUnesiOsobu = new MetroFramework.Controls.MetroButton();
-            this.metroButtonAzurirajOsobu = new MetroFramework.Controls.MetroButton();
             this.metroButtonSmenaLekara = new MetroFramework.Controls.MetroButton();
             this.metroTabControlGlobal.SuspendLayout();
             this.tabLekar.SuspendLayout();
@@ -73,11 +71,11 @@
             this.tabLekarUnos.SuspendLayout();
             this.tabLekarAzuriranje.SuspendLayout();
             this.tabOsoblje.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.metroGridData)).BeginInit();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGridData)).BeginInit();
             this.SuspendLayout();
             // 
             // metroTabControlGlobal
@@ -114,7 +112,7 @@
             this.metroTabControl2.Controls.Add(this.tabLekarAzuriranje);
             this.metroTabControl2.Location = new System.Drawing.Point(3, 4);
             this.metroTabControl2.Name = "metroTabControl2";
-            this.metroTabControl2.SelectedIndex = 0;
+            this.metroTabControl2.SelectedIndex = 2;
             this.metroTabControl2.Size = new System.Drawing.Size(842, 100);
             this.metroTabControl2.TabIndex = 2;
             this.metroTabControl2.UseSelectable = true;
@@ -192,6 +190,7 @@
             this.metroButtonAzurirajLekara.TabIndex = 42;
             this.metroButtonAzurirajLekara.Text = "Ažurirajte lekara";
             this.metroButtonAzurirajLekara.UseSelectable = true;
+            this.metroButtonAzurirajLekara.Click += new System.EventHandler(this.metroButtonAzurirajLekara_Click);
             // 
             // tabOsoblje
             // 
@@ -207,6 +206,91 @@
             this.tabOsoblje.VerticalScrollbarBarColor = true;
             this.tabOsoblje.VerticalScrollbarHighlightOnWheel = false;
             this.tabOsoblje.VerticalScrollbarSize = 10;
+            // 
+            // metroTabControl1
+            // 
+            this.metroTabControl1.Controls.Add(this.metroTabPage1);
+            this.metroTabControl1.Controls.Add(this.metroTabPage2);
+            this.metroTabControl1.Controls.Add(this.metroTabPage3);
+            this.metroTabControl1.Location = new System.Drawing.Point(3, 4);
+            this.metroTabControl1.Name = "metroTabControl1";
+            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.Size = new System.Drawing.Size(841, 100);
+            this.metroTabControl1.TabIndex = 2;
+            this.metroTabControl1.UseSelectable = true;
+            // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.Controls.Add(this.metroButtonObrisiOsobu);
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(833, 58);
+            this.metroTabPage1.TabIndex = 0;
+            this.metroTabPage1.Text = "Brisanje podatka o osoblju";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // metroButtonObrisiOsobu
+            // 
+            this.metroButtonObrisiOsobu.Location = new System.Drawing.Point(1, 18);
+            this.metroButtonObrisiOsobu.Name = "metroButtonObrisiOsobu";
+            this.metroButtonObrisiOsobu.Size = new System.Drawing.Size(831, 23);
+            this.metroButtonObrisiOsobu.TabIndex = 3;
+            this.metroButtonObrisiOsobu.Text = "Obriši osobu";
+            this.metroButtonObrisiOsobu.UseSelectable = true;
+            this.metroButtonObrisiOsobu.Click += new System.EventHandler(this.metroButtonObrisiOsobu_Click);
+            // 
+            // metroTabPage2
+            // 
+            this.metroTabPage2.Controls.Add(this.metroButtonUnesiOsobu);
+            this.metroTabPage2.HorizontalScrollbarBarColor = true;
+            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage2.Name = "metroTabPage2";
+            this.metroTabPage2.Size = new System.Drawing.Size(833, 58);
+            this.metroTabPage2.TabIndex = 1;
+            this.metroTabPage2.Text = "Unošenje podataka o osoblju";
+            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
+            // 
+            // metroButtonUnesiOsobu
+            // 
+            this.metroButtonUnesiOsobu.Location = new System.Drawing.Point(0, 18);
+            this.metroButtonUnesiOsobu.Name = "metroButtonUnesiOsobu";
+            this.metroButtonUnesiOsobu.Size = new System.Drawing.Size(833, 23);
+            this.metroButtonUnesiOsobu.TabIndex = 27;
+            this.metroButtonUnesiOsobu.Text = "Unesite osobu";
+            this.metroButtonUnesiOsobu.UseSelectable = true;
+            // 
+            // metroTabPage3
+            // 
+            this.metroTabPage3.Controls.Add(this.metroButtonAzurirajOsobu);
+            this.metroTabPage3.HorizontalScrollbarBarColor = true;
+            this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage3.HorizontalScrollbarSize = 10;
+            this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage3.Name = "metroTabPage3";
+            this.metroTabPage3.Size = new System.Drawing.Size(833, 58);
+            this.metroTabPage3.TabIndex = 2;
+            this.metroTabPage3.Text = "Ažuriraj osobu";
+            this.metroTabPage3.VerticalScrollbarBarColor = true;
+            this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage3.VerticalScrollbarSize = 10;
+            // 
+            // metroButtonAzurirajOsobu
+            // 
+            this.metroButtonAzurirajOsobu.Location = new System.Drawing.Point(0, 18);
+            this.metroButtonAzurirajOsobu.Name = "metroButtonAzurirajOsobu";
+            this.metroButtonAzurirajOsobu.Size = new System.Drawing.Size(833, 23);
+            this.metroButtonAzurirajOsobu.TabIndex = 27;
+            this.metroButtonAzurirajOsobu.Text = "Ažurirajte osobu";
+            this.metroButtonAzurirajOsobu.UseSelectable = true;
             // 
             // lblImeDomaZ
             // 
@@ -229,7 +313,7 @@
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(421, 295);
+            this.metroLabel6.Location = new System.Drawing.Point(421, 306);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(49, 19);
             this.metroLabel6.TabIndex = 50;
@@ -242,37 +326,37 @@
             this.metroGridData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metroGridData.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.metroGridData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGridData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.metroGridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metroGridData.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGridData.DefaultCellStyle = dataGridViewCellStyle5;
             this.metroGridData.EnableHeadersVisualStyles = false;
             this.metroGridData.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridData.Location = new System.Drawing.Point(31, 403);
             this.metroGridData.Name = "metroGridData";
             this.metroGridData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGridData.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGridData.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.metroGridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.metroGridData.Size = new System.Drawing.Size(831, 150);
@@ -387,10 +471,10 @@
             // metroDateTimeDatumRodjenja
             // 
             this.metroDateTimeDatumRodjenja.CustomFormat = "yyyy-MM-dd";
-            this.metroDateTimeDatumRodjenja.Location = new System.Drawing.Point(555, 355);
+            this.metroDateTimeDatumRodjenja.Location = new System.Drawing.Point(555, 349);
             this.metroDateTimeDatumRodjenja.MinimumSize = new System.Drawing.Size(0, 29);
             this.metroDateTimeDatumRodjenja.Name = "metroDateTimeDatumRodjenja";
-            this.metroDateTimeDatumRodjenja.Size = new System.Drawing.Size(200, 29);
+            this.metroDateTimeDatumRodjenja.Size = new System.Drawing.Size(223, 29);
             this.metroDateTimeDatumRodjenja.TabIndex = 45;
             // 
             // metroTextBoxIme
@@ -423,16 +507,6 @@
             this.metroTextBoxIme.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxIme.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroRadioButtonSmenaPoslepodne
-            // 
-            this.metroRadioButtonSmenaPoslepodne.AutoSize = true;
-            this.metroRadioButtonSmenaPoslepodne.Location = new System.Drawing.Point(693, 299);
-            this.metroRadioButtonSmenaPoslepodne.Name = "metroRadioButtonSmenaPoslepodne";
-            this.metroRadioButtonSmenaPoslepodne.Size = new System.Drawing.Size(85, 15);
-            this.metroRadioButtonSmenaPoslepodne.TabIndex = 44;
-            this.metroRadioButtonSmenaPoslepodne.Text = "Poslepodne";
-            this.metroRadioButtonSmenaPoslepodne.UseSelectable = true;
-            // 
             // metroTextBoxPrezime
             // 
             // 
@@ -462,16 +536,6 @@
             this.metroTextBoxPrezime.UseSelectable = true;
             this.metroTextBoxPrezime.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxPrezime.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // metroRadioButtonSmenaPrepodne
-            // 
-            this.metroRadioButtonSmenaPrepodne.AutoSize = true;
-            this.metroRadioButtonSmenaPrepodne.Location = new System.Drawing.Point(555, 299);
-            this.metroRadioButtonSmenaPrepodne.Name = "metroRadioButtonSmenaPrepodne";
-            this.metroRadioButtonSmenaPrepodne.Size = new System.Drawing.Size(74, 15);
-            this.metroRadioButtonSmenaPrepodne.TabIndex = 43;
-            this.metroRadioButtonSmenaPrepodne.Text = "Prepodne";
-            this.metroRadioButtonSmenaPrepodne.UseSelectable = true;
             // 
             // metroTextBoxLozinka
             // 
@@ -503,96 +567,11 @@
             this.metroTextBoxLozinka.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxLozinka.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroTabControl1
-            // 
-            this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Controls.Add(this.metroTabPage2);
-            this.metroTabControl1.Controls.Add(this.metroTabPage3);
-            this.metroTabControl1.Location = new System.Drawing.Point(3, 4);
-            this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(841, 100);
-            this.metroTabControl1.TabIndex = 2;
-            this.metroTabControl1.UseSelectable = true;
-            // 
-            // metroTabPage1
-            // 
-            this.metroTabPage1.Controls.Add(this.metroButtonObrisiOsobu);
-            this.metroTabPage1.HorizontalScrollbarBarColor = true;
-            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(833, 58);
-            this.metroTabPage1.TabIndex = 0;
-            this.metroTabPage1.Text = "Brisanje podatka o osoblju";
-            this.metroTabPage1.VerticalScrollbarBarColor = true;
-            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.VerticalScrollbarSize = 10;
-            // 
-            // metroTabPage2
-            // 
-            this.metroTabPage2.Controls.Add(this.metroButtonUnesiOsobu);
-            this.metroTabPage2.HorizontalScrollbarBarColor = true;
-            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.HorizontalScrollbarSize = 10;
-            this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(833, 58);
-            this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = "Unošenje podataka o osoblju";
-            this.metroTabPage2.VerticalScrollbarBarColor = true;
-            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.VerticalScrollbarSize = 10;
-            // 
-            // metroTabPage3
-            // 
-            this.metroTabPage3.Controls.Add(this.metroButtonAzurirajOsobu);
-            this.metroTabPage3.HorizontalScrollbarBarColor = true;
-            this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage3.HorizontalScrollbarSize = 10;
-            this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(833, 58);
-            this.metroTabPage3.TabIndex = 2;
-            this.metroTabPage3.Text = "Ažuriraj osobu";
-            this.metroTabPage3.VerticalScrollbarBarColor = true;
-            this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage3.VerticalScrollbarSize = 10;
-            // 
-            // metroButtonObrisiOsobu
-            // 
-            this.metroButtonObrisiOsobu.Location = new System.Drawing.Point(1, 18);
-            this.metroButtonObrisiOsobu.Name = "metroButtonObrisiOsobu";
-            this.metroButtonObrisiOsobu.Size = new System.Drawing.Size(831, 23);
-            this.metroButtonObrisiOsobu.TabIndex = 3;
-            this.metroButtonObrisiOsobu.Text = "Obriši osobu";
-            this.metroButtonObrisiOsobu.UseSelectable = true;
-            this.metroButtonObrisiOsobu.Click += new System.EventHandler(this.metroButtonObrisiOsobu_Click);
-            // 
-            // metroButtonUnesiOsobu
-            // 
-            this.metroButtonUnesiOsobu.Location = new System.Drawing.Point(0, 18);
-            this.metroButtonUnesiOsobu.Name = "metroButtonUnesiOsobu";
-            this.metroButtonUnesiOsobu.Size = new System.Drawing.Size(833, 23);
-            this.metroButtonUnesiOsobu.TabIndex = 27;
-            this.metroButtonUnesiOsobu.Text = "Unesite osobu";
-            this.metroButtonUnesiOsobu.UseSelectable = true;
-            // 
-            // metroButtonAzurirajOsobu
-            // 
-            this.metroButtonAzurirajOsobu.Location = new System.Drawing.Point(0, 18);
-            this.metroButtonAzurirajOsobu.Name = "metroButtonAzurirajOsobu";
-            this.metroButtonAzurirajOsobu.Size = new System.Drawing.Size(833, 23);
-            this.metroButtonAzurirajOsobu.TabIndex = 27;
-            this.metroButtonAzurirajOsobu.Text = "Ažurirajte osobu";
-            this.metroButtonAzurirajOsobu.UseSelectable = true;
-            // 
             // metroButtonSmenaLekara
             // 
-            this.metroButtonSmenaLekara.Location = new System.Drawing.Point(555, 319);
+            this.metroButtonSmenaLekara.Location = new System.Drawing.Point(555, 291);
             this.metroButtonSmenaLekara.Name = "metroButtonSmenaLekara";
-            this.metroButtonSmenaLekara.Size = new System.Drawing.Size(223, 23);
+            this.metroButtonSmenaLekara.Size = new System.Drawing.Size(223, 43);
             this.metroButtonSmenaLekara.TabIndex = 52;
             this.metroButtonSmenaLekara.Text = "Pregled / Unos smene";
             this.metroButtonSmenaLekara.UseSelectable = true;
@@ -616,9 +595,7 @@
             this.Controls.Add(this.metroTextBoxSrednjeSlovo);
             this.Controls.Add(this.metroDateTimeDatumRodjenja);
             this.Controls.Add(this.metroTextBoxIme);
-            this.Controls.Add(this.metroRadioButtonSmenaPoslepodne);
             this.Controls.Add(this.metroTextBoxPrezime);
-            this.Controls.Add(this.metroRadioButtonSmenaPrepodne);
             this.Controls.Add(this.metroTextBoxLozinka);
             this.Controls.Add(this.lblImeDomaZ);
             this.Controls.Add(this.metroTabControlGlobal);
@@ -631,11 +608,11 @@
             this.tabLekarUnos.ResumeLayout(false);
             this.tabLekarAzuriranje.ResumeLayout(false);
             this.tabOsoblje.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.metroGridData)).EndInit();
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.metroGridData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -665,9 +642,7 @@
         private MetroFramework.Controls.MetroTextBox metroTextBoxSrednjeSlovo;
         private MetroFramework.Controls.MetroDateTime metroDateTimeDatumRodjenja;
         private MetroFramework.Controls.MetroTextBox metroTextBoxIme;
-        private MetroFramework.Controls.MetroRadioButton metroRadioButtonSmenaPoslepodne;
         private MetroFramework.Controls.MetroTextBox metroTextBoxPrezime;
-        private MetroFramework.Controls.MetroRadioButton metroRadioButtonSmenaPrepodne;
         private MetroFramework.Controls.MetroTextBox metroTextBoxLozinka;
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;

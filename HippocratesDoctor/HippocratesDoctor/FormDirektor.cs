@@ -29,8 +29,8 @@ namespace HippocratesDoctor
             jmbg_admin = dom_zdravlja_admin_jmbg;
             lblImeDomaZ.Text = GetMedicalFacilityInfo(jmbg_admin);
             GetAllDoctors(facility_id); // GetAllDoctors(facility_id) se zove nakon GetMedicalFacilityInfo(jmbg_admin) jer se tu inicijalizuje 'facility_id'
-            metroRadioButtonSmenaPrepodne.MouseHover += MetroRadioButtonSmenaPrepodne_MouseHover;
-            metroRadioButtonSmenaPoslepodne.MouseHover += MetroRadioButtonSmenaPrepodne_MouseHover;
+            //metroRadioButtonSmenaPrepodne.MouseHover += MetroRadioButtonSmenaPrepodne_MouseHover;
+            //metroRadioButtonSmenaPoslepodne.MouseHover += MetroRadioButtonSmenaPrepodne_MouseHover;
         }
 
 
@@ -149,14 +149,14 @@ namespace HippocratesDoctor
             metroTextBoxLozinka.Text = mg.SelectedRows[0].Cells["PASSWORD"].Value.ToString();
             metroTextBoxSrednjeSlovo.Text = mg.SelectedRows[0].Cells["SREDNJE_SLOVO"].Value.ToString();
 
-            if (metroButtonSmenaLekara.Enabled == true) // medicinsko_osoblje nema smenu (ne pamti se u bazi)
-            {
-                int smena = GetDoctorShift(mg.SelectedRows[0].Cells["JMBG"].Value.ToString());
-                if (smena == 1)
-                    metroRadioButtonSmenaPrepodne.Checked = true;
-                else
-                    metroRadioButtonSmenaPoslepodne.Checked = true;
-            }
+            //if (metroButtonSmenaLekara.Enabled == true) // medicinsko_osoblje nema smenu (ne pamti se u bazi)
+            //{
+            //    int smena = GetDoctorShift(mg.SelectedRows[0].Cells["JMBG"].Value.ToString());
+            //    if (smena == 1)
+            //        metroRadioButtonSmenaPrepodne.Checked = true;
+            //    else
+            //        metroRadioButtonSmenaPoslepodne.Checked = true;
+            //}
             string str = mg.SelectedRows[0].Cells["DATUM_ROĐENJA"].Value.ToString();
             // dd.MM.yyyy.
             // 0123456789
@@ -295,6 +295,36 @@ namespace HippocratesDoctor
 
         }
 
+        private bool UpdateSelectedDoctor(string jmbg_lekara)
+        {
+            bool success = true;
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
+            {
+                conn.Open();
+                string temp_date = metroDateTimeDatumRodjenja.Value.Date.ToString();
+                string datum_rodjenja = ParseYear(temp_date).ToString() + "-" + ParseMonth(temp_date).ToString() + "-" + ParseDay(temp_date).ToString();
+                string sql = "update IZABRANI_LEKAR set " +
+                    " JMBG = '" + metroTextBoxJMBG.Text + "', IME = '" + metroTextBoxIme.Text + "'," +
+                    " SREDNJE_SLOVO = '" + metroTextBoxSrednjeSlovo.Text + "', PREZIME = ' " + metroTextBoxPrezime.Text +
+                    " ', DATUM_ROĐENJA = '" + datum_rodjenja + "', MBRZU = '" + facility_id + "', PASSWORD = '" + metroTextBoxLozinka.Text + "'" +
+                    " where JMBG = '" + jmbg_lekara + "';";
+
+                //MessageBox.Show(sql);
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                success = false;
+            }
+            conn.Close();
+            return success;
+
+        }
+
         private void metroGridLekari_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             TransferDataFromGridToControl(metroGridData);
@@ -355,6 +385,21 @@ namespace HippocratesDoctor
             //notifyIcon1.ShowBalloonTip(2000, "Info", "Za dodavanje smene lekaru pogledajte 'Ažuriranje podataka o lekarima' deo", ToolTipIcon.Info);
             //var icon = new NotifyIcon();
             //icon.ShowBalloonTip(2000, "Info", "Za dodavanje smene lekaru pogledajte 'Ažuriranje podataka o lekarima' deo", ToolTipIcon.Info);
+        }
+
+        private void metroButtonAzurirajLekara_Click(object sender, EventArgs e)
+        {
+            MetroGrid mg = metroGridData; // hard-coded
+            string jmbg = string.Empty;
+            if (IsDataSelected(mg, out jmbg))
+            {
+                if (UpdateSelectedDoctor(jmbg))
+                    MetroMessageBox.Show(this, "Uspešno ažuriran lekar", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MetroMessageBox.Show(this, "Error prilikom update funkcije za ažuriranje lekara", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                GetAllDoctors(facility_id);
+            }
         }
 
         private void metroButtonObrisiOsobu_Click(object sender, EventArgs e)

@@ -98,7 +98,19 @@ namespace HippocratesDoctor
             //return to_return;
         }
 
-        private void ReadControls()
+        private void ReadDataFromGrid()
+        {
+            this.smena = Int32.Parse(metroGridSmenaLekara.SelectedRows[0].Cells["SMENA"].Value.ToString());
+            string temp = metroGridSmenaLekara.SelectedRows[0].Cells["DATUM_OD"].Value.ToString();
+            this.datum_od = ParseYear(temp) + "-" + ParseMonth(temp) + "-" + ParseDay(temp);
+            // DATUM_OD is not in correct format ERROR 
+            // not needed to read for 'datum_do' 
+            temp = metroGridSmenaLekara.SelectedRows[0].Cells["DATUM_DO"].Value.ToString();
+            this.datum_do = ParseYear(temp) + "-" + ParseMonth(temp) + "-" + ParseDay(temp);
+            //MessageBox.Show(this.smena + " datum od: " + this.datum_od + " datum do: " + this.datum_do);
+        }
+
+        private void ReadInputControls()
         {
             if (metroRadioButtonSmenaPrepodne.Checked)
                 this.smena = 1;
@@ -112,20 +124,20 @@ namespace HippocratesDoctor
             temp = metroDateTimeDatumDo.Value.Date.ToString();
 
             datum_do = ParseYear(temp) + "-" + ParseMonth(temp) + "-" + ParseDay(temp);
-            MessageBox.Show(smena + " " + datum_od + " " + datum_do);
+            //MessageBox.Show(smena + " " + datum_od + " " + datum_do);
 
         }
 
-        private bool UpdateDoctorShift(string jmbg_lekara)
+        private bool AddDoctorShift(string jmbg_lekara)
         {
             bool success = true;
             MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
             try
             {
                 conn.Open();
-                string sql = "insert into SMENA values ('" + jmbg_lekara +"', '" + datum_od + "', '" + datum_do + "', " + smena + ");";
+                string sql = "insert into SMENA values ('" + jmbg_lekara + "', '" + datum_od + "', '" + datum_do + "', " + smena + ");";
 
-                MessageBox.Show(sql);
+                //MessageBox.Show(sql);
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -135,11 +147,72 @@ namespace HippocratesDoctor
                 MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 success = false;
             }
-            conn.Close();
-
+            finally
+            {
+                conn.Close();
+            }
             return success;
         }
 
+        private bool DeleteDoctorShift(string jmbg_lekara)
+        {
+            bool success = true;
+            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            try
+            {
+                conn.Open();
+                string sql = "delete from SMENA where MATBRL = '" + jmbg_lekara + "' and DATUM_OD = '" + datum_od + "';";
+
+                //MessageBox.Show(sql);
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                success = false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return success;
+
+        }
+
+        private bool UpdateDoctorShift(string jmbg_lekara)
+        {
+
+            bool success = true;
+            ReadDataFromGrid();
+            DeleteDoctorShift(jmbg_lekara);
+            ReadInputControls();
+            AddDoctorShift(jmbg_lekara);
+            //MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            //try
+            //{
+            //    conn.Open();
+            //    string sql = "update SMENA set DATUM_OD = '" + datum_od + "', DATUM_DO = '" + datum_do + "', SMENA = " + smena +
+            //        " where MATBRL = '" + jmbg_lekara + "';";
+
+            //    MessageBox.Show(sql);
+
+            //    MySqlCommand cmd = new MySqlCommand(sql, conn);
+            //    cmd.ExecuteNonQuery();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    success = false;
+            //}
+            //conn.Close();
+
+            return success;
+
+        }
+
+        
         private string ParseYear(string date)
         {
             string year = string.Empty;
@@ -185,17 +258,43 @@ namespace HippocratesDoctor
             return day;
         }
 
+        private void metroButtonObrisiSelektovanuSmenu_Click(object sender, EventArgs e)
+        {
+            //string temp = metroGridSmenaLekara.SelectedRows[0].Cells["DATUM_OD"].Value.ToString();
+            //MessageBox.Show(this, temp);
+            //string smena_datum = ParseYear(temp) + "-" + ParseMonth(temp) + "-" + ParseDay(temp);
+            //MessageBox.Show(this, smena_datum);
+            ReadDataFromGrid();
+            if (DeleteDoctorShift(jmbg_lekara))
+                MetroMessageBox.Show(this, "Uspešno obrisana smena", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MetroMessageBox.Show(this, "Error prilikom delete funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            GetDoctorShift(jmbg_lekara);
+        }
+
         private void metroButtonDodajSmenu_Click(object sender, EventArgs e)
         {
-            ReadControls(); // to local copy 
-            if (UpdateDoctorShift(jmbg_lekara))
+            ReadInputControls(); // to local copy 
+            if (AddDoctorShift(jmbg_lekara))
                 MetroMessageBox.Show(this, "Uspešno dodata smena", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MetroMessageBox.Show(this, "Error prilikom insert funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            GetDoctorShift(jmbg_lekara);
+        }
+
+        private void metroButtonAzurirajSmenu_Click(object sender, EventArgs e)
+        {
+            //ReadControls(); // function is called in UpdateDoctorShift
+            ReadInputControls();
+            if (UpdateDoctorShift(jmbg_lekara))
+                MetroMessageBox.Show(this, "Uspešno ažurirana smena", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MetroMessageBox.Show(this, "Error prilikom update funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             GetDoctorShift(jmbg_lekara);
         }
-
 
     }
 }
