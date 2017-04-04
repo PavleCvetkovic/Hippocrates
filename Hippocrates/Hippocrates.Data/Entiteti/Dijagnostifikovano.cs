@@ -11,6 +11,9 @@ namespace Hippocrates.Data.Entiteti
         public virtual DijagnostifikovanoId Id { get; set; }
         public virtual DateTime Datum { get; set; }
 
-        public virtual IzabraniLekar Lekar { get; set; }
+        public Dijagnostifikovano()
+        {
+            Id = new DijagnostifikovanoId();
+        }
     }
 }

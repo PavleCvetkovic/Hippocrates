@@ -11,5 +11,7 @@ namespace Hippocrates.Data.Entiteti
         public virtual string Sifra { get; set; }
         public virtual string Ime { get; set; }
 
+        public virtual IList<Dijagnostifikovano> DijagnostifikovanoPacijenti { get; set; }
+        public virtual IList<Dijagnostifikovano> DijagnostifikovanoLekari { get; set; }
     }
 }

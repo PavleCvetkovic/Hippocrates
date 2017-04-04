@@ -236,5 +236,84 @@ namespace Hippocrates
             MessageBox.Show(il.Ocene[0].Vrednost.ToString());
             MessageBox.Show(il.RadiUDomuZdravlja.Ime);
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+
+            DomZdravlja dz = new DomZdravlja()
+            {
+                Mbr = "test",
+                Lokacija = "test",
+                Adresa = "test",
+                Ime = "test",
+                Opstina = "aaaaa"
+            };
+
+            IzabraniLekar il = new IzabraniLekar()
+            {
+                Jmbg = "12345",
+                Datum_rodjenja = new DateTime(1960, 10, 10),
+                Ime = "testDijagnostifikovano",
+                Prezime = "test",
+                Password = "12345",
+                Srednje_slovo = "A",
+
+            };
+            Pacijent pac = new Pacijent()
+            {
+                Jmbg = "6789",
+                Ime = "test",
+                Prezime = "prezime1",
+                Datum_rodjenja = new DateTime(1995, 01, 01),
+                Email = "testORM",
+                Telefon = "555-333",
+                Lbo = "01",
+                Opstina = "aaaaa",
+                Srednje_slovo = "D",
+                Vazi_do = new DateTime(2017, 12, 30)
+            };
+            il.RadiUDomuZdravlja = dz;
+            dz.Lekari.Add(il);
+            il.Pacijenti.Add(pac);
+            pac.Lekar = il;
+            Dijagnoza d = new Dijagnoza()
+            {
+                Ime = "test",
+                Sifra = "test"
+            };
+            s.Save(d);
+            s.Flush();
+            Dijagnostifikovano dij = new Dijagnostifikovano()
+            {
+                Datum = new DateTime(2000,5,5)
+            };
+            dij.Id.DijagnozaLekar = il;
+            dij.Id.DijagnozaPacijent = pac;
+            dij.Id.DijagnozaDijagnoza = d;
+            il.DijagnostifikovanoDijagnoze.Add(dij);
+            pac.DijagnostifikovanoDijagnoze.Add(dij);
+            
+            s.Save(dz);
+            s.Flush();
+            s.Close();
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            IzabraniLekar il = s.Load<IzabraniLekar>("0112955445023");
+            Smena smena = new Smena()
+            {
+                Datum_Do = new DateTime(2018, 12, 30),
+                SmenaLekara = 2
+            };
+            smena.Id.Datum_Od = new DateTime(2018, 1, 1);
+            smena.Id.Lekar = il;
+            s.Save(il);
+            s.Flush();
+            s.Close();
+        }
     }
 }

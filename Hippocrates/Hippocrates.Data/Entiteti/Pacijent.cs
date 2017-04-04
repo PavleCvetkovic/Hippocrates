@@ -22,12 +22,15 @@ namespace Hippocrates.Data.Entiteti
         
         public virtual IzabraniLekar Lekar { get; set; }
         public virtual IList<Ocena> Ocene { get; set; }
+
         public virtual IList<PrimioVakcinu> PrimioVakcinuVakcine { get; set; }
+        public virtual IList<Dijagnostifikovano> DijagnostifikovanoDijagnoze { get; set; }
 
         public Pacijent()
         {
             Ocene = new List<Ocena>();
             PrimioVakcinuVakcine = new List<PrimioVakcinu>();
+            DijagnostifikovanoDijagnoze = new List<Dijagnostifikovano>();
         }
     }
 }

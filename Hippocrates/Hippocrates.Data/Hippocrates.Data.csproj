@@ -67,6 +67,8 @@
     <Compile Include="Entiteti\Pacijent.cs" />
     <Compile Include="Entiteti\PrimioVakcinu.cs" />
     <Compile Include="Entiteti\PrimioVakcinuId.cs" />
+    <Compile Include="Entiteti\Smena.cs" />
+    <Compile Include="Entiteti\SmenaId.cs" />
     <Compile Include="Entiteti\Specijalista.cs" />
     <Compile Include="Entiteti\Vakcina.cs" />
     <Compile Include="Mapiranja\BolnicaMapiranja.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Mapiranja\OcenaMapiranja.cs" />
     <Compile Include="Mapiranja\PacijentMapiranja.cs" />
     <Compile Include="Mapiranja\PrimioVakcinuMapiranja.cs" />
+    <Compile Include="Mapiranja\SmenaMapiranja.cs" />
     <Compile Include="Mapiranja\SpecijalistaMapiranja.cs" />
     <Compile Include="Mapiranja\VakcinaMapiranja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -24,6 +24,8 @@ namespace Hippocrates.Data.Mapiranja
             References(x => x.RadiUDomuZdravlja).Column("MBRZU").LazyLoad();
             HasMany(x => x.Pacijenti).KeyColumn("MATBRL").LazyLoad().Inverse().Cascade.All();
             HasMany(x => x.Ocene).KeyColumn("MATBRL").Cascade.All().Inverse().LazyLoad();
+            HasMany(x => x.DijagnostifikovanoDijagnoze).KeyColumn("MATBRL").Cascade.All().Inverse().LazyLoad();
+            HasMany(x => x.Smene).KeyColumn("MATBRL").Cascade.All().Inverse().LazyLoad();
         }
     }
 }

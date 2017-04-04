@@ -8,8 +8,9 @@ namespace Hippocrates.Data.Entiteti
 {
     public class DijagnostifikovanoId
     {
-        public virtual Pacijent DijagnozaPacijenta { get; set; }
+        public virtual Pacijent DijagnozaPacijent { get; set; }
         public virtual Dijagnoza DijagnozaDijagnoza { get; set; }
+        public virtual IzabraniLekar DijagnozaLekar { get; set; }
 
         public override bool Equals(object obj)
         {
