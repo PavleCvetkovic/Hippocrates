@@ -18,10 +18,12 @@ namespace Hippocrates.Data.Entiteti
         public virtual DomZdravlja RadiUDomuZdravlja { get; set; }
 
         public virtual IList<Pacijent> Pacijenti { get; set; }
+        public virtual IList<Ocena> Ocene { get; set; }
 
         public IzabraniLekar()
         {
             Pacijenti = new List<Pacijent>();
+            Ocene = new List<Ocena>();
         }
 
     }

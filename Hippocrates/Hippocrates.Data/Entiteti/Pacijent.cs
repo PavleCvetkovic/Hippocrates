@@ -21,5 +21,13 @@ namespace Hippocrates.Data.Entiteti
         public virtual string Telefon { get; set; }
         
         public virtual IzabraniLekar Lekar { get; set; }
+        public virtual IList<Ocena> Ocene { get; set; }
+        public virtual IList<PrimioVakcinu> PrimioVakcinuVakcine { get; set; }
+
+        public Pacijent()
+        {
+            Ocene = new List<Ocena>();
+            PrimioVakcinuVakcine = new List<PrimioVakcinu>();
+        }
     }
 }

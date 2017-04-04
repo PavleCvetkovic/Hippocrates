@@ -28,6 +28,8 @@ namespace Hippocrates.Data.Mapiranja
             Map(x => x.Vazi_do, "VAŽI_DO");
 
             References(x => x.Lekar).Column("MATBRL").LazyLoad();
+            HasMany(x => x.Ocene).KeyColumn("MATBRP").Cascade.All().LazyLoad();
+            HasMany(x => x.PrimioVakcinuVakcine).KeyColumn("JMBGP").Cascade.All().Inverse().LazyLoad();
         }
     }
 }

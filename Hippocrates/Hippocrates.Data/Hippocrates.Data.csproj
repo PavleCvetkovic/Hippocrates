@@ -59,14 +59,22 @@
     <Compile Include="Entiteti\DomZdravlja.cs" />
     <Compile Include="Entiteti\IzabraniLekar.cs" />
     <Compile Include="Entiteti\MedicinskoOsoblje.cs" />
+    <Compile Include="Entiteti\Ocena.cs" />
+    <Compile Include="Entiteti\OcenaId.cs" />
     <Compile Include="Entiteti\Pacijent.cs" />
+    <Compile Include="Entiteti\PrimioVakcinu.cs" />
+    <Compile Include="Entiteti\PrimioVakcinuId.cs" />
     <Compile Include="Entiteti\Specijalista.cs" />
+    <Compile Include="Entiteti\Vakcina.cs" />
     <Compile Include="Mapiranja\BolnicaMapiranja.cs" />
     <Compile Include="Mapiranja\DomZdravljaMapiranja.cs" />
     <Compile Include="Mapiranja\IzabraniLekarMapiranja.cs" />
     <Compile Include="Mapiranja\MedicinskoOsobljeMapiranja.cs" />
+    <Compile Include="Mapiranja\OcenaMapiranja.cs" />
     <Compile Include="Mapiranja\PacijentMapiranja.cs" />
+    <Compile Include="Mapiranja\PrimioVakcinuMapiranja.cs" />
     <Compile Include="Mapiranja\SpecijalistaMapiranja.cs" />
+    <Compile Include="Mapiranja\VakcinaMapiranja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

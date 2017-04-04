@@ -30,7 +30,7 @@ namespace Hippocrates.Data
             try
             {
                 var cfg = MySQLConfiguration.Standard.ConnectionString(c => c.Is("server=139.59.132.29;user=paja;charset=utf8;database=Hippocrates;port=3306;password=pajapro1234;"));
-                return Fluently.Configure().Database(cfg).Mappings(m => m.FluentMappings.AddFromAssemblyOf<Mapiranja.DomZdravljaMapiranja>()).BuildSessionFactory();
+                return Fluently.Configure().Database(cfg.ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<Mapiranja.DomZdravljaMapiranja>()).BuildSessionFactory();
             }
             catch(Exception ex)
             {
