@@ -303,7 +303,7 @@ namespace Hippocrates
         private void button7_Click(object sender, EventArgs e)
         {
             ISession s = DataLayer.GetSession();
-            IzabraniLekar il = s.Load<IzabraniLekar>("0112955445023");
+            IzabraniLekar il = s.Get<IzabraniLekar>("0112955445023");
             Smena smena = new Smena()
             {
                 Datum_Do = new DateTime(2018, 12, 30),
@@ -311,6 +311,7 @@ namespace Hippocrates
             };
             smena.Id.Datum_Od = new DateTime(2018, 1, 1);
             smena.Id.Lekar = il;
+            il.Smene.Add(smena);
             s.Save(il);
             s.Flush();
             s.Close();

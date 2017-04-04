@@ -25,7 +25,7 @@ namespace Hippocrates.Data.Mapiranja
             HasMany(x => x.Pacijenti).KeyColumn("MATBRL").LazyLoad().Inverse().Cascade.All();
             HasMany(x => x.Ocene).KeyColumn("MATBRL").Cascade.All().Inverse().LazyLoad();
             HasMany(x => x.DijagnostifikovanoDijagnoze).KeyColumn("MATBRL").Cascade.All().Inverse().LazyLoad();
-            HasMany(x => x.Smene).KeyColumn("MATBRL").Cascade.All().Inverse().LazyLoad();
+            HasMany(x => x.Smene).KeyColumn("MATBRL").Cascade.All().Inverse();
         }
     }
 }

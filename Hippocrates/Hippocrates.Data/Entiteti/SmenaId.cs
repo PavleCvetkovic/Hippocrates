@@ -10,5 +10,14 @@ namespace Hippocrates.Data.Entiteti
     {
         public virtual IzabraniLekar Lekar { get; set; }
         public virtual DateTime Datum_Od { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
