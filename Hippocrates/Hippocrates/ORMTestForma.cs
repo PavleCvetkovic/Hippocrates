@@ -197,6 +197,9 @@ namespace Hippocrates
                 Opis = "00",
                 Sifra = "011",
             };
+            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA SVEE
+            s.Save(v);
+            s.Flush();
             
             PrimioVakcinu pr = new PrimioVakcinu();
 
@@ -207,9 +210,6 @@ namespace Hippocrates
             pac1.PrimioVakcinuVakcine.Add(pr);
             v.PrimioVakcinuPacijenti.Add(pr);
 
-            //NE SNIMI MI VAKCINU(NEMA INSERT ZA VAKCINU)
-            s.Save(v);
-            // da li postoji mogucnost bez eksplicitnog save-a vakcine
 
             dz.Lekari.Add(il);
             il.RadiUDomuZdravlja = dz;
@@ -220,9 +220,9 @@ namespace Hippocrates
             pac1.Lekar = il;
             il.Ocene.Add(ocena);
             pac1.Ocene.Add(ocena);
-
-
-            s.Save(dz);
+          
+            
+            s.SaveOrUpdate(dz); 
             s.Flush();
             s.Close();
         }
