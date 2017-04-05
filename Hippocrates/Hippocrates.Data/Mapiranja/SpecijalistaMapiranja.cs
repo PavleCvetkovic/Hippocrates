@@ -23,6 +23,8 @@ namespace Hippocrates.Data.Mapiranja
             Map(x => x.Titula, "TITULA");
 
             References(x => x.RadiUBolnici).Column("MBRZU").LazyLoad();
+
+            HasMany(x => x.Termini).KeyColumn("MATBRSPEC").Cascade.All().Inverse().LazyLoad();
         }
     }
 }

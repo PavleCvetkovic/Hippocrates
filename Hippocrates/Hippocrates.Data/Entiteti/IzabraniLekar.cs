@@ -19,9 +19,11 @@ namespace Hippocrates.Data.Entiteti
 
         public virtual IList<Pacijent> Pacijenti { get; set; }
         public virtual IList<Ocena> Ocene { get; set; }
-
+        public virtual IList<Terapija> Terapije { get; set; }
         public virtual IList<Dijagnostifikovano> DijagnostifikovanoDijagnoze { get; set; }
         public virtual IList<Smena> Smene { get; set; }
+        public virtual IList<Termin> Termini { get; set; }
+        public virtual IList<ZahtevZaPromenu> Zahtevi { get; set; }
 
         public IzabraniLekar()
         {
@@ -29,6 +31,9 @@ namespace Hippocrates.Data.Entiteti
             Ocene = new List<Ocena>();
             DijagnostifikovanoDijagnoze = new List<Dijagnostifikovano>();
             Smene = new List<Smena>();
+            Terapije = new List<Terapija>();
+            Termini = new List<Termin>();
+            Zahtevi = new List<ZahtevZaPromenu>();
         }
 
     }

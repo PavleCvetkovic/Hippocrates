@@ -13,5 +13,13 @@ namespace Hippocrates.Data.Entiteti
 
         public virtual IList<Dijagnostifikovano> DijagnostifikovanoPacijenti { get; set; }
         public virtual IList<Dijagnostifikovano> DijagnostifikovanoLekari { get; set; }
+        public virtual IList<Terapija> Terapije { get; set; }
+
+        public Dijagnoza()
+        {
+            DijagnostifikovanoPacijenti = new List<Dijagnostifikovano>();
+            DijagnostifikovanoLekari = new List<Dijagnostifikovano>();
+            Terapije = new List<Terapija>();
+        }
     }
 }

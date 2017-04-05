@@ -16,5 +16,11 @@ namespace Hippocrates.Data.Entiteti
         public virtual string Titula { get; set; }
 
         public virtual Bolnica RadiUBolnici { get; set; }
+        public virtual IList<TerminBolnica> Termini { get; set; }
+
+        public Specijalista()
+        {
+            Termini = new List<TerminBolnica>();
+        }
     }
 }

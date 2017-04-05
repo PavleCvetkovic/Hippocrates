@@ -316,5 +316,110 @@ namespace Hippocrates
             s.Flush();
             s.Close();
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            IzabraniLekar il = s.Get<IzabraniLekar>("0112955445023");
+            Pacijent pac = s.Get<Pacijent>("0000");
+
+            Terapija ter = new Terapija()
+            {
+                Datum_do = new DateTime(2018, 10, 10),
+                Datum_od = new DateTime(2017, 4, 5),
+                Opis = "ORM TEST",
+                
+            };
+            Dijagnoza dij = new Dijagnoza()
+            {
+                Ime = "ORM",
+                Sifra = "ORM1",
+
+            };
+
+    
+            ter.TerapijaLekar = il;
+            ter.TerapijaPacijent = pac;
+            il.Terapije.Add(ter);
+            pac.Terapije.Add(ter);
+            ter.TerapijaDijagnoza = dij;
+            dij.Terapije.Add(ter);
+            s.SaveOrUpdate(dij);
+            
+            s.Flush();
+            s.Close();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            IzabraniLekar il = s.Get<IzabraniLekar>("0112955445023");
+            Pacijent pac = s.Get<Pacijent>("0000");
+            Termin t = new Termin()
+            {
+                Datum = new DateTime(2020, 5, 5),
+                Napomena = "ORM TEST",
+                Vreme = 2220
+            };
+            t.Pacijent = pac;
+            pac.Termini.Add(t);
+            t.Lekar = il;
+            il.Termini.Add(t);
+            s.Save(t);
+            s.Flush();
+            s.Close();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            IzabraniLekar il = s.Get<IzabraniLekar>("1203970666630");
+            Pacijent pac = s.Get<Pacijent>("0000");
+            ZahtevZaPromenu z= new ZahtevZaPromenu();
+            z.ZeljeniLekar = il;
+            z.ZahtevPacijenta = pac;
+            s.Save(z);
+            s.Flush();
+            s.Close();
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            Pacijent pac = s.Get<Pacijent>("0000");
+            Specijalista sp = new Specijalista()
+            {
+                Datum_rodjenja = new DateTime(1950, 5, 5),
+                Ime = "ORM",
+                Prezime = "TEST",
+                Jmbg = "testorm",
+                Srednje_slovo = "a",
+                Titula = "aaa"
+            };
+            Bolnica b = new Bolnica()
+            {
+                Adresa = "test",
+                Ime = "test",
+                Lokacija = "test",
+                Mbr = "1",
+                Opstina = "22"
+            };
+            b.Specijaliste.Add(sp);
+            sp.RadiUBolnici = b;
+            TerminBolnica tb = new TerminBolnica()
+            {
+                Datum = new DateTime(2018, 1, 1),
+                LSpecijalista = sp,
+                Napomena = "aa",
+                Pacijent = pac,
+                Vreme = 1200
+            };
+            pac.TerminiBolnica.Add(tb);
+            sp.Termini.Add(tb);
+            s.Save(b);
+            s.Flush();
+            s.Close();
+        }
     }
 }
