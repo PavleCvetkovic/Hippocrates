@@ -126,6 +126,7 @@
             this.metroComboBoxIzborPretrage = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroGridPretragaPacijenata = new MetroFramework.Controls.MetroGrid();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroTabGlobal.SuspendLayout();
             this.metroTabRasporedPregleda.SuspendLayout();
             this.pnlPopodne.SuspendLayout();
@@ -153,7 +154,7 @@
             this.metroTabGlobal.Controls.Add(this.metroTabPretragaPacijenata);
             this.metroTabGlobal.Location = new System.Drawing.Point(23, 63);
             this.metroTabGlobal.Name = "metroTabGlobal";
-            this.metroTabGlobal.SelectedIndex = 3;
+            this.metroTabGlobal.SelectedIndex = 1;
             this.metroTabGlobal.Size = new System.Drawing.Size(754, 514);
             this.metroTabGlobal.TabIndex = 0;
             this.metroTabGlobal.UseSelectable = true;
@@ -922,6 +923,7 @@
             // 
             // metroTabSviPacijenti
             // 
+            this.metroTabSviPacijenti.Controls.Add(this.metroLabel7);
             this.metroTabSviPacijenti.Controls.Add(this.metroGridPacijenti);
             this.metroTabSviPacijenti.HorizontalScrollbarBarColor = true;
             this.metroTabSviPacijenti.HorizontalScrollbarHighlightOnWheel = false;
@@ -962,7 +964,7 @@
             this.metroGridPacijenti.EnableHeadersVisualStyles = false;
             this.metroGridPacijenti.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGridPacijenti.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGridPacijenti.Location = new System.Drawing.Point(3, 3);
+            this.metroGridPacijenti.Location = new System.Drawing.Point(3, 56);
             this.metroGridPacijenti.Name = "metroGridPacijenti";
             this.metroGridPacijenti.ReadOnly = true;
             this.metroGridPacijenti.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -976,7 +978,7 @@
             this.metroGridPacijenti.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.metroGridPacijenti.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGridPacijenti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGridPacijenti.Size = new System.Drawing.Size(740, 466);
+            this.metroGridPacijenti.Size = new System.Drawing.Size(740, 413);
             this.metroGridPacijenti.TabIndex = 2;
             this.metroGridPacijenti.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGridPacijenti_CellContentClick);
             // 
@@ -1411,6 +1413,15 @@
             this.metroGridPretragaPacijenata.Size = new System.Drawing.Size(740, 256);
             this.metroGridPretragaPacijenata.TabIndex = 2;
             // 
+            // metroLabel7
+            // 
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.Location = new System.Drawing.Point(3, 11);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(317, 19);
+            this.metroLabel7.TabIndex = 3;
+            this.metroLabel7.Text = "Klik na željenog pacijenta pruža dodatne mogućnosti";
+            // 
             // FormLekar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1425,6 +1436,7 @@
             this.pnlPopodne.ResumeLayout(false);
             this.pnlPrepodne.ResumeLayout(false);
             this.metroTabSviPacijenti.ResumeLayout(false);
+            this.metroTabSviPacijenti.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridPacijenti)).EndInit();
             this.metroTabTrenutniPacijent.ResumeLayout(false);
             this.metroTabPacijentInfo.ResumeLayout(false);
@@ -1531,5 +1543,6 @@
         private MetroFramework.Controls.MetroDateTime metroDateTimeDatumParametar;
         private MetroFramework.Controls.MetroTextBox metroTextBoxUnosParametra;
         private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel metroLabel7;
     }
 }

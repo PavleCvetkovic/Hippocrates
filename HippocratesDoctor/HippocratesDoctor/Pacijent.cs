@@ -1,6 +1,10 @@
 ﻿using Hippocrates;
+using Hippocrates.Data;
+using Hippocrates.Data.Entiteti;
+using HippocratesDoctor;
 using MetroFramework;
 using MySql.Data.MySqlClient;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -197,6 +201,55 @@ namespace HippocratesPatient
             FormRaspored raspored_form = new FormRaspored(jmbg, GetDoctorNameAndSurname(jmbg_lekara), jmbg_lekara);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
             raspored_form.Show();
+        }
+
+        private void metroButtonDodajVakcinu_Click(object sender, EventArgs e)
+        {
+            FormVakcine fv = new FormVakcine(jmbg);
+            fv.StartPosition = FormStartPosition.CenterScreen;
+            fv.ShowDialog();
+        }
+
+        private void metroButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void metroButtonObrisiVakcinu_Click(object sender, EventArgs e)
+        {
+            MetroMessageBox.Show(this, "not implemented");
+            //int row_index = metrogridVakcine.CurrentCell.RowIndex;
+            //string sifra = metrogridVakcine["SIFRA_VAKCINE", row_index].Value.ToString();
+            //ISession session = DataLayer.GetSession();
+            //var query = session.CreateQuery("delete from PRIMIO_VAKCINU where JMBGP = :id and SIFRA_VAKCINE = :sifra");
+            //query.SetParameter("id", jmbg);
+            //query.SetParameter("sifra", sifra);
+            //query.ExecuteUpdate();
+            //Pacijent active_patient = session.Load<Pacijent>(jmbg);
+            //PrimioVakcinu pv = new PrimioVakcinu
+            //{
+            //    Datum = (DateTime)metrogridVakcine["DATUM", metrogridVakcine.CurrentCell.RowIndex].Value,
+            //    Id = new PrimioVakcinuId()
+            //    {
+            //        PrimioPacijent = active_patient,
+            //        PrimioVakcina = new Vakcina()
+            //        {
+            //            Sifra = 
+            //        }
+            //    }
+            //};
+            //int i = 0;
+            //for (i = 0; i < active_patient.PrimioVakcinuVakcine.Count; i++)
+            //{
+            //    if (PrimioVakcinu.Equals(active_patient.PrimioVakcinuVakcine[i], pv))
+            //        break; // i 
+            //}
+
+            //active_patient.PrimioVakcinuVakcine.RemoveAt(i);
+            ////v.PrimioVakcinuPacijenti.Remove(pv);
+            //session.Save(active_patient);
+            //session.Flush();
+            //session.Close();
         }
 
         private void PacijentForm_Load(object sender, EventArgs e)
