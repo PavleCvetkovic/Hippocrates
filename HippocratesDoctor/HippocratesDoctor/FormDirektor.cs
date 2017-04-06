@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Hippocrates.Data;
 using Hippocrates.Controller;
 using Hippocrates.View;
 using MySql.Data.MySqlClient;
 using MetroFramework.Forms;
 using MetroFramework;
 using MetroFramework.Controls;
+using Hippocrates.Data.Entiteti;
+using NHibernate;
 
 namespace HippocratesDoctor
 {
@@ -25,7 +28,7 @@ namespace HippocratesDoctor
         public FormDirektor(string dom_zdravlja_admin_jmbg)
         {
             InitializeComponent();
-            //metroTabControlGlobal.SelectedIndex = 0;
+            metroTabControlGlobal.SelectedIndex = 0;
             jmbg_admin = dom_zdravlja_admin_jmbg;
             lblImeDomaZ.Text = GetMedicalFacilityInfo(jmbg_admin);
             GetAllDoctors(facility_id); // GetAllDoctors(facility_id) se zove nakon GetMedicalFacilityInfo(jmbg_admin) jer se tu inicijalizuje 'facility_id'
@@ -325,6 +328,78 @@ namespace HippocratesDoctor
 
         }
 
+        private bool InsertNewMedicalStaff()
+        {
+            bool success = true;
+            ISession s = DataLayer.GetSession();
+            DomZdravlja dz = s.Load<DomZdravlja>(facility_id);
+
+            MedicinskoOsoblje mo = new MedicinskoOsoblje()
+            {
+                Jmbg = metroTextBoxJMBG.Text,
+                Ime = metroTextBoxIme.Text,
+                Prezime = metroTextBoxPrezime.Text,
+                Srednje_slovo = metroTextBoxSrednjeSlovo.Text,
+                Password = metroTextBoxLozinka.Text,
+                Datum_rodjenja = metroDateTimeDatumRodjenja.Value.Date,
+                RadiUDomuZdravlja = dz
+            };
+
+            dz.MedicinskoOsoblje.Add(mo);
+            s.Save(dz);
+            //s.Save(mo);
+            s.Flush();
+            
+            // always returns true
+            return success;
+
+        }
+
+        private bool DeleteSelectedMedicalStaff(string jmbg)
+        {
+            bool success = true;
+            ISession s = DataLayer.GetSession();
+            //DomZdravlja dz = s.Load<DomZdravlja>(facility_id);
+            ////s.Delete("MedicinskoOsoblje", dz.MedicinskoOsoblje.)
+            //int index = 0;
+            //for (index = 0; index < dz.MedicinskoOsoblje.Count; index++)
+            //    if (dz.MedicinskoOsoblje[index].Jmbg == jmbg)
+            //        break;
+
+            //MessageBox.Show("index is " + index);
+            //MessageBox.Show("data[index] is " + dz.MedicinskoOsoblje[index].Ime + " " + dz.MedicinskoOsoblje[index].Jmbg);
+            //dz.MedicinskoOsoblje.RemoveAt(index);
+            
+            s.CreateQuery("delete from MedicinskoOsoblje where MBRZU = '" + facility_id + "' and JMBG = '" + jmbg + "';").ExecuteUpdate();
+            //s.Save(dz);
+            s.Flush();
+            return success;
+        }
+
+        private bool UpdateSelectedMedicalStaff(string jmbg)
+        {
+            bool success = true;
+            ISession s = DataLayer.GetSession();
+            DomZdravlja dz = s.Load<DomZdravlja>(facility_id);
+
+            int index = 0;
+            for (index = 0; index < dz.MedicinskoOsoblje.Count; index++)
+                if (dz.MedicinskoOsoblje[index].Jmbg == jmbg)
+                    break;
+
+            //No validation
+            dz.MedicinskoOsoblje[index].Ime = metroTextBoxIme.Text;
+            dz.MedicinskoOsoblje[index].Srednje_slovo = metroTextBoxSrednjeSlovo.Text;
+            dz.MedicinskoOsoblje[index].Prezime = metroTextBoxPrezime.Text;
+            dz.MedicinskoOsoblje[index].Password = metroTextBoxLozinka.Text;
+            dz.MedicinskoOsoblje[index].Datum_rodjenja = metroDateTimeDatumRodjenja.Value.Date;
+            dz.MedicinskoOsoblje[index].RadiUDomuZdravlja = dz;
+
+            s.Save(dz);
+            s.Flush();
+            return success;
+        }
+
         private void metroGridLekari_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             TransferDataFromGridToControl(metroGridData);
@@ -402,10 +477,51 @@ namespace HippocratesDoctor
             }
         }
 
+        private void metroButtonUnesiOsobu_Click(object sender, EventArgs e)
+        {
+            // Controls to data
+            // Update
+            // Refresh view
+            if (InsertNewMedicalStaff())
+                MetroMessageBox.Show(this, "Uspešno dodato novo medicinsko osoblje", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MetroMessageBox.Show(this, "Error prilikom save funkcije za dodavanje novog medicinskog osoblja", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            GetMedicalStaffData(facility_id);
+        }
+
+        private void metroButtonAzurirajOsobu_Click(object sender, EventArgs e)
+        {
+            MetroGrid mg = metroGridData; // hard-coded
+            string jmbg = string.Empty;
+            if (IsDataSelected(mg, out jmbg))
+            {
+                if (UpdateSelectedMedicalStaff(jmbg))
+                    MetroMessageBox.Show(this, "Uspešno ažurirano medicinsko osoblje", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MetroMessageBox.Show(this, "Error prilikom update funkcije za ažuriranje medicinskog osoblja", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                GetMedicalStaffData(facility_id);
+            }
+
+        }
+        
         private void metroButtonObrisiOsobu_Click(object sender, EventArgs e)
         {
-            
+            MetroGrid mg = metroGridData; // hard-coded
+            string jmbg = string.Empty;
+            if (IsDataSelected(mg, out jmbg))
+            {
+                MessageBox.Show("Selected jmbg " + jmbg);
+                if (DeleteSelectedMedicalStaff(jmbg))
+                    MetroMessageBox.Show(this, "Uspešno obrisano medicinsko osoblje", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MetroMessageBox.Show(this, "Error prilikom delete funkcije za brisanje medicinskog osoblja", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                GetMedicalStaffData(facility_id);
+            }
         }
+        
         #region MVC
         public void setController(IController controller)
         {

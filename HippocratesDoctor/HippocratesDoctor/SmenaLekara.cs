@@ -137,7 +137,8 @@ namespace HippocratesDoctor
                 conn.Open();
                 string sql = "insert into SMENA values ('" + jmbg_lekara + "', '" + datum_od + "', '" + datum_do + "', " + smena + ");";
 
-                //MessageBox.Show(sql);
+                //
+                MessageBox.Show(sql);
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
