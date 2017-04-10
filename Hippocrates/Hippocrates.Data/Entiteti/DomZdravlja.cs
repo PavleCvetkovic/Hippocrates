@@ -16,11 +16,17 @@ namespace Hippocrates.Data.Entiteti
 
         public virtual IList<IzabraniLekar> Lekari { get; set; }
         public virtual IList<MedicinskoOsoblje> MedicinskoOsoblje { get; set; }
+        public virtual IList<AdministratorDomaZdravlja> Administratori { get; set; }
 
         public DomZdravlja()
         {
             Lekari = new List<IzabraniLekar>();
             MedicinskoOsoblje = new List<MedicinskoOsoblje>();
+            Administratori = new List<AdministratorDomaZdravlja>();
         }
+       /* public override string ToString()
+        {
+            return Ime+" Mbr: "+ Mbr;
+        }*/
     }
 }

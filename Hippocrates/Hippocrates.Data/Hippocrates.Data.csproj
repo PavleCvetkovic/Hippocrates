@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
     <Compile Include="DataLayer.cs" />
+    <Compile Include="Entiteti\AdministratorDomaZdravlja.cs" />
     <Compile Include="Entiteti\Bolnica.cs" />
     <Compile Include="Entiteti\Dijagnostifikovano.cs" />
     <Compile Include="Entiteti\DijagnostifikovanoId.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Entiteti\TerminBolnica.cs" />
     <Compile Include="Entiteti\Vakcina.cs" />
     <Compile Include="Entiteti\ZahtevZaPromenu.cs" />
+    <Compile Include="Mapiranja\AdminDomaZdravljaMapiranje.cs" />
     <Compile Include="Mapiranja\BolnicaMapiranja.cs" />
     <Compile Include="Mapiranja\DijagnostifikovanoMapiranja.cs" />
     <Compile Include="Mapiranja\DijagnozaMapiranja.cs" />
