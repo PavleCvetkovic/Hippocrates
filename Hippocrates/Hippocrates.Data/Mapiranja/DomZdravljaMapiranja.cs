@@ -23,6 +23,7 @@ namespace Hippocrates.Data.Mapiranja
 
             HasMany(x => x.Lekari).KeyColumn("MBRZU").LazyLoad().Cascade.All().Inverse();
             HasMany(x => x.MedicinskoOsoblje).KeyColumn("MBRZU").Inverse().Cascade.All().LazyLoad();
+            HasMany(x => x.Administratori).KeyColumn("MBRZU").Inverse().Cascade.All().LazyLoad();
         }
     }
 }
