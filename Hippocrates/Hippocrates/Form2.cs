@@ -22,12 +22,7 @@ namespace Hippocrates
 {
     public partial class Form2 : MetroForm
     {
-        private IList<Hippocrates.Data.Entiteti.DomZdravlja> domovi;
-        //-----------------------
-        MySqlDataAdapter adapter;
-        DataSet dataSet;
-        private string connstr;
-        MySqlConnection conn;
+        
         public string pomIndex;
         public Form2()
         {
@@ -38,8 +33,7 @@ namespace Hippocrates
             //this.popunjavanje_dgva();
             dTP_lekara.CustomFormat = "dd ,MMMM ,yyyy";
             dTP_pacijenta.CustomFormat = "dd ,MMMM ,yyyy";
-            connstr = "server=pavlecvetkovic.me; user=aki;charset=utf8;database=Hippocrates;port=3306;password=jetion123c;";
-            conn = new MySqlConnection(connstr);
+            
         }
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -360,7 +354,7 @@ namespace Hippocrates
             }
             else if (TabControl_za_unos.SelectedIndex == 4)
             {
-                //tek treba da se dodaju kontrole 
+                popuni_dgv_medOsoblje(dgv_unos_medRad);
             }
            
         }
@@ -384,7 +378,7 @@ namespace Hippocrates
             }
             else if (tabControl_za_brisanje.SelectedIndex == 4)
             {
-                //tek trebaju kontrole da se dodaju
+                //tek trebaju da se dodaju kontrole
             }
 
         }
@@ -571,58 +565,48 @@ namespace Hippocrates
         #endregion
 
         #region tab_za_unos_medicinskog_radnika
-        /*int rowindex = dgv_admin_unos_izbor_dz.CurrentCell.RowIndex;
-                pomIndex = dgv_admin_unos_izbor_dz.Rows[rowindex].Cells[0].Value.ToString();*/
         
+        private void dgv_unos_medRad_izborDz_SelectionChanged(object sender, EventArgs e)
+        {
+            int rowindex = dgv_admin_unos_izbor_dz.CurrentCell.RowIndex;
+            pomIndex = dgv_admin_unos_izbor_dz.Rows[rowindex].Cells[0].Value.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            MedicinskoOsoblje m = new MedicinskoOsoblje()
+            {
+                Jmbg = tb_unos_medRadnik_jmbg.Text,
+                Ime = tb_unos_medRad_Ime.Text,
+                Srednje_slovo = tb_unos_medRad_srednjeS.Text,
+                Prezime = tb_unos_medRad_Prezime.Text,
+                Password = tb_unos_medRad_Password.Text
+            };
+            Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
+            dzi = s.Load<DomZdravlja>(pomIndex);
+            dzi.MedicinskoOsoblje.Add(m);
+            m.RadiUDomuZdravlja = dzi;
+            s.Flush();
+            s.Close();
+            popuni_dgv_medOsoblje(dgv_unos_medRad);
+            MessageBox.Show("Uspeno ste uneli novog admina");
+        }
 
         #endregion
 
         #endregion
-        //odavde je stari kod(neupotrebljiv)
+       
         #region tab_za_brisanje
 
         #region tab_za_brisanje_dz
 
         private void btn_brisanje_dz_Click(object sender, EventArgs e)
         {
-            /* OVO FUNKCIJA NE RADI JOS UVEK
-            ISession s = DataLayer.GetSession();
-            Data.Entiteti.DomZdravlja dz = new Data.Entiteti.DomZdravlja();
-            foreach(Data.Entiteti.DomZdravlja d in domovi)
-            {
-                if(pomIndex == d.Mbr)
-                {
-                    dz = d;
-                }
-            }
+            
 
-            foreach(Data.Entiteti.IzabraniLekar i in dz.Lekari)
-            {
-                i.RadiUDomuZdravlja = null;
-            }
-            foreach(Data.Entiteti.MedicinskoOsoblje m in dz.MedicinskoOsoblje)
-            {
-                m.RadiUDomuZdravlja = null;
-            }
-            foreach(Data.Entiteti.AdministratorDomaZdravlja a in dz.Administratori)
-            {
-                a.RadiUDomuZdravlja = null;
-            }
-
-            dz.Lekari.Clear();
-            dz.MedicinskoOsoblje.Clear();
-            dz.Administratori.Clear();
-            s.Flush();
-            s.Close();
-            s = DataLayer.GetSession();
-            s.Delete(dz);
-            s.Flush();
-            s.Close();
-            popunjavanje_dgv_dz();
-            MessageBox.Show("Uspeno ste obrisali dom zdravlja");*/
-
-    }
-    private void dGV_brisanje_dz_SelectionChanged(object sender, EventArgs e)
+        }
+        private void dGV_brisanje_dz_SelectionChanged(object sender, EventArgs e)
         {
             int rowindex = dGV_brisanje_dz.CurrentCell.RowIndex;
             pomIndex = dGV_brisanje_dz.Rows[rowindex].Cells[0].Value.ToString();
@@ -659,31 +643,8 @@ namespace Hippocrates
         #endregion
 
         #region tab_za_azuriranje
-        #region pomocnePromenljive
-        private string mbr_za_menjanje;
-        private string jmbg_lekara_zaMenjanje;
-        private string jmbg_pacijenta_zaMenjanje;
-        string s;
-        string s2;
-        string s3;
-        string s4;
-        string s5;
-        string s6;
-        string s7;
-        string s8;
-        string s9;
-        string s10;
-        string s11;
-        #endregion
-
-        #region dataGridViewi_na_tabu_za_azuriranje_baze
-
-       
-
-        #endregion
 
         #region tab_za_azuriranje_domova_zdravlja
-
 
         private void dGV_domZdravlja_azuriranje_SelectionChanged(object sender, EventArgs e)
         {
@@ -692,191 +653,33 @@ namespace Hippocrates
 
         private void btn_azuriranje_domZ_Click(object sender, EventArgs e)
         { 
-            try
-            {
-                conn.Open();
-                string commandSqlUpdate = "UPDATE DOM_ZDRAVLJA SET MBR = '"+ tb_azuriranje_MBR_domZ.Text +"',IME ='"+ tb_azuriranje_Ime_domZ.Text + "',OPŠTINA='"+ tb_azuriranje_opstina_domZ.Text +"',LOKACIJA='"+ tb_azuriranje_lokacija_domZ.Text +"',ADRESA='"+ tb_azuriranje_adresa_domZ.Text +"' WHERE MBR='"+ mbr_za_menjanje +"'";
-                MySqlCommand mcc = new MySqlCommand(commandSqlUpdate, conn);
-                mcc.ExecuteNonQuery();
-                MessageBox.Show("Uspesno ste azurirali dom zdravlja u bazi podatka");
-                //---
-                string sqlcommand = "SELECT * FROM DOM_ZDRAVLJA";
-                adapter = new MySqlDataAdapter(sqlcommand, connstr);
-                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
-
-                dataSet = new DataSet();
-                adapter.Fill(dataSet, "DOM_ZDRAVLJA");
-                dGV_domZdravlja_azuriranje.DataSource = dataSet;
-                dGV_domZdravlja_azuriranje.DataMember = "DOM_ZDRAVLJA";
-                //---
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Problem" + ex);
-                conn.Close();
-            }
+           
         }
-
-
 
         #endregion
 
         #region tab_za_azuriranje_lekara
 
         private void dGV_lekari_azuriranje_SelectionChanged(object sender, EventArgs e)
-        {/*
-            int rowindex = dGV_lekari_azuriranje.CurrentCell.RowIndex;
-             s  = dGV_lekari_azuriranje.Rows[rowindex].Cells[0].Value.ToString();
-             s2 = dGV_lekari_azuriranje.Rows[rowindex].Cells[1].Value.ToString();
-             s3 = dGV_lekari_azuriranje.Rows[rowindex].Cells[2].Value.ToString();
-             s4 = dGV_lekari_azuriranje.Rows[rowindex].Cells[3].Value.ToString();
-             s5 = dGV_lekari_azuriranje.Rows[rowindex].Cells[4].Value.ToString();
-             s6 = dGV_lekari_azuriranje.Rows[rowindex].Cells[5].Value.ToString();
-             s7 = dGV_lekari_azuriranje.Rows[rowindex].Cells[6].Value.ToString();
-             s8 = dGV_lekari_azuriranje.Rows[rowindex].Cells[7].Value.ToString(); 
-            tb_azuriranje_jmbg_lekar.Text = s;
-            tb_azuriranje_ime_lekar.Text = s2;
-            tb_azuriranje_lekar_srednjeSlovo.Text = s3;
-            tb_azuriranje_prezime_lekar.Text = s4;
-            dTP_azuriranje_lekar.Value = DateTime.Parse(s5);
-            tb_azuriranje_mbrzu_lekar.Text = s6;
-            if(s7 == "1")
-            {
-                cb_azuriranje_smenaPrva_leakr.Checked = true ;
-                cb_azuriranje_smenaDruga_leakr.Checked = false;
-                
-            }
-            else
-            {
-                cb_azuriranje_smenaPrva_leakr.Checked = false;
-                cb_azuriranje_smenaDruga_leakr.Checked = true;
-            }
-            tb_azuriranje_pass_lekar.Text = s8;
-            jmbg_lekara_zaMenjanje = s;*/
+        {
         }
 
         private void btn_azuriranje_lekara_Click(object sender, EventArgs e)
         {
-            int smena = 1;
-            if(cb_azuriranje_smenaDruga_leakr.Checked)
-            {
-                smena = 2;
-            }
-            try
-            {
-                conn.Open();
-                string commandSqlUpdate = "UPDATE IZABRANI_LEKAR SET JMBG='"+ tb_azuriranje_jmbg_lekar.Text + "',IME='"+ tb_azuriranje_ime_lekar.Text + "',SREDNJE_SLOVO='"+ tb_azuriranje_lekar_srednjeSlovo.Text + "',PREZIME='"+ tb_azuriranje_prezime_lekar.Text + "',DATUM_ROĐENJA='"+ dTP_azuriranje_lekar.Value.ToString("yyyy-MM-dd") + "',MBRZU='"+ tb_azuriranje_mbrzu_lekar.Text + "',SMENA='"+smena+"',PASSWORD='"+ tb_azuriranje_pass_lekar.Text + "' WHERE JMBG='"+ jmbg_lekara_zaMenjanje + "'";
-                MySqlCommand mcc = new MySqlCommand(commandSqlUpdate, conn);
-                mcc.ExecuteNonQuery();
-                MessageBox.Show("Uspesno ste azurirali lekara u bazi podatka");
-                //---
-                string sqlcommand = "SELECT * FROM IZABRANI_LEKAR";
-                adapter = new MySqlDataAdapter(sqlcommand, connstr);
-                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
-
-                dataSet = new DataSet();
-                adapter.Fill(dataSet, "IZABRANI_LEKAR");
-                dGV_lekari_azuriranje.DataSource = dataSet;
-                dGV_lekari_azuriranje.DataMember = "IZABRANI_LEKAR";
-
-                
-
-                //----
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                conn.Close();
-                MessageBox.Show("Problem" + ex);
-            }
+           
         }
-
-
-
-
-
 
         #endregion
 
         #region tab_za_azuriranje_pacijenta
-        private int pravo_da_zakaze;
+        
         private void dGV_pacijenti_azuriranje_SelectionChanged(object sender, EventArgs e)
-        {/*
-            int rowindex = dGV_pacijenti_azuriranje.CurrentCell.RowIndex;
-             s = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[0].Value.ToString();
-            s2 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[1].Value.ToString();
-            s3 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[2].Value.ToString();
-            s4 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[3].Value.ToString();
-            s5 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[4].Value.ToString();
-            s6 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[5].Value.ToString();
-            s7 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[6].Value.ToString();
-            s8 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[7].Value.ToString();
-            s9 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[8].Value.ToString();
-            s10 = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[9].Value.ToString();
-            jmbg_pacijenta_zaMenjanje = s;
-
-            tb_pacijent_azuriranje_jmbg.Text = s;
-            tb_pacijent_azuriranje_lbo.Text = s8;
-            tb_pacijent_azuriranje_ime.Text = s2;
-            tb_pacijent_azuriranje_prezime.Text = s4;
-            tb_pacijent_azuriranje_opstina.Text = s6;
-            dTP_pacijent_azuriranje.Value = DateTime.Parse(s5);
-            tb_pacijent_azuriranje_srednjeSlovo.Text = s3;
-            tb_pacijent_azuriranje_MATBRL.Text = s9;
-            dTP_vaziDo_pacijent.Value = DateTime.Parse(s10);
-            if (Int32.Parse(s7) == 1)
-            {
-                cB_pravo_da_zakaze.Checked = true;
-                pravo_da_zakaze = 1;
-            }
-            else
-            {
-                pravo_da_zakaze = 0;
-                cB_pravo_da_zakaze.Checked = false;
-            }*/
+        {
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!cB_pravo_da_zakaze.Checked)
-            {
-                pravo_da_zakaze = 0;
-            }
-            else
-            {
-                pravo_da_zakaze = 1;
-            }
-            try
-            {
-                conn.Open();
-                string commandSqlUpdate = "UPDATE PACIJENT SET JMBG='" + tb_pacijent_azuriranje_jmbg.Text + "',IME='" + tb_pacijent_azuriranje_ime.Text + "',SREDNJE_SLOVO='" + tb_pacijent_azuriranje_srednjeSlovo.Text + "',PREZIME='" + tb_pacijent_azuriranje_prezime.Text + "',DATUM_ROĐENJA='" + dTP_pacijent_azuriranje.Value.ToString("yyyy-MM-dd") + "',OPŠTINA='" + tb_pacijent_azuriranje_opstina.Text + "',PRAVO_DA_ZAKAŽE='" + pravo_da_zakaze + "',LBO='" + tb_pacijent_azuriranje_lbo.Text + "',MATBRL='" + tb_pacijent_azuriranje_MATBRL.Text + "',VAŽI_DO='" + dTP_vaziDo_pacijent.Value.ToString("yyyy-MM-dd") + "' WHERE JMBG='" + jmbg_pacijenta_zaMenjanje + "'";
-                MySqlCommand mcc = new MySqlCommand(commandSqlUpdate, conn);
-                mcc.ExecuteNonQuery();
-                MessageBox.Show("Uspesno ste azurirali pacijenta u bazi podatka");
-                //--- 
-                string sqlcommand = "SELECT * FROM PACIJENT";
-                adapter = new MySqlDataAdapter(sqlcommand, connstr);
-                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
-
-                dataSet = new DataSet();
-                adapter.Fill(dataSet, "PACIJENT");
-                dGV_pacijenti_azuriranje.DataSource = dataSet;
-                dGV_pacijenti_azuriranje.DataMember = "PACIJENT";
-
-
-
-                //---- 
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                conn.Close();
-                MessageBox.Show("Problem" + ex);
-            }
         }
-
-
 
         #endregion
 
@@ -884,37 +687,17 @@ namespace Hippocrates
 
         private void btn_azuriranje_adminDz_Click(object sender, EventArgs e)
         {
-            //ADMINISTRATOR_DOM_ZDRAVLJA
-            try
-            {
-                conn.Open();
-                string commandSqlUpdate = "UPDATE ADMINISTRATOR_DOM_ZDRAVLJA SET JMBG='" + tb_azuriranje_admindz_jmbg.Text + "',IME='" + tb_azuriranje_admindz_ime.Text + "',SREDNJE_SLOVO='" + tb_azuriranje_admindz_srednjeS.Text + "',PREZIME='" + tb_azuriranje_admindz_prezime.Text + "',MBRZU='" + tb_azuriranje_admindz_mbrzu.Text + "',PASSWORD='" + tb_azuriranje_admindz_password.Text + "' WHERE JMBG='" + tb_azuriranje_admindz_jmbg.Text + "'";
-                MySqlCommand mcc = new MySqlCommand(commandSqlUpdate, conn);
-                mcc.ExecuteNonQuery();
-                MessageBox.Show("Uspesno ste azurirali administratora doma zdravlja u bazi podatka");
-                //---
-                string sqlcommand = "SELECT * FROM ADMINISTRATOR_DOM_ZDRAVLJA";
-                adapter = new MySqlDataAdapter(sqlcommand, connstr);
-                MySqlCommandBuilder cb = new MySqlCommandBuilder(adapter);
-
-                dataSet = new DataSet();
-                adapter.Fill(dataSet, "ADMINISTRATOR_DOM_ZDRAVLJA");
-                dGV_azuriranje_adminDZ.DataSource = dataSet;
-                dGV_azuriranje_adminDZ.DataMember = "ADMINISTRATOR_DOM_ZDRAVLJA";
-                //---
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Problem" + ex);
-                conn.Close();
-            }
+            
         }
-        
+
+        #endregion
+
+        #region tab_mad_radnik_azuriranje
+
         #endregion
 
         #endregion
-        //dovde je stari neupotrebljiv kod
+       
 
         #region validacija_za_unos_u_kontrole
 
@@ -1183,6 +966,7 @@ namespace Hippocrates
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar));
         }
+
 
 
 
