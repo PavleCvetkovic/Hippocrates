@@ -81,6 +81,7 @@
             this.lblJMBGLekara = new System.Windows.Forms.Label();
             this.tb_jmbg_lekara = new System.Windows.Forms.TextBox();
             this.tab_nov_pacijent = new MetroFramework.Controls.MetroTabPage();
+            this.dgv_pac_unos_izborLekara = new System.Windows.Forms.DataGridView();
             this.tb_pac_unos_brTel = new System.Windows.Forms.TextBox();
             this.label54 = new System.Windows.Forms.Label();
             this.dTP_Vazi_do = new System.Windows.Forms.DateTimePicker();
@@ -209,6 +210,21 @@
             this.tb_azuriranje_jmbg_lekar = new System.Windows.Forms.TextBox();
             this.dGV_lekari_azuriranje = new System.Windows.Forms.DataGridView();
             this.Tab_azuriranje_medRadnik = new MetroFramework.Controls.MetroTabPage();
+            this.btn_odabir_lekara_unos_pac = new System.Windows.Forms.Button();
+            this.dgv_unos_medRad_izborDz = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.tb_unos_medRad_srednjeS = new System.Windows.Forms.TextBox();
+            this.tb_unos_medRad_Prezime = new System.Windows.Forms.TextBox();
+            this.tb_unos_medRad_Ime = new System.Windows.Forms.TextBox();
+            this.tb_unos_medRad_Password = new System.Windows.Forms.TextBox();
+            this.tb_unos_medRadnik_jmbg = new System.Windows.Forms.TextBox();
+            this.dgv_unos_medRad = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -225,10 +241,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_odabirDz_unos_lekara)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_lekar)).BeginInit();
             this.tab_nov_pacijent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_pac_unos_izborLekara)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_pacijent)).BeginInit();
             this.tab_nov_admin_dz.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_admin_unos_izbor_dz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_unos_AdminDZ)).BeginInit();
+            this.tab_unos_med_rad.SuspendLayout();
             this.tab_za_brisanje_podataka.SuspendLayout();
             this.tabControl_za_brisanje.SuspendLayout();
             this.tab_brisanje_dz.SuspendLayout();
@@ -253,6 +271,8 @@
             this.Tab_azuriranje_lekara.SuspendLayout();
             this.pnl_azuriranje_lekari.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_lekari_azuriranje)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_unos_medRad_izborDz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_unos_medRad)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -835,6 +855,8 @@
             // 
             // tab_nov_pacijent
             // 
+            this.tab_nov_pacijent.Controls.Add(this.btn_odabir_lekara_unos_pac);
+            this.tab_nov_pacijent.Controls.Add(this.dgv_pac_unos_izborLekara);
             this.tab_nov_pacijent.Controls.Add(this.tb_pac_unos_brTel);
             this.tab_nov_pacijent.Controls.Add(this.label54);
             this.tab_nov_pacijent.Controls.Add(this.dTP_Vazi_do);
@@ -866,6 +888,15 @@
             this.tab_nov_pacijent.VerticalScrollbarBarColor = true;
             this.tab_nov_pacijent.VerticalScrollbarHighlightOnWheel = false;
             this.tab_nov_pacijent.VerticalScrollbarSize = 10;
+            // 
+            // dgv_pac_unos_izborLekara
+            // 
+            this.dgv_pac_unos_izborLekara.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_pac_unos_izborLekara.Location = new System.Drawing.Point(546, 166);
+            this.dgv_pac_unos_izborLekara.Name = "dgv_pac_unos_izborLekara";
+            this.dgv_pac_unos_izborLekara.Size = new System.Drawing.Size(439, 184);
+            this.dgv_pac_unos_izborLekara.TabIndex = 56;
+            this.dgv_pac_unos_izborLekara.SelectionChanged += new System.EventHandler(this.dgv_pac_unos_izborLekara_SelectionChanged);
             // 
             // tb_pac_unos_brTel
             // 
@@ -921,9 +952,9 @@
             // dGV_unosenje_pacijent
             // 
             this.dGV_unosenje_pacijent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_unosenje_pacijent.Location = new System.Drawing.Point(14, 284);
+            this.dGV_unosenje_pacijent.Location = new System.Drawing.Point(14, 356);
             this.dGV_unosenje_pacijent.Name = "dGV_unosenje_pacijent";
-            this.dGV_unosenje_pacijent.Size = new System.Drawing.Size(971, 297);
+            this.dGV_unosenje_pacijent.Size = new System.Drawing.Size(971, 225);
             this.dGV_unosenje_pacijent.TabIndex = 49;
             // 
             // dTP_pacijenta
@@ -959,7 +990,7 @@
             // 
             // btn_unesi_pacijenta
             // 
-            this.btn_unesi_pacijenta.Location = new System.Drawing.Point(695, 245);
+            this.btn_unesi_pacijenta.Location = new System.Drawing.Point(355, 317);
             this.btn_unesi_pacijenta.Name = "btn_unesi_pacijenta";
             this.btn_unesi_pacijenta.Size = new System.Drawing.Size(178, 33);
             this.btn_unesi_pacijenta.TabIndex = 42;
@@ -1239,6 +1270,20 @@
             // 
             // tab_unos_med_rad
             // 
+            this.tab_unos_med_rad.Controls.Add(this.dgv_unos_medRad_izborDz);
+            this.tab_unos_med_rad.Controls.Add(this.button2);
+            this.tab_unos_med_rad.Controls.Add(this.label9);
+            this.tab_unos_med_rad.Controls.Add(this.label16);
+            this.tab_unos_med_rad.Controls.Add(this.label17);
+            this.tab_unos_med_rad.Controls.Add(this.label47);
+            this.tab_unos_med_rad.Controls.Add(this.label55);
+            this.tab_unos_med_rad.Controls.Add(this.label56);
+            this.tab_unos_med_rad.Controls.Add(this.tb_unos_medRad_srednjeS);
+            this.tab_unos_med_rad.Controls.Add(this.tb_unos_medRad_Prezime);
+            this.tab_unos_med_rad.Controls.Add(this.tb_unos_medRad_Ime);
+            this.tab_unos_med_rad.Controls.Add(this.tb_unos_medRad_Password);
+            this.tab_unos_med_rad.Controls.Add(this.tb_unos_medRadnik_jmbg);
+            this.tab_unos_med_rad.Controls.Add(this.dgv_unos_medRad);
             this.tab_unos_med_rad.HorizontalScrollbarBarColor = true;
             this.tab_unos_med_rad.HorizontalScrollbarHighlightOnWheel = false;
             this.tab_unos_med_rad.HorizontalScrollbarSize = 10;
@@ -1453,9 +1498,9 @@
             // 
             // tab_azuriranje
             // 
+            this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_domaZdravlja);
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_pacijenata);
             this.tab_azuriranje.Controls.Add(this.tab_azuriranje_admin_dz);
-            this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_domaZdravlja);
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_lekara);
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_medRadnik);
             this.tab_azuriranje.Location = new System.Drawing.Point(1, 1);
@@ -2307,6 +2352,149 @@
             this.Tab_azuriranje_medRadnik.VerticalScrollbarHighlightOnWheel = false;
             this.Tab_azuriranje_medRadnik.VerticalScrollbarSize = 10;
             // 
+            // btn_odabir_lekara_unos_pac
+            // 
+            this.btn_odabir_lekara_unos_pac.Location = new System.Drawing.Point(836, 137);
+            this.btn_odabir_lekara_unos_pac.Name = "btn_odabir_lekara_unos_pac";
+            this.btn_odabir_lekara_unos_pac.Size = new System.Drawing.Size(149, 23);
+            this.btn_odabir_lekara_unos_pac.TabIndex = 57;
+            this.btn_odabir_lekara_unos_pac.Text = "Odabir lekara";
+            this.btn_odabir_lekara_unos_pac.UseVisualStyleBackColor = true;
+            this.btn_odabir_lekara_unos_pac.Click += new System.EventHandler(this.btn_odabir_lekara_unos_pac_Click);
+            // 
+            // dgv_unos_medRad_izborDz
+            // 
+            this.dgv_unos_medRad_izborDz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_unos_medRad_izborDz.Location = new System.Drawing.Point(608, 50);
+            this.dgv_unos_medRad_izborDz.Name = "dgv_unos_medRad_izborDz";
+            this.dgv_unos_medRad_izborDz.Size = new System.Drawing.Size(377, 131);
+            this.dgv_unos_medRad_izborDz.TabIndex = 78;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(695, 245);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(178, 33);
+            this.button2.TabIndex = 77;
+            this.button2.Text = "Unesite podatke";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.White;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(115, 158);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(103, 20);
+            this.label9.TabIndex = 76;
+            this.label9.Text = "PASSWORD";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.White;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(604, 27);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(163, 20);
+            this.label16.TabIndex = 75;
+            this.label16.Text = "Izaberite dom zdravlja";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.White;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(152, 129);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(66, 20);
+            this.label17.TabIndex = 74;
+            this.label17.Text = "Prezime";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.BackColor = System.Drawing.Color.White;
+            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label47.Location = new System.Drawing.Point(114, 97);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(104, 20);
+            this.label47.TabIndex = 73;
+            this.label47.Text = "Srednje slovo";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.BackColor = System.Drawing.Color.White;
+            this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label55.Location = new System.Drawing.Point(182, 65);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(36, 20);
+            this.label55.TabIndex = 72;
+            this.label55.Text = "Ime";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.BackColor = System.Drawing.Color.White;
+            this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label56.Location = new System.Drawing.Point(164, 33);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(54, 20);
+            this.label56.TabIndex = 71;
+            this.label56.Text = "JMBG";
+            // 
+            // tb_unos_medRad_srednjeS
+            // 
+            this.tb_unos_medRad_srednjeS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_unos_medRad_srednjeS.Location = new System.Drawing.Point(239, 91);
+            this.tb_unos_medRad_srednjeS.MaxLength = 2;
+            this.tb_unos_medRad_srednjeS.Name = "tb_unos_medRad_srednjeS";
+            this.tb_unos_medRad_srednjeS.Size = new System.Drawing.Size(331, 26);
+            this.tb_unos_medRad_srednjeS.TabIndex = 70;
+            // 
+            // tb_unos_medRad_Prezime
+            // 
+            this.tb_unos_medRad_Prezime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_unos_medRad_Prezime.Location = new System.Drawing.Point(239, 123);
+            this.tb_unos_medRad_Prezime.Name = "tb_unos_medRad_Prezime";
+            this.tb_unos_medRad_Prezime.Size = new System.Drawing.Size(331, 26);
+            this.tb_unos_medRad_Prezime.TabIndex = 69;
+            // 
+            // tb_unos_medRad_Ime
+            // 
+            this.tb_unos_medRad_Ime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_unos_medRad_Ime.Location = new System.Drawing.Point(239, 59);
+            this.tb_unos_medRad_Ime.Name = "tb_unos_medRad_Ime";
+            this.tb_unos_medRad_Ime.Size = new System.Drawing.Size(331, 26);
+            this.tb_unos_medRad_Ime.TabIndex = 68;
+            // 
+            // tb_unos_medRad_Password
+            // 
+            this.tb_unos_medRad_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_unos_medRad_Password.Location = new System.Drawing.Point(239, 155);
+            this.tb_unos_medRad_Password.Name = "tb_unos_medRad_Password";
+            this.tb_unos_medRad_Password.Size = new System.Drawing.Size(331, 26);
+            this.tb_unos_medRad_Password.TabIndex = 67;
+            // 
+            // tb_unos_medRadnik_jmbg
+            // 
+            this.tb_unos_medRadnik_jmbg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_unos_medRadnik_jmbg.Location = new System.Drawing.Point(239, 27);
+            this.tb_unos_medRadnik_jmbg.MaxLength = 13;
+            this.tb_unos_medRadnik_jmbg.Name = "tb_unos_medRadnik_jmbg";
+            this.tb_unos_medRadnik_jmbg.Size = new System.Drawing.Size(331, 26);
+            this.tb_unos_medRadnik_jmbg.TabIndex = 66;
+            // 
+            // dgv_unos_medRad
+            // 
+            this.dgv_unos_medRad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_unos_medRad.Location = new System.Drawing.Point(14, 284);
+            this.dgv_unos_medRad.Name = "dgv_unos_medRad";
+            this.dgv_unos_medRad.Size = new System.Drawing.Size(971, 297);
+            this.dgv_unos_medRad.TabIndex = 65;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2340,11 +2528,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_lekar)).EndInit();
             this.tab_nov_pacijent.ResumeLayout(false);
             this.tab_nov_pacijent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_pac_unos_izborLekara)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_pacijent)).EndInit();
             this.tab_nov_admin_dz.ResumeLayout(false);
             this.tab_nov_admin_dz.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_admin_unos_izbor_dz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_unos_AdminDZ)).EndInit();
+            this.tab_unos_med_rad.ResumeLayout(false);
+            this.tab_unos_med_rad.PerformLayout();
             this.tab_za_brisanje_podataka.ResumeLayout(false);
             this.tabControl_za_brisanje.ResumeLayout(false);
             this.tab_brisanje_dz.ResumeLayout(false);
@@ -2373,6 +2564,8 @@
             this.pnl_azuriranje_lekari.ResumeLayout(false);
             this.pnl_azuriranje_lekari.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_lekari_azuriranje)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_unos_medRad_izborDz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_unos_medRad)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2556,10 +2749,26 @@
         private System.Windows.Forms.Button btn_pogled_admini;
         private System.Windows.Forms.DataGridView dgv_odabirDz_unos_lekara;
         private System.Windows.Forms.TextBox tb_pac_unos_brTel;
-        private System.Windows.Forms.Label label54;
         private System.Windows.Forms.DataGridView dgv_admin_unos_izbor_dz;
         private MetroFramework.Controls.MetroTabPage tab_unos_med_rad;
         private MetroFramework.Controls.MetroTabPage tab_brisanje_medRad;
         private MetroFramework.Controls.MetroTabPage Tab_azuriranje_medRadnik;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.DataGridView dgv_pac_unos_izborLekara;
+        private System.Windows.Forms.Button btn_odabir_lekara_unos_pac;
+        private System.Windows.Forms.DataGridView dgv_unos_medRad_izborDz;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox tb_unos_medRad_srednjeS;
+        private System.Windows.Forms.TextBox tb_unos_medRad_Prezime;
+        private System.Windows.Forms.TextBox tb_unos_medRad_Ime;
+        private System.Windows.Forms.TextBox tb_unos_medRad_Password;
+        private System.Windows.Forms.TextBox tb_unos_medRadnik_jmbg;
+        private System.Windows.Forms.DataGridView dgv_unos_medRad;
     }
 }

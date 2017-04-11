@@ -28,6 +28,7 @@ namespace Hippocrates
         DataSet dataSet;
         private string connstr;
         MySqlConnection conn;
+        public string pomIndex;
         public Form2()
         {
 
@@ -57,18 +58,19 @@ namespace Hippocrates
             ISession s = Hippocrates.Data.DataLayer.GetSession();
             IQuery iq = s.CreateQuery("from DomZdravlja");
             IList<Hippocrates.Data.Entiteti.DomZdravlja> domovi = iq.List<Hippocrates.Data.Entiteti.DomZdravlja>();
-            dGV_pogled_u_bazu.ColumnCount = 6;
+
+            
+            dGV_pogled_u_bazu.ColumnCount = 5;
             dGV_pogled_u_bazu.Columns[0].Name = "MBR";
             dGV_pogled_u_bazu.Columns[1].Name = "Ime";
             dGV_pogled_u_bazu.Columns[2].Name = "Lokacija";
             dGV_pogled_u_bazu.Columns[3].Name = "Adresa";
             dGV_pogled_u_bazu.Columns[4].Name = "Opstina";
-
             foreach (DomZdravlja d in domovi)
             {
                 dGV_pogled_u_bazu.Rows.Add(d.Mbr, d.Ime, d.Lokacija, d.Adresa, d.Opstina);
             }
-
+           
             s.Close();
         }
 
@@ -170,286 +172,152 @@ namespace Hippocrates
         #endregion
 
         #region dataGridViews_funkcije_za_popunjavanje
-
-        private void dGV_unosenje_DZ_popuni()
-        {
-            dGV_pogled_u_bazu.DataSource = null;
-            dGV_pogled_u_bazu.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from DomZdravlja");
-            IList<Hippocrates.Data.Entiteti.DomZdravlja> domovi = iq.List<Hippocrates.Data.Entiteti.DomZdravlja>();
-            dGV_unosenje_DZ.ColumnCount = 6;
-            dGV_unosenje_DZ.Columns[0].Name = "MBR";
-            dGV_unosenje_DZ.Columns[1].Name = "Ime";
-            dGV_unosenje_DZ.Columns[2].Name = "Lokacija";
-            dGV_unosenje_DZ.Columns[3].Name = "Adresa";
-            dGV_unosenje_DZ.Columns[4].Name = "Opstina";
-
-            foreach (DomZdravlja d in domovi)
-            {
-                dGV_unosenje_DZ.Rows.Add(d.Mbr, d.Ime, d.Lokacija, d.Adresa, d.Opstina);
-            }
-
-            s.Close();
-        }
+        
        
-        private void dGV_unosenje_lekar_popuni()
+        
+        private void popuni_dgv_domovi(DataGridView dgv)
         {
-            dGV_unosenje_lekar.DataSource = null;
-            dGV_unosenje_lekar.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from IzabraniLekar");
-            IList<Hippocrates.Data.Entiteti.IzabraniLekar> lekari = iq.List<Hippocrates.Data.Entiteti.IzabraniLekar>();
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
 
-            dGV_unosenje_lekar.ColumnCount = 6;
-            dGV_unosenje_lekar.Columns[0].Name = "JMBG";
-            dGV_unosenje_lekar.Columns[1].Name = "Ime";
-            dGV_unosenje_lekar.Columns[2].Name = "Srednje slovo";
-            dGV_unosenje_lekar.Columns[3].Name = "Prezime";
-            dGV_unosenje_lekar.Columns[4].Name = "Password";
-            dGV_unosenje_lekar.Columns[5].Name = "Radi u";
-
-            foreach (Data.Entiteti.IzabraniLekar l in lekari)
-            {
-                dGV_unosenje_lekar.Rows.Add(l.Jmbg, l.Ime, l.Srednje_slovo, l.Prezime, l.Password, l.RadiUDomuZdravlja.Ime);
-            }
-            s.Close();
-        }
-
-        private void dGV_unosenje_pacijent_popuni()
-        {
-            dGV_unosenje_pacijent.DataSource = null;
-            dGV_unosenje_pacijent.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from Pacijent");
-            IList<Hippocrates.Data.Entiteti.Pacijent> pacijenti = iq.List<Hippocrates.Data.Entiteti.Pacijent>();
-            dGV_unosenje_pacijent.ColumnCount = 11;
-            dGV_unosenje_pacijent.Columns[0].Name = "JMBG";
-            dGV_unosenje_pacijent.Columns[1].Name = "Ime";
-            dGV_unosenje_pacijent.Columns[2].Name = "Srednje slovo";
-            dGV_unosenje_pacijent.Columns[3].Name = "Prezime";
-            dGV_unosenje_pacijent.Columns[4].Name = "Datum rodjenja";
-            dGV_unosenje_pacijent.Columns[5].Name = "Opstina";
-            dGV_unosenje_pacijent.Columns[6].Name = "Pravo da zakaze";
-            dGV_unosenje_pacijent.Columns[7].Name = "Lbo";
-            dGV_unosenje_pacijent.Columns[8].Name = "Vazi do";
-            dGV_unosenje_pacijent.Columns[9].Name = "Email";
-            dGV_unosenje_pacijent.Columns[10].Name = "Telefon";
-            foreach (Pacijent p in pacijenti)
-            {
-                dGV_unosenje_pacijent.Rows.Add(p.Jmbg, p.Ime, p.Srednje_slovo, p.Prezime, p.Datum_rodjenja.ToShortDateString(), p.Opstina, p.Pravo_da_zakaze, p.Lbo, p.Vazi_do.ToShortDateString(), p.Email, p.Telefon);
-            }
-            s.Close();
-        }
-
-        private void dGV_unos_AdminDZ_popuni()
-        {
-            dGV_unos_AdminDZ.DataSource = null;
-            dGV_unos_AdminDZ.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from AdministratorDomaZdravlja");
-            IList<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja> admini = iq.List<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja>();
-            dGV_unos_AdminDZ.ColumnCount = 6;
-            dGV_unos_AdminDZ.Columns[0].Name = "JMBG";
-            dGV_unos_AdminDZ.Columns[1].Name = "Ime";
-            dGV_unos_AdminDZ.Columns[2].Name = "Srednje slovo";
-            dGV_unos_AdminDZ.Columns[3].Name = "Prezime";
-            dGV_unos_AdminDZ.Columns[4].Name = "Radi u";
-            dGV_unos_AdminDZ.Columns[5].Name = "Password";
-            foreach (AdministratorDomaZdravlja a in admini)
-            {
-                dGV_unos_AdminDZ.Rows.Add(a.JMBG, a.Ime, a.SrednjeSlovo, a.Prezime, a.RadiUDomuZdravlja.Ime, a.Password);
-            }
-
-            s.Close();
-        }
-
-        private void dGV_brisanje_dz_popuni()
-        {
-            dGV_brisanje_dz.DataSource = null;
-            dGV_brisanje_dz.Columns.Clear();
             ISession s = Hippocrates.Data.DataLayer.GetSession();
             IQuery iq = s.CreateQuery("from DomZdravlja");
             IList<Hippocrates.Data.Entiteti.DomZdravlja> domovi = iq.List<Hippocrates.Data.Entiteti.DomZdravlja>();
-            dGV_brisanje_dz.ColumnCount = 6;
-            dGV_brisanje_dz.Columns[0].Name = "MBR";
-            dGV_brisanje_dz.Columns[1].Name = "Ime";
-            dGV_brisanje_dz.Columns[2].Name = "Lokacija";
-            dGV_brisanje_dz.Columns[3].Name = "Adresa";
-            dGV_brisanje_dz.Columns[4].Name = "Opstina";
+            dgv.ColumnCount = 6;
+            dgv.Columns[0].Name = "MBR";
+            dgv.Columns[1].Name = "Ime";
+            dgv.Columns[2].Name = "Lokacija";
+            dgv.Columns[3].Name = "Adresa";
+            dgv.Columns[4].Name = "Opstina";
 
             foreach (DomZdravlja d in domovi)
             {
-                dGV_brisanje_dz.Rows.Add(d.Mbr, d.Ime, d.Lokacija, d.Adresa, d.Opstina);
+                dgv.Rows.Add(d.Mbr, d.Ime, d.Lokacija, d.Adresa, d.Opstina);
             }
 
             s.Close();
         }
         
-        private void dGV_lekar_brisanje_popuni()
+        private void popuni_dgv_lekari(DataGridView dgv)
         {
-            dGV_lekar_brisanje.DataSource = null;
-            dGV_lekar_brisanje.Columns.Clear();
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
             ISession s = Hippocrates.Data.DataLayer.GetSession();
             IQuery iq = s.CreateQuery("from IzabraniLekar");
             IList<Hippocrates.Data.Entiteti.IzabraniLekar> lekari = iq.List<Hippocrates.Data.Entiteti.IzabraniLekar>();
 
-            dGV_lekar_brisanje.ColumnCount = 6;
-            dGV_lekar_brisanje.Columns[0].Name = "JMBG";
-            dGV_lekar_brisanje.Columns[1].Name = "Ime";
-            dGV_lekar_brisanje.Columns[2].Name = "Srednje slovo";
-            dGV_lekar_brisanje.Columns[3].Name = "Prezime";
-            dGV_lekar_brisanje.Columns[4].Name = "Password";
-            dGV_lekar_brisanje.Columns[5].Name = "Radi u";
+            dgv.ColumnCount = 6;
+            dgv.Columns[0].Name = "JMBG";
+            dgv.Columns[1].Name = "Ime";
+            dgv.Columns[2].Name = "Srednje slovo";
+            dgv.Columns[3].Name = "Prezime";
+            dgv.Columns[4].Name = "Password";
+            dgv.Columns[5].Name = "Radi u";
 
             foreach (Data.Entiteti.IzabraniLekar l in lekari)
             {
-                dGV_lekar_brisanje.Rows.Add(l.Jmbg, l.Ime, l.Srednje_slovo, l.Prezime, l.Password, l.RadiUDomuZdravlja.Ime);
+                dgv.Rows.Add(l.Jmbg, l.Ime, l.Srednje_slovo, l.Prezime, l.Password, l.RadiUDomuZdravlja.Ime);
             }
             s.Close();
         }
 
-        private void dGV_pacijent_brisanje_popuni()
+        private void popuni_dgv_lekari(DataGridView dgv,String parametar)
         {
-            dGV_pacijent_brisanje.DataSource = null;
-            dGV_pacijent_brisanje.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from Pacijent");
-            IList<Hippocrates.Data.Entiteti.Pacijent> pacijenti = iq.List<Hippocrates.Data.Entiteti.Pacijent>();
-            dGV_pacijent_brisanje.ColumnCount = 11;
-            dGV_pacijent_brisanje.Columns[0].Name = "JMBG";
-            dGV_pacijent_brisanje.Columns[1].Name = "Ime";
-            dGV_pacijent_brisanje.Columns[2].Name = "Srednje slovo";
-            dGV_pacijent_brisanje.Columns[3].Name = "Prezime";
-            dGV_pacijent_brisanje.Columns[4].Name = "Datum rodjenja";
-            dGV_pacijent_brisanje.Columns[5].Name = "Opstina";
-            dGV_pacijent_brisanje.Columns[6].Name = "Pravo da zakaze";
-            dGV_pacijent_brisanje.Columns[7].Name = "Lbo";
-            dGV_pacijent_brisanje.Columns[8].Name = "Vazi do";
-            dGV_pacijent_brisanje.Columns[9].Name = "Email";
-            dGV_pacijent_brisanje.Columns[10].Name = "Telefon";
-            foreach (Pacijent p in pacijenti)
-            {
-                dGV_pacijent_brisanje.Rows.Add(p.Jmbg, p.Ime, p.Srednje_slovo, p.Prezime, p.Datum_rodjenja.ToShortDateString(), p.Opstina, p.Pravo_da_zakaze, p.Lbo, p.Vazi_do.ToShortDateString(), p.Email, p.Telefon);
-            }
-            s.Close();
-        }
-
-        private void dGV_adminDZ_brisanje_popuni()
-        {
-            dGV_adminDZ_brisanje.DataSource = null;
-            dGV_adminDZ_brisanje.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from AdministratorDomaZdravlja");
-            IList<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja> admini = iq.List<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja>();
-            dGV_adminDZ_brisanje.ColumnCount = 6;
-            dGV_adminDZ_brisanje.Columns[0].Name = "JMBG";
-            dGV_adminDZ_brisanje.Columns[1].Name = "Ime";
-            dGV_adminDZ_brisanje.Columns[2].Name = "Srednje slovo";
-            dGV_adminDZ_brisanje.Columns[3].Name = "Prezime";
-            dGV_adminDZ_brisanje.Columns[4].Name = "Radi u";
-            dGV_adminDZ_brisanje.Columns[5].Name = "Password";
-            foreach (AdministratorDomaZdravlja a in admini)
-            {
-                dGV_adminDZ_brisanje.Rows.Add(a.JMBG, a.Ime, a.SrednjeSlovo, a.Prezime, a.RadiUDomuZdravlja.Ime, a.Password);
-            }
-
-            s.Close();
-        }
-
-        private void dGV_pacijenti_azuriranje_popuni()
-        {
-            dGV_pacijenti_azuriranje.DataSource = null;
-            dGV_pacijenti_azuriranje.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from Pacijent");
-            IList<Hippocrates.Data.Entiteti.Pacijent> pacijenti = iq.List<Hippocrates.Data.Entiteti.Pacijent>();
-            dGV_pacijenti_azuriranje.ColumnCount = 11;
-            dGV_pacijenti_azuriranje.Columns[0].Name = "JMBG";
-            dGV_pacijenti_azuriranje.Columns[1].Name = "Ime";
-            dGV_pacijenti_azuriranje.Columns[2].Name = "Srednje slovo";
-            dGV_pacijenti_azuriranje.Columns[3].Name = "Prezime";
-            dGV_pacijenti_azuriranje.Columns[4].Name = "Datum rodjenja";
-            dGV_pacijenti_azuriranje.Columns[5].Name = "Opstina";
-            dGV_pacijenti_azuriranje.Columns[6].Name = "Pravo da zakaze";
-            dGV_pacijenti_azuriranje.Columns[7].Name = "Lbo";
-            dGV_pacijenti_azuriranje.Columns[8].Name = "Vazi do";
-            dGV_pacijenti_azuriranje.Columns[9].Name = "Email";
-            dGV_pacijenti_azuriranje.Columns[10].Name = "Telefon";
-            foreach (Pacijent p in pacijenti)
-            {
-                dGV_pacijenti_azuriranje.Rows.Add(p.Jmbg, p.Ime, p.Srednje_slovo, p.Prezime, p.Datum_rodjenja.ToShortDateString(), p.Opstina, p.Pravo_da_zakaze, p.Lbo, p.Vazi_do.ToShortDateString(), p.Email, p.Telefon);
-            }
-            s.Close();
-        }
-
-        private void dGV_azuriranje_adminDZ_popuni()
-        {
-            dGV_azuriranje_adminDZ.DataSource = null;
-            dGV_azuriranje_adminDZ.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from AdministratorDomaZdravlja");
-            IList<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja> admini = iq.List<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja>();
-            dGV_azuriranje_adminDZ.ColumnCount = 6;
-            dGV_azuriranje_adminDZ.Columns[0].Name = "JMBG";
-            dGV_azuriranje_adminDZ.Columns[1].Name = "Ime";
-            dGV_azuriranje_adminDZ.Columns[2].Name = "Srednje slovo";
-            dGV_azuriranje_adminDZ.Columns[3].Name = "Prezime";
-            dGV_azuriranje_adminDZ.Columns[4].Name = "Radi u";
-            dGV_azuriranje_adminDZ.Columns[5].Name = "Password";
-            foreach (AdministratorDomaZdravlja a in admini)
-            {
-                dGV_azuriranje_adminDZ.Rows.Add(a.JMBG, a.Ime, a.SrednjeSlovo, a.Prezime, a.RadiUDomuZdravlja.Ime, a.Password);
-            }
-
-            s.Close();
-        }
-
-        private void dGV_domZdravlja_azuriranje_popuni()
-        {
-            dGV_domZdravlja_azuriranje.DataSource = null;
-            dGV_domZdravlja_azuriranje.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from DomZdravlja");
-            IList<Hippocrates.Data.Entiteti.DomZdravlja> domovi = iq.List<Hippocrates.Data.Entiteti.DomZdravlja>();
-            dGV_domZdravlja_azuriranje.ColumnCount = 6;
-            dGV_domZdravlja_azuriranje.Columns[0].Name = "MBR";
-            dGV_domZdravlja_azuriranje.Columns[1].Name = "Ime";
-            dGV_domZdravlja_azuriranje.Columns[2].Name = "Lokacija";
-            dGV_domZdravlja_azuriranje.Columns[3].Name = "Adresa";
-            dGV_domZdravlja_azuriranje.Columns[4].Name = "Opstina";
-
-            foreach (DomZdravlja d in domovi)
-            {
-                dGV_domZdravlja_azuriranje.Rows.Add(d.Mbr, d.Ime, d.Lokacija, d.Adresa, d.Opstina);
-            }
-
-            s.Close();
-        }
-
-        private void dGV_lekari_azuriranje_popuni()
-        {
-            dGV_lekari_azuriranje.DataSource = null;
-            dGV_lekari_azuriranje.Columns.Clear();
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
             ISession s = Hippocrates.Data.DataLayer.GetSession();
             IQuery iq = s.CreateQuery("from IzabraniLekar");
             IList<Hippocrates.Data.Entiteti.IzabraniLekar> lekari = iq.List<Hippocrates.Data.Entiteti.IzabraniLekar>();
 
-            dGV_lekari_azuriranje.ColumnCount = 6;
-            dGV_lekari_azuriranje.Columns[0].Name = "JMBG";
-            dGV_lekari_azuriranje.Columns[1].Name = "Ime";
-            dGV_lekari_azuriranje.Columns[2].Name = "Srednje slovo";
-            dGV_lekari_azuriranje.Columns[3].Name = "Prezime";
-            dGV_lekari_azuriranje.Columns[4].Name = "Password";
-            dGV_lekari_azuriranje.Columns[5].Name = "Radi u";
+            dgv.ColumnCount = 6;
+
+            dgv.Columns[0].Name = "Ime";
+            dgv.Columns[1].Name = "Srednje slovo";
+            dgv.Columns[2].Name = "Prezime";
+
 
             foreach (Data.Entiteti.IzabraniLekar l in lekari)
             {
-                dGV_lekari_azuriranje.Rows.Add(l.Jmbg, l.Ime, l.Srednje_slovo, l.Prezime, l.Password, l.RadiUDomuZdravlja.Ime);
+                if (parametar == l.RadiUDomuZdravlja.Opstina)
+                    dgv.Rows.Add(l.Ime, l.Srednje_slovo, l.Prezime);
             }
             s.Close();
         }
 
+        private void popuni_dgv_admini(DataGridView dgv)
+        {
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
+            ISession s = Hippocrates.Data.DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from AdministratorDomaZdravlja");
+            IList<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja> admini = iq.List<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja>();
+            dgv.ColumnCount = 6;
+            dgv.Columns[0].Name = "JMBG";
+            dgv.Columns[1].Name = "Ime";
+            dgv.Columns[2].Name = "Srednje slovo";
+            dgv.Columns[3].Name = "Prezime";
+            dgv.Columns[4].Name = "Radi u";
+            dgv.Columns[5].Name = "Password";
+            foreach (AdministratorDomaZdravlja a in admini)
+            {
+                dgv.Rows.Add(a.JMBG, a.Ime, a.SrednjeSlovo, a.Prezime, a.RadiUDomuZdravlja.Ime, a.Password);
+            }
+
+            s.Close();
+        }
+
+        private void popuni_dgv_pacijenti(DataGridView dgv)
+        {
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
+            ISession s = Hippocrates.Data.DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from Pacijent");
+            IList<Hippocrates.Data.Entiteti.Pacijent> pacijenti = iq.List<Hippocrates.Data.Entiteti.Pacijent>();
+            dgv.ColumnCount = 11;
+            dgv.Columns[0].Name = "JMBG";
+            dgv.Columns[1].Name = "Ime";
+            dgv.Columns[2].Name = "Srednje slovo";
+            dgv.Columns[3].Name = "Prezime";
+            dgv.Columns[4].Name = "Datum rodjenja";
+            dgv.Columns[5].Name = "Opstina";
+            dgv.Columns[6].Name = "Pravo da zakaze";
+            dgv.Columns[7].Name = "Lbo";
+            dgv.Columns[8].Name = "Vazi do";
+            dgv.Columns[9].Name = "Email";
+            dgv.Columns[10].Name = "Telefon";
+            foreach (Pacijent p in pacijenti)
+            {
+                dgv.Rows.Add(p.Jmbg, p.Ime, p.Srednje_slovo, p.Prezime, p.Datum_rodjenja.ToShortDateString(), p.Opstina, p.Pravo_da_zakaze, p.Lbo, p.Vazi_do.ToShortDateString(), p.Email, p.Telefon);
+            }
+            s.Close();
+        }
+
+        private void popuni_dgv_medOsoblje(DataGridView dgv)
+        {
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
+            ISession s = Hippocrates.Data.DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from MedicinskoOsoblje");
+            IList<Hippocrates.Data.Entiteti.MedicinskoOsoblje> medOsoblje = iq.List<Hippocrates.Data.Entiteti.MedicinskoOsoblje>();
+            dgv.ColumnCount = 7;
+            dgv.Columns[0].Name = "JMBG";
+            dgv.Columns[1].Name = "Ime";
+            dgv.Columns[2].Name = "Srednje slovo";
+            dgv.Columns[3].Name = "Prezime";
+            dgv.Columns[4].Name = "Password";
+            dgv.Columns[5].Name = "Radi u";
+            dgv.Columns[6].Name = "Datum rodjenja";
+
+
+            foreach (MedicinskoOsoblje m in medOsoblje)
+            {
+                dgv.Rows.Add(m.Jmbg, m.Ime, m.Srednje_slovo, m.Prezime, m.Password, m.RadiUDomuZdravlja.Ime, m.Datum_rodjenja.ToShortDateString());
+            }
+
+            s.Close();
+        }
+
+        
         #endregion
 
         #region tab_change
@@ -457,15 +325,16 @@ namespace Hippocrates
         {
             if(GeneralControl.SelectedIndex == 1)
             {
-                dGV_unosenje_DZ_popuni();
+                popuni_dgv_domovi(dGV_unosenje_DZ);
             }
             else if(GeneralControl.SelectedIndex == 2)
             {
-                dGV_brisanje_dz_popuni();
+                popuni_dgv_domovi(dGV_brisanje_dz);
+                
             }
             else if(GeneralControl.SelectedIndex == 3)
             {
-                dGV_pacijenti_azuriranje_popuni();
+                popuni_dgv_domovi(dGV_domZdravlja_azuriranje);
             }
             
         }
@@ -473,19 +342,21 @@ namespace Hippocrates
         {
             if(TabControl_za_unos.SelectedIndex == 0)
             {
-                dGV_unosenje_DZ_popuni();
+                popuni_dgv_domovi(dGV_unosenje_DZ);
             }   
             else if(TabControl_za_unos.SelectedIndex == 1)
             {
-                dGV_unosenje_lekar_popuni();
+                popuni_dgv_lekari(dGV_unosenje_lekar);
+                popuni_dgv_domovi(dgv_odabirDz_unos_lekara);
             }
             else if (TabControl_za_unos.SelectedIndex == 2)
             {
-                dGV_unosenje_pacijent_popuni();
+                popuni_dgv_pacijenti(dGV_unosenje_pacijent);
             }
             else if (TabControl_za_unos.SelectedIndex == 3)
             {
-                dGV_unos_AdminDZ_popuni();
+                popuni_dgv_admini(dGV_unos_AdminDZ);
+                popuni_dgv_domovi(dgv_admin_unos_izbor_dz);
             }
             else if (TabControl_za_unos.SelectedIndex == 4)
             {
@@ -497,19 +368,19 @@ namespace Hippocrates
         {
             if(tabControl_za_brisanje.SelectedIndex == 0)
             {
-                dGV_brisanje_dz_popuni();
+                popuni_dgv_domovi(dGV_brisanje_dz);
             }
             else if (tabControl_za_brisanje.SelectedIndex == 1)
             {
-                dGV_lekar_brisanje_popuni();
+                popuni_dgv_lekari(dGV_lekar_brisanje);
             }
             else if (tabControl_za_brisanje.SelectedIndex == 2)
             {
-                dGV_pacijent_brisanje_popuni();
+               popuni_dgv_pacijenti(dGV_pacijent_brisanje);
             }
             else if (tabControl_za_brisanje.SelectedIndex == 3)
             {
-                dGV_adminDZ_brisanje_popuni();
+                popuni_dgv_admini(dGV_adminDZ_brisanje);
             }
             else if (tabControl_za_brisanje.SelectedIndex == 4)
             {
@@ -521,19 +392,19 @@ namespace Hippocrates
         {
             if(tab_azuriranje.SelectedIndex == 0)
             {
-                dGV_pacijenti_azuriranje_popuni();
+                popuni_dgv_domovi(dGV_domZdravlja_azuriranje);
             }
             else if(tab_azuriranje.SelectedIndex == 1)
             {
-                dGV_azuriranje_adminDZ_popuni();
+                popuni_dgv_pacijenti(dGV_pacijenti_azuriranje);
             }
             else if (tab_azuriranje.SelectedIndex == 2)
             {
-                dGV_domZdravlja_azuriranje_popuni();
+                popuni_dgv_admini(dGV_azuriranje_adminDZ);   
             }
             else if (tab_azuriranje.SelectedIndex == 3)
             {
-                dGV_lekari_azuriranje_popuni();
+                popuni_dgv_lekari(dGV_lekari_azuriranje);
             }
             else if (tab_azuriranje.SelectedIndex == 4)
             {
@@ -542,7 +413,7 @@ namespace Hippocrates
           
         }
         #endregion
-        //odavde je stari kod(neupotrebljiv)
+       
         #region Unos_podataka
 
 
@@ -566,13 +437,14 @@ namespace Hippocrates
 
            
             s.Close();
+            popuni_dgv_domovi(dGV_unosenje_DZ);
             MessageBox.Show("Uspeno ste uneli nov dom zdravlja ");
         }
 
         #endregion
 
         #region tab_za_Unos_lekara
-        public string pomIndex;
+        
         private void dgv_odabirDz_unos_lekara_SelectionChanged(object sender, EventArgs e)
         {
             int rowindex = dgv_odabirDz_unos_lekara.CurrentCell.RowIndex;
@@ -592,13 +464,7 @@ namespace Hippocrates
             };
             
             Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
-            foreach(Data.Entiteti.DomZdravlja dz in domovi)
-            {
-                if(dz.Mbr == pomIndex)
-                {
-                    dzi = dz;
-                }
-            }
+            dzi = s.Load<DomZdravlja>(pomIndex);
             
             dzi.Lekari.Add(il);
             il.RadiUDomuZdravlja = dzi;
@@ -608,14 +474,25 @@ namespace Hippocrates
 
             
             s.Close();
-
-            MessageBox.Show("Uspeno ste uneli novog lekara ");
+            popuni_dgv_lekari(dGV_unosenje_lekar);
+            MessageBox.Show("Uspeno ste uneli novog lekara " + pomIndex);
 
 
         }
         #endregion
 
         #region tab_za_Unos_pacijenta
+
+        private void dgv_pac_unos_izborLekara_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgv_odabirDz_unos_lekara.RowCount != 0)
+            {
+                int rowindex = dgv_odabirDz_unos_lekara.CurrentCell.RowIndex;
+                pomIndex = dgv_odabirDz_unos_lekara.Rows[rowindex].Cells[0].Value.ToString();
+            }
+            else
+                MessageBox.Show("Ne postoji nijedan lekar u navedenoj opstini ili ste pogresno uneli ime opstine");
+        }
 
         private void btn_unesi_pacijenta_Click(object sender, EventArgs e)
         {
@@ -632,13 +509,30 @@ namespace Hippocrates
                 Srednje_slovo = tb_srednjeSlovo.Text,
                 Vazi_do = dTP_Vazi_do.Value,
             };
+            
+            IzabraniLekar l = new IzabraniLekar();
+            l = s.Load<IzabraniLekar>(pomIndex);
+
+            l.Pacijenti.Add(pac1);
+            pac1.Lekar = l;
             s.Save(pac1);
             s.Flush();
             s.Close();
-            
+            popuni_dgv_pacijenti(dGV_unosenje_pacijent);
             MessageBox.Show("Uspeno ste uneli novog pacijenta");
         }
 
+        private void btn_odabir_lekara_unos_pac_Click(object sender, EventArgs e)
+        {
+            if(tb_opstina.Text != string.Empty)
+            {
+                popuni_dgv_lekari(dgv_pac_unos_izborLekara,tb_opstina.Text);
+            }
+            else
+            {
+                MessageBox.Show("Prvo morate uneti opstinu pacijenta");
+            }
+        }
 
         #endregion
 
@@ -646,11 +540,10 @@ namespace Hippocrates
 
         private void dgv_admin_unos_izbor_dz_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgv_admin_unos_izbor_dz.Rows.Count > 0)
-            {
+           
                 int rowindex = dgv_admin_unos_izbor_dz.CurrentCell.RowIndex;
                 pomIndex = dgv_admin_unos_izbor_dz.Rows[rowindex].Cells[0].Value.ToString();
-            }
+            
         }
 
         private void btn_unesi_adminaDZ_Click(object sender, EventArgs e)
@@ -665,28 +558,29 @@ namespace Hippocrates
                 Password = tb_adminDZ_azuriranje_PASS.Text
             };
             Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
-            foreach (Data.Entiteti.DomZdravlja dz in domovi)
-            {
-                if (dz.Mbr == pomIndex)
-                {
-                    dzi = dz;
-                }
-            }
+            dzi = s.Load<DomZdravlja>(pomIndex);
             dzi.Administratori.Add(admin);
             admin.RadiUDomuZdravlja = dzi;
             s.Save(admin);
             s.Flush();
             s.Close();
-            
-            MessageBox.Show("Uspeno ste uneli novog admina ");
+            popuni_dgv_admini(dGV_unos_AdminDZ);
+            MessageBox.Show("Uspeno ste uneli novog admina");
         }
 
         #endregion
 
-            #endregion
-
-        #region tab_za_brisanje
+        #region tab_za_unos_medicinskog_radnika
+        /*int rowindex = dgv_admin_unos_izbor_dz.CurrentCell.RowIndex;
+                pomIndex = dgv_admin_unos_izbor_dz.Rows[rowindex].Cells[0].Value.ToString();*/
         
+
+        #endregion
+
+        #endregion
+        //odavde je stari kod(neupotrebljiv)
+        #region tab_za_brisanje
+
         #region tab_za_brisanje_dz
 
         private void btn_brisanje_dz_Click(object sender, EventArgs e)
@@ -727,8 +621,8 @@ namespace Hippocrates
             popunjavanje_dgv_dz();
             MessageBox.Show("Uspeno ste obrisali dom zdravlja");*/
 
-        }
-        private void dGV_brisanje_dz_SelectionChanged(object sender, EventArgs e)
+    }
+    private void dGV_brisanje_dz_SelectionChanged(object sender, EventArgs e)
         {
             int rowindex = dGV_brisanje_dz.CurrentCell.RowIndex;
             pomIndex = dGV_brisanje_dz.Rows[rowindex].Cells[0].Value.ToString();
@@ -1020,6 +914,7 @@ namespace Hippocrates
         #endregion
 
         #endregion
+        //dovde je stari neupotrebljiv kod
 
         #region validacija_za_unos_u_kontrole
 
@@ -1299,8 +1194,11 @@ namespace Hippocrates
 
 
 
+
+
+
         #endregion
 
-        
+       
     }
 }
