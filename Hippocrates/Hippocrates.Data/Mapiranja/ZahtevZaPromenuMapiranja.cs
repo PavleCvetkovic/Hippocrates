@@ -15,6 +15,8 @@ namespace Hippocrates.Data.Mapiranja
             Table("ZAHTEV_ZA_PROMENU");
 
             Id(x => x.Id, "ID");
+            //Id(x => x.Id, "ID").GeneratedBy.Increment();
+            //Id(x => x.Id, "ID").GeneratedBy.Native();
 
             References(x => x.ZahtevPacijenta).Column("MATBRP");
             References(x => x.ZeljeniLekar).Column("MATBR_ŽELJENOG");
