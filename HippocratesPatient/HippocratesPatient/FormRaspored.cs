@@ -12,6 +12,9 @@ using MySql.Data.MySqlClient;
 using MetroFramework;
 using MetroFramework.Controls;
 using HippocratesPatient;
+using Hippocrates.Data.Entiteti;
+using NHibernate;
+using Hippocrates.Data;
 
 namespace Hippocrates
 {
@@ -22,20 +25,23 @@ namespace Hippocrates
         private int smena_lekara; // Local copy
         private string jmbg_lekara; // Local copy
         private string jmbg_pacijenta;
+        private Pacijent pacijent_local;
+        private ISession session;
 
-        public FormRaspored(string jmbg_p, string puno_ime_lekara, string jmbglek)
+        public FormRaspored(Pacijent pacijent)
         {
             InitializeComponent();
-            this.jmbg_pacijenta = jmbg_p;
-            this.jmbg_lekara = jmbglek; // Local copy
+            pacijent_local = pacijent;
+            this.jmbg_pacijenta = pacijent.Jmbg;
+            this.jmbg_lekara = pacijent.Lekar.Jmbg; 
             //this.WindowState = FormWindowState.Maximized;
             this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
                 Screen.PrimaryScreen.WorkingArea.Height);
             this.MinimumSize = new System.Drawing.Size(698, 365);
 
+            metroLabelLekarInfo.Text = "Izabrani lekar: " + pacijent.Lekar.Ime + " " + pacijent.Lekar.Prezime + " " + pacijent.Lekar.Jmbg;
             metroDateTime1.MinDate = System.DateTime.Today;
             metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
-            metroLabelLekarInfo.Text = "Izabrani lekar: " + puno_ime_lekara + " " + jmbglek ;
 
             // Binding handler to control
             foreach (Control c in pnlPopodne.Controls)
@@ -48,50 +54,97 @@ namespace Hippocrates
         private void RefreshControls(string jmbglek)
         {
             //int to_return = 1; // prva smena inicijalno
-            MySqlConnection conn = new MySqlConnection(conStr);
-            MySqlDataReader rdr;
-            try
+
+            session = DataLayer.GetSession();
+            IzabraniLekar lekar = session.Get<IzabraniLekar>(pacijent_local.Lekar.Jmbg);
+            var smena_lekara = session.CreateQuery("select s from Smena s where s.Id.Lekar = '" + lekar.Jmbg + 
+                "' and s.Id.Datum_Od > '" + metroDateTime1.Value.Date +"'");
+            //MetroMessageBox.Show(this, smena_lekara.List<Smena>()[0].Id.Lekar.Ime.ToString());
+            IList<Smena> smena_list = smena_lekara.List<Smena>();
+            int i = 0, smena_temp = 1; // for error avoid
+            for(i = 0; i < smena_list.Count; i++) 
             {
-                conn.Open();
-                string smena = "select SMENA from SMENA  where MATBRL = '" + jmbglek + "'" +
-                    " and '" + GetDate() + "'between DATUM_OD and DATUM_DO; ";
-                MySqlCommand cmdSmena = new MySqlCommand(smena, conn);
-
-                //short smena_byte = (short)cmdSmena.ExecuteScalar();
-                //smena_lekara = (int)smena_byte;
-                smena_lekara = (int)cmdSmena.ExecuteScalar();
-                UpdateForm(smena_lekara); // Panel showing
-
-                string command =
-                    "SELECT VREME FROM TERMIN WHERE MATBRL LIKE '" + jmbglek + "' AND DATUM = '" + GetDate() /*"2017-03-22"*/ + "' ;";
-
-                MySqlCommand cmd = new MySqlCommand(command, conn);
-                rdr = cmd.ExecuteReader();
-
-                foreach (Control c in pnlPopodne.Controls)
-                    c.Enabled = true;
-                foreach (Control c in pnlPrepodne.Controls)
-                    c.Enabled = true;
-
-                while (rdr.Read())
+                if (smena_list[i].Id.Datum_Od <= metroDateTime1.Value.Date && smena_list[i].Datum_Do >= metroDateTime1.Value.Date)
                 {
-                    int time = rdr.GetInt32(0);
-                    //MetroMessageBox.Show(this, "Enter while loop in rdr.Read() " + time.ToString(), "rdr.Read()", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (time <= 1330)
-                        this.pnlPrepodne.Controls["metroButton" + time.ToString()].Enabled = false;
-                    else
-                        this.pnlPopodne.Controls["metroButton" + time.ToString()].Enabled = false;
+                    smena_temp = smena_list[i].SmenaLekara;
+                    break;
                 }
-                rdr.Close();
             }
-            catch (Exception ex)
-            {
-                MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conn.Close();
-            }
+            UpdateForm(smena_temp);
+
+            //Enable all buttons (later disable the ones with appointments)
+            foreach (Control c in pnlPopodne.Controls)
+                c.Enabled = true;
+            foreach (Control c in pnlPrepodne.Controls)
+                c.Enabled = true;
+
+            // DOESN'T WORK OKAY
+            //try
+            //{
+            //    var termin_lekara = session.CreateQuery("select t from Termin t where t.Lekar = '" + lekar.Jmbg +
+            //        "' and t.Pacijent = '" + pacijent_local.Jmbg + /*"' and t.Datum = '" + metroDateTime1.Value.Date + */"'");
+
+            //    IList<Termin> termin_list = termin_lekara.List<Termin>();
+
+            //    foreach (Termin t in termin_list)
+            //        if (t.Datum == metroDateTime1.Value.Date)
+            //            if (t.Vreme <= 1330)
+            //                this.pnlPrepodne.Controls["metroButton" + t.Vreme.ToString()].Enabled = false;
+            //            else
+            //                this.pnlPopodne.Controls["metroButton" + t.Vreme.ToString()].Enabled = false;
+            //}
+            //catch(Exception ex)
+            //{
+            //    MetroMessageBox.Show(this, "Greška prilikom učitavanja podataka o zakazanim terminima " + ex.Message);
+            //}
+
+            #region SQL varijanta
+
+            //MySqlConnection conn = new MySqlConnection(conStr);
+            //MySqlDataReader rdr;
+            //try
+            //{
+            //    conn.Open();
+            //    string smena = "select SMENA from SMENA  where MATBRL = '" + jmbglek + "'" +
+            //        " and '" + GetDate() + "'between DATUM_OD and DATUM_DO; ";
+            //    MySqlCommand cmdSmena = new MySqlCommand(smena, conn);
+
+            //    //short smena_byte = (short)cmdSmena.ExecuteScalar();
+            //    //smena_lekara = (int)smena_byte;
+            //    smena_lekara = (int)cmdSmena.ExecuteScalar();
+            //    UpdateForm(smena_lekara); // Panel showing
+
+            //    string command =
+            //        "SELECT VREME FROM TERMIN WHERE MATBRL LIKE '" + jmbglek + "' AND DATUM = '" + GetDate() /*"2017-03-22"*/ + "' ;";
+
+            //    MySqlCommand cmd = new MySqlCommand(command, conn);
+            //    rdr = cmd.ExecuteReader();
+
+            //    foreach (Control c in pnlPopodne.Controls)
+            //        c.Enabled = true;
+            //    foreach (Control c in pnlPrepodne.Controls)
+            //        c.Enabled = true;
+
+            //    while (rdr.Read())
+            //    {
+            //        int time = rdr.GetInt32(0);
+            //        //MetroMessageBox.Show(this, "Enter while loop in rdr.Read() " + time.ToString(), "rdr.Read()", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        if (time <= 1330)
+            //            this.pnlPrepodne.Controls["metroButton" + time.ToString()].Enabled = false;
+            //        else
+            //            this.pnlPopodne.Controls["metroButton" + time.ToString()].Enabled = false;
+            //    }
+            //    rdr.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            //finally
+            //{
+            //    conn.Close();
+            //}
+            #endregion
         }
 
         private void UpdateForm(int smena_lek)
@@ -153,7 +206,7 @@ namespace Hippocrates
             //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
             string napomena = "Treba da dodam formu za upis napomene"; // Add form
             DialogResult dr = MetroMessageBox.Show(this, "Question", "Da li ste sigurni da želite da zakažete " + GetDate() + " " + metro_button.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Cancel)
+            if (dr == DialogResult.No) // Doesn't work okay
                 return;
 
             Napomena_Form nf = new Napomena_Form();
@@ -168,6 +221,11 @@ namespace Hippocrates
             else
                 MetroMessageBox.Show(this, "Info", "Greška prilikom zakazivanja termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        }
+
+        private void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            session.Close();
         }
     }
 }

@@ -161,9 +161,18 @@ namespace HippocratesPatient
 
         private void GetVakcineData()
         {
-            MySqlDataAdapter data_adapter;
-            DataSet data_set;
+
+            //MySqlDataAdapter data_adapter;
+            //DataSet data_set;
             //string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
+            IList<Vakcina> vakcine = session.QueryOver<Vakcina>().List();
+
+            metrogridVakcine.DataSource = vakcine;
+            metrogridVakcine.Columns[3].Visible = false; // 
+            for (int i = 0; i < metrogridVakcine.ColumnCount; i++)
+                metrogridVakcine.Columns[i].Width = metrogridVakcine.Width / metrogridVakcine.ColumnCount;
+            #region SQL varijanta
+            /*
             MySqlConnection conn = new MySqlConnection(connection);
             try
             {
@@ -182,13 +191,24 @@ namespace HippocratesPatient
             {
                 MessageBox.Show("Error during connection " +  ex.Message.ToString());
             }
+            */
+            #endregion
         } // Fill metroDataGrid in Vakcine
 
         private void GetDijagnozeData()
         {
-            MySqlDataAdapter data_adapter;
-            DataSet data_set;
+            //MySqlDataAdapter data_adapter;
+            //DataSet data_set;
             //string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
+            IList<Dijagnostifikovano> dijagnoze = session.QueryOver<Dijagnostifikovano>().List();
+            //IList<DijagnostifikovanoId> dijagnoze_id = session.QueryOver<DijagnostifikovanoId>().List();
+
+            //dijagnoze[0].Id = dijagnoze_id;
+            // ??
+            metroGridDijagnoze.DataSource = dijagnoze;
+
+            #region SQL varijanta
+            /*
             MySqlConnection conn = new MySqlConnection(connection);
             try
             {
@@ -207,6 +227,8 @@ namespace HippocratesPatient
             {
                 MessageBox.Show("Error during connection " + ex.Message.ToString());
             }
+            */
+            #endregion
         } // Fill metroDataGrid in Dijagnoze
 
         private void tabGlobal_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,7 +246,7 @@ namespace HippocratesPatient
         private void metroButton2_Click(object sender, EventArgs e)
         {
             //MetroMessageBox.Show(this, "This is a message in MetroBox");
-            FormRaspored raspored_form = new FormRaspored(jmbg_pacijenta, GetDoctorNameAndSurname(jmbg_lekara), jmbg_lekara);
+            FormRaspored raspored_form = new FormRaspored(pacijent);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
             raspored_form.ShowDialog();
         }

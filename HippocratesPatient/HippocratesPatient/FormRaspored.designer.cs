@@ -836,6 +836,7 @@
             this.Controls.Add(this.metroDateTime1);
             this.Name = "FormRaspored";
             this.Text = "Termini za zakazivanje";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRaspored_FormClosing);
             this.pnlPrepodne.ResumeLayout(false);
             this.pnlPopodne.ResumeLayout(false);
             this.ResumeLayout(false);
