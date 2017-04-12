@@ -28,9 +28,8 @@ namespace Hippocrates
         {
 
             InitializeComponent();
-            this.MaximumSize = new System.Drawing.Size(1243, 822);
-            this.MinimumSize = new System.Drawing.Size(1243, 822);
-            //this.popunjavanje_dgva();
+            this.MaximumSize = new System.Drawing.Size(1268, 872);
+            this.MinimumSize = new System.Drawing.Size(1268, 872);
             dTP_lekara.CustomFormat = "dd ,MMMM ,yyyy";
             dTP_pacijenta.CustomFormat = "dd ,MMMM ,yyyy";
             
@@ -648,12 +647,36 @@ namespace Hippocrates
 
         private void dGV_domZdravlja_azuriranje_SelectionChanged(object sender, EventArgs e)
         {
-           
+            int rowindex = dGV_domZdravlja_azuriranje.CurrentCell.RowIndex;
+            pomIndex = dGV_domZdravlja_azuriranje.Rows[rowindex].Cells[0].Value.ToString();
+            ISession s = DataLayer.GetSession();
+            DomZdravlja dzi = new DomZdravlja();
+            dzi = s.Load<DomZdravlja>(pomIndex);
+            tb_azuriranje_MBR_domZ.Text = dzi.Mbr;
+            tb_azuriranje_Ime_domZ.Text = dzi.Ime;
+            tb_azuriranje_lokacija_domZ.Text = dzi.Lokacija;
+            tb_azuriranje_opstina_domZ.Text = dzi.Opstina;
+            tb_azuriranje_adresa_domZ.Text = dzi.Adresa;
+            s.Close();
         }
 
         private void btn_azuriranje_domZ_Click(object sender, EventArgs e)
         { 
-           
+            ISession s = DataLayer.GetSession();
+            DomZdravlja dzi = new DomZdravlja();
+            dzi = s.Load<DomZdravlja>(pomIndex);
+            dzi.Mbr = tb_azuriranje_MBR_domZ.Text;
+            dzi.Ime = tb_azuriranje_Ime_domZ.Text;
+            dzi.Lokacija =tb_azuriranje_lokacija_domZ.Text;
+            dzi.Opstina = tb_azuriranje_opstina_domZ.Text;
+            dzi.Adresa = tb_azuriranje_adresa_domZ.Text;
+            s.Save(dzi);
+            s.Flush();
+
+
+            s.Close();
+            popuni_dgv_domovi(dGV_domZdravlja_azuriranje);
+            MessageBox.Show("Uspesno ste updatovali dom zdravlja");
         }
 
         #endregion
@@ -675,12 +698,46 @@ namespace Hippocrates
         
         private void dGV_pacijenti_azuriranje_SelectionChanged(object sender, EventArgs e)
         {
+            
+            int rowindex = dGV_pacijenti_azuriranje.CurrentCell.RowIndex;
+            pomIndex = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[0].Value.ToString();
+            ISession s = DataLayer.GetSession();
+            Pacijent pac = new Pacijent();
+            pac = s.Load<Pacijent>(pomIndex);
+            tb_pacijent_azuriranje_jmbg.Text = pac.Jmbg;
+            tb_pacijent_azuriranje_ime.Text = pac.Ime;
+            tb_pacijent_azuriranje_prezime.Text = pac.Prezime;
+            tb_pacijent_azuriranje_srednjeSlovo.Text = pac.Srednje_slovo;
+            tb_pacijent_azuriranje_lbo.Text = pac.Lbo;
+            tb_pacijent_azuriranje_opstina.Text = pac.Opstina;
+            tb_pacijent_azuriranje_telefon.Text = pac.Telefon;
+            tb_pacijent_azuriranje_email.Text = pac.Email;
+            IQuery iq = s.CreateQuery("from Vakcina");
+            IList<Vakcina> vakcine = iq.List<Vakcina>();
+            dGV_azuriranje_pac_vakcine.DataSource = vakcine;
+            dGV_azuriranje_pac_vakcine.Columns[3].Visible = false;
+            dGV_azuriranje_pac_vakcine.Columns[2].Visible = false;
+            dGV_azuriranje_pac_vakcine.Columns[1].Visible = false;
+            
+            IList<PrimioVakcinu> primioVak = pac.PrimioVakcinuVakcine;
+            //ovo nije gotovo
+
+            s.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+        }
+        private void btn_azuriranje_pac_vakBrisanje_Click(object sender, EventArgs e)
+        {
+
         }
 
+        private void btn_azuriranje_pac_vakDodaj_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
         #region tab_za_azuriranje_adminaDz
@@ -981,8 +1038,14 @@ namespace Hippocrates
 
 
 
+
+
+
+
+
+
         #endregion
 
-       
+      
     }
 }
