@@ -22,18 +22,20 @@ namespace Hippocrates
     {
         private string conStr =
                 "server=139.59.132.29;user=djeki;charset=utf8;database=Hippocrates;port=3306;password=volimdoroteju1;";
-        private int smena_lekara; // Local copy
-        private string jmbg_lekara; // Local copy
-        private string jmbg_pacijenta;
+        //private int smena_lekara; // Local copy
+        //private string jmbg_lekara; // Local copy
+        //private string jmbg_pacijenta;
         private Pacijent pacijent_local;
+        private IzabraniLekar lekar_local;
+        private IList<Termin> termin_list; // Local copy
         private ISession session;
 
         public FormRaspored(Pacijent pacijent)
         {
             InitializeComponent();
             pacijent_local = pacijent;
-            this.jmbg_pacijenta = pacijent.Jmbg;
-            this.jmbg_lekara = pacijent.Lekar.Jmbg; 
+            //this.jmbg_pacijenta = pacijent.Jmbg;
+            //this.jmbg_lekara = pacijent.Lekar.Jmbg; 
             //this.WindowState = FormWindowState.Maximized;
             this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
                 Screen.PrimaryScreen.WorkingArea.Height);
@@ -56,8 +58,8 @@ namespace Hippocrates
             //int to_return = 1; // prva smena inicijalno
 
             session = DataLayer.GetSession();
-            IzabraniLekar lekar = session.Get<IzabraniLekar>(pacijent_local.Lekar.Jmbg);
-            var smena_lekara = session.CreateQuery("select s from Smena s where s.Id.Lekar = '" + lekar.Jmbg + 
+            lekar_local = session.Get<IzabraniLekar>(pacijent_local.Lekar.Jmbg);
+            var smena_lekara = session.CreateQuery("select s from Smena s where s.Id.Lekar = '" + lekar_local.Jmbg + 
                 "' and s.Id.Datum_Od > '" + metroDateTime1.Value.Date +"'");
             //MetroMessageBox.Show(this, smena_lekara.List<Smena>()[0].Id.Lekar.Ime.ToString());
             IList<Smena> smena_list = smena_lekara.List<Smena>();
@@ -78,25 +80,26 @@ namespace Hippocrates
             foreach (Control c in pnlPrepodne.Controls)
                 c.Enabled = true;
 
-            // DOESN'T WORK OKAY
-            //try
-            //{
-            //    var termin_lekara = session.CreateQuery("select t from Termin t where t.Lekar = '" + lekar.Jmbg +
-            //        "' and t.Pacijent = '" + pacijent_local.Jmbg + /*"' and t.Datum = '" + metroDateTime1.Value.Date + */"'");
+            //DOESN'T WORK OKAY
+            try
+            {
+                // COULD NOT EXECUTE QUERY ?? (WHY, PORQUE ALEXANDRO..????????????????)
+                var termin_lekara = session.CreateQuery("select t from Termin t where t.Lekar = '" + lekar_local.Jmbg +
+                    "' and t.Pacijent = '" + pacijent_local.Jmbg + /*"' and t.Datum = '" + metroDateTime1.Value.Date + */"'");
 
-            //    IList<Termin> termin_list = termin_lekara.List<Termin>();
-
-            //    foreach (Termin t in termin_list)
-            //        if (t.Datum == metroDateTime1.Value.Date)
-            //            if (t.Vreme <= 1330)
-            //                this.pnlPrepodne.Controls["metroButton" + t.Vreme.ToString()].Enabled = false;
-            //            else
-            //                this.pnlPopodne.Controls["metroButton" + t.Vreme.ToString()].Enabled = false;
-            //}
-            //catch(Exception ex)
-            //{
-            //    MetroMessageBox.Show(this, "Greška prilikom učitavanja podataka o zakazanim terminima " + ex.Message);
-            //}
+                termin_list = termin_lekara.List<Termin>();
+                
+                foreach (Termin t in termin_list)
+                    if (t.Datum == metroDateTime1.Value.Date)
+                        if (t.Vreme <= 1330)
+                            this.pnlPrepodne.Controls["metroButton" + t.Vreme.ToString()].Enabled = false;
+                        else
+                            this.pnlPopodne.Controls["metroButton" + t.Vreme.ToString()].Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "Greška prilikom učitavanja podataka o zakazanim terminima " + ex.Message);
+            }
 
             #region SQL varijanta
 
@@ -174,30 +177,50 @@ namespace Hippocrates
         private bool MakeAnApointment(string time, string napomena) // time - metroButton name (730, 745, 800 ...)
         {
             bool success = true;
-
-            MySqlConnection conn = new MySqlConnection(conStr);
-            try
+            int time_parse = 0;
+            if (!Int32.TryParse(time, out time_parse))
             {
-                conn.Open();
-
-                string sql = "INSERT INTO TERMIN VALUES ('" + jmbg_lekara + "','" + jmbg_pacijenta + "','" + GetDate() + "','" + Int32.Parse(time) + "','" + napomena + "')";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                success = false;
+                MetroMessageBox.Show(this, "Greška prilikom učitavanja vremena " + time);
+                return false;
             }
 
-            conn.Close();
+            Termin temp_termin = new Termin()
+            {
+                Lekar = lekar_local,
+                Pacijent = pacijent_local,
+                Datum = metroDateTime1.Value.Date,
+                Vreme = time_parse,
+                Napomena = napomena
+            };
+
+            //termin_list.Add(temp_termin);
+            session.Save(temp_termin);
+            session.Flush(); // to see changes
+            #region SQL nacin
+            //MySqlConnection conn = new MySqlConnection(conStr);
+            //try
+            //{
+            //    conn.Open();
+
+            //    string sql = "INSERT INTO TERMIN VALUES ('" + jmbg_lekara + "','" + jmbg_pacijenta + "','" + GetDate() + "','" + Int32.Parse(time) + "','" + napomena + "')";
+            //    MySqlCommand cmd = new MySqlCommand(sql, conn);
+            //    cmd.ExecuteNonQuery();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    success = false;
+            //}
+
+            //conn.Close();
+            #endregion
             return success;
         }
 
         private void metroDateTime1_ValueChanged(object sender, EventArgs e)
         {
             //Each date change refreshes controls
-            RefreshControls(jmbg_lekara);
+            RefreshControls(pacijent_local.Lekar.Jmbg);
         }
         
         private void metroButton_Click(object sender, EventArgs e)
@@ -215,7 +238,7 @@ namespace Hippocrates
 
             if (MakeAnApointment(metro_button.Text.Replace(":", string.Empty), napomena)) // Replace(string old_string, string new_string) 11:30 -> 1130
             {
-                RefreshControls(jmbg_lekara); //Each appointment change refreshed controls
+                RefreshControls(lekar_local.Jmbg); //Each appointment change refreshed controls
                 MetroMessageBox.Show(this, "Info", "Uspešno zakazan termin", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else

@@ -20,7 +20,11 @@ namespace Hippocrates.Data.Mapiranja
             Map(x => x.Vreme, "VREME");
             Map(x => x.Datum, "DATUM");
 
-            References(x => x.Lekar).Column("MATBRSPEC");
+            //References(x => x.Lekar).Column("MATBRSPEC");
+            //Ovaj zakomentarisani deo gde je pogresno napisano ime kolone mi je oduzeo 2 sata zivota (Pavle ti si kriv)
+            //Dizem ovaj spomenik mojim potrosenim 120 minuta
+            //Slava im.
+            References(x => x.Lekar).Column("MATBRL");
             References(x => x.Pacijent).Column("MATBRP");
         }
     }
