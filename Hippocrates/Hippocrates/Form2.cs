@@ -32,7 +32,7 @@ namespace Hippocrates
             this.MinimumSize = new System.Drawing.Size(1268, 872);
             dTP_lekara.CustomFormat = "dd ,MMMM ,yyyy";
             dTP_pacijenta.CustomFormat = "dd ,MMMM ,yyyy";
-            
+            pomIndex = string.Empty;
         }
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -310,7 +310,21 @@ namespace Hippocrates
             s.Close();
         }
 
-        
+        private void popuni_dGV_azuriranje_pacijent_VakcinePacijentove(DataGridView dgv,Pacijent p)
+        {
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
+            ISession s1 = DataLayer.GetSession();
+            IList<PrimioVakcinu> vakcinePac = p.PrimioVakcinuVakcine;
+            List<Vakcina> vakcineZaDgv = new List<Vakcina>();
+            foreach (PrimioVakcinu pv in vakcinePac)
+            {
+                vakcineZaDgv.Add(pv.Id.PrimioVakcina);
+            }
+            dgv.DataSource = vakcineZaDgv;
+            dgv.Columns[3].Visible = false;
+            s1.Close();
+        }
         #endregion
 
         #region tab_change
@@ -712,31 +726,67 @@ namespace Hippocrates
             tb_pacijent_azuriranje_opstina.Text = pac.Opstina;
             tb_pacijent_azuriranje_telefon.Text = pac.Telefon;
             tb_pacijent_azuriranje_email.Text = pac.Email;
+            popuni_dGV_azuriranje_pacijent_VakcinePacijentove(dGV_azuriranje_pacijent_VakcinePacijentove, pac);
+
             IQuery iq = s.CreateQuery("from Vakcina");
-            IList<Vakcina> vakcine = iq.List<Vakcina>();
+            IList<Vakcina> vakcine = iq.List<Vakcina>();     
             dGV_azuriranje_pac_vakcine.DataSource = vakcine;
             dGV_azuriranje_pac_vakcine.Columns[3].Visible = false;
             dGV_azuriranje_pac_vakcine.Columns[2].Visible = false;
-            dGV_azuriranje_pac_vakcine.Columns[1].Visible = false;
-            
-            IList<PrimioVakcinu> primioVak = pac.PrimioVakcinuVakcine;
-            //ovo nije gotovo
-
             s.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_azuriraj_pac_Click(object sender, EventArgs e)
         {
+            int rowindex = dGV_azuriranje_pacijent_VakcinePacijentove.CurrentCell.RowIndex;
+            string pomIndex2 = dGV_azuriranje_pacijent_VakcinePacijentove.Rows[rowindex].Cells[1].Value.ToString();
+
 
         }
+
         private void btn_azuriranje_pac_vakBrisanje_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btn_azuriranje_pac_vakDodaj_Click(object sender, EventArgs e)
         {
+            int rowindex = dGV_azuriranje_pac_vakcine.CurrentCell.RowIndex;
+            string pomIndex2 = dGV_azuriranje_pac_vakcine.Rows[rowindex].Cells[1].Value.ToString();
+            ISession s = DataLayer.GetSession();
+            Pacijent pac = s.Load<Pacijent>(pomIndex);
+            Vakcina v = s.Load<Vakcina>(pomIndex2);
+            bool vecPrimio = false;
+            PrimioVakcinu pv = new PrimioVakcinu();
+            pv.Datum = DateTime.Now;
+            pv.Id.PrimioPacijent = pac;
+            pv.Id.PrimioVakcina = v;
+            IList<PrimioVakcinu> vakcinePac = pac.PrimioVakcinuVakcine;
+            foreach (PrimioVakcinu pri in vakcinePac)
+            {
+                if(pv.Id.PrimioPacijent == pri.Id.PrimioPacijent && pv.Id.PrimioVakcina == pri.Id.PrimioVakcina)
+                {
+                    vecPrimio = true;
+                }
+            }
+            if (vecPrimio == false)
+            {
+                pac.PrimioVakcinuVakcine.Add(pv);
+                v.PrimioVakcinuPacijenti.Add(pv);
+                
+                s.SaveOrUpdate(pac);
+                s.Flush();
+                popuni_dGV_azuriranje_pacijent_VakcinePacijentove(dGV_azuriranje_pacijent_VakcinePacijentove, pac);
 
+                s.Close();
+
+            }
+            else
+            {
+                MessageBox.Show("Pacijent je vec primio izabranu vakcinu .");
+            }
+            
+            
         }
         #endregion
 
@@ -1044,8 +1094,10 @@ namespace Hippocrates
 
 
 
+
+
         #endregion
 
-      
+       
     }
 }

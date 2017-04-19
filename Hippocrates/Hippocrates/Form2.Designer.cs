@@ -151,6 +151,39 @@
             this.tab_brisanje_medRad = new MetroFramework.Controls.MetroTabPage();
             this.tab_za_azuriranje = new MetroFramework.Controls.MetroTabPage();
             this.tab_azuriranje = new MetroFramework.Controls.MetroTabControl();
+            this.Tab_azuriranje_pacijenata = new MetroFramework.Controls.MetroTabPage();
+            this.pnl_azuriranje_pacijenti = new System.Windows.Forms.Panel();
+            this.mTC_pacijent_azuriranje_VakDokTer = new MetroFramework.Controls.MetroTabControl();
+            this.tab_vakcine = new MetroFramework.Controls.MetroTabPage();
+            this.dGV_azuriranje_pacijent_VakcinePacijentove = new System.Windows.Forms.DataGridView();
+            this.btn_azuriranje_pac_vakBrisanje = new System.Windows.Forms.Button();
+            this.btn_azuriranje_pac_vakDodaj = new System.Windows.Forms.Button();
+            this.dGV_azuriranje_pac_vakcine = new System.Windows.Forms.DataGridView();
+            this.tab_terapije = new MetroFramework.Controls.MetroTabPage();
+            this.tab_doktor = new MetroFramework.Controls.MetroTabPage();
+            this.tb_pacijent_azuriranje_telefon = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.tb_pacijent_azuriranje_email = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.cB_pravo_da_zakaze = new System.Windows.Forms.CheckBox();
+            this.dTP_vaziDo_pacijent = new System.Windows.Forms.DateTimePicker();
+            this.label40 = new System.Windows.Forms.Label();
+            this.tb_pacijent_azuriranje_srednjeSlovo = new System.Windows.Forms.TextBox();
+            this.dTP_pacijent_azuriranje = new System.Windows.Forms.DateTimePicker();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.btn_azuriraj_pac = new System.Windows.Forms.Button();
+            this.tb_pacijent_azuriranje_opstina = new System.Windows.Forms.TextBox();
+            this.tb_pacijent_azuriranje_prezime = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.tb_pacijent_azuriranje_ime = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.tb_pacijent_azuriranje_lbo = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.tb_pacijent_azuriranje_jmbg = new System.Windows.Forms.TextBox();
+            this.dGV_pacijenti_azuriranje = new System.Windows.Forms.DataGridView();
             this.Tab_azuriranje_domaZdravlja = new MetroFramework.Controls.MetroTabPage();
             this.pnl_azuriranje_domZ = new System.Windows.Forms.Panel();
             this.btn_azuriranje_domZ = new System.Windows.Forms.Button();
@@ -165,46 +198,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.tb_azuriranje_MBR_domZ = new System.Windows.Forms.TextBox();
             this.dGV_domZdravlja_azuriranje = new System.Windows.Forms.DataGridView();
-            this.Tab_azuriranje_pacijenata = new MetroFramework.Controls.MetroTabPage();
-            this.pnl_azuriranje_pacijenti = new System.Windows.Forms.Panel();
-            this.mTC_pacijent_azuriranje_VakDokTer = new MetroFramework.Controls.MetroTabControl();
-            this.tab_vakcine = new MetroFramework.Controls.MetroTabPage();
-            this.rtb_azuriranje_pac_vakOpis = new System.Windows.Forms.RichTextBox();
-            this.label61 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
-            this.tb_azuriranje_pac_vakSifra = new System.Windows.Forms.TextBox();
-            this.label59 = new System.Windows.Forms.Label();
-            this.tb_azuriranje_pac_vakIme = new System.Windows.Forms.TextBox();
-            this.btn_azuriranje_pac_vakBrisanje = new System.Windows.Forms.Button();
-            this.btn_azuriranje_pac_vakDodaj = new System.Windows.Forms.Button();
-            this.dGV_azuriranje_pac_vakcine = new System.Windows.Forms.DataGridView();
-            this.tab_terapije = new MetroFramework.Controls.MetroTabPage();
-            this.tab_doktor = new MetroFramework.Controls.MetroTabPage();
-            this.tb_pacijent_azuriranje_telefon = new System.Windows.Forms.TextBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.tb_pacijent_azuriranje_email = new System.Windows.Forms.TextBox();
-            this.label58 = new System.Windows.Forms.Label();
-            this.cB_pravo_da_zakaze = new System.Windows.Forms.CheckBox();
-            this.dTP_vaziDo_pacijent = new System.Windows.Forms.DateTimePicker();
-            this.label40 = new System.Windows.Forms.Label();
-            this.tb_pacijent_azuriranje_MATBRL = new System.Windows.Forms.TextBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.tb_pacijent_azuriranje_srednjeSlovo = new System.Windows.Forms.TextBox();
-            this.dTP_pacijent_azuriranje = new System.Windows.Forms.DateTimePicker();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tb_pacijent_azuriranje_opstina = new System.Windows.Forms.TextBox();
-            this.tb_pacijent_azuriranje_prezime = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.tb_pacijent_azuriranje_ime = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.tb_pacijent_azuriranje_lbo = new System.Windows.Forms.TextBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.tb_pacijent_azuriranje_jmbg = new System.Windows.Forms.TextBox();
-            this.dGV_pacijenti_azuriranje = new System.Windows.Forms.DataGridView();
             this.tab_azuriranje_admin_dz = new MetroFramework.Controls.MetroTabPage();
             this.dGV_azuriranje_adminDZ = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -244,7 +237,6 @@
             this.dGV_lekari_azuriranje = new System.Windows.Forms.DataGridView();
             this.Tab_azuriranje_medRadnik = new MetroFramework.Controls.MetroTabPage();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.dGV_azuriranje_pacijent_VakcinePacijentove = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -281,15 +273,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dGV_adminDZ_brisanje)).BeginInit();
             this.tab_za_azuriranje.SuspendLayout();
             this.tab_azuriranje.SuspendLayout();
-            this.Tab_azuriranje_domaZdravlja.SuspendLayout();
-            this.pnl_azuriranje_domZ.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_domZdravlja_azuriranje)).BeginInit();
             this.Tab_azuriranje_pacijenata.SuspendLayout();
             this.pnl_azuriranje_pacijenti.SuspendLayout();
             this.mTC_pacijent_azuriranje_VakDokTer.SuspendLayout();
             this.tab_vakcine.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_azuriranje_pacijent_VakcinePacijentove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_azuriranje_pac_vakcine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_pacijenti_azuriranje)).BeginInit();
+            this.Tab_azuriranje_domaZdravlja.SuspendLayout();
+            this.pnl_azuriranje_domZ.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_domZdravlja_azuriranje)).BeginInit();
             this.tab_azuriranje_admin_dz.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_azuriranje_adminDZ)).BeginInit();
             this.panel4.SuspendLayout();
@@ -297,7 +290,6 @@
             this.pnl_azuriranje_lekari.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_lekari_azuriranje)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_azuriranje_pacijent_VakcinePacijentove)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -431,7 +423,7 @@
             this.GeneralControl.Controls.Add(this.tab_za_azuriranje);
             this.GeneralControl.Location = new System.Drawing.Point(200, 93);
             this.GeneralControl.Name = "GeneralControl";
-            this.GeneralControl.SelectedIndex = 3;
+            this.GeneralControl.SelectedIndex = 0;
             this.GeneralControl.Size = new System.Drawing.Size(1058, 766);
             this.GeneralControl.TabIndex = 4;
             this.GeneralControl.UseSelectable = true;
@@ -1675,11 +1667,383 @@
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_medRadnik);
             this.tab_azuriranje.Location = new System.Drawing.Point(1, 1);
             this.tab_azuriranje.Name = "tab_azuriranje";
-            this.tab_azuriranje.SelectedIndex = 1;
+            this.tab_azuriranje.SelectedIndex = 0;
             this.tab_azuriranje.Size = new System.Drawing.Size(1053, 727);
             this.tab_azuriranje.TabIndex = 4;
             this.tab_azuriranje.UseSelectable = true;
             this.tab_azuriranje.SelectedIndexChanged += new System.EventHandler(this.tab_azuriranje_SelectedIndexChanged);
+            // 
+            // Tab_azuriranje_pacijenata
+            // 
+            this.Tab_azuriranje_pacijenata.Controls.Add(this.pnl_azuriranje_pacijenti);
+            this.Tab_azuriranje_pacijenata.Controls.Add(this.dGV_pacijenti_azuriranje);
+            this.Tab_azuriranje_pacijenata.HorizontalScrollbarBarColor = true;
+            this.Tab_azuriranje_pacijenata.HorizontalScrollbarHighlightOnWheel = false;
+            this.Tab_azuriranje_pacijenata.HorizontalScrollbarSize = 10;
+            this.Tab_azuriranje_pacijenata.Location = new System.Drawing.Point(4, 38);
+            this.Tab_azuriranje_pacijenata.Name = "Tab_azuriranje_pacijenata";
+            this.Tab_azuriranje_pacijenata.Size = new System.Drawing.Size(1045, 685);
+            this.Tab_azuriranje_pacijenata.TabIndex = 2;
+            this.Tab_azuriranje_pacijenata.Text = "Azuriraj podatka o pacijentima";
+            this.Tab_azuriranje_pacijenata.VerticalScrollbarBarColor = true;
+            this.Tab_azuriranje_pacijenata.VerticalScrollbarHighlightOnWheel = false;
+            this.Tab_azuriranje_pacijenata.VerticalScrollbarSize = 10;
+            // 
+            // pnl_azuriranje_pacijenti
+            // 
+            this.pnl_azuriranje_pacijenti.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.mTC_pacijent_azuriranje_VakDokTer);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_telefon);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label57);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_email);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label58);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.cB_pravo_da_zakaze);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.dTP_vaziDo_pacijent);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label40);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_srednjeSlovo);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.dTP_pacijent_azuriranje);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label31);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label32);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.btn_azuriraj_pac);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_opstina);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_prezime);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label33);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label34);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_ime);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label35);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_lbo);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label36);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.label37);
+            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_jmbg);
+            this.pnl_azuriranje_pacijenti.Location = new System.Drawing.Point(2, 365);
+            this.pnl_azuriranje_pacijenti.Name = "pnl_azuriranje_pacijenti";
+            this.pnl_azuriranje_pacijenti.Size = new System.Drawing.Size(1040, 325);
+            this.pnl_azuriranje_pacijenti.TabIndex = 4;
+            // 
+            // mTC_pacijent_azuriranje_VakDokTer
+            // 
+            this.mTC_pacijent_azuriranje_VakDokTer.Controls.Add(this.tab_vakcine);
+            this.mTC_pacijent_azuriranje_VakDokTer.Controls.Add(this.tab_terapije);
+            this.mTC_pacijent_azuriranje_VakDokTer.Controls.Add(this.tab_doktor);
+            this.mTC_pacijent_azuriranje_VakDokTer.Location = new System.Drawing.Point(453, 42);
+            this.mTC_pacijent_azuriranje_VakDokTer.Name = "mTC_pacijent_azuriranje_VakDokTer";
+            this.mTC_pacijent_azuriranje_VakDokTer.SelectedIndex = 0;
+            this.mTC_pacijent_azuriranje_VakDokTer.Size = new System.Drawing.Size(575, 233);
+            this.mTC_pacijent_azuriranje_VakDokTer.TabIndex = 74;
+            this.mTC_pacijent_azuriranje_VakDokTer.UseSelectable = true;
+            // 
+            // tab_vakcine
+            // 
+            this.tab_vakcine.Controls.Add(this.dGV_azuriranje_pacijent_VakcinePacijentove);
+            this.tab_vakcine.Controls.Add(this.btn_azuriranje_pac_vakBrisanje);
+            this.tab_vakcine.Controls.Add(this.btn_azuriranje_pac_vakDodaj);
+            this.tab_vakcine.Controls.Add(this.dGV_azuriranje_pac_vakcine);
+            this.tab_vakcine.HorizontalScrollbarBarColor = true;
+            this.tab_vakcine.HorizontalScrollbarHighlightOnWheel = false;
+            this.tab_vakcine.HorizontalScrollbarSize = 10;
+            this.tab_vakcine.Location = new System.Drawing.Point(4, 38);
+            this.tab_vakcine.Name = "tab_vakcine";
+            this.tab_vakcine.Size = new System.Drawing.Size(567, 191);
+            this.tab_vakcine.TabIndex = 0;
+            this.tab_vakcine.Text = "Vakcine";
+            this.tab_vakcine.VerticalScrollbarBarColor = true;
+            this.tab_vakcine.VerticalScrollbarHighlightOnWheel = false;
+            this.tab_vakcine.VerticalScrollbarSize = 10;
+            // 
+            // dGV_azuriranje_pacijent_VakcinePacijentove
+            // 
+            this.dGV_azuriranje_pacijent_VakcinePacijentove.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_azuriranje_pacijent_VakcinePacijentove.Location = new System.Drawing.Point(284, 6);
+            this.dGV_azuriranje_pacijent_VakcinePacijentove.Name = "dGV_azuriranje_pacijent_VakcinePacijentove";
+            this.dGV_azuriranje_pacijent_VakcinePacijentove.Size = new System.Drawing.Size(283, 154);
+            this.dGV_azuriranje_pacijent_VakcinePacijentove.TabIndex = 12;
+            // 
+            // btn_azuriranje_pac_vakBrisanje
+            // 
+            this.btn_azuriranje_pac_vakBrisanje.Location = new System.Drawing.Point(284, 165);
+            this.btn_azuriranje_pac_vakBrisanje.Name = "btn_azuriranje_pac_vakBrisanje";
+            this.btn_azuriranje_pac_vakBrisanje.Size = new System.Drawing.Size(130, 23);
+            this.btn_azuriranje_pac_vakBrisanje.TabIndex = 4;
+            this.btn_azuriranje_pac_vakBrisanje.Text = "Obrisi";
+            this.btn_azuriranje_pac_vakBrisanje.UseVisualStyleBackColor = true;
+            this.btn_azuriranje_pac_vakBrisanje.Click += new System.EventHandler(this.btn_azuriranje_pac_vakBrisanje_Click);
+            // 
+            // btn_azuriranje_pac_vakDodaj
+            // 
+            this.btn_azuriranje_pac_vakDodaj.Location = new System.Drawing.Point(148, 165);
+            this.btn_azuriranje_pac_vakDodaj.Name = "btn_azuriranje_pac_vakDodaj";
+            this.btn_azuriranje_pac_vakDodaj.Size = new System.Drawing.Size(130, 23);
+            this.btn_azuriranje_pac_vakDodaj.TabIndex = 3;
+            this.btn_azuriranje_pac_vakDodaj.Text = "Dodaj";
+            this.btn_azuriranje_pac_vakDodaj.UseVisualStyleBackColor = true;
+            this.btn_azuriranje_pac_vakDodaj.Click += new System.EventHandler(this.btn_azuriranje_pac_vakDodaj_Click);
+            // 
+            // dGV_azuriranje_pac_vakcine
+            // 
+            this.dGV_azuriranje_pac_vakcine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_azuriranje_pac_vakcine.Location = new System.Drawing.Point(0, 6);
+            this.dGV_azuriranje_pac_vakcine.Name = "dGV_azuriranje_pac_vakcine";
+            this.dGV_azuriranje_pac_vakcine.Size = new System.Drawing.Size(278, 154);
+            this.dGV_azuriranje_pac_vakcine.TabIndex = 2;
+            // 
+            // tab_terapije
+            // 
+            this.tab_terapije.HorizontalScrollbarBarColor = true;
+            this.tab_terapije.HorizontalScrollbarHighlightOnWheel = false;
+            this.tab_terapije.HorizontalScrollbarSize = 10;
+            this.tab_terapije.Location = new System.Drawing.Point(4, 38);
+            this.tab_terapije.Name = "tab_terapije";
+            this.tab_terapije.Size = new System.Drawing.Size(567, 191);
+            this.tab_terapije.TabIndex = 1;
+            this.tab_terapije.Text = "Terapije";
+            this.tab_terapije.VerticalScrollbarBarColor = true;
+            this.tab_terapije.VerticalScrollbarHighlightOnWheel = false;
+            this.tab_terapije.VerticalScrollbarSize = 10;
+            // 
+            // tab_doktor
+            // 
+            this.tab_doktor.HorizontalScrollbarBarColor = true;
+            this.tab_doktor.HorizontalScrollbarHighlightOnWheel = false;
+            this.tab_doktor.HorizontalScrollbarSize = 10;
+            this.tab_doktor.Location = new System.Drawing.Point(4, 38);
+            this.tab_doktor.Name = "tab_doktor";
+            this.tab_doktor.Size = new System.Drawing.Size(567, 191);
+            this.tab_doktor.TabIndex = 2;
+            this.tab_doktor.Text = "Doktor";
+            this.tab_doktor.VerticalScrollbarBarColor = true;
+            this.tab_doktor.VerticalScrollbarHighlightOnWheel = false;
+            this.tab_doktor.VerticalScrollbarSize = 10;
+            // 
+            // tb_pacijent_azuriranje_telefon
+            // 
+            this.tb_pacijent_azuriranje_telefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pacijent_azuriranje_telefon.Location = new System.Drawing.Point(512, 6);
+            this.tb_pacijent_azuriranje_telefon.MaxLength = 13;
+            this.tb_pacijent_azuriranje_telefon.Name = "tb_pacijent_azuriranje_telefon";
+            this.tb_pacijent_azuriranje_telefon.Size = new System.Drawing.Size(213, 26);
+            this.tb_pacijent_azuriranje_telefon.TabIndex = 73;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label57.Location = new System.Drawing.Point(435, 12);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(62, 20);
+            this.label57.TabIndex = 72;
+            this.label57.Text = "Telefon";
+            // 
+            // tb_pacijent_azuriranje_email
+            // 
+            this.tb_pacijent_azuriranje_email.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pacijent_azuriranje_email.Location = new System.Drawing.Point(815, 6);
+            this.tb_pacijent_azuriranje_email.Name = "tb_pacijent_azuriranje_email";
+            this.tb_pacijent_azuriranje_email.Size = new System.Drawing.Size(213, 26);
+            this.tb_pacijent_azuriranje_email.TabIndex = 71;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.Location = new System.Drawing.Point(761, 12);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(48, 20);
+            this.label58.TabIndex = 70;
+            this.label58.Text = "Email";
+            // 
+            // cB_pravo_da_zakaze
+            // 
+            this.cB_pravo_da_zakaze.AutoSize = true;
+            this.cB_pravo_da_zakaze.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cB_pravo_da_zakaze.Location = new System.Drawing.Point(284, 44);
+            this.cB_pravo_da_zakaze.Name = "cB_pravo_da_zakaze";
+            this.cB_pravo_da_zakaze.Size = new System.Drawing.Size(145, 24);
+            this.cB_pravo_da_zakaze.TabIndex = 69;
+            this.cB_pravo_da_zakaze.Text = "Pravo da zakaze";
+            this.cB_pravo_da_zakaze.UseVisualStyleBackColor = true;
+            // 
+            // dTP_vaziDo_pacijent
+            // 
+            this.dTP_vaziDo_pacijent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTP_vaziDo_pacijent.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dTP_vaziDo_pacijent.Location = new System.Drawing.Point(216, 268);
+            this.dTP_vaziDo_pacijent.Name = "dTP_vaziDo_pacijent";
+            this.dTP_vaziDo_pacijent.Size = new System.Drawing.Size(213, 22);
+            this.dTP_vaziDo_pacijent.TabIndex = 68;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(129, 270);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(62, 20);
+            this.label40.TabIndex = 67;
+            this.label40.Text = "Vazi do";
+            // 
+            // tb_pacijent_azuriranje_srednjeSlovo
+            // 
+            this.tb_pacijent_azuriranje_srednjeSlovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pacijent_azuriranje_srednjeSlovo.Location = new System.Drawing.Point(222, 42);
+            this.tb_pacijent_azuriranje_srednjeSlovo.MaxLength = 2;
+            this.tb_pacijent_azuriranje_srednjeSlovo.Name = "tb_pacijent_azuriranje_srednjeSlovo";
+            this.tb_pacijent_azuriranje_srednjeSlovo.Size = new System.Drawing.Size(53, 26);
+            this.tb_pacijent_azuriranje_srednjeSlovo.TabIndex = 64;
+            // 
+            // dTP_pacijent_azuriranje
+            // 
+            this.dTP_pacijent_azuriranje.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTP_pacijent_azuriranje.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dTP_pacijent_azuriranje.Location = new System.Drawing.Point(216, 202);
+            this.dTP_pacijent_azuriranje.Name = "dTP_pacijent_azuriranje";
+            this.dTP_pacijent_azuriranje.Size = new System.Drawing.Size(213, 22);
+            this.dTP_pacijent_azuriranje.TabIndex = 63;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(6, 202);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(185, 20);
+            this.label31.TabIndex = 62;
+            this.label31.Text = "Datum rodjenja pacijenta";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(19, 48);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(172, 20);
+            this.label32.TabIndex = 61;
+            this.label32.Text = "Srednje slovo pacijenta";
+            // 
+            // btn_azuriraj_pac
+            // 
+            this.btn_azuriraj_pac.Location = new System.Drawing.Point(856, 281);
+            this.btn_azuriraj_pac.Name = "btn_azuriraj_pac";
+            this.btn_azuriraj_pac.Size = new System.Drawing.Size(178, 33);
+            this.btn_azuriraj_pac.TabIndex = 59;
+            this.btn_azuriraj_pac.Text = "Azuriraj podatke";
+            this.btn_azuriraj_pac.UseVisualStyleBackColor = true;
+            this.btn_azuriraj_pac.Click += new System.EventHandler(this.btn_azuriraj_pac_Click);
+            // 
+            // tb_pacijent_azuriranje_opstina
+            // 
+            this.tb_pacijent_azuriranje_opstina.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pacijent_azuriranje_opstina.Location = new System.Drawing.Point(216, 162);
+            this.tb_pacijent_azuriranje_opstina.Name = "tb_pacijent_azuriranje_opstina";
+            this.tb_pacijent_azuriranje_opstina.Size = new System.Drawing.Size(213, 26);
+            this.tb_pacijent_azuriranje_opstina.TabIndex = 58;
+            this.tb_pacijent_azuriranje_opstina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_opstina_KeyPress);
+            // 
+            // tb_pacijent_azuriranje_prezime
+            // 
+            this.tb_pacijent_azuriranje_prezime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pacijent_azuriranje_prezime.Location = new System.Drawing.Point(216, 121);
+            this.tb_pacijent_azuriranje_prezime.Name = "tb_pacijent_azuriranje_prezime";
+            this.tb_pacijent_azuriranje_prezime.Size = new System.Drawing.Size(213, 26);
+            this.tb_pacijent_azuriranje_prezime.TabIndex = 57;
+            this.tb_pacijent_azuriranje_prezime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_prezime_KeyPress);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(44, 168);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(132, 20);
+            this.label33.TabIndex = 56;
+            this.label33.Text = "Opstinu pacijenta";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(57, 127);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(134, 20);
+            this.label34.TabIndex = 55;
+            this.label34.Text = "Prezime pacijenta";
+            // 
+            // tb_pacijent_azuriranje_ime
+            // 
+            this.tb_pacijent_azuriranje_ime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pacijent_azuriranje_ime.Location = new System.Drawing.Point(216, 83);
+            this.tb_pacijent_azuriranje_ime.Name = "tb_pacijent_azuriranje_ime";
+            this.tb_pacijent_azuriranje_ime.Size = new System.Drawing.Size(213, 26);
+            this.tb_pacijent_azuriranje_ime.TabIndex = 54;
+            this.tb_pacijent_azuriranje_ime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_ime_KeyPress);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Location = new System.Drawing.Point(87, 86);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(104, 20);
+            this.label35.TabIndex = 53;
+            this.label35.Text = "Ime pacijenta";
+            // 
+            // tb_pacijent_azuriranje_lbo
+            // 
+            this.tb_pacijent_azuriranje_lbo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pacijent_azuriranje_lbo.Location = new System.Drawing.Point(216, 233);
+            this.tb_pacijent_azuriranje_lbo.MaxLength = 5;
+            this.tb_pacijent_azuriranje_lbo.Name = "tb_pacijent_azuriranje_lbo";
+            this.tb_pacijent_azuriranje_lbo.Size = new System.Drawing.Size(213, 26);
+            this.tb_pacijent_azuriranje_lbo.TabIndex = 52;
+            this.tb_pacijent_azuriranje_lbo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_lbo_KeyPress);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(82, 239);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(109, 20);
+            this.label36.TabIndex = 51;
+            this.label36.Text = "LBO pacijenta";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(69, 12);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(122, 20);
+            this.label37.TabIndex = 50;
+            this.label37.Text = "JMBG pacijenta";
+            // 
+            // tb_pacijent_azuriranje_jmbg
+            // 
+            this.tb_pacijent_azuriranje_jmbg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_pacijent_azuriranje_jmbg.Location = new System.Drawing.Point(216, 6);
+            this.tb_pacijent_azuriranje_jmbg.MaxLength = 13;
+            this.tb_pacijent_azuriranje_jmbg.Name = "tb_pacijent_azuriranje_jmbg";
+            this.tb_pacijent_azuriranje_jmbg.Size = new System.Drawing.Size(213, 26);
+            this.tb_pacijent_azuriranje_jmbg.TabIndex = 49;
+            this.tb_pacijent_azuriranje_jmbg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_jmbg_KeyPress);
+            // 
+            // dGV_pacijenti_azuriranje
+            // 
+            this.dGV_pacijenti_azuriranje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_pacijenti_azuriranje.Location = new System.Drawing.Point(2, 4);
+            this.dGV_pacijenti_azuriranje.Name = "dGV_pacijenti_azuriranje";
+            this.dGV_pacijenti_azuriranje.Size = new System.Drawing.Size(1040, 355);
+            this.dGV_pacijenti_azuriranje.TabIndex = 2;
+            this.dGV_pacijenti_azuriranje.SelectionChanged += new System.EventHandler(this.dGV_pacijenti_azuriranje_SelectionChanged);
             // 
             // Tab_azuriranje_domaZdravlja
             // 
@@ -1835,453 +2199,6 @@
             this.dGV_domZdravlja_azuriranje.Size = new System.Drawing.Size(1040, 355);
             this.dGV_domZdravlja_azuriranje.TabIndex = 2;
             this.dGV_domZdravlja_azuriranje.SelectionChanged += new System.EventHandler(this.dGV_domZdravlja_azuriranje_SelectionChanged);
-            // 
-            // Tab_azuriranje_pacijenata
-            // 
-            this.Tab_azuriranje_pacijenata.Controls.Add(this.pnl_azuriranje_pacijenti);
-            this.Tab_azuriranje_pacijenata.Controls.Add(this.dGV_pacijenti_azuriranje);
-            this.Tab_azuriranje_pacijenata.HorizontalScrollbarBarColor = true;
-            this.Tab_azuriranje_pacijenata.HorizontalScrollbarHighlightOnWheel = false;
-            this.Tab_azuriranje_pacijenata.HorizontalScrollbarSize = 10;
-            this.Tab_azuriranje_pacijenata.Location = new System.Drawing.Point(4, 38);
-            this.Tab_azuriranje_pacijenata.Name = "Tab_azuriranje_pacijenata";
-            this.Tab_azuriranje_pacijenata.Size = new System.Drawing.Size(1045, 685);
-            this.Tab_azuriranje_pacijenata.TabIndex = 2;
-            this.Tab_azuriranje_pacijenata.Text = "Azuriraj podatka o pacijentima";
-            this.Tab_azuriranje_pacijenata.VerticalScrollbarBarColor = true;
-            this.Tab_azuriranje_pacijenata.VerticalScrollbarHighlightOnWheel = false;
-            this.Tab_azuriranje_pacijenata.VerticalScrollbarSize = 10;
-            // 
-            // pnl_azuriranje_pacijenti
-            // 
-            this.pnl_azuriranje_pacijenti.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.mTC_pacijent_azuriranje_VakDokTer);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_telefon);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label57);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_email);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label58);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.cB_pravo_da_zakaze);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.dTP_vaziDo_pacijent);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label40);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_MATBRL);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label39);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_srednjeSlovo);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.dTP_pacijent_azuriranje);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label31);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label32);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.button1);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_opstina);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_prezime);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label33);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label34);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_ime);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label35);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_lbo);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label36);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.label37);
-            this.pnl_azuriranje_pacijenti.Controls.Add(this.tb_pacijent_azuriranje_jmbg);
-            this.pnl_azuriranje_pacijenti.Location = new System.Drawing.Point(2, 365);
-            this.pnl_azuriranje_pacijenti.Name = "pnl_azuriranje_pacijenti";
-            this.pnl_azuriranje_pacijenti.Size = new System.Drawing.Size(1040, 325);
-            this.pnl_azuriranje_pacijenti.TabIndex = 4;
-            // 
-            // mTC_pacijent_azuriranje_VakDokTer
-            // 
-            this.mTC_pacijent_azuriranje_VakDokTer.Controls.Add(this.tab_vakcine);
-            this.mTC_pacijent_azuriranje_VakDokTer.Controls.Add(this.tab_terapije);
-            this.mTC_pacijent_azuriranje_VakDokTer.Controls.Add(this.tab_doktor);
-            this.mTC_pacijent_azuriranje_VakDokTer.Location = new System.Drawing.Point(453, 42);
-            this.mTC_pacijent_azuriranje_VakDokTer.Name = "mTC_pacijent_azuriranje_VakDokTer";
-            this.mTC_pacijent_azuriranje_VakDokTer.SelectedIndex = 0;
-            this.mTC_pacijent_azuriranje_VakDokTer.Size = new System.Drawing.Size(575, 233);
-            this.mTC_pacijent_azuriranje_VakDokTer.TabIndex = 74;
-            this.mTC_pacijent_azuriranje_VakDokTer.UseSelectable = true;
-            // 
-            // tab_vakcine
-            // 
-            this.tab_vakcine.Controls.Add(this.dGV_azuriranje_pacijent_VakcinePacijentove);
-            this.tab_vakcine.Controls.Add(this.rtb_azuriranje_pac_vakOpis);
-            this.tab_vakcine.Controls.Add(this.label61);
-            this.tab_vakcine.Controls.Add(this.label60);
-            this.tab_vakcine.Controls.Add(this.tb_azuriranje_pac_vakSifra);
-            this.tab_vakcine.Controls.Add(this.label59);
-            this.tab_vakcine.Controls.Add(this.tb_azuriranje_pac_vakIme);
-            this.tab_vakcine.Controls.Add(this.btn_azuriranje_pac_vakBrisanje);
-            this.tab_vakcine.Controls.Add(this.btn_azuriranje_pac_vakDodaj);
-            this.tab_vakcine.Controls.Add(this.dGV_azuriranje_pac_vakcine);
-            this.tab_vakcine.HorizontalScrollbarBarColor = true;
-            this.tab_vakcine.HorizontalScrollbarHighlightOnWheel = false;
-            this.tab_vakcine.HorizontalScrollbarSize = 10;
-            this.tab_vakcine.Location = new System.Drawing.Point(4, 38);
-            this.tab_vakcine.Name = "tab_vakcine";
-            this.tab_vakcine.Size = new System.Drawing.Size(567, 191);
-            this.tab_vakcine.TabIndex = 0;
-            this.tab_vakcine.Text = "Vakcine";
-            this.tab_vakcine.VerticalScrollbarBarColor = true;
-            this.tab_vakcine.VerticalScrollbarHighlightOnWheel = false;
-            this.tab_vakcine.VerticalScrollbarSize = 10;
-            // 
-            // rtb_azuriranje_pac_vakOpis
-            // 
-            this.rtb_azuriranje_pac_vakOpis.Location = new System.Drawing.Point(399, 75);
-            this.rtb_azuriranje_pac_vakOpis.Name = "rtb_azuriranje_pac_vakOpis";
-            this.rtb_azuriranje_pac_vakOpis.Size = new System.Drawing.Size(165, 85);
-            this.rtb_azuriranje_pac_vakOpis.TabIndex = 11;
-            this.rtb_azuriranje_pac_vakOpis.Text = "";
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label61.Location = new System.Drawing.Point(341, 91);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(36, 16);
-            this.label61.TabIndex = 10;
-            this.label61.Text = "Opis";
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label60.Location = new System.Drawing.Point(341, 53);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(35, 16);
-            this.label60.TabIndex = 8;
-            this.label60.Text = "Sifra";
-            // 
-            // tb_azuriranje_pac_vakSifra
-            // 
-            this.tb_azuriranje_pac_vakSifra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_azuriranje_pac_vakSifra.Location = new System.Drawing.Point(399, 47);
-            this.tb_azuriranje_pac_vakSifra.Name = "tb_azuriranje_pac_vakSifra";
-            this.tb_azuriranje_pac_vakSifra.Size = new System.Drawing.Size(165, 22);
-            this.tb_azuriranje_pac_vakSifra.TabIndex = 7;
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label59.Location = new System.Drawing.Point(355, 18);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(30, 16);
-            this.label59.TabIndex = 6;
-            this.label59.Text = "Ime";
-            // 
-            // tb_azuriranje_pac_vakIme
-            // 
-            this.tb_azuriranje_pac_vakIme.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_azuriranje_pac_vakIme.Location = new System.Drawing.Point(399, 12);
-            this.tb_azuriranje_pac_vakIme.Name = "tb_azuriranje_pac_vakIme";
-            this.tb_azuriranje_pac_vakIme.Size = new System.Drawing.Size(165, 22);
-            this.tb_azuriranje_pac_vakIme.TabIndex = 5;
-            // 
-            // btn_azuriranje_pac_vakBrisanje
-            // 
-            this.btn_azuriranje_pac_vakBrisanje.Location = new System.Drawing.Point(165, 165);
-            this.btn_azuriranje_pac_vakBrisanje.Name = "btn_azuriranje_pac_vakBrisanje";
-            this.btn_azuriranje_pac_vakBrisanje.Size = new System.Drawing.Size(130, 23);
-            this.btn_azuriranje_pac_vakBrisanje.TabIndex = 4;
-            this.btn_azuriranje_pac_vakBrisanje.Text = "Obrisi";
-            this.btn_azuriranje_pac_vakBrisanje.UseVisualStyleBackColor = true;
-            this.btn_azuriranje_pac_vakBrisanje.Click += new System.EventHandler(this.btn_azuriranje_pac_vakBrisanje_Click);
-            // 
-            // btn_azuriranje_pac_vakDodaj
-            // 
-            this.btn_azuriranje_pac_vakDodaj.Location = new System.Drawing.Point(29, 165);
-            this.btn_azuriranje_pac_vakDodaj.Name = "btn_azuriranje_pac_vakDodaj";
-            this.btn_azuriranje_pac_vakDodaj.Size = new System.Drawing.Size(130, 23);
-            this.btn_azuriranje_pac_vakDodaj.TabIndex = 3;
-            this.btn_azuriranje_pac_vakDodaj.Text = "Dodaj";
-            this.btn_azuriranje_pac_vakDodaj.UseVisualStyleBackColor = true;
-            this.btn_azuriranje_pac_vakDodaj.Click += new System.EventHandler(this.btn_azuriranje_pac_vakDodaj_Click);
-            // 
-            // dGV_azuriranje_pac_vakcine
-            // 
-            this.dGV_azuriranje_pac_vakcine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_azuriranje_pac_vakcine.Location = new System.Drawing.Point(3, 6);
-            this.dGV_azuriranje_pac_vakcine.Name = "dGV_azuriranje_pac_vakcine";
-            this.dGV_azuriranje_pac_vakcine.Size = new System.Drawing.Size(156, 154);
-            this.dGV_azuriranje_pac_vakcine.TabIndex = 2;
-            // 
-            // tab_terapije
-            // 
-            this.tab_terapije.HorizontalScrollbarBarColor = true;
-            this.tab_terapije.HorizontalScrollbarHighlightOnWheel = false;
-            this.tab_terapije.HorizontalScrollbarSize = 10;
-            this.tab_terapije.Location = new System.Drawing.Point(4, 38);
-            this.tab_terapije.Name = "tab_terapije";
-            this.tab_terapije.Size = new System.Drawing.Size(567, 191);
-            this.tab_terapije.TabIndex = 1;
-            this.tab_terapije.Text = "Terapije";
-            this.tab_terapije.VerticalScrollbarBarColor = true;
-            this.tab_terapije.VerticalScrollbarHighlightOnWheel = false;
-            this.tab_terapije.VerticalScrollbarSize = 10;
-            // 
-            // tab_doktor
-            // 
-            this.tab_doktor.HorizontalScrollbarBarColor = true;
-            this.tab_doktor.HorizontalScrollbarHighlightOnWheel = false;
-            this.tab_doktor.HorizontalScrollbarSize = 10;
-            this.tab_doktor.Location = new System.Drawing.Point(4, 38);
-            this.tab_doktor.Name = "tab_doktor";
-            this.tab_doktor.Size = new System.Drawing.Size(567, 191);
-            this.tab_doktor.TabIndex = 2;
-            this.tab_doktor.Text = "Doktor";
-            this.tab_doktor.VerticalScrollbarBarColor = true;
-            this.tab_doktor.VerticalScrollbarHighlightOnWheel = false;
-            this.tab_doktor.VerticalScrollbarSize = 10;
-            // 
-            // tb_pacijent_azuriranje_telefon
-            // 
-            this.tb_pacijent_azuriranje_telefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_telefon.Location = new System.Drawing.Point(512, 6);
-            this.tb_pacijent_azuriranje_telefon.MaxLength = 13;
-            this.tb_pacijent_azuriranje_telefon.Name = "tb_pacijent_azuriranje_telefon";
-            this.tb_pacijent_azuriranje_telefon.Size = new System.Drawing.Size(213, 26);
-            this.tb_pacijent_azuriranje_telefon.TabIndex = 73;
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label57.Location = new System.Drawing.Point(435, 12);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(62, 20);
-            this.label57.TabIndex = 72;
-            this.label57.Text = "Telefon";
-            // 
-            // tb_pacijent_azuriranje_email
-            // 
-            this.tb_pacijent_azuriranje_email.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_email.Location = new System.Drawing.Point(815, 6);
-            this.tb_pacijent_azuriranje_email.Name = "tb_pacijent_azuriranje_email";
-            this.tb_pacijent_azuriranje_email.Size = new System.Drawing.Size(213, 26);
-            this.tb_pacijent_azuriranje_email.TabIndex = 71;
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label58.Location = new System.Drawing.Point(761, 12);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(48, 20);
-            this.label58.TabIndex = 70;
-            this.label58.Text = "Email";
-            // 
-            // cB_pravo_da_zakaze
-            // 
-            this.cB_pravo_da_zakaze.AutoSize = true;
-            this.cB_pravo_da_zakaze.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cB_pravo_da_zakaze.Location = new System.Drawing.Point(284, 44);
-            this.cB_pravo_da_zakaze.Name = "cB_pravo_da_zakaze";
-            this.cB_pravo_da_zakaze.Size = new System.Drawing.Size(145, 24);
-            this.cB_pravo_da_zakaze.TabIndex = 69;
-            this.cB_pravo_da_zakaze.Text = "Pravo da zakaze";
-            this.cB_pravo_da_zakaze.UseVisualStyleBackColor = true;
-            // 
-            // dTP_vaziDo_pacijent
-            // 
-            this.dTP_vaziDo_pacijent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dTP_vaziDo_pacijent.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dTP_vaziDo_pacijent.Location = new System.Drawing.Point(216, 297);
-            this.dTP_vaziDo_pacijent.Name = "dTP_vaziDo_pacijent";
-            this.dTP_vaziDo_pacijent.Size = new System.Drawing.Size(213, 22);
-            this.dTP_vaziDo_pacijent.TabIndex = 68;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(129, 298);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(62, 20);
-            this.label40.TabIndex = 67;
-            this.label40.Text = "Vazi do";
-            // 
-            // tb_pacijent_azuriranje_MATBRL
-            // 
-            this.tb_pacijent_azuriranje_MATBRL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_MATBRL.Location = new System.Drawing.Point(216, 265);
-            this.tb_pacijent_azuriranje_MATBRL.MaxLength = 13;
-            this.tb_pacijent_azuriranje_MATBRL.Name = "tb_pacijent_azuriranje_MATBRL";
-            this.tb_pacijent_azuriranje_MATBRL.Size = new System.Drawing.Size(213, 26);
-            this.tb_pacijent_azuriranje_MATBRL.TabIndex = 66;
-            this.tb_pacijent_azuriranje_MATBRL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_MATBRL_KeyPress);
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(117, 272);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(74, 20);
-            this.label39.TabIndex = 65;
-            this.label39.Text = "MATBRL";
-            // 
-            // tb_pacijent_azuriranje_srednjeSlovo
-            // 
-            this.tb_pacijent_azuriranje_srednjeSlovo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_srednjeSlovo.Location = new System.Drawing.Point(222, 42);
-            this.tb_pacijent_azuriranje_srednjeSlovo.MaxLength = 2;
-            this.tb_pacijent_azuriranje_srednjeSlovo.Name = "tb_pacijent_azuriranje_srednjeSlovo";
-            this.tb_pacijent_azuriranje_srednjeSlovo.Size = new System.Drawing.Size(53, 26);
-            this.tb_pacijent_azuriranje_srednjeSlovo.TabIndex = 64;
-            // 
-            // dTP_pacijent_azuriranje
-            // 
-            this.dTP_pacijent_azuriranje.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dTP_pacijent_azuriranje.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dTP_pacijent_azuriranje.Location = new System.Drawing.Point(216, 202);
-            this.dTP_pacijent_azuriranje.Name = "dTP_pacijent_azuriranje";
-            this.dTP_pacijent_azuriranje.Size = new System.Drawing.Size(213, 22);
-            this.dTP_pacijent_azuriranje.TabIndex = 63;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(6, 202);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(185, 20);
-            this.label31.TabIndex = 62;
-            this.label31.Text = "Datum rodjenja pacijenta";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(19, 48);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(172, 20);
-            this.label32.TabIndex = 61;
-            this.label32.Text = "Srednje slovo pacijenta";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(856, 281);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(178, 33);
-            this.button1.TabIndex = 59;
-            this.button1.Text = "Azuriraj podatke";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // tb_pacijent_azuriranje_opstina
-            // 
-            this.tb_pacijent_azuriranje_opstina.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_opstina.Location = new System.Drawing.Point(216, 162);
-            this.tb_pacijent_azuriranje_opstina.Name = "tb_pacijent_azuriranje_opstina";
-            this.tb_pacijent_azuriranje_opstina.Size = new System.Drawing.Size(213, 26);
-            this.tb_pacijent_azuriranje_opstina.TabIndex = 58;
-            this.tb_pacijent_azuriranje_opstina.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_opstina_KeyPress);
-            // 
-            // tb_pacijent_azuriranje_prezime
-            // 
-            this.tb_pacijent_azuriranje_prezime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_prezime.Location = new System.Drawing.Point(216, 121);
-            this.tb_pacijent_azuriranje_prezime.Name = "tb_pacijent_azuriranje_prezime";
-            this.tb_pacijent_azuriranje_prezime.Size = new System.Drawing.Size(213, 26);
-            this.tb_pacijent_azuriranje_prezime.TabIndex = 57;
-            this.tb_pacijent_azuriranje_prezime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_prezime_KeyPress);
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(44, 168);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(132, 20);
-            this.label33.TabIndex = 56;
-            this.label33.Text = "Opstinu pacijenta";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(57, 127);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(134, 20);
-            this.label34.TabIndex = 55;
-            this.label34.Text = "Prezime pacijenta";
-            // 
-            // tb_pacijent_azuriranje_ime
-            // 
-            this.tb_pacijent_azuriranje_ime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_ime.Location = new System.Drawing.Point(216, 83);
-            this.tb_pacijent_azuriranje_ime.Name = "tb_pacijent_azuriranje_ime";
-            this.tb_pacijent_azuriranje_ime.Size = new System.Drawing.Size(213, 26);
-            this.tb_pacijent_azuriranje_ime.TabIndex = 54;
-            this.tb_pacijent_azuriranje_ime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_ime_KeyPress);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(87, 86);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(104, 20);
-            this.label35.TabIndex = 53;
-            this.label35.Text = "Ime pacijenta";
-            // 
-            // tb_pacijent_azuriranje_lbo
-            // 
-            this.tb_pacijent_azuriranje_lbo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_lbo.Location = new System.Drawing.Point(216, 233);
-            this.tb_pacijent_azuriranje_lbo.MaxLength = 5;
-            this.tb_pacijent_azuriranje_lbo.Name = "tb_pacijent_azuriranje_lbo";
-            this.tb_pacijent_azuriranje_lbo.Size = new System.Drawing.Size(213, 26);
-            this.tb_pacijent_azuriranje_lbo.TabIndex = 52;
-            this.tb_pacijent_azuriranje_lbo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_lbo_KeyPress);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(82, 239);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(109, 20);
-            this.label36.TabIndex = 51;
-            this.label36.Text = "LBO pacijenta";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(69, 12);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(122, 20);
-            this.label37.TabIndex = 50;
-            this.label37.Text = "JMBG pacijenta";
-            // 
-            // tb_pacijent_azuriranje_jmbg
-            // 
-            this.tb_pacijent_azuriranje_jmbg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_pacijent_azuriranje_jmbg.Location = new System.Drawing.Point(216, 6);
-            this.tb_pacijent_azuriranje_jmbg.MaxLength = 13;
-            this.tb_pacijent_azuriranje_jmbg.Name = "tb_pacijent_azuriranje_jmbg";
-            this.tb_pacijent_azuriranje_jmbg.Size = new System.Drawing.Size(213, 26);
-            this.tb_pacijent_azuriranje_jmbg.TabIndex = 49;
-            this.tb_pacijent_azuriranje_jmbg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_jmbg_KeyPress);
-            // 
-            // dGV_pacijenti_azuriranje
-            // 
-            this.dGV_pacijenti_azuriranje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_pacijenti_azuriranje.Location = new System.Drawing.Point(2, 4);
-            this.dGV_pacijenti_azuriranje.Name = "dGV_pacijenti_azuriranje";
-            this.dGV_pacijenti_azuriranje.Size = new System.Drawing.Size(1040, 355);
-            this.dGV_pacijenti_azuriranje.TabIndex = 2;
-            this.dGV_pacijenti_azuriranje.SelectionChanged += new System.EventHandler(this.dGV_pacijenti_azuriranje_SelectionChanged);
             // 
             // tab_azuriranje_admin_dz
             // 
@@ -2712,14 +2629,6 @@
             this.Tab_azuriranje_medRadnik.VerticalScrollbarHighlightOnWheel = false;
             this.Tab_azuriranje_medRadnik.VerticalScrollbarSize = 10;
             // 
-            // dGV_azuriranje_pacijent_VakcinePacijentove
-            // 
-            this.dGV_azuriranje_pacijent_VakcinePacijentove.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_azuriranje_pacijent_VakcinePacijentove.Location = new System.Drawing.Point(165, 6);
-            this.dGV_azuriranje_pacijent_VakcinePacijentove.Name = "dGV_azuriranje_pacijent_VakcinePacijentove";
-            this.dGV_azuriranje_pacijent_VakcinePacijentove.Size = new System.Drawing.Size(156, 154);
-            this.dGV_azuriranje_pacijent_VakcinePacijentove.TabIndex = 12;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2775,18 +2684,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dGV_adminDZ_brisanje)).EndInit();
             this.tab_za_azuriranje.ResumeLayout(false);
             this.tab_azuriranje.ResumeLayout(false);
-            this.Tab_azuriranje_domaZdravlja.ResumeLayout(false);
-            this.pnl_azuriranje_domZ.ResumeLayout(false);
-            this.pnl_azuriranje_domZ.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_domZdravlja_azuriranje)).EndInit();
             this.Tab_azuriranje_pacijenata.ResumeLayout(false);
             this.pnl_azuriranje_pacijenti.ResumeLayout(false);
             this.pnl_azuriranje_pacijenti.PerformLayout();
             this.mTC_pacijent_azuriranje_VakDokTer.ResumeLayout(false);
             this.tab_vakcine.ResumeLayout(false);
-            this.tab_vakcine.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_azuriranje_pacijent_VakcinePacijentove)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_azuriranje_pac_vakcine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_pacijenti_azuriranje)).EndInit();
+            this.Tab_azuriranje_domaZdravlja.ResumeLayout(false);
+            this.pnl_azuriranje_domZ.ResumeLayout(false);
+            this.pnl_azuriranje_domZ.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_domZdravlja_azuriranje)).EndInit();
             this.tab_azuriranje_admin_dz.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGV_azuriranje_adminDZ)).EndInit();
             this.panel4.ResumeLayout(false);
@@ -2796,7 +2705,6 @@
             this.pnl_azuriranje_lekari.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_lekari_azuriranje)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_azuriranje_pacijent_VakcinePacijentove)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2912,7 +2820,7 @@
         private System.Windows.Forms.DateTimePicker dTP_pacijent_azuriranje;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_azuriraj_pac;
         private System.Windows.Forms.TextBox tb_pacijent_azuriranje_opstina;
         private System.Windows.Forms.TextBox tb_pacijent_azuriranje_prezime;
         private System.Windows.Forms.Label label33;
@@ -2940,7 +2848,6 @@
         private System.Windows.Forms.CheckBox cb_azuriranje_smenaPrva_leakr;
         private System.Windows.Forms.TextBox tb_pacijent_azuriranje_srednjeSlovo;
         private System.Windows.Forms.TextBox tb_pacijent_azuriranje_MATBRL;
-        private System.Windows.Forms.Label label39;
         private System.Windows.Forms.DateTimePicker dTP_vaziDo_pacijent;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.CheckBox cB_pravo_da_zakaze;
@@ -3013,12 +2920,6 @@
         private System.Windows.Forms.Button btn_azuriranje_pac_vakBrisanje;
         private System.Windows.Forms.Button btn_azuriranje_pac_vakDodaj;
         private System.Windows.Forms.DataGridView dGV_azuriranje_pac_vakcine;
-        private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.TextBox tb_azuriranje_pac_vakIme;
-        private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.TextBox tb_azuriranje_pac_vakSifra;
-        private System.Windows.Forms.RichTextBox rtb_azuriranje_pac_vakOpis;
         private System.Windows.Forms.DataGridView dGV_azuriranje_pacijent_VakcinePacijentove;
     }
 }
