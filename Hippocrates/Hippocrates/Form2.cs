@@ -325,6 +325,39 @@ namespace Hippocrates
             dgv.Columns[3].Visible = false;
             s1.Close();
         }
+
+        private void popuni_dgv_azuriranje_pac_terapije(DataGridView dgv,Pacijent p)
+        {
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
+            ISession s1 = DataLayer.GetSession();
+            IList<Terapija> terapije = p.Terapije;
+            dgv.ColumnCount = 2;
+            dgv.Columns[0].Name = "Opis";
+            dgv.Columns[1].Name = "Dijagnoza";
+            foreach (Terapija t in terapije)
+            {
+                dgv_azuriranje_pac_terapije.Rows.Add(t.Opis, t.TerapijaDijagnoza.Ime);
+            }
+            s1.Close();
+        }
+
+        private void popuni_dGV_pac_dijagnoze(DataGridView dgv, Pacijent p)
+        {
+            dgv.DataSource = null;
+            dgv.Columns.Clear();
+            ISession s1 = DataLayer.GetSession();
+            IList<Dijagnostifikovano> dijagnoze = p.DijagnostifikovanoDijagnoze;
+            dgv.ColumnCount = 2;
+            dgv.Columns[0].Name = "Sifra";
+            dgv.Columns[1].Name = "Ime";
+            foreach(Dijagnostifikovano d in dijagnoze)
+            {
+                dgv.Rows.Add(d.Id.DijagnozaDijagnoza.Sifra, d.Id.DijagnozaDijagnoza.Ime);
+            }
+            s1.Close();
+        }
+
         #endregion
 
         #region tab_change
@@ -712,7 +745,10 @@ namespace Hippocrates
         
         private void dGV_pacijenti_azuriranje_SelectionChanged(object sender, EventArgs e)
         {
-            
+            cB_Dijagnoze_pacijenta_azuriranje.Items.Clear();
+            cB_Dijagnoze_pacijenta_azuriranje.Text = string.Empty;
+            cB_dijagnoze_Azuriranje_tabDij.Items.Clear();
+            cB_dijagnoze_Azuriranje_tabDij.Text = string.Empty;
             int rowindex = dGV_pacijenti_azuriranje.CurrentCell.RowIndex;
             pomIndex = dGV_pacijenti_azuriranje.Rows[rowindex].Cells[0].Value.ToString();
             ISession s = DataLayer.GetSession();
@@ -728,19 +764,42 @@ namespace Hippocrates
             tb_pacijent_azuriranje_email.Text = pac.Email;
             popuni_dGV_azuriranje_pacijent_VakcinePacijentove(dGV_azuriranje_pacijent_VakcinePacijentove, pac);
 
+            //---combobox dijagnoze pacijenta
+            foreach (Dijagnostifikovano d in pac.DijagnostifikovanoDijagnoze)
+            {
+                    cB_Dijagnoze_pacijenta_azuriranje.Items.Add(d.Id.DijagnozaDijagnoza.Sifra + "-" + d.Id.DijagnozaDijagnoza.Ime);                
+            }
+            IQuery iq1 = s.CreateQuery("from Dijagnoza");
+            IList<Dijagnoza> dijagnoze = iq1.List<Dijagnoza>();
+            foreach (Dijagnoza d in dijagnoze)
+            {
+                if (cB_Dijagnoze_pacijenta_azuriranje.Items.Contains(d.Sifra + "-" + d.Ime) == false)
+                    cB_dijagnoze_Azuriranje_tabDij.Items.Add(d.Sifra + "-" + d.Ime);      
+            }
+            label_lekar_pac.Text = pac.Lekar.Ime;
+            label_lekar_prezime_pac.Text = pac.Lekar.Prezime;
+            iq1 = s.CreateQuery("from IzabraniLekar");
+            IList<IzabraniLekar> lekari = iq1.List<IzabraniLekar>();
+            foreach(IzabraniLekar l in lekari)
+            {
+                if (l.RadiUDomuZdravlja.Opstina == pac.Opstina && l.Ime != label_lekar_pac.Text && l.Prezime != label_lekar_prezime_pac.Text)
+                {
+                    cB_lekari_za_izmenu.Items.Add(l.Ime + " " + l.Prezime);
+                }
+            }
+            //----
             IQuery iq = s.CreateQuery("from Vakcina");
             IList<Vakcina> vakcine = iq.List<Vakcina>();     
             dGV_azuriranje_pac_vakcine.DataSource = vakcine;
             dGV_azuriranje_pac_vakcine.Columns[3].Visible = false;
             dGV_azuriranje_pac_vakcine.Columns[2].Visible = false;
+            popuni_dgv_azuriranje_pac_terapije(dgv_azuriranje_pac_terapije, pac);
+            popuni_dGV_pac_dijagnoze(dGV_pac_dijagnoze, pac);
             s.Close();
         }
 
         private void btn_azuriraj_pac_Click(object sender, EventArgs e)
         {
-            int rowindex = dGV_azuriranje_pacijent_VakcinePacijentove.CurrentCell.RowIndex;
-            string pomIndex2 = dGV_azuriranje_pacijent_VakcinePacijentove.Rows[rowindex].Cells[1].Value.ToString();
-
 
         }
 
@@ -788,6 +847,74 @@ namespace Hippocrates
             
             
         }
+
+        private void btn_dodaj_Terapiju_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                Pacijent pac = s.Load<Pacijent>(pomIndex);
+                string dijagnozaIzCB = cB_Dijagnoze_pacijenta_azuriranje.SelectedItem.ToString();
+                string indexDijagnoze = dijagnozaIzCB.Substring(0, dijagnozaIzCB.IndexOf("-"));
+                Dijagnoza d = s.Load<Dijagnoza>(indexDijagnoze);
+                Terapija ter = new Terapija()
+                {
+                    Datum_do = dTP_pac_terap_od.Value,
+                    Datum_od = dTP_pac_terap_do.Value,
+                    Opis = rtB_opis_terapije.Text
+                };
+                ter.TerapijaPacijent = pac;
+                ter.TerapijaLekar = pac.Lekar;
+                pac.Lekar.Terapije.Add(ter);
+                pac.Terapije.Add(ter);
+                ter.TerapijaDijagnoza = d;
+                d.Terapije.Add(ter);
+                s.Flush();
+
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti pacijenta u tabeli na tabu");
+            }
+        }
+
+
+        private void btn_pac_dijagnoza_dodaj_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                Pacijent pac = s.Load<Pacijent>(pomIndex);
+                string dijagnozaIzCB = cB_Dijagnoze_pacijenta_azuriranje.SelectedItem.ToString();
+                string indexDijagnoze = dijagnozaIzCB.Substring(0, dijagnozaIzCB.IndexOf("-"));
+                Dijagnoza d = s.Load<Dijagnoza>(indexDijagnoze);
+                Dijagnostifikovano dij = new Dijagnostifikovano()
+                {
+                    Datum = DateTime.Now
+                };
+                dij.Id.DijagnozaLekar = pac.Lekar;
+                dij.Id.DijagnozaPacijent = pac;
+                dij.Id.DijagnozaDijagnoza = d;
+                pac.Lekar.DijagnostifikovanoDijagnoze.Add(dij);
+                pac.DijagnostifikovanoDijagnoze.Add(dij);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti pacijenta u tabeli na tabu");
+            }
+        }
+
+        private void btn_promena_lekara_Click(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
 
         #region tab_za_azuriranje_adminaDz
@@ -1073,6 +1200,12 @@ namespace Hippocrates
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar));
         }
+
+
+
+
+
+
 
 
 

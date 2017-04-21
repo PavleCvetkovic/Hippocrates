@@ -21,5 +21,10 @@ namespace Hippocrates.Data.Entiteti
             DijagnostifikovanoLekari = new List<Dijagnostifikovano>();
             Terapije = new List<Terapija>();
         }
+        public override string ToString()
+        {
+            
+            return this.Ime.ToString();
+        }
     }
 }
