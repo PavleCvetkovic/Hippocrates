@@ -751,7 +751,7 @@ namespace Hippocrates
                 {
                     lBSmeneLekara.Items.Add(smen.Id.Datum_Od + " - " + smen.Datum_Do + " smena: " + smen.SmenaLekara);
                 }
-                //--------------------
+               
                 cb_domovi_za_promenu_lekar.Items.Clear();
                 cb_domovi_za_promenu_lekar.Text = string.Empty;
                 IQuery iq = s.CreateQuery("from DomZdravlja");
@@ -761,26 +761,35 @@ namespace Hippocrates
                     if(il.RadiUDomuZdravlja.Mbr != dz.Mbr)
                         cb_domovi_za_promenu_lekar.Items.Add(dz.Mbr + " " + dz.Ime);
                 }
-                //--------------------
+               
                 s.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Morate izabrati lekara za kojeg hocete da azurirate podatke.");
+                MessageBox.Show("Morate izabrati lekara za kojeg hocete da azurirate podatke. " + ex);
             }
         }
 
         private void btn_azuriranje_lekara_Click(object sender, EventArgs e)
         {
             ISession s = DataLayer.GetSession();
-            IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
-            il.Ime = tb_azuriranje_ime_lekar.Text;
-            il.Prezime = tb_azuriranje_prezime_lekar.Text;
-            il.Password = tb_azuriranje_pass_lekar.Text;
-            il.Datum_rodjenja = dTP_azuriranje_lekar.Value;
-            il.Jmbg = tb_azuriranje_jmbg_lekar.Text;
-            il.Srednje_slovo = tb_azuriranje_lekar_srednjeSlovo.Text;
-            s.Flush();
+            try
+            {
+                
+                IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
+                il.Ime = tb_azuriranje_ime_lekar.Text;
+                il.Prezime = tb_azuriranje_prezime_lekar.Text;
+                il.Password = tb_azuriranje_pass_lekar.Text;
+                il.Datum_rodjenja = dTP_azuriranje_lekar.Value;
+                il.Jmbg = tb_azuriranje_jmbg_lekar.Text;
+                il.Srednje_slovo = tb_azuriranje_lekar_srednjeSlovo.Text;
+                s.Flush();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti lekara za kojeg zelite da azurirate podatke." + ex);
+            }
 
             s.Close();
             popuni_dgv_lekari(dGV_lekari_azuriranje);
@@ -896,7 +905,7 @@ namespace Hippocrates
             }
             else
             {
-                MessageBox.Show("Svi pacijenti moraju promeniti izabranog lekara da bi lekar mogao da promeni dom zdravlja.");
+                MessageBox.Show("Svi pacijenti moraju promeniti izabranog lekara da bi lekar mogao da promeni dom zdravlja. ");
             }
 
 
@@ -936,7 +945,7 @@ namespace Hippocrates
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Morate prvo oznaciti lekara za kojeg zelite da azurirate podatke.");
+                MessageBox.Show("Morate prvo oznaciti lekara za kojeg zelite da azurirate podatke." + ex);
             }
         }
         #endregion
@@ -1167,12 +1176,82 @@ namespace Hippocrates
         #endregion
 
         #region tab_za_azuriranje_adminaDz
+        private void dGV_azuriranje_adminDZ_SelectionChanged(object sender, EventArgs e)
+        {
+            int rowindex = dGV_azuriranje_adminDZ.CurrentCell.RowIndex;
+            pomIndex = dGV_azuriranje_adminDZ.Rows[rowindex].Cells[0].Value.ToString();
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                AdministratorDomaZdravlja adz = s.Load<AdministratorDomaZdravlja>(pomIndex);
+                tb_azuriranje_admindz_jmbg.Text = adz.JMBG;
+                tb_azuriranje_admindz_ime.Text = adz.Ime;
+                tb_azuriranje_admindz_srednjeS.Text = adz.SrednjeSlovo;
+                tb_azuriranje_admindz_prezime.Text = adz.Prezime;
+                tb_azuriranje_admindz_password.Text = adz.Password;
+                tb_azuriranje_admindz_mbrzu.Text = adz.RadiUDomuZdravlja.Ime;
+
+                cB_domovi_za_menjanje_adz.Items.Clear();
+                cB_domovi_za_menjanje_adz.Text = string.Empty;
+                IQuery iq = s.CreateQuery("from DomZdravlja");
+                IList<DomZdravlja> domovi = iq.List<DomZdravlja>();
+                foreach (DomZdravlja dz in domovi)
+                {
+                    if (adz.RadiUDomuZdravlja.Mbr != dz.Mbr)
+                        cB_domovi_za_menjanje_adz.Items.Add(dz.Mbr + " " + dz.Ime);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti administratora kojeg zelite da azurirate " + ex);
+            }
+            s.Close();
+        }
 
         private void btn_azuriranje_adminDz_Click(object sender, EventArgs e)
         {
-            
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                AdministratorDomaZdravlja adz = s.Load<AdministratorDomaZdravlja>(pomIndex);
+                adz.JMBG = tb_azuriranje_admindz_jmbg.Text;
+                adz.Ime = tb_azuriranje_admindz_ime.Text;
+                adz.SrednjeSlovo = tb_azuriranje_admindz_srednjeS.Text;
+                adz.Prezime = tb_azuriranje_admindz_prezime.Text;
+                adz.Password = tb_azuriranje_admindz_password.Text;
+
+                MessageBox.Show("Uspeno ste azurirali podatke o administratoru doma zdravlja.");
+                s.Flush();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti administratora kojem zelite da promenite podatke " + ex);
+            }
+            s.Close();
         }
 
+        private void btn_promeniDZ_admin_Click(object sender, EventArgs e)
+        {
+            string dzMbr = cB_domovi_za_menjanje_adz.SelectedItem.ToString();
+            dzMbr = dzMbr.Substring(0, dzMbr.IndexOf(" "));
+            
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                DomZdravlja dz = s.Load<DomZdravlja>(dzMbr);
+                AdministratorDomaZdravlja adz = s.Load<AdministratorDomaZdravlja>(pomIndex);
+                adz.RadiUDomuZdravlja.Administratori.Remove(adz);
+                adz.RadiUDomuZdravlja = dz;
+                dz.Administratori.Add(adz);
+                s.Flush();
+                MessageBox.Show("Uspeno ste promenili dom zdravlja administratoru.");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti administratora kojem zelite da promenite dom zdravlja " + ex);
+            }
+            s.Close();
+        }
         #endregion
 
         #region tab_mad_radnik_azuriranje
@@ -1180,7 +1259,7 @@ namespace Hippocrates
         #endregion
 
         #endregion
-       
+
 
         #region validacija_za_unos_u_kontrole
 
@@ -1449,6 +1528,9 @@ namespace Hippocrates
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar));
         }
+
+
+
 
 
 
