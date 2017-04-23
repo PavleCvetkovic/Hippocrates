@@ -52,7 +52,7 @@ namespace HippocratesPatient.Controller
             PacijentForm pacijent_form = new PacijentForm(view.GetJMBG(), view.GetLBO());
 
             pacijent_form.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            pacijent_form.Show();
+            pacijent_form.ShowDialog();
 
             
         }

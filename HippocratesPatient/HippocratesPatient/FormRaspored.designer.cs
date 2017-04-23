@@ -828,7 +828,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 365);
+            this.ClientSize = new System.Drawing.Size(736, 511);
             this.Controls.Add(this.metroLabelSmenaLekara);
             this.Controls.Add(this.metroLabelLekarInfo);
             this.Controls.Add(this.pnlPopodne);
@@ -836,6 +836,7 @@
             this.Controls.Add(this.metroDateTime1);
             this.Name = "FormRaspored";
             this.Text = "Termini za zakazivanje";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRaspored_FormClosing);
             this.pnlPrepodne.ResumeLayout(false);
             this.pnlPopodne.ResumeLayout(false);
             this.ResumeLayout(false);

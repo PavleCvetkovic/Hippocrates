@@ -34,6 +34,9 @@
                     <a href="vakcine.php">Vakcine</a>
                 </li>
                 <li>
+                    <a href="ocenilekara.php">Oceni lekara</a>
+                </li>
+                <li>
                     <a href="promenilekara.php">Promeni lekara</a>
                 </li>
                 <li>
@@ -103,6 +106,7 @@
                             </select>
                             <button class="btn btn-default" id="btnizaberi" type="submit">Izaberi</button>
                         </form>
+                        [[if $status]]
                         <table class="table-sm table table-hover table-striped table-responsive ">
                             <thead class="theadboja">
                                 <tr>
@@ -143,7 +147,9 @@
                                 </tr>
                                 [[/foreach]]
                         </table>
-
+                        [[else]]
+                        <h3>Još uvek nije određena smena lekara za taj datum.</h3>
+                        [[/if]]
                     </div>
                 </div>
             </div>

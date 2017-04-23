@@ -49,6 +49,7 @@ namespace HippocratesPatient.Model
             }
             catch (Exception ex)
             {
+                
                 success = false;
             }
             finally

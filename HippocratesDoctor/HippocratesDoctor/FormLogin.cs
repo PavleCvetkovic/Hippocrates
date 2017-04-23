@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Hippocrates.Data;
 using MetroFramework.Forms;
 using MySql.Data.MySqlClient;
+using MetroFramework;
 
 namespace HippocratesDoctor
 {
@@ -35,25 +36,30 @@ namespace HippocratesDoctor
 
                 if (mtbxLekarSifra.Text == (string)cmd.ExecuteScalar())
                 {
+                    /*
                     FormLekar frmLekar = new FormLekar();
                     frmLekar.FormClosing += new FormClosingEventHandler(showThisForm);
                     this.Visible = false;
-                    frmLekar.ShowDialog();
+                    frmLekar.ShowDialog();*/
+                    //this.Hide();
+                    FormLekar f = new FormLekar(mtbxLekarJMBG.Text);
+                    f.ShowDialog();
+                    //this.Close();
                 }
                 else
                 {
-                    throw new Exception("Pogrešan JMBG ili šifra.");
+                    MetroMessageBox.Show(this, "Pogrešan JMBG ili lozinka", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //throw new Exception("Pogrešan JMBG ili šifra.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 conn.Close();
             }
-
         }
 
         private void showThisForm(object sender, EventArgs e)
@@ -76,10 +82,10 @@ namespace HippocratesDoctor
 
                 if (mtbxOsobljeSifra.Text == (string)cmd.ExecuteScalar())
                 {
-                    //frm = new Form();
-                    //frm.FormClosing += new FormClosingEventHandler(showThisForm);
-                    this.Visible = false;
-                    //frm.ShowDialog();
+                    //this.Hide();
+                    FormOsoblje f = new FormOsoblje();
+                    f.ShowDialog();
+                    //this.Close();
                 }
                 else
                 {
@@ -99,7 +105,7 @@ namespace HippocratesDoctor
         private void mbtnDirektorSubmit_Click(object sender, EventArgs e)
         {
             string conStr =
-                "server=139.59.132.29;user=djeki;charset=utf8;database=Hippocrates;port=3306;password=volimdoroteju1;";
+                "server=139.59.132.29;user=aki;charset=utf8;database=Hippocrates;port=3306;password=jetion123c;";
             MySqlConnection conn = new MySqlConnection(conStr);
 
             try
@@ -111,10 +117,10 @@ namespace HippocratesDoctor
 
                 if (mtbxDirektorSifra.Text == (string)cmd.ExecuteScalar())
                 {
-                    //Form frm = new Form();
-                    //frm.FormClosing += new FormClosingEventHandler(showThisForm);
-                    this.Visible = false;
-                    //frm.ShowDialog();
+                    //this.Hide();
+                    FormDirektor f = new FormDirektor(this.mtbxDirektorJMBG.Text);
+                    f.ShowDialog();
+                    //this.Close();
                 }
                 else
                 {
@@ -130,5 +136,7 @@ namespace HippocratesDoctor
                 conn.Close();
             }
         }
+
+       
     }
 }

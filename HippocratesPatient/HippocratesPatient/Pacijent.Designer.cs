@@ -48,7 +48,7 @@
             this.tabDijagnoze = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroGridDijagnoze = new MetroFramework.Controls.MetroGrid();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabelJMBGLBO = new MetroFramework.Controls.MetroLabel();
             this.metroTabGlobal.SuspendLayout();
             this.tabIzabraniLekar.SuspendLayout();
             this.tabVakcine.SuspendLayout();
@@ -295,24 +295,26 @@
             this.metroGridDijagnoze.Size = new System.Drawing.Size(429, 205);
             this.metroGridDijagnoze.TabIndex = 2;
             // 
-            // metroLabel1
+            // metroLabelJMBGLBO
             // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(28, 76);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(109, 19);
-            this.metroLabel1.TabIndex = 1;
-            this.metroLabel1.Text = "jmbg + lbo ovde";
+            this.metroLabelJMBGLBO.AutoSize = true;
+            this.metroLabelJMBGLBO.Location = new System.Drawing.Point(28, 76);
+            this.metroLabelJMBGLBO.Name = "metroLabelJMBGLBO";
+            this.metroLabelJMBGLBO.Size = new System.Drawing.Size(109, 19);
+            this.metroLabelJMBGLBO.TabIndex = 1;
+            this.metroLabelJMBGLBO.Text = "jmbg + lbo ovde";
             // 
             // PacijentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(490, 434);
-            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.metroLabelJMBGLBO);
             this.Controls.Add(this.metroTabGlobal);
             this.Name = "PacijentForm";
             this.Text = "Pacijent";
+            this.TransparencyKey = System.Drawing.Color.Empty;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PacijentForm_FormClosing);
             this.Load += new System.EventHandler(this.PacijentForm_Load);
             this.metroTabGlobal.ResumeLayout(false);
             this.tabIzabraniLekar.ResumeLayout(false);
@@ -345,7 +347,7 @@
         private MetroFramework.Controls.MetroTabPage tabDijagnoze;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroGrid metroGridDijagnoze;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel metroLabelJMBGLBO;
         private MetroFramework.Controls.MetroLabel metroLabelPravoZaZakazivanje;
     }
 }
