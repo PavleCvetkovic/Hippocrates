@@ -2201,8 +2201,198 @@ namespace Hippocrates
         }
         #endregion
 
+        #region tab_azuriranje_vak_dijg_ter
+
+        private void cb_azuriranje_vakcine_Enter(object sender, EventArgs e)
+        {
+            cb_azuriranje_vakcine.Items.Clear();
+            ISession s = DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from Vakcina");
+            IList<Vakcina> vakcine = iq.List<Vakcina>();
+            foreach (Vakcina v in vakcine)
+            {
+                cb_azuriranje_vakcine.Items.Add(v.Ime + " " + v.Sifra);
+            }
+            s.Close();
+        }
+
+        private void cb_azuriranje_vakcine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            string[] parametars = cb_azuriranje_vakcine.SelectedItem.ToString().Split(' ');
+            Vakcina v = s.Load<Vakcina>(parametars[1]);
+            tb_azuriranje_vak_ime.Text = v.Ime;
+            tb_azuriranje_vak_opis.Text = v.Opis;
+            s.Close();
+        }
+
+        private void cb_azuriranje_dijagnoza_Enter(object sender, EventArgs e)
+        {
+            cb_azuriranje_dijagnoza.Items.Clear();
+            ISession s = DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from Dijagnoza");
+            IList<Dijagnoza> dijag = iq.List<Dijagnoza>();
+            foreach (Dijagnoza d in dijag)
+            {
+                cb_azuriranje_dijagnoza.Items.Add(d.Ime + " " + d.Sifra);
+            }
+            s.Close();
+        }
+
+        private void cb_azuriranje_dijagnoza_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            string[] parametars = cb_azuriranje_dijagnoza.SelectedItem.ToString().Split(' ');
+            Dijagnoza d = s.Load<Dijagnoza>(parametars[1]);
+            tb_azuriranje_dijag_ime.Text = d.Ime;
+            s.Close();
+        }
+
+        private void cb_azuriranje_ter_lekar_Enter(object sender, EventArgs e)
+        {
+            cb_azuriranje_ter_lekar.Items.Clear();
+            ISession s = DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from IzabraniLekar");
+            IList<IzabraniLekar> lekari = iq.List<IzabraniLekar>();
+            foreach (IzabraniLekar l in lekari)
+            {
+                cb_azuriranje_ter_lekar.Items.Add(l.Ime + " " + l.Prezime + " " + l.Jmbg);
+            }
+            s.Close();
+        }
+
+        private void cb_azuriranje_ter_pac_Enter(object sender, EventArgs e)
+        {
+            cb_azuriranje_ter_pac.Items.Clear();
+            if (cb_azuriranje_ter_lekar.Text != string.Empty)
+            {
+                string parametar = cb_azuriranje_ter_lekar.SelectedItem.ToString();
+                parametar = parametar.Substring(0, parametar.IndexOf(" "));
+                ISession s = DataLayer.GetSession();
+                cb_azuriranje_ter_pac.Items.Clear();
+                cb_azuriranje_ter_pac.Text = string.Empty;
+                IQuery iq = s.CreateQuery("select o from Pacijent as o where o.Lekar.Ime = : imeLekara");
+                iq.SetString("imeLekara", parametar);
+                IList<Pacijent> pacijenti = iq.List<Pacijent>();
+                foreach (Pacijent pac in pacijenti)
+                {
+                    cb_azuriranje_ter_pac.Items.Add(pac.Ime + " " + pac.Prezime + " " + pac.Jmbg);
+                }
+                s.Close();
+            }
+        }
+
+        private void cb_azuriranje_ter_dijagnoza_Enter(object sender, EventArgs e)
+        {
+            cb_azuriranje_ter_dijagnoza.Items.Clear();
+            if (cb_azuriranje_ter_pac.Text != string.Empty)
+            {
+                string[] parametars = cb_azuriranje_ter_pac.SelectedItem.ToString().Split(' ');
+                ISession s = DataLayer.GetSession();
+                Pacijent p = s.Load<Pacijent>(parametars[2]);
+                foreach (Dijagnostifikovano t in p.DijagnostifikovanoDijagnoze)
+                {
+                    cb_azuriranje_ter_dijagnoza.Items.Add(t.Id.DijagnozaDijagnoza.Sifra);
+                }
+                s.Close();
+            }
+        }
+        private void cb_azuriranje_ter_ter_Enter(object sender, EventArgs e)
+        {
+            cb_azuriranje_ter_ter.Items.Clear();
+            if (cb_azuriranje_ter_dijagnoza.Text != string.Empty)
+            {
+
+                ISession s = DataLayer.GetSession();
+                IQuery iq = s.CreateQuery("select o from Terapija as o where o.TerapijaPacijent.Jmbg = : jmbgpacijenta and o.TerapijaDijagnoza.Sifra = : sifraDijag");
+
+                string[] paramDijag = cb_azuriranje_ter_dijagnoza.SelectedItem.ToString().Split(' ');
+                iq.SetString("sifraDijag", paramDijag[0]);
+                string[] paramPac = cb_azuriranje_ter_pac.SelectedItem.ToString().Split(' ');
+                iq.SetString("jmbgpacijenta", paramPac[2]);
+                IList<Terapija> terapije = iq.List<Terapija>();
+                foreach (Terapija t in terapije)
+                {
+                    cb_azuriranje_ter_ter.Items.Add(t.Id + " " + t.Opis);
+                }
+                s.Close();
+            }
+        }
+        private void btn_azuriraj_vakcinu_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                string[] parametars = cb_azuriranje_vakcine.SelectedItem.ToString().Split(' ');
+                Vakcina v = s.Load<Vakcina>(parametars[1]);
+                v.Ime = tb_azuriranje_vak_ime.Text;
+                v.Opis = tb_azuriranje_vak_opis.Text;
+                s.Flush();
+                MessageBox.Show("Uspesno ste azurirali vakcinu.");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate odabrati vakcinu koju zelite da azurirate. ");
+            }
+            s.Close();
+        }
+
+        private void btn_azuriranje_dijag_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                string[] parametars = cb_azuriranje_dijagnoza.SelectedItem.ToString().Split(' ');
+                Dijagnoza d = s.Load<Dijagnoza>(parametars[1]);
+                d.Ime = tb_azuriranje_dijag_ime.Text;
+                s.Flush();
+                MessageBox.Show("Uspesno ste azurirali dijagnozu. ");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate izabrati dijagnozu koju zelite da azurirate. ");
+            }
+            s.Close();
+        }
+
+        private void cb_azuriranje_ter_ter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            string[] parametars = cb_azuriranje_ter_ter.SelectedItem.ToString().Split(' ');
+            int parametar = Int32.Parse(parametars[0]);
+            Terapija t = s.Load<Terapija>(parametar);
+            tb_azuriranje_ter_opis.Text = t.Opis;
+            dTP_azuriranje_ter_od.Value = t.Datum_od;
+            dTP_azuriranje_ter_do.Value = t.Datum_do;
+            s.Close();
+
+        }
+
+        private void btn_azurirajte_terapiju_Click(object sender, EventArgs e)
+        {
+
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                string[] parametars = cb_azuriranje_ter_ter.SelectedItem.ToString().Split(' ');
+                int parametar = Int32.Parse(parametars[0]);
+                Terapija t = s.Load<Terapija>(parametar);
+                t.Opis = tb_azuriranje_ter_opis.Text;
+                t.Datum_od = dTP_azuriranje_ter_od.Value;
+                t.Datum_do = dTP_azuriranje_ter_do.Value;
+                s.Flush();
+                MessageBox.Show("Uspeno ste azurirali terapiju. ");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate izabrati terapiju koju zelite da azurirate. ");
+            }
+            s.Close();
+        }
+
         #endregion
 
+        #endregion
 
         #region validacija_za_unos_u_kontrole
 
@@ -2579,8 +2769,12 @@ namespace Hippocrates
 
 
 
+
+
+
+
         #endregion
 
-       
+        
     }
 }
