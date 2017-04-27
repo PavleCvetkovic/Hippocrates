@@ -681,13 +681,44 @@ namespace Hippocrates
         private void btn_unesi_terapiju_Click(object sender, EventArgs e)
         {
             ISession s = DataLayer.GetSession();
-            
-            s.Flush();
+            try
+            {
+                string[] parametars = cb_unos_terapija_pacijenti.SelectedItem.ToString().Split(' ');
+                Pacijent p = s.Load<Pacijent>(parametars[2]);
+                string parametarDijagnoza = cb_unos_terapije_dijagnoza.SelectedItem.ToString();
+                Dijagnostifikovano dijag = new Dijagnostifikovano();
+                foreach(Dijagnostifikovano d in p.DijagnostifikovanoDijagnoze)
+                {
+                    if(d.Id.DijagnozaDijagnoza.Sifra == parametarDijagnoza)
+                    {
+                        dijag = d;
+                    }
+                }
+                Terapija ter = new Terapija()
+                {
+                    Datum_do = dTP_vakcine_unos_od.Value,
+                    Datum_od = dTP_vakcine_unos_do.Value,
+                    Opis = tb_unos_terapiju_opis.Text
+                };
+                ter.TerapijaPacijent = p;
+                ter.TerapijaLekar = p.Lekar;
+                p.Lekar.Terapije.Add(ter);
+                p.Terapije.Add(ter);
+                ter.TerapijaDijagnoza = dijag.Id.DijagnozaDijagnoza;
+                dijag.Id.DijagnozaDijagnoza.Terapije.Add(ter);
+                s.Flush();
+                MessageBox.Show("Uspeno ste uneli novu terapiju pacijentu .");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("morate izabrati lekara,pacijenta i dijagnozu za koju zelite da dodate terapiju" + ex);
+            }
             s.Close();
         }
 
         private void cb_unos_terapija_lekari_Enter(object sender, EventArgs e)
         {
+            cb_unos_terapija_lekari.Items.Clear();
             ISession s = DataLayer.GetSession();
             cb_unos_terapija_lekari.Items.Clear();
             cb_unos_terapija_lekari.Text = string.Empty;
@@ -702,6 +733,7 @@ namespace Hippocrates
 
         private void cb_unos_terapija_pacijenti_Enter(object sender, EventArgs e)
         {
+            cb_unos_terapija_pacijenti.Items.Clear();
             if (cb_unos_terapija_lekari.Text != string.Empty)
             {
                 string parametar = cb_unos_terapija_lekari.SelectedItem.ToString();
@@ -722,7 +754,7 @@ namespace Hippocrates
 
         private void cb_unos_terapije_dijagnoza_Enter(object sender, EventArgs e)
         {
-
+            cb_unos_terapije_dijagnoza.Items.Clear();
             if (cb_unos_terapija_pacijenti.Text != string.Empty)
             {
                 string[] parametars = cb_unos_terapija_pacijenti.SelectedItem.ToString().Split(' ');
@@ -730,7 +762,7 @@ namespace Hippocrates
                 Pacijent p = s.Load<Pacijent>(parametars[2]);
                 foreach(Dijagnostifikovano t in p.DijagnostifikovanoDijagnoze)
                 {
-
+                    cb_unos_terapije_dijagnoza.Items.Add(t.Id.DijagnozaDijagnoza.Sifra);
                 }
                 s.Close();
             }
@@ -1055,6 +1087,163 @@ namespace Hippocrates
             s.Flush();
             s.Close();
             MessageBox.Show("Uspeno ste obrisali medicinskog radnika");
+        }
+        #endregion
+
+        #region tab_za_brisanje_vakcina_dijagnoza_terapija
+        private void cb_brisanje_dijagnoze_Enter(object sender, EventArgs e)
+        {
+            cb_brisanje_dijagnoze.Items.Clear();
+            ISession s = DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from Dijagnoza");
+            IList<Dijagnoza> dijagnoze = iq.List<Dijagnoza>();
+            foreach (Dijagnoza d in dijagnoze)
+            {
+                cb_brisanje_dijagnoze.Items.Add(d.Sifra + " " + d.Ime);
+            }
+            s.Close();
+        }
+
+        private void cb_vakcina_brisanje_Enter(object sender, EventArgs e)
+        {
+            cb_vakcina_brisanje.Items.Clear();
+            ISession s = DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from Vakcina");
+            IList<Vakcina> vakcine = iq.List<Vakcina>();
+            foreach(Vakcina v in vakcine)
+            {
+                cb_vakcina_brisanje.Items.Add(v.Ime + " " + v.Sifra);
+            }
+            s.Close();
+        }
+        
+        private void btn_brisanje_vakcine_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                string[] vakcinaSifra = cb_vakcina_brisanje.SelectedItem.ToString().Split(' ');
+                Vakcina v = s.Load<Vakcina>(vakcinaSifra[1]);
+                s.Delete(v);
+                s.Flush();
+                MessageBox.Show("Uspeno ste obrisali vakcinu. ");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate izabrati vakcinu koju zelite da izbrisete. " + ex);
+            }
+            s.Close();
+        }
+
+        private void btn_dijag_brisanje_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                string[] dijagSifra = cb_brisanje_dijagnoze.SelectedItem.ToString().Split(' ');
+                Dijagnoza d = s.Load<Dijagnoza>(dijagSifra[0]);
+                s.Delete(d);
+                s.Flush();
+                MessageBox.Show("Uspeno ste obrisali dijagnozu. ");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Izaberite dijagnozu koju zelite da obrisate. " + ex);
+            }
+            s.Close();
+        }
+
+        private void cb_brisanje_ter_lekar_Enter(object sender, EventArgs e)
+        {
+            cb_brisanje_ter_lekar.Items.Clear();
+            ISession s = DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from IzabraniLekar");
+            IList<IzabraniLekar> lekari = iq.List<IzabraniLekar>();
+            foreach (IzabraniLekar l in lekari)
+            {
+                cb_brisanje_ter_lekar.Items.Add(l.Ime + " " + l.Prezime + " " + l.Jmbg);
+            }
+            s.Close();
+        }
+
+        private void cb_brisanje_ter_pac_Enter(object sender, EventArgs e)
+        {
+            cb_brisanje_ter_pac.Items.Clear();
+            if (cb_brisanje_ter_lekar.Text != string.Empty)
+            {
+                string parametar = cb_brisanje_ter_lekar.SelectedItem.ToString();
+                parametar = parametar.Substring(0, parametar.IndexOf(" "));
+                ISession s = DataLayer.GetSession();
+                cb_brisanje_ter_pac.Items.Clear();
+                cb_brisanje_ter_pac.Text = string.Empty;
+                IQuery iq = s.CreateQuery("select o from Pacijent as o where o.Lekar.Ime = : imeLekara");
+                iq.SetString("imeLekara", parametar);
+                IList<Pacijent> pacijenti = iq.List<Pacijent>();
+                foreach (Pacijent pac in pacijenti)
+                {
+                    cb_brisanje_ter_pac.Items.Add(pac.Ime + " " + pac.Prezime + " " + pac.Jmbg);
+                }
+                s.Close();
+            }
+        }
+
+        private void cb_brisanje_ter_dijag_Enter(object sender, EventArgs e)
+        {
+            cb_brisanje_ter_dijag.Items.Clear();
+            if (cb_brisanje_ter_pac.Text != string.Empty)
+            {
+                string[] parametars = cb_brisanje_ter_pac.SelectedItem.ToString().Split(' ');
+                ISession s = DataLayer.GetSession();
+                Pacijent p = s.Load<Pacijent>(parametars[2]);
+                foreach (Dijagnostifikovano t in p.DijagnostifikovanoDijagnoze)
+                {
+                    cb_brisanje_ter_dijag.Items.Add(t.Id.DijagnozaDijagnoza.Sifra);
+                }
+                s.Close();
+            }
+        }
+
+        private void cb_brisanje_ter_Enter(object sender, EventArgs e)
+        {
+            cb_brisanje_ter.Items.Clear();
+            if (cb_brisanje_ter_dijag.Text != string.Empty)
+            {
+                
+                ISession s = DataLayer.GetSession();
+                IQuery iq = s.CreateQuery("select o from Terapija as o where o.TerapijaPacijent.Jmbg = : jmbgpacijenta and o.TerapijaDijagnoza.Sifra = : sifraDijag");                
+                
+                string[] paramDijag = cb_brisanje_ter_dijag.SelectedItem.ToString().Split(' ');
+                iq.SetString("sifraDijag", paramDijag[0]);
+                string[] paramPac = cb_brisanje_ter_pac.SelectedItem.ToString().Split(' ');
+                iq.SetString("jmbgpacijenta", paramPac[2]);
+                IList<Terapija> terapije = iq.List<Terapija>();
+                foreach (Terapija t in terapije)
+                {
+                    cb_brisanje_ter.Items.Add(t.Id + " " + t.Opis);
+                }
+                s.Close();
+            }
+        }
+
+        private void btn_brisanje_ter_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                string[] param = cb_brisanje_ter.SelectedItem.ToString().Split(' ');
+                int par = Int32.Parse(param[0]);
+                Terapija t = s.Load<Terapija>(par);
+               
+                
+                s.Delete(t);
+                s.Flush();
+                MessageBox.Show("Uspesno ste obrisali terapiju. ");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti terapiju koju zelite da obrisete. " + ex);
+            }
+            s.Close();
         }
         #endregion
 
@@ -2386,8 +2575,12 @@ namespace Hippocrates
 
 
 
+
+
+
+
         #endregion
 
-        
+       
     }
 }
