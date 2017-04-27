@@ -643,8 +643,98 @@ namespace Hippocrates
         }
         #endregion
 
-        #region tab_za_unos_vakcine
+        #region tab_za_unos_vakcine_dijagnoze_terapije
 
+        private void btn_unos_vakcina_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            Vakcina v = new Vakcina()
+            {
+                Ime = tb_unos_vakcina_ime.Text,
+                Opis = tb_unos_vakcina_opis.Text,
+                Sifra = tb_unos_vakcina_Sifra.Text
+            };
+            s.Save(v);
+            s.Flush();
+            MessageBox.Show("Uspesno ste uneli vakcinu.");
+            s.Close();
+            tb_unos_vakcina_ime.Text = string.Empty;
+            tb_unos_vakcina_opis.Text = string.Empty;
+            tb_unos_vakcina_Sifra.Text = string.Empty;
+        }
+
+        private void btn_unos_dijagnoze_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            Dijagnoza d = new Dijagnoza()
+            {
+                Ime = tb_unos_dijagnoza_ime.Text,
+                Sifra = tb_unos_dijagnoza_sifra.Text
+            };
+            s.Flush();
+            MessageBox.Show("Uspesno ste uneli dijagnozu.");
+            s.Close();
+            tb_unos_dijagnoza_ime.Text = string.Empty;
+            tb_unos_dijagnoza_sifra.Text = string.Empty;
+        }
+
+        private void btn_unesi_terapiju_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            
+            s.Flush();
+            s.Close();
+        }
+
+        private void cb_unos_terapija_lekari_Enter(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            cb_unos_terapija_lekari.Items.Clear();
+            cb_unos_terapija_lekari.Text = string.Empty;
+            IQuery iq = s.CreateQuery("from IzabraniLekar");
+            IList<IzabraniLekar> lekari = iq.List<IzabraniLekar>();
+            foreach (IzabraniLekar il in lekari)
+            {
+                cb_unos_terapija_lekari.Items.Add(il.Ime + " " + il.Prezime + " " + il.Jmbg);
+            }
+            s.Close();
+        }
+
+        private void cb_unos_terapija_pacijenti_Enter(object sender, EventArgs e)
+        {
+            if (cb_unos_terapija_lekari.Text != string.Empty)
+            {
+                string parametar = cb_unos_terapija_lekari.SelectedItem.ToString();
+                parametar = parametar.Substring(0, parametar.IndexOf(" "));
+                ISession s = DataLayer.GetSession();
+                cb_unos_terapija_pacijenti.Items.Clear();
+                cb_unos_terapija_pacijenti.Text = string.Empty;
+                IQuery iq = s.CreateQuery("select o from Pacijent as o where o.Lekar.Ime = : imeLekara");
+                iq.SetString("imeLekara", parametar);
+                IList<Pacijent> pacijenti = iq.List<Pacijent>();
+                foreach (Pacijent pac in pacijenti)
+                {
+                    cb_unos_terapija_pacijenti.Items.Add(pac.Ime + " " + pac.Prezime + " " + pac.Jmbg);
+                }
+                s.Close();
+            }
+        }
+
+        private void cb_unos_terapije_dijagnoza_Enter(object sender, EventArgs e)
+        {
+
+            if (cb_unos_terapija_pacijenti.Text != string.Empty)
+            {
+                string[] parametars = cb_unos_terapija_pacijenti.SelectedItem.ToString().Split(' ');
+                ISession s = DataLayer.GetSession();
+                Pacijent p = s.Load<Pacijent>(parametars[2]);
+                foreach(Dijagnostifikovano t in p.DijagnostifikovanoDijagnoze)
+                {
+
+                }
+                s.Close();
+            }
+        }
         #endregion
 
         #endregion
@@ -2287,8 +2377,17 @@ namespace Hippocrates
 
 
 
+
+
+
+
+
+
+
+
+
         #endregion
 
-       
+        
     }
 }
