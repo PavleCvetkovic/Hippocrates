@@ -361,7 +361,7 @@
             this.metroGridData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.metroGridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGridData.Size = new System.Drawing.Size(831, 150);
+            this.metroGridData.Size = new System.Drawing.Size(831, 234);
             this.metroGridData.TabIndex = 36;
             this.metroGridData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGridLekari_CellContentClick);
             // 
@@ -603,6 +603,7 @@
             this.Controls.Add(this.metroTabControlGlobal);
             this.Name = "FormDirektor";
             this.Text = "Administrator panel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormDirektor_FormClosing);
             this.metroTabControlGlobal.ResumeLayout(false);
             this.tabLekar.ResumeLayout(false);
             this.metroTabControl2.ResumeLayout(false);

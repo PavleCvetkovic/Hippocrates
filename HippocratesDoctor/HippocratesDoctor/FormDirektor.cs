@@ -24,22 +24,32 @@ namespace HippocratesDoctor
         private IController _controller;
         //private Hippocrates.Data.IzabraniLekar active_doctor;
         private string facility_id, facility_name, jmbg_admin;
+        private ISession session;
+        private AdministratorDomaZdravlja admin_local;
+        private DomZdravlja dom_zdravlja_local;
 
         public FormDirektor(string dom_zdravlja_admin_jmbg)
         {
             InitializeComponent();
-            metroTabControlGlobal.SelectedIndex = 0;
-            jmbg_admin = dom_zdravlja_admin_jmbg;
-            lblImeDomaZ.Text = GetMedicalFacilityInfo(jmbg_admin);
-            GetAllDoctors(facility_id); // GetAllDoctors(facility_id) se zove nakon GetMedicalFacilityInfo(jmbg_admin) jer se tu inicijalizuje 'facility_id'
+            session = DataLayer.GetSession();
+            admin_local = session.Get<AdministratorDomaZdravlja>(dom_zdravlja_admin_jmbg);
+            dom_zdravlja_local = admin_local.RadiUDomuZdravlja;
+
+            jmbg_admin = admin_local.JMBG;
+            lblImeDomaZ.Text = GetMedicalFacilityInfo(admin_local);
+            metroTabControlGlobal.SelectedIndex = 0; // Zove GetAllDoctors(dom_zdravlja_local)
+            //GetAllDoctors(dom_zdravlja_local); // GetAllDoctors(facility_id) se zove nakon GetMedicalFacilityInfo(jmbg_admin) jer se tu inicijalizuje 'facility_id'
             //metroRadioButtonSmenaPrepodne.MouseHover += MetroRadioButtonSmenaPrepodne_MouseHover;
             //metroRadioButtonSmenaPoslepodne.MouseHover += MetroRadioButtonSmenaPrepodne_MouseHover;
         }
 
 
-        private string GetMedicalFacilityInfo(string jmbg_admina)
+        private string GetMedicalFacilityInfo(AdministratorDomaZdravlja admin)
         {
             string to_return = string.Empty;
+            to_return = admin.RadiUDomuZdravlja.Ime + " " + admin.RadiUDomuZdravlja.Adresa;
+            #region SQL nacin
+            /*
             MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
             try
             {
@@ -63,58 +73,90 @@ namespace HippocratesDoctor
             {
                 conn.Close();
             }
-            return facility_name + " " + this.facility_id;
+            */
+            #endregion
+
+            return to_return;
         }
 
-        private void GetAllDoctors(string dom_zdravlja_id)
+        private void GetAllDoctors(DomZdravlja dom_zdravlja)
         {
-            MySqlDataAdapter data_adapter;
-            DataSet data_set;
-            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
-            try
-            {
-                string sql = "select * from IZABRANI_LEKAR where MBRZU = '" + dom_zdravlja_id + "'";
-                data_adapter = new MySqlDataAdapter(sql, conn);
-                MySqlCommandBuilder cb = new MySqlCommandBuilder(data_adapter);
+            IList<IzabraniLekar> Lekari = dom_zdravlja.Lekari;
+            //metroGridData.Refresh();
+            metroGridData.DataSource = Lekari;
+            int to_show_column_number = 6;
+            for (int i = to_show_column_number; i < metroGridData.ColumnCount; i++)
+                metroGridData.Columns[i].Visible = false;
+            for (int i = 0; i < metroGridData.ColumnCount - to_show_column_number; i++)
+                metroGridData.Columns[i].Width = metroGridData.Width / (metroGridData.ColumnCount - to_show_column_number);
 
-                data_set = new DataSet();
-                data_adapter.Fill(data_set, "Lekari");
-                metroGridData.DataSource = data_set;
-                metroGridData.DataMember = "Lekari";
-                for (int i = 0; i < metroGridData.ColumnCount; i++)
-                    metroGridData.Columns[i].Width = metroGridData.Width / metroGridData.ColumnCount;
+            #region SQL nacin
+            //MySqlDataAdapter data_adapter;
+            //DataSet data_set;
+            //MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            //try
+            //{
+            //    string sql = "select * from IZABRANI_LEKAR where MBRZU = '" + dom_zdravlja_id + "'";
+            //    data_adapter = new MySqlDataAdapter(sql, conn);
+            //    MySqlCommandBuilder cb = new MySqlCommandBuilder(data_adapter);
 
-            }
-            catch (Exception ex)
-            {
-                MetroMessageBox.Show(this, "Error during connection " + ex.Message.ToString());
-            }
+            //    data_set = new DataSet();
+            //    data_adapter.Fill(data_set, "Lekari");
+            //    metroGridData.DataSource = data_set;
+            //    metroGridData.DataMember = "Lekari";
+            //    for (int i = 0; i < metroGridData.ColumnCount; i++)
+            //        metroGridData.Columns[i].Width = metroGridData.Width / metroGridData.ColumnCount;
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MetroMessageBox.Show(this, "Error during connection " + ex.Message.ToString());
+            //}
+            #endregion
         }
 
-        private int GetDoctorShift(string doctor_id) // Vraca smenu za trenutno sistemsko vreme (u kojoj smeni lekar sada radi)
+        private int GetDoctorShift(string doctor_id) // (Nije potrebna (nigde se ne zove)) Vraca smenu za trenutno sistemsko vreme (u kojoj smeni lekar sada radi)
         {
-            int to_return = 0;
-            //string to_return = string.Empty;
-            string date = System.DateTime.Now.Year + "-" + System.DateTime.Now.Month + "-" + System.DateTime.Now.Day;
-            //MessageBox.Show(date);
-            MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
-            try
-            {
-                conn.Open();
-                string sql_command = "select SMENA from SMENA where MATBRL = '" + doctor_id + "' and '"
-                    + date + "' between DATUM_OD and DATUM_DO;";
+            int to_return = 1;
 
-                MySqlCommand cmd = new MySqlCommand(sql_command, conn);
-                to_return = (int)cmd.ExecuteScalar();
-            }
-            catch (Exception ex)
-            {
-                MetroMessageBox.Show(this, "Greška prilikom čitanja iz baze " + ex.Message + " (Moguće je da lekaru (za koga se traži smena) nije dodeljena smena u bazi)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conn.Close();
-            }
+            #region ORM varijanta
+            //var smena_lekara = session.CreateQuery("select s from Smena s where s.Id.Lekar = '" + doctor_id+
+            //    "' and s.Id.Datum_Od > '" + metroDateTime1.Value.Date + "'");
+            //IList<Smena> smena_list = smena_lekara.List<Smena>();
+            //int i = 0, smena_temp = 1; // for error avoid
+            //for (i = 0; i < smena_list.Count; i++)
+            //{
+            //    if (smena_list[i].Id.Datum_Od <= metroDateTime1.Value.Date && smena_list[i].Datum_Do >= metroDateTime1.Value.Date)
+            //    {
+            //        smena_temp = smena_list[i].SmenaLekara;
+            //        break;
+            //    }
+            //}
+            #endregion
+
+            #region SQL varijanta
+
+            //string date = System.DateTime.Now.Year + "-" + System.DateTime.Now.Month + "-" + System.DateTime.Now.Day;
+            ////MessageBox.Show(date);
+            //MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
+            //try
+            //{
+            //    conn.Open();
+            //    string sql_command = "select SMENA from SMENA where MATBRL = '" + doctor_id + "' and '"
+            //        + date + "' between DATUM_OD and DATUM_DO;";
+
+            //    MySqlCommand cmd = new MySqlCommand(sql_command, conn);
+            //    to_return = (int)cmd.ExecuteScalar();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MetroMessageBox.Show(this, "Greška prilikom čitanja iz baze " + ex.Message + " (Moguće je da lekaru (za koga se traži smena) nije dodeljena smena u bazi)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            //finally
+            //{
+            //    conn.Close();
+            //}
+            #endregion
             return to_return;
         }
 
@@ -160,7 +202,7 @@ namespace HippocratesDoctor
             //    else
             //        metroRadioButtonSmenaPoslepodne.Checked = true;
             //}
-            string str = mg.SelectedRows[0].Cells["DATUM_ROĐENJA"].Value.ToString();
+            string str = mg.SelectedRows[0].Cells["DATUM_RODJENJA"].Value.ToString();
             // dd.MM.yyyy.
             // 0123456789
             //MessageBox.Show(Int32.Parse(str.Substring(0, 4)).ToString() + " " + Int32.Parse(str.Substring(5, 2)).ToString() + " " + Int32.Parse(str.Substring(8, 2)).ToString());
@@ -245,6 +287,28 @@ namespace HippocratesDoctor
         private bool InsertNewDoctor()
         {
             bool success = true;
+
+            IzabraniLekar novi_lekar = new IzabraniLekar()
+            {
+                Jmbg = metroTextBoxJMBG.Text,
+                Ime = metroTextBoxIme.Text,
+                Srednje_slovo = metroTextBoxSrednjeSlovo.Text,
+                Prezime = metroTextBoxPrezime.Text,
+                Datum_rodjenja = metroDateTimeDatumRodjenja.Value.Date,
+                Password = metroTextBoxLozinka.Text
+            };
+            dom_zdravlja_local.Lekari.Add(novi_lekar); 
+            novi_lekar.RadiUDomuZdravlja = dom_zdravlja_local;
+            session.Save(novi_lekar);
+            session.SaveOrUpdate(dom_zdravlja_local);
+            session.Flush();
+
+            metroGridData.DataSource = dom_zdravlja_local.Lekari;
+            metroGridData.Refresh();
+            //GetAllDoctors(dom_zdravlja_local); // Zove se u button_click handleru za dodavanje 
+
+            #region SQL nacin
+            /*
             MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
             try
             {
@@ -271,7 +335,8 @@ namespace HippocratesDoctor
                 success = false;
             }
             conn.Close();
-
+            */
+            #endregion
             return success;
         }
 
@@ -410,7 +475,7 @@ namespace HippocratesDoctor
             MetroTabControl mtc = sender as MetroTabControl;
             switch(mtc.SelectedIndex)
             {
-                case 0: { metroButtonSmenaLekara.Enabled = true; GetAllDoctors(facility_id);  break; }
+                case 0: { metroButtonSmenaLekara.Enabled = true; GetAllDoctors(dom_zdravlja_local);  break; }
                 case 1: { metroButtonSmenaLekara.Enabled = false; GetMedicalStaffData(facility_id); break; }
             }
         }
@@ -423,7 +488,7 @@ namespace HippocratesDoctor
             else
                 MetroMessageBox.Show(this, "Error prilikom insert funkcije za dodavanje novog lekara", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            GetAllDoctors(facility_id);
+            GetAllDoctors(dom_zdravlja_local);
         }
 
         private void metroButtonSmenaLekara_Click(object sender, EventArgs e)
@@ -450,7 +515,7 @@ namespace HippocratesDoctor
                 else
                     MetroMessageBox.Show(this, "Error prilikom delete funkcije za brisanje lekara", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                GetAllDoctors(facility_id);
+                GetAllDoctors(dom_zdravlja_local);
             }
 
         }
@@ -473,7 +538,7 @@ namespace HippocratesDoctor
                 else
                     MetroMessageBox.Show(this, "Error prilikom update funkcije za ažuriranje lekara", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                GetAllDoctors(facility_id);
+                GetAllDoctors(dom_zdravlja_local);
             }
         }
 
@@ -505,7 +570,12 @@ namespace HippocratesDoctor
             }
 
         }
-        
+
+        private void FormDirektor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            session.Close();
+        }
+
         private void metroButtonObrisiOsobu_Click(object sender, EventArgs e)
         {
             MetroGrid mg = metroGridData; // hard-coded
