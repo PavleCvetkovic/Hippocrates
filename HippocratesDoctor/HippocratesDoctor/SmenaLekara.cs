@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Hippocrates.Data.Entiteti;
+using MetroFramework;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -14,20 +15,23 @@ namespace HippocratesDoctor
 {
     public partial class SmenaLekara : MetroFramework.Forms.MetroForm
     {
+        private IzabraniLekar lekar_local;
         private string jmbg_lekara;
         private string datum_od, datum_do;
         private int smena;
 
-        public SmenaLekara(string jmbg_lekara)
+        public SmenaLekara(IzabraniLekar selektovani_lekar)
         {
             InitializeComponent();
-            this.Text = "Smena lekara " + GetDoctorNameAndSurname(jmbg_lekara);
-            this.jmbg_lekara = jmbg_lekara;
-            metroLabelInfoLekara.Text = jmbg_lekara;
-            GetDoctorShift(this.jmbg_lekara);
+            this.Text = "Smena lekara " + selektovani_lekar.Ime + " " + selektovani_lekar.Prezime;
+            lekar_local = selektovani_lekar;
+
+            this.jmbg_lekara = selektovani_lekar.Jmbg;
+            metroLabelInfoLekara.Text = selektovani_lekar.Ime + " " + selektovani_lekar.Prezime;
+            GetDoctorShift();
         }
 
-        private string GetDoctorNameAndSurname(string jmbg_lekara)
+        /*private string GetDoctorNameAndSurname(string jmbg_lekara)
         {
             string to_return = string.Empty;
             MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
@@ -61,12 +65,30 @@ namespace HippocratesDoctor
                 // Database is always closed
             }
             return to_return;
-        }
+        }*/
 
-        private void GetDoctorShift(string doctor_id) // Vraca smenu za trenutno sistemsko vreme (u kojoj smeni lekar sada radi)
+        private void GetDoctorShift() // Vraca smenu za trenutno sistemsko vreme (u kojoj smeni lekar sada radi)
         {
+            metroGridSmenaLekara.ColumnCount = 3;
+            metroGridSmenaLekara.Columns[0].Name = "SMENA";
+            metroGridSmenaLekara.Columns[1].Name = "DATUM_OD";
+            metroGridSmenaLekara.Columns[2].Name = "DATUM_DO";
+            foreach (Smena s in lekar_local.Smene)
+                metroGridSmenaLekara.Rows.Add(s.Id.Datum_Od, s.Datum_Do, s.SmenaLekara);
+
+            //metroGridData.Refresh();
+
+            //metroGridSmenaLekara.DataSource = lekar_local.Smene;
+            //int to_show_column_number = 0;
+            //for (int i = to_show_column_number; i < metroGridSmenaLekara.ColumnCount; i++)
+            //    metroGridSmenaLekara.Columns[i].Visible = false;
+            //for (int i = 0; i < metroGridSmenaLekara.ColumnCount - to_show_column_number; i++)
+            //    metroGridSmenaLekara.Columns[i].Width = metroGridSmenaLekara.Width / (metroGridSmenaLekara.ColumnCount - to_show_column_number);
+
             //int to_return = 0;
             //string to_return = string.Empty;
+            #region SQL nacin
+            /*
             MySqlDataAdapter data_adapter;
             DataSet data_set;
             //string date = System.DateTime.Now.Year + "-" + System.DateTime.Now.Month + "-" + System.DateTime.Now.Day;
@@ -94,7 +116,8 @@ namespace HippocratesDoctor
             finally
             {
                 conn.Close();
-            }
+            }*/
+            #endregion
             //return to_return;
         }
 
@@ -271,7 +294,7 @@ namespace HippocratesDoctor
             else
                 MetroMessageBox.Show(this, "Error prilikom delete funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            GetDoctorShift(jmbg_lekara);
+            GetDoctorShift();
         }
 
         private void metroButtonDodajSmenu_Click(object sender, EventArgs e)
@@ -282,7 +305,7 @@ namespace HippocratesDoctor
             else
                 MetroMessageBox.Show(this, "Error prilikom insert funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            GetDoctorShift(jmbg_lekara);
+            GetDoctorShift();
         }
 
         private void metroButtonAzurirajSmenu_Click(object sender, EventArgs e)
@@ -294,7 +317,7 @@ namespace HippocratesDoctor
             else
                 MetroMessageBox.Show(this, "Error prilikom update funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            GetDoctorShift(jmbg_lekara);
+            GetDoctorShift();
         }
 
     }
