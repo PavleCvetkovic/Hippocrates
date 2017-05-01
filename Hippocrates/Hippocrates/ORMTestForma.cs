@@ -12,6 +12,8 @@ using NHibernate.Criterion;
 using NHibernate.Linq;
 using Hippocrates.Data.Entiteti;
 using Hippocrates.Data;
+using Hippocrates.Data.EntitetiOracle;
+
 
 namespace Hippocrates
 {
@@ -420,6 +422,21 @@ namespace Hippocrates
             s.Save(b);
             s.Flush();
             s.Close();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayerOracle.GetSession();
+            KlinickiCentar kc = s.Load<KlinickiCentar>(1);
+            foreach (Klinika k in kc.Klinike)
+            {
+                foreach(SpecijalistaKC sckc in k.Specijaliste)
+                {
+                    MessageBox.Show(sckc.Ime);
+                }
+            }
+            s.Close();
+            
         }
     }
 }
