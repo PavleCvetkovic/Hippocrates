@@ -335,15 +335,14 @@ function slobodanTermin($matbrl,Datum $datum,$vreme){
         $con->close();
     }
 }
-function otkazi($matbrp,$datum){
+function otkazi($matbrp,$datum,$vreme){
     $con = new mysqli("139.59.132.29", "paja", "pajapro1234", "Hippocrates");
     $con->set_charset('utf8mb4');
     if ($con->connect_errno) {
-        // u slucaju greske odstampati odgovarajucu poruku
         print ("Connection error (" . $con->connect_errno . "): $con->connect_error");
     }
     else{
-        $con->query("DELETE FROM TERMIN WHERE MATBRP=$matbrp AND DATUM='$datum'");
+        $con->query("DELETE FROM TERMIN WHERE MATBRP=$matbrp AND DATUM='$datum' AND VREME='$vreme'");
         $con->query("UPDATE PACIJENT SET PRAVO_DA_ZAKAŽE=1;");
         $con->close();     
     }
@@ -367,13 +366,13 @@ function zakazi($matbrp,Termin $termin,$napomena){
                     $napomena=" ";
                 $sqlquery="INSERT INTO `TERMIN`(`MATBRL`, `MATBRP`, `DATUM`, `VREME`, `NAPOMENA`) VALUES('$matbrl','$matbrp','$datum->godina-$datum->mesec-$datum->dan',$vreme,'$napomena');";
                 $res2=$con->query($sqlquery);
+                $sqlquery="UPDATE PACIJENT SET PRAVO_DA_ZAKAŽE=0 WHERE JMBG=$matbrp";
+                $res=$con->query($sqlquery);
                 if($res2===TRUE)
                     return true;
                 else{
                     return false;
                     }
-                $sqlquery="UPDATE PACIJENT SET PRAVO_DA_ZAKAŽE=0 WHERE JMBG=$matbrp";
-                $res=$con->query($sqlquery);
                 return false;
             }
             else{

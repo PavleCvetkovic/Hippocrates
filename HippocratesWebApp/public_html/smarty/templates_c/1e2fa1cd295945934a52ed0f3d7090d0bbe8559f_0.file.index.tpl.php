@@ -1,3 +1,27 @@
+<?php
+/* Smarty version 3.1.30, created on 2017-05-01 12:17:06
+  from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\index.tpl" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.30',
+  'unifunc' => 'content_59070b229cd3f6_16416842',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '1e2fa1cd295945934a52ed0f3d7090d0bbe8559f' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\index.tpl',
+      1 => 1493633815,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_59070b229cd3f6_16416842 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <html>
 
 <head>
@@ -53,7 +77,11 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a><p id="labelime">Dobrodošli: [[$pacijent->ime]] [[$pacijent->prezime]] Vaš izabrani lekar: [[$izabranilekar->ime]] [[$izabranilekar->prezime]] </p>
+                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a><p id="labelime">Dobrodošli: <?php echo $_smarty_tpl->tpl_vars['pacijent']->value->ime;?>
+ <?php echo $_smarty_tpl->tpl_vars['pacijent']->value->prezime;?>
+ Vaš izabrani lekar: <?php echo $_smarty_tpl->tpl_vars['izabranilekar']->value->ime;?>
+ <?php echo $_smarty_tpl->tpl_vars['izabranilekar']->value->prezime;?>
+ </p>
                     <h1>Zakaži</h1>
                     <div class="col-lg-12">
                         <form action="index.php" method="GET">
@@ -107,7 +135,7 @@
                             </select>
                             <button class="btn btn-default" id="btnizaberi" type="submit">Izaberi</button>
                         </form>
-                        [[if $status]]
+                        <?php if ($_smarty_tpl->tpl_vars['status']->value) {?>
                         <table class="table-sm table table-hover table-striped table-responsive ">
                             <thead class="theadboja">
                                 <tr>
@@ -125,18 +153,31 @@
                                     </th>
                                 </tr>
                             </thead>
-                                [[foreach $listatermina as $termin]]
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['listatermina']->value, 'termin');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['termin']->value) {
+?>
                                 <tr>
                                 <form action='zakazi.php' method='GET'>
                                     <td>
-                                        [[$termin->datum->dan]]/[[$termin->datum->mesec]]/[[$termin->datum->godina]]
-                                        <input type="hidden" name="dan" value='[[$termin->datum->dan]]' />
-                                        <input type="hidden" name="mesec" value='[[$termin->datum->mesec]]' />
+                                        <?php echo $_smarty_tpl->tpl_vars['termin']->value->datum->dan;?>
+/<?php echo $_smarty_tpl->tpl_vars['termin']->value->datum->mesec;?>
+/<?php echo $_smarty_tpl->tpl_vars['termin']->value->datum->godina;?>
+
+                                        <input type="hidden" name="dan" value='<?php echo $_smarty_tpl->tpl_vars['termin']->value->datum->dan;?>
+' />
+                                        <input type="hidden" name="mesec" value='<?php echo $_smarty_tpl->tpl_vars['termin']->value->datum->mesec;?>
+' />
                                     </td>
                                     <td>
-                                        [[$termin->sat]] : [[$termin->minut]]
-                                        <input type="hidden" name="sat" value='[[$termin->sat]]' />
-                                        <input type="hidden" name="minut" value='[[$termin->minut]]' />
+                                        <?php echo $_smarty_tpl->tpl_vars['termin']->value->sat;?>
+ : <?php echo $_smarty_tpl->tpl_vars['termin']->value->minut;?>
+
+                                        <input type="hidden" name="sat" value='<?php echo $_smarty_tpl->tpl_vars['termin']->value->sat;?>
+' />
+                                        <input type="hidden" name="minut" value='<?php echo $_smarty_tpl->tpl_vars['termin']->value->minut;?>
+' />
                                     </td>
                                     <td>
                                         <input type='text' name='napomena'/>
@@ -146,11 +187,16 @@
                                     </td>
                                 </form>
                                 </tr>
-                                [[/foreach]]
+                                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
                         </table>
-                        [[else]]
+                        <?php } else { ?>
                         <h3>Još uvek nije određena smena lekara za taj datum.</h3>
-                        [[/if]]
+                        <?php }?>
                     </div>
                 </div>
             </div>
@@ -159,17 +205,25 @@
 
     </div>
 
-    <script src="bootstrap-3.3.7-dist/js/jquery.js"></script>
+    <?php echo '<script'; ?>
+ src="bootstrap-3.3.7-dist/js/jquery.js"><?php echo '</script'; ?>
+>
 
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <?php echo '<script'; ?>
+ src="bootstrap-3.3.7-dist/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
-    <script>
+    <?php echo '<script'; ?>
+>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-    </script>
+    <?php echo '</script'; ?>
+>
 
 </body>
 
 </html>
+<?php }
+}

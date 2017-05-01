@@ -1,3 +1,27 @@
+<?php
+/* Smarty version 3.1.30, created on 2017-05-01 12:21:03
+  from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\zakazanitermini.tpl" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.30',
+  'unifunc' => 'content_59070c0f70acc7_96931173',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '7348a650622f3a772e5c99e0a1921ea8994f9e78' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\zakazanitermini.tpl',
+      1 => 1493633815,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_59070c0f70acc7_96931173 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <html>
 
 <head>
@@ -16,7 +40,6 @@
 <body>
 
     <div id="wrapper" class="toggled">
-
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li>
@@ -55,41 +78,56 @@
             <div class="container-fluid">
                 <div class="row">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a>
-                    <h1>Vaše terapije</h1>
+                    <h1>Vaši zakazani termini</h1>
                     <div class="col-lg-12">
                         <table class="table-sm table table-hover table-striped table-responsive ">
                             <thead class="theadboja">
                                 <tr>
                                     <th>
-                                        IME DIJAGNOZE
+                                        DATUM
                                     </th>
                                     <th>
-                                        OPIS TERAPIJE
+                                        VREME
                                     </th>
                                     <th>
-                                        DATUM_OD
+                                        NAPOMENA
                                     </th>
                                     <th>
-                                        DATUM_DO
+                                        OTKAŽI
                                     </th>
                                 </tr>
                             </thead>
-                                [[foreach $nizTerapija as $terapija]]
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['nizTermina']->value, 'termin');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['termin']->value) {
+?>
                                 <tr>
                                     <td>
-                                        [[$terapija->dijagnoza->ime]]
+                                        <?php echo $_smarty_tpl->tpl_vars['termin']->value->datum;?>
+
                                     </td>
                                     <td>
-                                        [[$terapija->opis]]
+                                        <?php echo $_smarty_tpl->tpl_vars['termin']->value->sat;?>
+ : <?php echo $_smarty_tpl->tpl_vars['termin']->value->minut;?>
+
                                     </td>
                                     <td>
-                                        [[$terapija->datumOd]]
+                                        <?php echo $_smarty_tpl->tpl_vars['termin']->value->napomena;?>
+
                                     </td>
                                     <td>
-                                        [[$terapija->datumDo]]
+                                        <a class="btn btn-default" href="otkazi.php?datum=<?php echo $_smarty_tpl->tpl_vars['termin']->value->datum;?>
+&vreme=<?php echo $_smarty_tpl->tpl_vars['termin']->value->vreme();?>
+">OTKAŽI</a>
                                     </td>
                                 </tr>
-                                [[/foreach]]
+                                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
                             </thead>
                         </table>
                     </div>
@@ -97,15 +135,22 @@
             </div>
         </div>
     </div>
-     <script src="bootstrap-3.3.7-dist/js/jquery.js"></script>
+     <?php echo '<script'; ?>
+ src="bootstrap-3.3.7-dist/js/jquery.js"><?php echo '</script'; ?>
+>
 
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <?php echo '<script'; ?>
+ src="bootstrap-3.3.7-dist/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
-    <script>
+    <?php echo '<script'; ?>
+>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-    </script>
+    <?php echo '</script'; ?>
+>
 </body>
-</html>
+</html><?php }
+}

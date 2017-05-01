@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico">
     <title>Hippocrates system</title>
 
     <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -84,7 +85,7 @@
                                         [[$termin->napomena]]
                                     </td>
                                     <td>
-                                        <a class="btn btn-default" href="otkazi.php?datum=[[$termin->datum]]">OTKAŽI</a>
+                                        <a class="btn btn-default" href="otkazi.php?datum=[[$termin->datum]]&vreme=[[$termin->vreme()]]">OTKAŽI</a>
                                     </td>
                                 </tr>
                                 [[/foreach]]

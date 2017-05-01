@@ -1,3 +1,27 @@
+<?php
+/* Smarty version 3.1.30, created on 2017-05-01 12:21:05
+  from "C:\xampp\htdocs\HippocratesWebApp\public_html\tpl\otkazi.tpl" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.30',
+  'unifunc' => 'content_59070c115ac6e8_44711601',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '571259f97b33885bceef9379cda44711b9b42fc3' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\HippocratesWebApp\\public_html\\tpl\\otkazi.tpl',
+      1 => 1493633815,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_59070c115ac6e8_44711601 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <html>
 
 <head>
@@ -51,61 +75,33 @@
 
 
         <div id="page-content-wrapper">
-            
             <div class="container-fluid">
                 <div class="row">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Otvori\Zatvori meni</a>
-                    <h1>Vaše terapije</h1>
                     <div class="col-lg-12">
-                        <table class="table-sm table table-hover table-striped table-responsive ">
-                            <thead class="theadboja">
-                                <tr>
-                                    <th>
-                                        IME DIJAGNOZE
-                                    </th>
-                                    <th>
-                                        OPIS TERAPIJE
-                                    </th>
-                                    <th>
-                                        DATUM_OD
-                                    </th>
-                                    <th>
-                                        DATUM_DO
-                                    </th>
-                                </tr>
-                            </thead>
-                                [[foreach $nizTerapija as $terapija]]
-                                <tr>
-                                    <td>
-                                        [[$terapija->dijagnoza->ime]]
-                                    </td>
-                                    <td>
-                                        [[$terapija->opis]]
-                                    </td>
-                                    <td>
-                                        [[$terapija->datumOd]]
-                                    </td>
-                                    <td>
-                                        [[$terapija->datumDo]]
-                                    </td>
-                                </tr>
-                                [[/foreach]]
-                            </thead>
-                        </table>
+                        <h3><?php echo $_smarty_tpl->tpl_vars['statusOtkazivanja']->value;?>
+</h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-     <script src="bootstrap-3.3.7-dist/js/jquery.js"></script>
+     <?php echo '<script'; ?>
+ src="bootstrap-3.3.7-dist/js/jquery.js"><?php echo '</script'; ?>
+>
 
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <?php echo '<script'; ?>
+ src="bootstrap-3.3.7-dist/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
-    <script>
+    <?php echo '<script'; ?>
+>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-    </script>
+    <?php echo '</script'; ?>
+>
 </body>
-</html>
+</html><?php }
+}
