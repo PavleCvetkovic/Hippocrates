@@ -16,7 +16,7 @@ namespace Hippocrates.Data.Mapiranja
             Id(x => x.Sifra, "ŠIFRA");
 
             Map(x => x.Ime, "IME");
-
+            HasMany(x => x.Dijagnostifikovano).KeyColumn("ŠIFRA_DIJAGNOZE");
            
         }
     }
