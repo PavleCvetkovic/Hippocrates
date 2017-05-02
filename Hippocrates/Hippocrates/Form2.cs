@@ -40,19 +40,23 @@ namespace Hippocrates
             this.Close();
         }
 
-        #region dataGridViewi_na_tabu_za_pogled_na_bazu
-
-
-        private void btn_dom_zdravlja_obicanPogled_Click(object sender, EventArgs e)
+        #region pregled
+        private void dGV_pogled_u_bazu_SelectionChanged(object sender, EventArgs e)
         {
+            int rowindex = dGV_pogled_u_bazu.CurrentCell.RowIndex;
+            pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
+        }
 
+        #region domz
+        private void btn_domZ_pregled_Click(object sender, EventArgs e)
+        {
             dGV_pogled_u_bazu.DataSource = null;
             dGV_pogled_u_bazu.Columns.Clear();
             ISession s = Hippocrates.Data.DataLayer.GetSession();
             IQuery iq = s.CreateQuery("from DomZdravlja");
             IList<Hippocrates.Data.Entiteti.DomZdravlja> domovi = iq.List<Hippocrates.Data.Entiteti.DomZdravlja>();
 
-            
+
             dGV_pogled_u_bazu.ColumnCount = 5;
             dGV_pogled_u_bazu.Columns[0].Name = "MBR";
             dGV_pogled_u_bazu.Columns[1].Name = "Ime";
@@ -63,111 +67,537 @@ namespace Hippocrates
             {
                 dGV_pogled_u_bazu.Rows.Add(d.Mbr, d.Ime, d.Lokacija, d.Adresa, d.Opstina);
             }
-           
-            s.Close();
-        }
-
-        private void btn_obican_pogled_Lekar_Click(object sender, EventArgs e)
-        {
-            dGV_pogled_u_bazu.DataSource = null;
-            dGV_pogled_u_bazu.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from IzabraniLekar");
-            IList<Hippocrates.Data.Entiteti.IzabraniLekar> lekari = iq.List<Hippocrates.Data.Entiteti.IzabraniLekar>();
-           
-            dGV_pogled_u_bazu.ColumnCount = 6;
-            dGV_pogled_u_bazu.Columns[0].Name = "JMBG";
-            dGV_pogled_u_bazu.Columns[1].Name = "Ime";
-            dGV_pogled_u_bazu.Columns[2].Name = "Srednje slovo";
-            dGV_pogled_u_bazu.Columns[3].Name = "Prezime";
-            dGV_pogled_u_bazu.Columns[4].Name = "Password";
-            dGV_pogled_u_bazu.Columns[5].Name = "Radi u";
-
-            foreach (Data.Entiteti.IzabraniLekar l in lekari)
-            {
-                dGV_pogled_u_bazu.Rows.Add(l.Jmbg, l.Ime, l.Srednje_slovo, l.Prezime, l.Password, l.RadiUDomuZdravlja.Ime);
-            }
-            s.Close();
-        }
-
-        private void btn_obican_pogled_MedicOsoblje_Click(object sender, EventArgs e)
-        {
-            dGV_pogled_u_bazu.DataSource = null;
-            dGV_pogled_u_bazu.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from MedicinskoOsoblje");
-            IList<Hippocrates.Data.Entiteti.MedicinskoOsoblje> medOsoblje = iq.List<Hippocrates.Data.Entiteti.MedicinskoOsoblje>();
-            dGV_pogled_u_bazu.ColumnCount = 7;
-            dGV_pogled_u_bazu.Columns[0].Name = "JMBG";
-            dGV_pogled_u_bazu.Columns[1].Name = "Ime";
-            dGV_pogled_u_bazu.Columns[2].Name = "Srednje slovo";
-            dGV_pogled_u_bazu.Columns[3].Name = "Prezime";
-            dGV_pogled_u_bazu.Columns[4].Name = "Password";
-            dGV_pogled_u_bazu.Columns[5].Name = "Radi u";
-            dGV_pogled_u_bazu.Columns[6].Name = "Datum rodjenja";
-
-
-            foreach (MedicinskoOsoblje m in medOsoblje)
-            {
-                dGV_pogled_u_bazu.Rows.Add(m.Jmbg, m.Ime, m.Srednje_slovo,m.Prezime,m.Password,m.RadiUDomuZdravlja.Ime,m.Datum_rodjenja.ToShortDateString());
-            }
 
             s.Close();
+            int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+            pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
         }
 
-        private void btn_obican_pogled_Pacijent_Click(object sender, EventArgs e)
+        private void btn_azuriraj_Dz_pretraga_Click(object sender, EventArgs e)
         {
-            dGV_pogled_u_bazu.DataSource = null;
-            dGV_pogled_u_bazu.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from Pacijent");
-            IList<Hippocrates.Data.Entiteti.Pacijent> pacijenti = iq.List<Hippocrates.Data.Entiteti.Pacijent>();
-            dGV_pogled_u_bazu.ColumnCount = 11;
-            dGV_pogled_u_bazu.Columns[0].Name = "JMBG";
-            dGV_pogled_u_bazu.Columns[1].Name = "Ime";
-            dGV_pogled_u_bazu.Columns[2].Name = "Srednje slovo";
-            dGV_pogled_u_bazu.Columns[3].Name = "Prezime";
-            dGV_pogled_u_bazu.Columns[4].Name = "Datum rodjenja";
-            dGV_pogled_u_bazu.Columns[5].Name = "Opstina";
-            dGV_pogled_u_bazu.Columns[6].Name = "Pravo da zakaze";
-            dGV_pogled_u_bazu.Columns[7].Name = "Lbo";
-            dGV_pogled_u_bazu.Columns[8].Name = "Vazi do";
-            dGV_pogled_u_bazu.Columns[9].Name = "Email";
-            dGV_pogled_u_bazu.Columns[10].Name = "Telefon";
-            foreach(Pacijent p in pacijenti)
-            {
-                dGV_pogled_u_bazu.Rows.Add(p.Jmbg, p.Ime, p.Srednje_slovo, p.Prezime, p.Datum_rodjenja.ToShortDateString(), p.Opstina, p.Pravo_da_zakaze, p.Lbo, p.Vazi_do.ToShortDateString(), p.Email, p.Telefon);
-            }
-            s.Close();
-        }
-
-        private void btn_pogled_admini_Click_1(object sender, EventArgs e)
-        {
-            dGV_pogled_u_bazu.DataSource = null;
-            dGV_pogled_u_bazu.Columns.Clear();
-            ISession s = Hippocrates.Data.DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from AdministratorDomaZdravlja");
-            IList<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja> admini = iq.List<Hippocrates.Data.Entiteti.AdministratorDomaZdravlja>();
-            dGV_pogled_u_bazu.ColumnCount = 6;
-            dGV_pogled_u_bazu.Columns[0].Name = "JMBG";
-            dGV_pogled_u_bazu.Columns[1].Name = "Ime";
-            dGV_pogled_u_bazu.Columns[2].Name = "Srednje slovo";
-            dGV_pogled_u_bazu.Columns[3].Name = "Prezime";
-            dGV_pogled_u_bazu.Columns[4].Name = "Radi u";
-            dGV_pogled_u_bazu.Columns[5].Name = "Password";
-            foreach(AdministratorDomaZdravlja a in admini)
-            {
-                dGV_pogled_u_bazu.Rows.Add(a.JMBG, a.Ime, a.SrednjeSlovo, a.Prezime, a.RadiUDomuZdravlja.Ime, a.Password);
-            }
             
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                DomZdravlja dzi = new DomZdravlja();
+                dzi = s.Load<DomZdravlja>(pomIndex);
+                tb_azuriranje_MBR_domZ.Text = dzi.Mbr;
+                tb_azuriranje_Ime_domZ.Text = dzi.Ime;
+                tb_azuriranje_lokacija_domZ.Text = dzi.Lokacija;
+                tb_azuriranje_opstina_domZ.Text = dzi.Opstina;
+                tb_azuriranje_adresa_domZ.Text = dzi.Adresa;
+                int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate izabrati dom zdravlja.");
+            }
+            s.Close();
+            GeneralControl.SelectTab(3);
+            tab_azuriranje.SelectTab("Tab_azuriranje_domaZdravlja");
+        }
+        #endregion
+
+        #region lekar
+
+        private void btn_lek_pretraga_Click(object sender, EventArgs e)
+        {
+            dGV_pogled_u_bazu.DataSource = null;
+            dGV_pogled_u_bazu.Columns.Clear();
+            ISession s = DataLayer.GetSession();
+            try
+            {
+
+
+                IQuery q = s.CreateQuery("select o from IzabraniLekar as o where o.Ime = :ImeLekara");
+                q.SetString("ImeLekara", tb_ime_lekara_pretraga.Text);
+                IList<IzabraniLekar> ilekari = q.List<IzabraniLekar>();
+                dGV_pogled_u_bazu.ColumnCount = 4;
+                dGV_pogled_u_bazu.Columns[0].Name = "Jmbg";
+                dGV_pogled_u_bazu.Columns[1].Name = "Ime";
+                dGV_pogled_u_bazu.Columns[2].Name = "Prezime";
+                dGV_pogled_u_bazu.Columns[3].Name = "Radi u";
+                foreach (IzabraniLekar il in ilekari)
+                {
+                    dGV_pogled_u_bazu.Rows.Add(il.Jmbg, il.Ime, il.Prezime, il.RadiUDomuZdravlja.Ime);
+                }
+                if (ilekari.Count != 0)
+                {
+                    int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+                    pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nista nije pronadjeno za navedeni kriterijum po kojem vrsite pretragu,pokusajte ponovo.");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            s.Close();
+        }
+
+        private void btn_azuriraj_lek_pretraga_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                
+                IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
+
+                lBSmeneLekara.Items.Clear();
+                tb_azuriranje_jmbg_lekar.Text = il.Jmbg;
+                tb_azuriranje_mbrzu_lekar.Text = il.RadiUDomuZdravlja.Ime;
+                tb_azuriranje_ime_lekar.Text = il.Ime;
+                tb_azuriranje_prezime_lekar.Text = il.Prezime;
+                tb_azuriranje_pass_lekar.Text = il.Password;
+                dTP_azuriranje_lekar.Value = il.Datum_rodjenja;
+                tb_azuriranje_lekar_srednjeSlovo.Text = il.Srednje_slovo;
+                foreach (Smena smen in il.Smene)
+                {
+                    lBSmeneLekara.Items.Add(smen.Id.Datum_Od.ToShortDateString() + " - " + smen.Datum_Do.ToShortDateString() + " smena: " + smen.SmenaLekara);
+                }
+
+                cb_domovi_za_promenu_lekar.Items.Clear();
+                cb_domovi_za_promenu_lekar.Text = string.Empty;
+                IQuery iq = s.CreateQuery("from DomZdravlja");
+                IList<DomZdravlja> domovi = iq.List<DomZdravlja>();
+                foreach (DomZdravlja dz in domovi)
+                {
+                    if (il.RadiUDomuZdravlja.Mbr != dz.Mbr)
+                        cb_domovi_za_promenu_lekar.Items.Add(dz.Mbr + " " + dz.Ime);
+                }
+
+                GeneralControl.SelectTab(3);
+                tab_azuriranje.SelectTab("Tab_azuriranje_lekara");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate izabrati lekara za kojeg hocete da azurirate podatke. ");
+            }
+            s.Close();
+            
+        }
+        #endregion
+
+        #region pacijent
+
+        private void btn_pac_pretraga_Click(object sender, EventArgs e)
+        {
+            dGV_pogled_u_bazu.DataSource = null;
+            dGV_pogled_u_bazu.Columns.Clear();
+            ISession s = Hippocrates.Data.DataLayer.GetSession();
+            try
+            {
+                IQuery iq = s.CreateQuery("select o from Pacijent as o where o.Ime = : imePac");
+                iq.SetString("imePac", tb_imePac_pretraga.Text);
+                
+                IList<Pacijent> pacijenti = iq.List<Pacijent>();
+                dGV_pogled_u_bazu.ColumnCount = 6;
+                dGV_pogled_u_bazu.Columns[0].Name = "JMBG";
+                dGV_pogled_u_bazu.Columns[1].Name = "Ime";
+                dGV_pogled_u_bazu.Columns[2].Name = "Srednje slovo";
+                dGV_pogled_u_bazu.Columns[3].Name = "Prezime";
+                dGV_pogled_u_bazu.Columns[4].Name = "Pravo da zakaze";
+                dGV_pogled_u_bazu.Columns[5].Name = "Opstina";
+                ;
+                foreach (Pacijent pac in pacijenti)
+                {
+                    dGV_pogled_u_bazu.Rows.Add(pac.Jmbg, pac.Ime, pac.Srednje_slovo, pac.Prezime, pac.Pravo_da_zakaze, pac.Opstina);
+                }
+                if (pacijenti.Count != 0)
+                {
+                    int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+                    pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nista nije pronadjeno za navedeni kriterijum po kojem vrsite pretragu,pokusajte ponovo.");
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            s.Close();
+        }
+
+        private void btn_azuriranje_pacijenta_pretraga_Click(object sender, EventArgs e)
+        {
+            cB_Dijagnoze_pacijenta_azuriranje.Items.Clear();
+            cB_Dijagnoze_pacijenta_azuriranje.Text = string.Empty;
+            cB_dijagnoze_Azuriranje_tabDij.Items.Clear();
+            cB_dijagnoze_Azuriranje_tabDij.Text = string.Empty;
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                Pacijent pac = new Pacijent();
+                pac = s.Load<Pacijent>(pomIndex);
+                tb_pacijent_azuriranje_jmbg.Text = pac.Jmbg;
+                tb_pacijent_azuriranje_ime.Text = pac.Ime;
+                tb_pacijent_azuriranje_prezime.Text = pac.Prezime;
+                tb_pacijent_azuriranje_srednjeSlovo.Text = pac.Srednje_slovo;
+                tb_pacijent_azuriranje_lbo.Text = pac.Lbo;
+                tb_pacijent_azuriranje_opstina.Text = pac.Opstina;
+                tb_pacijent_azuriranje_telefon.Text = pac.Telefon;
+                tb_pacijent_azuriranje_email.Text = pac.Email;
+                popuni_lb_vakcine(lb_pac_vakcine, pac);
+                //---combobox dijagnoze pacijenta
+                foreach (Dijagnostifikovano d in pac.DijagnostifikovanoDijagnoze)
+                {
+                    cB_Dijagnoze_pacijenta_azuriranje.Items.Add(d.Id.DijagnozaDijagnoza.Sifra + "-" + d.Id.DijagnozaDijagnoza.Ime);
+                }
+                IQuery iq1 = s.CreateQuery("from Dijagnoza");
+                IList<Dijagnoza> dijagnoze = iq1.List<Dijagnoza>();
+                foreach (Dijagnoza d in dijagnoze)
+                {
+                    if (cB_Dijagnoze_pacijenta_azuriranje.Items.Contains(d.Sifra + "-" + d.Ime) == false)
+                        cB_dijagnoze_Azuriranje_tabDij.Items.Add(d.Sifra + "-" + d.Ime);
+                }
+                label_lekar_pac.Text = pac.Lekar.Ime;
+                label_lekar_prezime_pac.Text = pac.Lekar.Prezime;
+                iq1 = s.CreateQuery("from IzabraniLekar");
+                IList<IzabraniLekar> lekari = iq1.List<IzabraniLekar>();
+                foreach (IzabraniLekar l in lekari)
+                {
+                    if (l.RadiUDomuZdravlja.Opstina == pac.Opstina && l.Ime != label_lekar_pac.Text && l.Prezime != label_lekar_prezime_pac.Text)
+                    {
+                        cB_lekari_za_izmenu.Items.Add(l.Jmbg + " " + l.Ime + " " + l.Prezime);
+                    }
+                }
+                IQuery iq = s.CreateQuery("from Vakcina");
+                IList<Vakcina> vakcine = iq.List<Vakcina>();
+                dGV_azuriranje_pac_vakcine.DataSource = vakcine;
+                dGV_azuriranje_pac_vakcine.Columns[3].Visible = false;
+                dGV_azuriranje_pac_vakcine.Columns[2].Visible = false;
+                popuni_dgv_azuriranje_pac_terapije(dgv_azuriranje_pac_terapije, pac);
+                popuni_dGV_pac_dijagnoze(dGV_pac_dijagnoze, pac);
+                GeneralControl.SelectTab(3);
+                tab_azuriranje.SelectTab("Tab_azuriranje_pacijenata");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate izabrati pacijenta. ");
+            }
+
+            s.Close();
+           
+        }
+
+        #endregion
+
+        #region adminDz
+
+        private void btn_adminDz_pretraga_Click(object sender, EventArgs e)
+        {
+            dGV_pogled_u_bazu.DataSource = null;
+            dGV_pogled_u_bazu.Columns.Clear();
+            ISession s = Hippocrates.Data.DataLayer.GetSession();
+            try
+            {
+                IQuery iq = s.CreateQuery("select o from AdministratorDomaZdravlja as o where o.Ime = : Imeadmina");
+                iq.SetString("Imeadmina", tb_imeAdmina_pretraga.Text);
+                IList<AdministratorDomaZdravlja> admini = iq.List<AdministratorDomaZdravlja>();
+                dGV_pogled_u_bazu.ColumnCount = 6;
+                dGV_pogled_u_bazu.Columns[0].Name = "JMBG";
+                dGV_pogled_u_bazu.Columns[1].Name = "Ime";
+                dGV_pogled_u_bazu.Columns[2].Name = "Srednje slovo";
+                dGV_pogled_u_bazu.Columns[3].Name = "Prezime";
+                dGV_pogled_u_bazu.Columns[4].Name = "Radi u";
+                dGV_pogled_u_bazu.Columns[5].Name = "Password";
+                foreach (AdministratorDomaZdravlja a in admini)
+                {
+                    dGV_pogled_u_bazu.Rows.Add(a.JMBG, a.Ime, a.SrednjeSlovo, a.Prezime, a.RadiUDomuZdravlja.Ime, a.Password);
+                }
+                if (admini.Count != 0)
+                {
+                    int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+                    pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nista nije pronadjeno za navedeni kriterijum po kojem vrsite pretragu,pokusajte ponovo.");
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            s.Close();
+        }
+
+        private void btn_azuriraj_admina_pretraga_Click(object sender, EventArgs e)
+        {
+            
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                AdministratorDomaZdravlja adz = s.Load<AdministratorDomaZdravlja>(pomIndex);
+                tb_azuriranje_admindz_jmbg.Text = adz.JMBG;
+                tb_azuriranje_admindz_ime.Text = adz.Ime;
+                tb_azuriranje_admindz_srednjeS.Text = adz.SrednjeSlovo;
+                tb_azuriranje_admindz_prezime.Text = adz.Prezime;
+                tb_azuriranje_admindz_password.Text = adz.Password;
+                tb_azuriranje_admindz_mbrzu.Text = adz.RadiUDomuZdravlja.Ime;
+                GeneralControl.SelectTab(3);
+                tab_azuriranje.SelectTab("tab_azuriranje_admin_dz");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti administratora kojeg zelite da azurirate " );
+            }
+            s.Close();
+            
+        }
+
+        #endregion
+
+        #region medRad
+
+        private void btn_med_rad_pretraga_Click(object sender, EventArgs e)
+        {
+            dGV_pogled_u_bazu.DataSource = null;
+            dGV_pogled_u_bazu.Columns.Clear();
+            ISession s = DataLayer.GetSession();
+            try
+            {
+
+
+                IQuery q = s.CreateQuery("select o from MedicinskoOsoblje as o where o.Ime = :ImeRadnika");
+                q.SetString("ImeRadnika", tb_medRad_ime_azuriranje_pretraga.Text);
+                IList<MedicinskoOsoblje> mo = q.List<MedicinskoOsoblje>();
+                dGV_pogled_u_bazu.ColumnCount = 4;
+                dGV_pogled_u_bazu.Columns[0].Name = "Jmbg";
+                dGV_pogled_u_bazu.Columns[1].Name = "Ime";
+                dGV_pogled_u_bazu.Columns[2].Name = "Prezime";
+                dGV_pogled_u_bazu.Columns[3].Name = "Radi u";
+                foreach (MedicinskoOsoblje o in mo)
+                {
+                    dGV_pogled_u_bazu.Rows.Add(o.Jmbg, o.Ime, o.Prezime, o.RadiUDomuZdravlja.Ime);
+                }
+                if (mo.Count != 0)
+                {
+                    int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+                    pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nista nije pronadjeno za navedeni kriterijum po kojem vrsite pretragu,pokusajte ponovo.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problem : " + ex);
+            }
+            s.Close();
+        }
+
+        private void btn_azuriraj_medRad_pretraga_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                
+                MedicinskoOsoblje mo = s.Load<MedicinskoOsoblje>(pomIndex);
+                tb_jmbg_mr_azuriranje.Text = mo.Jmbg;
+                tb_ime_mr_azuriranje.Text = mo.Ime;
+                tb_prezime_mr_azuriranje.Text = mo.Prezime;
+                tb_radiU_mr_azuriranje.Text = mo.RadiUDomuZdravlja.Ime;
+                tb_pass_mr_azuriranje.Text = mo.Password;
+                tb_ss_mr_azuriranje.Text = mo.Srednje_slovo;
+                dTP_mr_datumRodj_azuriranje.Value = mo.Datum_rodjenja;
+                GeneralControl.SelectTab(3);
+                tab_azuriranje.SelectTab("Tab_azuriranje_medRadnik");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti zeljenog medicinskog radnika.");
+            }
+            s.Close();
+            
+        }
+
+        #endregion
+
+        #region dijag
+        private void btn_dijag_pretraga_Click(object sender, EventArgs e)
+        {
+            dGV_pogled_u_bazu.DataSource = null;
+            dGV_pogled_u_bazu.Columns.Clear();
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                dGV_pogled_u_bazu.ColumnCount = 2;
+                dGV_pogled_u_bazu.Columns[0].Name = "Sifra";
+                dGV_pogled_u_bazu.Columns[1].Name = "Ime";
+                IQuery q = s.CreateQuery("select o from Dijagnoza as o where o.Sifra = :Sifra");
+                q.SetString("Sifra", tb_dijag_pretraga.Text);
+                IList<Dijagnoza> dijag = q.List<Dijagnoza>();
+                foreach (Dijagnoza d in dijag)
+                {
+                    dGV_pogled_u_bazu.Rows.Add(d.Sifra, d.Ime);
+                }
+                if (dijag.Count != 0)
+                {
+                    int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+                    pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nista nije pronadjeno za navedeni kriterijum po kojem vrsite pretragu,pokusajte ponovo.");
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            s.Close();
+        }
+
+        private void btn_azuriraj_dijag_pretraga_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                Dijagnoza d = s.Load<Dijagnoza>(pomIndex);
+                tb_azuriranje_dijag_ime.Text = d.Ime;
+                GeneralControl.SelectTab(3);
+                tab_azuriranje.SelectTab("Tab_azuriranje_vak_dij_ter");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti dijagnozu koju zelite da azurirate.");
+            }
             s.Close();
         }
         #endregion
 
+        #region vakcine
+
+        private void btn_vakcina_pretraga_Click(object sender, EventArgs e)
+        {
+            dGV_pogled_u_bazu.DataSource = null;
+            dGV_pogled_u_bazu.Columns.Clear();
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                dGV_pogled_u_bazu.ColumnCount = 2;
+                dGV_pogled_u_bazu.Columns[0].Name = "Sifra";
+                dGV_pogled_u_bazu.Columns[1].Name = "Ime";
+                IQuery q = s.CreateQuery("select o from Vakcina as o where o.Ime = :Ime");
+                q.SetString("Ime", tb_vakcina_pretraga.Text);
+                IList<Vakcina> vakcine = q.List<Vakcina>();
+                foreach (Vakcina v in vakcine)
+                {
+                    dGV_pogled_u_bazu.Rows.Add(v.Sifra,v.Ime);
+                }
+                if (vakcine.Count != 0)
+                {
+                    int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+                    pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nista nije pronadjeno za navedeni kriterijum po kojem vrsite pretragu,pokusajte ponovo.");
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            s.Close();
+        }
+
+        private void btn_azuriraj_vakcinu_pretraga_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                Vakcina v = s.Load<Vakcina>(pomIndex);
+                tb_azuriranje_vak_ime.Text = v.Ime;
+                tb_azuriranje_vak_opis.Text = v.Opis;
+                GeneralControl.SelectTab(3);
+                tab_azuriranje.SelectTab("Tab_azuriranje_vak_dij_ter");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti vakcinu koju zelite da azurirate.");
+            }
+            s.Close();
+        }
+
+        #endregion
+
+        #region terapija
+
+        private void btn_ter_pretraga_Click(object sender, EventArgs e)
+        {
+            dGV_pogled_u_bazu.DataSource = null;
+            dGV_pogled_u_bazu.Columns.Clear();
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                
+                IQuery iq = s.CreateQuery("select o from Pacijent as o where o.Ime = : ime");
+                iq.SetString("ime", tb_imePacTer_pretraga.Text);
+                IList<Pacijent> pacijenti = iq.List<Pacijent>();
+                dGV_pogled_u_bazu.ColumnCount = 6;
+                dGV_pogled_u_bazu.Columns[0].Name = "JMBG";
+                dGV_pogled_u_bazu.Columns[1].Name = "Ime";
+                dGV_pogled_u_bazu.Columns[2].Name = "Srednje slovo";
+                dGV_pogled_u_bazu.Columns[3].Name = "Prezime";
+                dGV_pogled_u_bazu.Columns[4].Name = "Pravo da zakaze";
+                dGV_pogled_u_bazu.Columns[5].Name = "Opstina";
+                foreach (Pacijent pac in pacijenti)
+                {
+                    dGV_pogled_u_bazu.Rows.Add(pac.Jmbg, pac.Ime, pac.Srednje_slovo, pac.Prezime, pac.Pravo_da_zakaze, pac.Opstina);
+                }
+                if (pacijenti.Count != 0)
+                {
+                    int rowindex = dGV_pogled_u_bazu.Rows[0].Index;
+                    pomIndex = dGV_pogled_u_bazu.Rows[rowindex].Cells[0].Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nista nije pronadjeno za navedeni kriterijum po kojem vrsite pretragu,pokusajte ponovo.");
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            s.Close();
+        }
+
+        private void btn_azuriraj_terapiju_pretraga_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                Pacijent pac = new Pacijent();
+                pac = s.Load<Pacijent>(pomIndex);
+                tb_imepac_ter_azuriranje.Text = pac.Ime;
+                cb_azuriranje_ter_pac.Text = pac.Ime + " " + pac.Prezime + " " + pac.Jmbg;
+                GeneralControl.SelectTab(3);
+                tab_azuriranje.SelectTab("Tab_azuriranje_vak_dij_ter");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate oznaciti vakcinu koju zelite da azurirate.");
+            }
+            s.Close();
+        }
+
+        #endregion
+
+        #endregion
+
         #region listBox_i_dataGridViews_funkcije_za_popunjavanje
-        
-       
-        
+
+
+
         private void popuni_dgv_domovi(DataGridView dgv)
         {
             dgv.DataSource = null;
@@ -1260,8 +1690,7 @@ namespace Hippocrates
             ISession s = DataLayer.GetSession();
             try
             {
-                IQuery q = s.CreateQuery("select o from DomZdravlja as o where o.Opstina = :opstina");
-                q.SetString("opstina", tb_dz_azuriranje_pretraga.Text);
+                IQuery q = s.CreateQuery("from DomZdravlja");
                 IList<DomZdravlja> domovi = q.List<DomZdravlja>();
                 dGV_domZdravlja_azuriranje.ColumnCount = 3;
                 dGV_domZdravlja_azuriranje.Columns[0].Name = "Mbr";
@@ -1371,6 +1800,7 @@ namespace Hippocrates
 
         private void dGV_lekari_azuriranje_SelectionChanged(object sender, EventArgs e)
         {
+            pnlDodavanjeSmene.Visible = false;
             ISession s = DataLayer.GetSession();
             try
             {
@@ -1389,7 +1819,7 @@ namespace Hippocrates
                 tb_azuriranje_lekar_srednjeSlovo.Text = il.Srednje_slovo;
                 foreach(Smena smen in il.Smene)
                 {
-                    lBSmeneLekara.Items.Add(smen.Id.Datum_Od + " - " + smen.Datum_Do + " smena: " + smen.SmenaLekara);
+                    lBSmeneLekara.Items.Add(smen.Id.Datum_Od.ToShortDateString() + " - " + smen.Datum_Do.ToShortDateString() + " smena: " + smen.SmenaLekara);
                 }
                
                 cb_domovi_za_promenu_lekar.Items.Clear();
@@ -1439,68 +1869,69 @@ namespace Hippocrates
         private void btn_dodaj_smenu_Click(object sender, EventArgs e)
         {
             ISession s = DataLayer.GetSession();
+            pnlDodavanjeSmene.Visible = true;
+            IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
+            dTP_dodavanjeSmene_od.Value = il.Smene[il.Smene.Count - 1].Datum_Do;
+            dTP_dodavanjeSmene_od.Value = dTP_dodavanjeSmene_od.Value.AddDays(1);
+            dTP_dodavanjeSmene_do.Value = dTP_dodavanjeSmene_od.Value;
+            dTP_dodavanjeSmene_do.Value = dTP_dodavanjeSmene_do.Value.AddDays(1);
+            s.Close();
+        }
+
+        private void btn_dodaj_smenuLekara_panel_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
             try
             {
-                IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
-                double razlika = (dTP_smena_od.Value - il.Smene[il.Smene.Count - 1].Datum_Do).TotalDays;
-
-                if (cb_azuriranje_smenaPrva_leakr.Checked == true || cb_azuriranje_smenaDruga_leakr.Checked == false)
+                if (cB_dodavanjeSmene.Text != string.Empty)
                 {
-                    if (cb_azuriranje_smenaPrva_leakr.Checked == true && cb_azuriranje_smenaDruga_leakr.Checked == true)
+                    IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
+
+                    double razlika = (dTP_dodavanjeSmene_od.Value - il.Smene[il.Smene.Count - 1].Datum_Do).TotalDays;
+
+                    if (razlika == 1 || (razlika > 1 && razlika < 2))
                     {
-                        MessageBox.Show("Ne mozete izabrati obe smene za lekara u odredjenom periodu.");
+                        int SmenaLekara1;
+                        SmenaLekara1 = Int32.Parse(cB_dodavanjeSmene.SelectedItem.ToString());
+
+                        Smena smena = new Smena()
+                        {
+                            Datum_Do = dTP_dodavanjeSmene_do.Value,
+                            SmenaLekara = SmenaLekara1,
+
+                        };
+                        smena.Id.Datum_Od = dTP_dodavanjeSmene_od.Value;
+                        smena.Id.Lekar = il;
+                        il.Smene.Add(smena);
+                        s.Save(smena);
+                        s.Flush();
+                        lBSmeneLekara.Items.Clear();
+                        foreach (Smena smene in il.Smene)
+                        {
+                            lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
+                        }
+                        dTP_smena_do.Value = DateTime.Now;
+                        dTP_smena_od.Value = DateTime.Now;
+                        cb_azuriranje_smenaPrva_leakr.Checked = false;
+                        cb_azuriranje_smenaDruga_leakr.Checked = false;
+                        pnlDodavanjeSmene.Visible = false;
                     }
                     else
                     {
-                        if (razlika == 1 || (razlika > 1 && razlika < 2))
-                        {
-                            int SmenaLekara1;
-                            if (cb_azuriranje_smenaPrva_leakr.Checked == true)
-                            {
-                                SmenaLekara1 = 1;
-                            }
-                            else
-                            {
-                                SmenaLekara1 = 2;
-                            }
-
-                            Smena smena = new Smena()
-                            {
-                                Datum_Do = dTP_smena_do.Value,
-                                SmenaLekara = SmenaLekara1,
-
-                            };
-                            smena.Id.Datum_Od = dTP_smena_od.Value;
-                            smena.Id.Lekar = il;
-                            il.Smene.Add(smena);
-                            s.Save(smena);
-                            s.Flush();
-                            lBSmeneLekara.Items.Clear();
-                            foreach (Smena smene in il.Smene)
-                            {
-                                lBSmeneLekara.Items.Add(smene.Id.Datum_Od + " - " + smene.Datum_Do + " smena: " + smene.SmenaLekara);
-                            }
-                            dTP_smena_do.Value = DateTime.Now;
-                            dTP_smena_od.Value = DateTime.Now;
-                            cb_azuriranje_smenaPrva_leakr.Checked = false;
-                            cb_azuriranje_smenaDruga_leakr.Checked = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Datum od kojeg pocinje nova smena koju zelite da kreirate mora da bude za jedan dan veca od poslednjeg datuma iz liste smena.");
-                        }
+                        MessageBox.Show("Datum od kojeg pocinje nova smena koju zelite da kreirate mora da bude za jedan dan veca od poslednjeg datuma iz liste smena.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Morate izabrati smenu lekara za odredjeni datum.");
+                    MessageBox.Show("Morate izabrati smenu!");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Morate oznaciti lekara kome zelite smenu da dodate. " + ex);
             }
             s.Close();
+            
         }
 
         private void btn_azuriraj_smenu_Click(object sender, EventArgs e)
@@ -1531,7 +1962,7 @@ namespace Hippocrates
                 lBSmeneLekara.Items.Clear();
                 foreach (Smena smene in il.Smene)
                 {
-                    lBSmeneLekara.Items.Add(smene.Id.Datum_Od + " - " + smene.Datum_Do + " smena: " + smene.SmenaLekara);
+                    lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
                 }
             }
             catch(Exception ex)
@@ -1890,7 +2321,7 @@ namespace Hippocrates
             {
                 ISession s = DataLayer.GetSession();
                 Pacijent pac = s.Load<Pacijent>(pomIndex);
-                string dijagnozaIzCB = cB_Dijagnoze_pacijenta_azuriranje.SelectedItem.ToString();
+                string dijagnozaIzCB = cB_dijagnoze_Azuriranje_tabDij.SelectedItem.ToString();
                 string indexDijagnoze = dijagnozaIzCB.Substring(0, dijagnozaIzCB.IndexOf("-"));
                 Dijagnoza d = s.Load<Dijagnoza>(indexDijagnoze);
                 Dijagnostifikovano dij = new Dijagnostifikovano()
@@ -1902,14 +2333,14 @@ namespace Hippocrates
                 dij.Id.DijagnozaDijagnoza = d;
                 pac.Lekar.DijagnostifikovanoDijagnoze.Add(dij);
                 pac.DijagnostifikovanoDijagnoze.Add(dij);
-
+                s.Save(dij);
                 s.Flush();
 
                 s.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Morate oznaciti pacijenta u tabeli na tabu");
+                MessageBox.Show("Morate oznaciti pacijenta u tabeli na tabu" + ex);
             }
         }
 
@@ -2248,31 +2679,17 @@ namespace Hippocrates
             s.Close();
         }
 
-        private void cb_azuriranje_ter_lekar_Enter(object sender, EventArgs e)
-        {
-            cb_azuriranje_ter_lekar.Items.Clear();
-            ISession s = DataLayer.GetSession();
-            IQuery iq = s.CreateQuery("from IzabraniLekar");
-            IList<IzabraniLekar> lekari = iq.List<IzabraniLekar>();
-            foreach (IzabraniLekar l in lekari)
-            {
-                cb_azuriranje_ter_lekar.Items.Add(l.Ime + " " + l.Prezime + " " + l.Jmbg);
-            }
-            s.Close();
-        }
-
         private void cb_azuriranje_ter_pac_Enter(object sender, EventArgs e)
         {
             cb_azuriranje_ter_pac.Items.Clear();
-            if (cb_azuriranje_ter_lekar.Text != string.Empty)
+            if (tb_imepac_ter_azuriranje.Text != string.Empty)
             {
-                string parametar = cb_azuriranje_ter_lekar.SelectedItem.ToString();
-                parametar = parametar.Substring(0, parametar.IndexOf(" "));
+                string parametar = tb_imepac_ter_azuriranje.Text;
                 ISession s = DataLayer.GetSession();
                 cb_azuriranje_ter_pac.Items.Clear();
                 cb_azuriranje_ter_pac.Text = string.Empty;
-                IQuery iq = s.CreateQuery("select o from Pacijent as o where o.Lekar.Ime = : imeLekara");
-                iq.SetString("imeLekara", parametar);
+                IQuery iq = s.CreateQuery("select o from Pacijent as o where o.Ime = : ime");
+                iq.SetString("ime", parametar);
                 IList<Pacijent> pacijenti = iq.List<Pacijent>();
                 foreach (Pacijent pac in pacijenti)
                 {
@@ -2287,7 +2704,8 @@ namespace Hippocrates
             cb_azuriranje_ter_dijagnoza.Items.Clear();
             if (cb_azuriranje_ter_pac.Text != string.Empty)
             {
-                string[] parametars = cb_azuriranje_ter_pac.SelectedItem.ToString().Split(' ');
+                //string[] parametars = cb_azuriranje_ter_pac.SelectedItem.ToString().Split(' ');
+                string[] parametars = cb_azuriranje_ter_pac.Text.ToString().Split(' ');
                 ISession s = DataLayer.GetSession();
                 Pacijent p = s.Load<Pacijent>(parametars[2]);
                 foreach (Dijagnostifikovano t in p.DijagnostifikovanoDijagnoze)
@@ -2308,7 +2726,7 @@ namespace Hippocrates
 
                 string[] paramDijag = cb_azuriranje_ter_dijagnoza.SelectedItem.ToString().Split(' ');
                 iq.SetString("sifraDijag", paramDijag[0]);
-                string[] paramPac = cb_azuriranje_ter_pac.SelectedItem.ToString().Split(' ');
+                string[] paramPac = cb_azuriranje_ter_pac.Text.ToString().Split(' ');
                 iq.SetString("jmbgpacijenta", paramPac[2]);
                 IList<Terapija> terapije = iq.List<Terapija>();
                 foreach (Terapija t in terapije)
@@ -2661,100 +3079,6 @@ namespace Hippocrates
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar));
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
