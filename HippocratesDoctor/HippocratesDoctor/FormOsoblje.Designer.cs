@@ -30,6 +30,8 @@
         {
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.tab_pregledi = new MetroFramework.Controls.MetroTabPage();
+            this.btn_zakazivanje = new MetroFramework.Controls.MetroButton();
+            this.lblSmena = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.mBC_pacijenti_nacinPretrage = new MetroFramework.Controls.MetroComboBox();
             this.lblPrezimePacijenta = new System.Windows.Forms.Label();
@@ -72,8 +74,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblDomZdravlja = new System.Windows.Forms.Label();
-            this.lblSmena = new System.Windows.Forms.Label();
-            this.btn_zakazivanje = new MetroFramework.Controls.MetroButton();
             this.metroTabControl1.SuspendLayout();
             this.tab_pregledi.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -88,7 +88,7 @@
             this.metroTabControl1.Location = new System.Drawing.Point(9, 64);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(824, 565);
+            this.metroTabControl1.Size = new System.Drawing.Size(824, 448);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -103,15 +103,38 @@
             this.tab_pregledi.HorizontalScrollbarSize = 10;
             this.tab_pregledi.Location = new System.Drawing.Point(4, 38);
             this.tab_pregledi.Name = "tab_pregledi";
-            this.tab_pregledi.Size = new System.Drawing.Size(816, 523);
+            this.tab_pregledi.Size = new System.Drawing.Size(816, 406);
             this.tab_pregledi.TabIndex = 0;
             this.tab_pregledi.Text = "Raspored pregleda";
             this.tab_pregledi.VerticalScrollbarBarColor = true;
             this.tab_pregledi.VerticalScrollbarHighlightOnWheel = false;
             this.tab_pregledi.VerticalScrollbarSize = 10;
             // 
+            // btn_zakazivanje
+            // 
+            this.btn_zakazivanje.Location = new System.Drawing.Point(13, 204);
+            this.btn_zakazivanje.Name = "btn_zakazivanje";
+            this.btn_zakazivanje.Size = new System.Drawing.Size(220, 44);
+            this.btn_zakazivanje.TabIndex = 18;
+            this.btn_zakazivanje.Text = "Zakazi termin";
+            this.btn_zakazivanje.UseSelectable = true;
+            this.btn_zakazivanje.Click += new System.EventHandler(this.btn_zakazivanje_Click);
+            // 
+            // lblSmena
+            // 
+            this.lblSmena.AutoSize = true;
+            this.lblSmena.BackColor = System.Drawing.Color.White;
+            this.lblSmena.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSmena.Location = new System.Drawing.Point(10, 173);
+            this.lblSmena.Name = "lblSmena";
+            this.lblSmena.Size = new System.Drawing.Size(47, 15);
+            this.lblSmena.TabIndex = 16;
+            this.lblSmena.Text = "label6";
+            this.lblSmena.Visible = false;
+            // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.panel1.Controls.Add(this.mBC_pacijenti_nacinPretrage);
             this.panel1.Controls.Add(this.lblPrezimePacijenta);
             this.panel1.Controls.Add(this.lblImePacijenta);
@@ -173,7 +196,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.Control;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(12, 35);
             this.label5.Name = "label5";
@@ -192,7 +215,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.Control;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 9);
             this.label4.Name = "label4";
@@ -202,6 +225,7 @@
             // 
             // pnl_pretraga_doktora
             // 
+            this.pnl_pretraga_doktora.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.pnl_pretraga_doktora.Controls.Add(this.lblPrezimeLekara);
             this.pnl_pretraga_doktora.Controls.Add(this.lblImeLekara);
             this.pnl_pretraga_doktora.Controls.Add(this.label3);
@@ -235,7 +259,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Control;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(12, 9);
             this.label3.Name = "label3";
@@ -278,7 +302,7 @@
             this.tab_pac_infor.HorizontalScrollbarSize = 10;
             this.tab_pac_infor.Location = new System.Drawing.Point(4, 38);
             this.tab_pac_infor.Name = "tab_pac_infor";
-            this.tab_pac_infor.Size = new System.Drawing.Size(816, 360);
+            this.tab_pac_infor.Size = new System.Drawing.Size(816, 406);
             this.tab_pac_infor.TabIndex = 1;
             this.tab_pac_infor.Text = "Informacije pacijenta";
             this.tab_pac_infor.VerticalScrollbarBarColor = true;
@@ -606,33 +630,11 @@
             this.lblDomZdravlja.TabIndex = 16;
             this.lblDomZdravlja.Text = "#imeDoma#";
             // 
-            // lblSmena
-            // 
-            this.lblSmena.AutoSize = true;
-            this.lblSmena.BackColor = System.Drawing.Color.White;
-            this.lblSmena.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSmena.Location = new System.Drawing.Point(10, 173);
-            this.lblSmena.Name = "lblSmena";
-            this.lblSmena.Size = new System.Drawing.Size(47, 15);
-            this.lblSmena.TabIndex = 16;
-            this.lblSmena.Text = "label6";
-            this.lblSmena.Visible = false;
-            // 
-            // btn_zakazivanje
-            // 
-            this.btn_zakazivanje.Location = new System.Drawing.Point(13, 204);
-            this.btn_zakazivanje.Name = "btn_zakazivanje";
-            this.btn_zakazivanje.Size = new System.Drawing.Size(220, 44);
-            this.btn_zakazivanje.TabIndex = 18;
-            this.btn_zakazivanje.Text = "Zakazi termin";
-            this.btn_zakazivanje.UseSelectable = true;
-            this.btn_zakazivanje.Click += new System.EventHandler(this.btn_zakazivanje_Click);
-            // 
             // FormOsoblje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 640);
+            this.ClientSize = new System.Drawing.Size(842, 524);
             this.Controls.Add(this.lblDomZdravlja);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "FormOsoblje";

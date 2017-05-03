@@ -83,7 +83,7 @@ namespace HippocratesDoctor
                 if (mtbxOsobljeSifra.Text == (string)cmd.ExecuteScalar())
                 {
                     //this.Hide();
-                    FormOsoblje f = new FormOsoblje();
+                    FormOsoblje f = new FormOsoblje(mtbxOsobljeJMBG.Text);
                     f.ShowDialog();
                     //this.Close();
                 }
