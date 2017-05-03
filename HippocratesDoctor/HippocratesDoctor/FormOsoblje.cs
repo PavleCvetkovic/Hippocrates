@@ -29,6 +29,7 @@ namespace HippocratesDoctor
         private IzabraniLekar il;
         private Pacijent pac;
         private DomZdravlja dz;
+        private Smena smena_lekara_local;
         private IController _controller;
         public FormOsoblje()
         {
@@ -45,6 +46,8 @@ namespace HippocratesDoctor
             s.Close();
             il = new IzabraniLekar();
             pac = new Pacijent();
+            lblImePacijenta.Text = string.Empty;
+            lblImeLekara.Text = string.Empty;
         }
         public void setController(IController controller)
         {
@@ -84,13 +87,14 @@ namespace HippocratesDoctor
                         lblImeLekara.Visible = true;
                         lblPrezimeLekara.Text = il.Prezime;
                         lblPrezimeLekara.Visible = true;
-                        infomacijeOPac(pac);
+                        infomacijeOPac(pac);                        
                     }
                     lblImePacijenta.Text = pac.Ime;
                     lblImePacijenta.Visible = true;
                     lblPrezimePacijenta.Text = pac.Prezime;
                     lblPrezimePacijenta.Visible = true;
                 }
+                
             }
             catch(Exception ex)
             {
@@ -99,13 +103,7 @@ namespace HippocratesDoctor
             s.Close();
         }
 
-        private void mB_pogledUraspored_Click(object sender, EventArgs e)
-        {
-            ISession sess = DataLayer.GetSession();
-            FormRaspored fr = new FormRaspored(sess, il,pac);
-            fr.Show();
-            //sess.Close();
-        }
+       
 
         private void infomacijeOPac(Pacijent p)
         {
@@ -152,7 +150,20 @@ namespace HippocratesDoctor
             {
                 lB_terapije.Items.Add(t.Id + " " + t.Opis + " " + t.Datum_od.ToShortDateString() + " - " + t.Datum_do.ToShortDateString());
             }
+           
         }
 
+        private void btn_zakazivanje_Click(object sender, EventArgs e)
+        {
+            if (lblImeLekara.Text != string.Empty && lblImePacijenta.Text != string.Empty)
+            {
+                FormRaspored fr = new FormRaspored(il.Jmbg, pac.Jmbg);
+                fr.Show();
+            }
+            else
+            {
+                MetroMessageBox.Show(this,"Morate izabrati pacijenta.","Obavestenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }
