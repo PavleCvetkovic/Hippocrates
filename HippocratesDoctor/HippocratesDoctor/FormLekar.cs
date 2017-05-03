@@ -28,16 +28,16 @@ namespace HippocratesDoctor
         private Smena smena_lekara_local;
         private Pacijent aktivni_pacijent = null;
         //
-        private string jmbg_lekara, active_patient_jmbg;
-        private int smena_lekara;
-        private string sql_search;
+        //private string jmbg_lekara, active_patient_jmbg;
+        //private int smena_lekara;
+        //private string sql_search;
         public FormLekar(string jmbg_lekara)
         {
             InitializeComponent();
             session = DataLayer.GetSession();
             lekar_local = session.Load<IzabraniLekar>(jmbg_lekara);
 
-            this.jmbg_lekara = lekar_local.Jmbg;
+            //this.jmbg_lekara = lekar_local.Jmbg;
             this.Text = lekar_local.Ime + " " + lekar_local.Prezime;
             //this.Text = GetDoctorNameAndSurname(jmbg_lekara);
             metroDateTime1.MinDate = System.DateTime.Today;
@@ -271,7 +271,7 @@ namespace HippocratesDoctor
 
         //}
 
-        private string GetPatientBasicInfo(string jmbg_pacijenta)
+        private string GetPatientBasicInfo()
         {
             string to_return = string.Empty;
             to_return = aktivni_pacijent.Jmbg + " " + aktivni_pacijent.Ime + " " + aktivni_pacijent.Prezime;
@@ -439,7 +439,7 @@ namespace HippocratesDoctor
                 throw new Exception("Error in MetroGrid conversion");
             MetroMessageBox.Show(this, "Selektovali ste " + mg.SelectedCells[0].Value.ToString() + " LBO " + mg.SelectedCells[1].Value.ToString(), "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             aktivni_pacijent = (Pacijent)mg.SelectedRows[0].DataBoundItem;
-            PacijentForm pf = new PacijentForm(session ,aktivni_pacijent); // jmbg (from MetroGrid), lbo(not needed)
+            PacijentForm pf = new PacijentForm(session, aktivni_pacijent); // jmbg (from MetroGrid), lbo(not needed)
             pf.ShowDialog();
         }
 
@@ -483,7 +483,7 @@ namespace HippocratesDoctor
                 case 0: { RefreshDijagnozeData(aktivni_pacijent); break; }
                 case 1: { RefreshVakcineData(aktivni_pacijent); break; }
                 case 2: { RefreshTerapijeData(aktivni_pacijent); break; }
-                case 3: { metroLabelOceniPacijentaInfo.Text = GetPatientBasicInfo(active_patient_jmbg); break; }
+                case 3: { metroLabelOceniPacijentaInfo.Text = GetPatientBasicInfo(); break; }
             }
         }
 

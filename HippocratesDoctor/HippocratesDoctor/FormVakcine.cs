@@ -16,15 +16,17 @@ namespace HippocratesDoctor
 {
     public partial class FormVakcine : MetroFramework.Forms.MetroForm
     {
-        private string jmbg_pacijenta;
+        //private string jmbg_pacijenta;
         private Pacijent pacijent;
         private IList<Vakcina> sve_vakcine;
-        private ISession s;
+        private ISession session_local;
 
-        public FormVakcine(string jmbg_pacijenta)
+        public FormVakcine(ISession s, Pacijent p)
         {
             InitializeComponent();
-            this.jmbg_pacijenta = jmbg_pacijenta;
+            session_local = s;
+            pacijent = p;
+            //this.jmbg_pacijenta = jmbg_pacijenta;
             this.Text = "Dodavanje vakcine";
         }
 
@@ -35,18 +37,10 @@ namespace HippocratesDoctor
             metroTextBoxOpisVakcine.Text = metroGridVakcine["Opis", row_index].Value.ToString();
         }
 
-        private void InsertNewVaccine()
-        {
-            // session is open
-            //Vakcina v;
-
-        }
-
         private void metroButtonDodajVakcinu_Click(object sender, EventArgs e)
         {
             int sifra_row_index = metroGridVakcine.CurrentCell.RowIndex;
-            //string sifra_string = sifra.ToString();
-
+            
             string temp_sifra = metroGridVakcine["Sifra", sifra_row_index].Value.ToString();
 
             Vakcina vakcina = new Vakcina()
@@ -69,38 +63,30 @@ namespace HippocratesDoctor
             //vakcine.Add(vakcina); // For not in database Vaccine
             pacijent.PrimioVakcinuVakcine.Add(pv);
             vakcina.PrimioVakcinuPacijenti.Add(pv);
-
-            s.SaveOrUpdate(pacijent);
-            s.Flush();
-            s.Close();
-            //this.Close();
+            try
+            {
+                session_local.SaveOrUpdate(pacijent);
+                session_local.Flush();
+            }
+            catch(Exception ex)
+            {
+                MetroMessageBox.Show(this, "Greška u funkciji za dodavanje vakcine " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            MetroMessageBox.Show(this, "Uspešno dodata vakcina pacijentu " + pacijent.Ime + " " + pacijent.Prezime, "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void FormVakcine_Load(object sender, EventArgs e)
         {
-            s = DataLayer.GetSession();
-            pacijent = s.Load<Pacijent>(jmbg_pacijenta);
-            
-            //PrimioVakcinu[] primljene_vakcine = pacijent.PrimioVakcinuVakcine.ToArray();
-
-            //MetroMessageBox.Show(this, primljene_vakcine[0].Id.PrimioPacijent.Jmbg + " " + primljene_vakcine[0].Id.PrimioVakcina.Ime.ToString() + " " + primljene_vakcine[0].Datum.ToString());
-
-            sve_vakcine = s.QueryOver<Vakcina>().List(); // sve vakcine
-
-            //MetroMessageBox.Show(this, "Prva vakcina " + sve_vakcine[0].Ime + " " + sve_vakcine[0].Opis + " " + sve_vakcine[0].Sifra);
+            sve_vakcine = session_local.QueryOver<Vakcina>().List(); // sve vakcine
 
             metroGridVakcine.DataSource = sve_vakcine;
-            //metroGridVakcine.DataMember = "Vakcine"; // Error Child list cannot be created 
+
             metroGridVakcine.Columns[3].Visible = false;
             for (int i = 0; i < metroGridVakcine.ColumnCount; i++)
                 metroGridVakcine.Columns[i].Width = metroGridVakcine.Width / metroGridVakcine.ColumnCount;
 
             FromDataToControl(0); //Input to metroGrid must come before this function // not checked for (if Vakcine table in Database is empty)
-            //s.Save(pv);
-            //s.Flush();
-            //s.Close();
-            //MetroMessageBox.Show(this, "Dodata vakcina");
-            //this.Close();
         }
 
         private void metroGridVakcine_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -112,10 +98,7 @@ namespace HippocratesDoctor
 
         private void FormVakcine_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //session close 
-            //s.SaveOrUpdate(vakcine);
-            //s.SaveOrUpdate(pacijent);
-            //s.Close();
+            session_local.Flush();
         }
     }
 }

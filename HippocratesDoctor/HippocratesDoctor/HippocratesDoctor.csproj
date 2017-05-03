@@ -126,6 +126,12 @@
     <Compile Include="FormRaspored.designer.cs">
       <DependentUpon>FormRaspored.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormTerapije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTerapije.Designer.cs">
+      <DependentUpon>FormTerapije.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormVakcine.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRaspored.resx">
       <DependentUpon>FormRaspored.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTerapije.resx">
+      <DependentUpon>FormTerapije.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormVakcine.resx">
       <DependentUpon>FormVakcine.cs</DependentUpon>

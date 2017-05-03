@@ -23,7 +23,7 @@ namespace HippocratesDoctor
     {
         private IController _controller;
         //private Hippocrates.Data.IzabraniLekar active_doctor;
-        private string facility_id, facility_name, jmbg_admin;
+        //private string facility_id, facility_name, jmbg_admin;
         private ISession session;
         private AdministratorDomaZdravlja admin_local;
         private DomZdravlja dom_zdravlja_local;
@@ -35,10 +35,10 @@ namespace HippocratesDoctor
             admin_local = session.Get<AdministratorDomaZdravlja>(dom_zdravlja_admin_jmbg);
             dom_zdravlja_local = admin_local.RadiUDomuZdravlja;
 
-            jmbg_admin = admin_local.JMBG;
+            //jmbg_admin = admin_local.JMBG;
             lblImeDomaZ.Text = GetMedicalFacilityInfo(admin_local);
             metroTabControlGlobal.SelectedIndex = 0; // Zove GetAllDoctors(dom_zdravlja_local)
-            //GetAllDoctors(dom_zdravlja_local); // GetAllDoctors(facility_id) se zove nakon GetMedicalFacilityInfo(jmbg_admin) jer se tu inicijalizuje 'facility_id'
+            GetAllDoctors(dom_zdravlja_local); // GetAllDoctors(facility_id) se zove nakon GetMedicalFacilityInfo(jmbg_admin) jer se tu inicijalizuje 'facility_id'
             //metroRadioButtonSmenaPrepodne.MouseHover += MetroRadioButtonSmenaPrepodne_MouseHover;
             //metroRadioButtonSmenaPoslepodne.MouseHover += MetroRadioButtonSmenaPrepodne_MouseHover;
         }
@@ -653,7 +653,7 @@ namespace HippocratesDoctor
                 MetroMessageBox.Show(this, "Molimo selektujte lekara za izbor smene", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
             {
-                SmenaLekara sm = new SmenaLekara(selektovani_lekar);
+                SmenaLekara sm = new SmenaLekara(session, selektovani_lekar);
                 sm.StartPosition = FormStartPosition.CenterScreen;
                 sm.ShowDialog();
             }
