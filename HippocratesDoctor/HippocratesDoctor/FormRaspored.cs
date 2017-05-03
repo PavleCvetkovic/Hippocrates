@@ -48,7 +48,33 @@ namespace Hippocrates
                 c.Click += metroButton_Click;
 
         }
+        //----------------------------------------------
 
+        public FormRaspored(string lekar, string p)
+        {
+            InitializeComponent();
+            session_local = DataLayer.GetSession();
+            pacijent_local = session_local.Load<Pacijent>(p);
+            lekar_local = session_local.Load<IzabraniLekar>(lekar);
+
+            //this.WindowState = FormWindowState.Maximized;
+            this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
+                Screen.PrimaryScreen.WorkingArea.Height);
+            this.MinimumSize = new System.Drawing.Size(698, 365);
+
+            metroDateTime1.MinDate = System.DateTime.Today;
+            metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
+            metroLabelLekarInfo.Text = "Izabrani lekar: " + lekar_local.Ime + " " + lekar_local.Prezime + " " + lekar_local.Jmbg;
+
+            // Binding handler to control
+            foreach (Control c in pnlPopodne.Controls)
+                c.Click += metroButton_Click;
+            foreach (Control c in pnlPrepodne.Controls)
+                c.Click += metroButton_Click;
+
+        }
+
+        //----------------------------------------------
         private Smena GetDoctorShift(IzabraniLekar lekar)
         {
             Smena smena = null;
@@ -216,7 +242,7 @@ namespace Hippocrates
         private void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
         {
             session_local.Flush();
-            //session_local.Close();
+            session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
         }
     }
 }
