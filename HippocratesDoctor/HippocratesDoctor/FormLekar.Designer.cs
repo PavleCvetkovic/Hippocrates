@@ -102,6 +102,7 @@
             this.metroButton700 = new MetroFramework.Controls.MetroButton();
             this.metroDateTime1 = new MetroFramework.Controls.MetroDateTime();
             this.metroTabSviPacijenti = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroGridPacijenti = new MetroFramework.Controls.MetroGrid();
             this.metroTabTrenutniPacijent = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPacijentInfo = new MetroFramework.Controls.MetroTabControl();
@@ -126,7 +127,6 @@
             this.metroComboBoxIzborPretrage = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroGridPretragaPacijenata = new MetroFramework.Controls.MetroGrid();
-            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroTabGlobal.SuspendLayout();
             this.metroTabRasporedPregleda.SuspendLayout();
             this.pnlPopodne.SuspendLayout();
@@ -154,7 +154,7 @@
             this.metroTabGlobal.Controls.Add(this.metroTabPretragaPacijenata);
             this.metroTabGlobal.Location = new System.Drawing.Point(23, 63);
             this.metroTabGlobal.Name = "metroTabGlobal";
-            this.metroTabGlobal.SelectedIndex = 1;
+            this.metroTabGlobal.SelectedIndex = 0;
             this.metroTabGlobal.Size = new System.Drawing.Size(754, 514);
             this.metroTabGlobal.TabIndex = 0;
             this.metroTabGlobal.UseSelectable = true;
@@ -915,7 +915,7 @@
             // 
             this.metroDateTime1.CustomFormat = "";
             this.metroDateTime1.Location = new System.Drawing.Point(3, 42);
-            this.metroDateTime1.MinimumSize = new System.Drawing.Size(4, 29);
+            this.metroDateTime1.MinimumSize = new System.Drawing.Size(0, 29);
             this.metroDateTime1.Name = "metroDateTime1";
             this.metroDateTime1.Size = new System.Drawing.Size(200, 29);
             this.metroDateTime1.TabIndex = 3;
@@ -936,6 +936,15 @@
             this.metroTabSviPacijenti.VerticalScrollbarBarColor = true;
             this.metroTabSviPacijenti.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabSviPacijenti.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel7
+            // 
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.Location = new System.Drawing.Point(3, 11);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(317, 19);
+            this.metroLabel7.TabIndex = 3;
+            this.metroLabel7.Text = "Klik na željenog pacijenta pruža dodatne mogućnosti";
             // 
             // metroGridPacijenti
             // 
@@ -1412,15 +1421,6 @@
             this.metroGridPretragaPacijenata.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.metroGridPretragaPacijenata.Size = new System.Drawing.Size(740, 256);
             this.metroGridPretragaPacijenata.TabIndex = 2;
-            // 
-            // metroLabel7
-            // 
-            this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(3, 11);
-            this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(317, 19);
-            this.metroLabel7.TabIndex = 3;
-            this.metroLabel7.Text = "Klik na željenog pacijenta pruža dodatne mogućnosti";
             // 
             // FormLekar
             // 
