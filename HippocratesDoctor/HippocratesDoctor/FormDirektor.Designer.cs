@@ -64,6 +64,7 @@
             this.metroTextBoxPrezime = new MetroFramework.Controls.MetroTextBox();
             this.metroTextBoxLozinka = new MetroFramework.Controls.MetroTextBox();
             this.metroButtonSmenaLekara = new MetroFramework.Controls.MetroButton();
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControlGlobal.SuspendLayout();
             this.tabLekar.SuspendLayout();
             this.metroTabControl2.SuspendLayout();
@@ -84,7 +85,7 @@
             this.metroTabControlGlobal.Controls.Add(this.tabOsoblje);
             this.metroTabControlGlobal.Location = new System.Drawing.Point(23, 72);
             this.metroTabControlGlobal.Name = "metroTabControlGlobal";
-            this.metroTabControlGlobal.SelectedIndex = 1;
+            this.metroTabControlGlobal.SelectedIndex = 0;
             this.metroTabControlGlobal.Size = new System.Drawing.Size(849, 168);
             this.metroTabControlGlobal.TabIndex = 3;
             this.metroTabControlGlobal.UseSelectable = true;
@@ -112,7 +113,7 @@
             this.metroTabControl2.Controls.Add(this.tabLekarAzuriranje);
             this.metroTabControl2.Location = new System.Drawing.Point(3, 4);
             this.metroTabControl2.Name = "metroTabControl2";
-            this.metroTabControl2.SelectedIndex = 2;
+            this.metroTabControl2.SelectedIndex = 0;
             this.metroTabControl2.Size = new System.Drawing.Size(842, 100);
             this.metroTabControl2.TabIndex = 2;
             this.metroTabControl2.UseSelectable = true;
@@ -348,7 +349,7 @@
             this.metroGridData.EnableHeadersVisualStyles = false;
             this.metroGridData.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGridData.Location = new System.Drawing.Point(31, 403);
+            this.metroGridData.Location = new System.Drawing.Point(31, 442);
             this.metroGridData.Name = "metroGridData";
             this.metroGridData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -361,7 +362,7 @@
             this.metroGridData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.metroGridData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGridData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGridData.Size = new System.Drawing.Size(831, 150);
+            this.metroGridData.Size = new System.Drawing.Size(831, 195);
             this.metroGridData.TabIndex = 36;
             this.metroGridData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGridLekari_CellContentClick);
             // 
@@ -579,11 +580,21 @@
             this.metroButtonSmenaLekara.UseSelectable = true;
             this.metroButtonSmenaLekara.Click += new System.EventHandler(this.metroButtonSmenaLekara_Click);
             // 
+            // metroLabel8
+            // 
+            this.metroLabel8.AutoSize = true;
+            this.metroLabel8.Location = new System.Drawing.Point(70, 404);
+            this.metroLabel8.Name = "metroLabel8";
+            this.metroLabel8.Size = new System.Drawing.Size(330, 19);
+            this.metroLabel8.TabIndex = 53;
+            this.metroLabel8.Text = "Odaberite lekara/osobu za brisanje/ažuriranje iz tabele";
+            // 
             // FormDirektor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 673);
+            this.Controls.Add(this.metroLabel8);
             this.Controls.Add(this.metroButtonSmenaLekara);
             this.Controls.Add(this.metroLabel7);
             this.Controls.Add(this.metroLabel6);
@@ -603,6 +614,7 @@
             this.Controls.Add(this.metroTabControlGlobal);
             this.Name = "FormDirektor";
             this.Text = "Administrator panel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormDirektor_FormClosing);
             this.metroTabControlGlobal.ResumeLayout(false);
             this.tabLekar.ResumeLayout(false);
             this.metroTabControl2.ResumeLayout(false);
@@ -654,5 +666,6 @@
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
         private MetroFramework.Controls.MetroButton metroButtonAzurirajOsobu;
         private MetroFramework.Controls.MetroButton metroButtonSmenaLekara;
+        private MetroFramework.Controls.MetroLabel metroLabel8;
     }
 }

@@ -35,6 +35,9 @@
             // 
             // metroTextBoxNapomena
             // 
+            this.metroTextBoxNapomena.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
@@ -77,6 +80,8 @@
             // 
             // metroButtonOK
             // 
+            this.metroButtonOK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroButtonOK.Location = new System.Drawing.Point(24, 249);
             this.metroButtonOK.Name = "metroButtonOK";
             this.metroButtonOK.Size = new System.Drawing.Size(333, 23);
@@ -85,7 +90,7 @@
             this.metroButtonOK.UseSelectable = true;
             this.metroButtonOK.Click += new System.EventHandler(this.metroButtonOK_Click);
             // 
-            // Napomena
+            // Napomena_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -93,7 +98,7 @@
             this.Controls.Add(this.metroButtonOK);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.metroTextBoxNapomena);
-            this.Name = "Napomena";
+            this.Name = "Napomena_Form";
             this.Text = "Napomena";
             this.ResumeLayout(false);
             this.PerformLayout();

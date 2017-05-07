@@ -17,19 +17,20 @@ namespace HippocratesPatient
 {
     public partial class ZahtevZaIzborLekara : MetroFramework.Forms.MetroForm
     {
-        private string puno_ime_lekara, jmbg_lekara, jmbg_pacijenta;
+        //private string puno_ime_lekara, jmbg_lekara, jmbg_pacijenta;
         private Pacijent pacijent_local;
         private ISession session;
         private IList<IzabraniLekar> lekari;
 
-        public ZahtevZaIzborLekara(Pacijent pacijent_parametar)
+        public ZahtevZaIzborLekara(ISession s, Pacijent pacijent_parametar)
         {
             InitializeComponent();
+            session = s;
             this.pacijent_local = pacijent_parametar;
-            this.puno_ime_lekara = pacijent_parametar.Lekar.Ime + " " + pacijent_parametar.Lekar.Prezime;
-            this.jmbg_lekara = pacijent_parametar.Lekar.Jmbg;
-            this.jmbg_pacijenta = pacijent_parametar.Jmbg;
-            metroLabelIzabraniLekar.Text = puno_ime_lekara;
+            //this.puno_ime_lekara = pacijent_parametar.Lekar.Ime + " " + pacijent_parametar.Lekar.Prezime;
+            //this.jmbg_lekara = pacijent_parametar.Lekar.Jmbg;
+            //this.jmbg_pacijenta = pacijent_parametar.Jmbg;
+            metroLabelIzabraniLekar.Text = pacijent_parametar.Lekar.Ime + " " + pacijent_parametar.Lekar.Prezime;
             GetAvailableDoctors(pacijent_parametar);
         }
 
@@ -39,7 +40,7 @@ namespace HippocratesPatient
             //ISession session = null;
             try
             {
-                session = DataLayer.GetSession();
+                //session = DataLayer.GetSession();
                 //IList<IzabraniLekar> dostupni_lekari = session.
                 //var customers = session.CreateQuery("select c from Customer c  where c.FirstName = 'Laverne'"); 
                 var dostupni_lekari = session.CreateQuery("select l from IzabraniLekar l where l.RadiUDomuZdravlja.Opstina  = '" + pacijent.Opstina + "'");
@@ -101,8 +102,7 @@ namespace HippocratesPatient
 
         private void ZahtevZaIzborLekara_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (session != null)
-                session.Close();
+            session.Flush();
         }
 
         private bool ChangeDoctor(string jmbg_zeljeni_lekar)
@@ -111,13 +111,19 @@ namespace HippocratesPatient
             try
             {
                 IzabraniLekar zeljeni_lekar = session.Get<IzabraniLekar>(jmbg_zeljeni_lekar);
+                //string za_lazy_load = zeljeni_lekar.Ime;
                 ZahtevZaPromenu novi_zahtev = new ZahtevZaPromenu() // Id je auto_increment 
                 {
                     ZahtevPacijenta = pacijent_local,
                     ZeljeniLekar = zeljeni_lekar
                 };
 
-                session.Save(novi_zahtev); // ?? 
+                zeljeni_lekar.Zahtevi.Add(novi_zahtev);
+                pacijent_local.Zahtevi.Add(novi_zahtev);
+
+                session.Save(novi_zahtev);
+                session.Save(zeljeni_lekar);
+                session.Save(pacijent_local);
                 session.Flush();
             }
             catch(Exception ex)

@@ -19,5 +19,9 @@ namespace Hippocrates.Data.Entiteti
         {
             return base.GetHashCode();
         }
+        public override string ToString()
+        {
+            return PrimioVakcina.Ime + " " + PrimioVakcina.Opis;
+        }
     }
 }

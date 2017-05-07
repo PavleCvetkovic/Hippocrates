@@ -55,6 +55,13 @@
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
     <Compile Include="DataLayer.cs" />
+    <Compile Include="DataLayerOracle.cs" />
+    <Compile Include="EntitetiOracle\KlinickiCentar.cs" />
+    <Compile Include="EntitetiOracle\Klinika.cs" />
+    <Compile Include="EntitetiOracle\PacijentKlinickogCentra.cs" />
+    <Compile Include="EntitetiOracle\Pregled.cs" />
+    <Compile Include="EntitetiOracle\SmenaKC.cs" />
+    <Compile Include="EntitetiOracle\SpecijalistaKC.cs" />
     <Compile Include="Entiteti\AdministratorDomaZdravlja.cs" />
     <Compile Include="Entiteti\Bolnica.cs" />
     <Compile Include="Entiteti\Dijagnostifikovano.cs" />
@@ -76,6 +83,12 @@
     <Compile Include="Entiteti\TerminBolnica.cs" />
     <Compile Include="Entiteti\Vakcina.cs" />
     <Compile Include="Entiteti\ZahtevZaPromenu.cs" />
+    <Compile Include="MapiranjaOracle\KlinickiCentarMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\KlinikaMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\PacijentKlinickogCentraMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\PregledMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\SmenaMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\SpecijalistaMapiranja.cs" />
     <Compile Include="Mapiranja\AdminDomaZdravljaMapiranje.cs" />
     <Compile Include="Mapiranja\BolnicaMapiranja.cs" />
     <Compile Include="Mapiranja\DijagnostifikovanoMapiranja.cs" />
@@ -95,6 +108,7 @@
     <Compile Include="Mapiranja\ZahtevZaPromenuMapiranja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

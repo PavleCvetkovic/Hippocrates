@@ -12,6 +12,8 @@ using NHibernate.Criterion;
 using NHibernate.Linq;
 using Hippocrates.Data.Entiteti;
 using Hippocrates.Data;
+using Hippocrates.Data.EntitetiOracle;
+
 
 namespace Hippocrates
 {
@@ -26,46 +28,11 @@ namespace Hippocrates
         {
             ISession s = DataLayer.GetSession();
 
-            DomZdravlja dz = new DomZdravlja()
+            Dijagnoza d = s.Load<Dijagnoza>("N20");
+            foreach(Dijagnostifikovano dij in d.Dijagnostifikovano)
             {
-                Mbr = "test",
-                Lokacija = "test",
-                Adresa = "test",
-                Ime = "test",
-                Opstina = "aaaaa"
-            };
-            IzabraniLekar il = new IzabraniLekar()
-            {
-                Jmbg = "55555",
-                Ime = "ime",
-                Datum_rodjenja = new DateTime(2000, 10, 14),
-                Password = "test",
-                Prezime = "prezie",
-                Srednje_slovo = "s"
-            };
-            Pacijent pac1 = new Pacijent()
-            {
-                Jmbg = "01",
-                Ime = "imepacijenta1",
-                Prezime = "prezime1",
-                Datum_rodjenja = new DateTime(1995, 01, 01),
-                //bez mejla
-                Telefon = "555-333",
-                Lbo = "01",
-                Opstina = "aaaaa",
-                Srednje_slovo = "D",
-                Vazi_do = new DateTime(2017, 12, 30),
-            };
-
-            //dodaj lekara i dom zdravlja
-            dz.Lekari.Add(il);
-            il.RadiUDomuZdravlja = dz;
-            //dodaj lekaru pacijente
-            il.Pacijenti.Add(pac1);
-            pac1.Lekar = il;
-            s.Save(dz);
-
-            s.Flush();
+                MetroFramework.MetroMessageBox.Show(this,dij.Id.DijagnozaLekar.Ime);
+            }
             s.Close();
         }
 
@@ -420,6 +387,21 @@ namespace Hippocrates
             s.Save(b);
             s.Flush();
             s.Close();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayerOracle.GetSession();
+            KlinickiCentar kc = s.Load<KlinickiCentar>(1);
+            foreach (Klinika k in kc.Klinike)
+            {
+                foreach(SpecijalistaKC sckc in k.Specijaliste)
+                {
+                    MessageBox.Show(sckc.Ime);
+                }
+            }
+            s.Close();
+            
         }
     }
 }

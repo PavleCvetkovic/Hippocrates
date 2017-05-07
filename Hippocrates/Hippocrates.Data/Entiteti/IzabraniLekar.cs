@@ -35,6 +35,9 @@ namespace Hippocrates.Data.Entiteti
             Termini = new List<Termin>();
             Zahtevi = new List<ZahtevZaPromenu>();
         }
-
+        public override string ToString()
+        {
+            return Ime + " " + Prezime;
+        }
     }
 }

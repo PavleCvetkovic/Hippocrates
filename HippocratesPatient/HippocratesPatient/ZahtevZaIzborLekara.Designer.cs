@@ -115,8 +115,7 @@
             // 
             // metroButtonPodnesiZahtev
             // 
-            this.metroButtonPodnesiZahtev.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.metroButtonPodnesiZahtev.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroButtonPodnesiZahtev.Location = new System.Drawing.Point(23, 288);
             this.metroButtonPodnesiZahtev.Name = "metroButtonPodnesiZahtev";

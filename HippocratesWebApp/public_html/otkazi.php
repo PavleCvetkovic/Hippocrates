@@ -20,9 +20,10 @@ else{
 $smarty= new MySmarty(); 
 if(isset($_GET['datum'])){
     $datum=$_GET['datum'];
+    $vreme=$_GET['vreme'];
     //glupi format za u bazu
     $datum=date("Y-m-d",strtotime(str_replace('/', '-', $datum)));
-    otkazi($_SESSION['JMBG'],$datum);
+    otkazi($_SESSION['JMBG'],$datum,$vreme);
 }
 $statusOtkazivanja="Uspešno ste otkazali termin za ".$_GET['datum'] ;
 
