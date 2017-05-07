@@ -34,13 +34,13 @@ namespace HippocratesPatient
             metroTabGlobal.SelectedIndex = 0; // Show 'Izabrani Lekar' tab
             this.Text = pacijent.Ime + " " + pacijent.Prezime;
             metrolabInfoLekar.Text = pacijent.Lekar.Ime + " " + pacijent.Lekar.Prezime;
-            pravo_da_zakaze = (byte)pacijent.Pravo_da_zakaze;
+            //pravo_da_zakaze = (byte)pacijent.Pravo_da_zakaze;
             metroLabelJMBGLBO.Text = pacijent.Jmbg + " " + pacijent.Lbo;
 
             //
-            jmbg_pacijenta = pacijent.Jmbg;
+            //jmbg_pacijenta = pacijent.Jmbg;
             //
-            UpdateAppointment(pravo_da_zakaze);
+            UpdateAppointment(pacijent.Pravo_da_zakaze);
         }
 
         private void LoadPatientData(string jmbg_pacijenta)
@@ -62,9 +62,9 @@ namespace HippocratesPatient
             }
         }
 
-        private void UpdateAppointment(byte priviledge)
+        private void UpdateAppointment(int priviledge)
         {
-            if (pravo_da_zakaze >= 1)
+            if (priviledge >= 1)
             {
                 metroLabelPravoZaZakazivanje.Text = "Imate pravo da zakazete termin";
                 metroLabelPravoZaZakazivanje.UseCustomForeColor = true;
@@ -80,155 +80,34 @@ namespace HippocratesPatient
                 metroButtonZakaziteTermin.Enabled = false;
             }
         }
-        private string GetNameAndSurname(string jmbg, string lbo)
+
+        private void GetTerapijeData(Pacijent pacijent)
         {
-            string to_return = "Not found";
-            // Fetch 'Ime' + 'Prezime' from PACIJENT
-            //string connection = "server=139.59.132.29;user=paja;charset=utf8;database=Hippocrates;port=3306;password=pajapro1234;protocol=TCP";
-            //bool success = true;
+            metroGridTerapije.DataSource = null;
+            metroGridTerapije.DataSource = pacijent.Terapije;
+            metroGridTerapije.Columns["Id"].Visible = false;
+            metroGridTerapije.Columns["TerapijaPacijent"].Visible = false;
+            metroGridTerapije.Columns["TerapijaLekar"].Visible = false;
 
-            MySqlConnection conn = new MySqlConnection(connection);
-            try
-            {
-                // Open connection
-                conn.Open();
-                // Copy to local 
-                // Perform database operations
-                string sql = "select ime, prezime, matbrl, PRAVO_DA_ZAKAŽE from PACIJENT where jmbg = '" + jmbg + "' and lbo = '" + lbo + "'";
+            for (int i = 0; i < metroGridTerapije.ColumnCount; i++)
+                metroGridTerapije.Columns[i].Width = metroGridTerapije.Width / (metroGridTerapije.ColumnCount - 3);
+        } // Fill metroDatagrid in Terapije
 
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                // rdr[0] = IME, rdr[1] = PREZIME
-                while (rdr.Read())
-                {
-                    to_return = rdr[0].ToString() + " " + rdr[1].ToString();
-                    jmbg_lekara = rdr[2].ToString();
-                    pravo_da_zakaze = Byte.Parse(rdr[3].ToString());
-                }
-                rdr.Close();
-
-            }
-            catch (Exception ex)
-            {
-                to_return = pravo_da_zakaze.ToString() + "Error during database reading in GetNameAndSurname" + ex.Message.ToString();
-            }
-            finally
-            {
-                conn.Close();
-                // Database is always closed
-            }
-            return to_return;
-        } // Return patient name and surname from Database
-
-        private string GetDoctorNameAndSurname(string jmbg_lekar)
+        private void GetVakcineData(Pacijent p)
         {
-            string to_return = "Not found";
-            // Fetch 'Ime' + 'Prezime' from PACIJENT
-            //string connection = "server=139.59.132.29;user=paja;charset=utf8;database=Hippocrates;port=3306;password=pajapro1234;protocol=TCP";
-            //bool success = true;
-
-            MySqlConnection conn = new MySqlConnection(connection);
-            try
-            {
-                // Open connection
-                conn.Open();
-                // Copy to local 
-                // Perform database operations
-                string sql = "select ime, prezime from IZABRANI_LEKAR where jmbg = '" + jmbg_lekar + "'";
-
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                // rdr[0] = IME, rdr[1] = PREZIME
-                while (rdr.Read())
-                    to_return = rdr[0].ToString() + " " + rdr[1].ToString();
-
-                rdr.Close();
-
-            }
-            catch (Exception ex)
-            {
-                to_return = "Error during doctor database reading";
-            }
-            finally
-            {
-                conn.Close();
-                // Database is always closed
-            }
-            return to_return;
-        } // Return doctor name and surname from Database
-
-        private void GetVakcineData()
-        {
-
-            //MySqlDataAdapter data_adapter;
-            //DataSet data_set;
-            //string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
-            IList<Vakcina> vakcine = session.QueryOver<Vakcina>().List();
-
-            metrogridVakcine.DataSource = vakcine;
-            metrogridVakcine.Columns[3].Visible = false; // 
+            metrogridVakcine.DataSource = null;
+            metrogridVakcine.DataSource = p.PrimioVakcinuVakcine;
             for (int i = 0; i < metrogridVakcine.ColumnCount; i++)
                 metrogridVakcine.Columns[i].Width = metrogridVakcine.Width / metrogridVakcine.ColumnCount;
-            #region SQL varijanta
-            /*
-            MySqlConnection conn = new MySqlConnection(connection);
-            try
-            {
-                //label2.Text = "Connecting to MySQL...";
-
-                string sql = "select * from PRIMIO_VAKCINU where JMBGP = '" + jmbg_pacijenta + "'";
-                data_adapter = new MySqlDataAdapter(sql, conn);
-                MySqlCommandBuilder cb = new MySqlCommandBuilder(data_adapter);
-
-                data_set = new DataSet();
-                data_adapter.Fill(data_set, "Vakcine");
-                metrogridVakcine.DataSource = data_set;
-                metrogridVakcine.DataMember = "Vakcine";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error during connection " +  ex.Message.ToString());
-            }
-            */
-            #endregion
         } // Fill metroDataGrid in Vakcine
 
-        private void GetDijagnozeData()
+        private void GetDijagnozeData(Pacijent pacijent)
         {
-            //MySqlDataAdapter data_adapter;
-            //DataSet data_set;
-            //string connStr = "server=localhost;user=root;database=world;port=3306;password=******;";
-            IList<Dijagnostifikovano> dijagnoze = session.QueryOver<Dijagnostifikovano>().List();
-            //IList<DijagnostifikovanoId> dijagnoze_id = session.QueryOver<DijagnostifikovanoId>().List();
+            metroGridDijagnoze.DataSource = null;
+            metroGridDijagnoze.DataSource = pacijent.DijagnostifikovanoDijagnoze;
 
-            //dijagnoze[0].Id = dijagnoze_id;
-            // ??
-            metroGridDijagnoze.DataSource = dijagnoze;
-
-            #region SQL varijanta
-            /*
-            MySqlConnection conn = new MySqlConnection(connection);
-            try
-            {
-                //label2.Text = "Connecting to MySQL...";
-
-                string sql = "select * from DIJAGNOSTIFIKOVANO where MATBRP = '" + jmbg_pacijenta + "'";
-                data_adapter = new MySqlDataAdapter(sql, conn);
-                MySqlCommandBuilder cb = new MySqlCommandBuilder(data_adapter);
-
-                data_set = new DataSet();
-                data_adapter.Fill(data_set, "Dijagnoze");
-                metroGridDijagnoze.DataSource = data_set;
-                metroGridDijagnoze.DataMember = "Dijagnoze";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error during connection " + ex.Message.ToString());
-            }
-            */
-            #endregion
+            for (int i = 0; i < metroGridDijagnoze.ColumnCount; i++)
+                metroGridDijagnoze.Columns[i].Width = metroGridDijagnoze.Width / metroGridDijagnoze.ColumnCount;
         } // Fill metroDataGrid in Dijagnoze
 
         private void tabGlobal_SelectedIndexChanged(object sender, EventArgs e)
@@ -238,15 +117,18 @@ namespace HippocratesPatient
             //MessageBox.Show("Selected inex changed event" + mtc.SelectedIndex);
             switch(mtc.SelectedTab.Text)
             {
-                case "Vakcine" : { GetVakcineData(); break; }
-                case "Dijagnoze" : { GetDijagnozeData(); break; }
+                case "Vakcine" : { GetVakcineData(pacijent); break; }
+                case "Dijagnoze" : { GetDijagnozeData(pacijent); break; }
+                case "Terapije": { GetTerapijeData(pacijent); break; }
             }
         }
+
+       
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
             //MetroMessageBox.Show(this, "This is a message in MetroBox");
-            FormRaspored raspored_form = new FormRaspored(pacijent);
+            FormRaspored raspored_form = new FormRaspored(session, pacijent);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
             raspored_form.ShowDialog();
         }
@@ -267,7 +149,7 @@ namespace HippocratesPatient
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            ZahtevZaIzborLekara zahtev_form = new ZahtevZaIzborLekara(pacijent);
+            ZahtevZaIzborLekara zahtev_form = new ZahtevZaIzborLekara(session, pacijent);
             zahtev_form.StartPosition = FormStartPosition.CenterScreen;
             //zahtev_form.MdiParent = this; // To make it impossible to NOT focus
             zahtev_form.ShowDialog();

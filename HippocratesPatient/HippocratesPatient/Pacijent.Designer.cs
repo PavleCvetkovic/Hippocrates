@@ -34,6 +34,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroTabGlobal = new MetroFramework.Controls.MetroTabControl();
             this.tabIzabraniLekar = new MetroFramework.Controls.MetroTabPage();
             this.metrolabInfoLekar = new MetroFramework.Controls.MetroLabel();
@@ -49,6 +52,9 @@
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroGridDijagnoze = new MetroFramework.Controls.MetroGrid();
             this.metroLabelJMBGLBO = new MetroFramework.Controls.MetroLabel();
+            this.metroTabPageTerapije = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.metroGridTerapije = new MetroFramework.Controls.MetroGrid();
             this.metroTabGlobal.SuspendLayout();
             this.tabIzabraniLekar.SuspendLayout();
             this.tabVakcine.SuspendLayout();
@@ -56,6 +62,8 @@
             this.tabTermin.SuspendLayout();
             this.tabDijagnoze.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridDijagnoze)).BeginInit();
+            this.metroTabPageTerapije.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGridTerapije)).BeginInit();
             this.SuspendLayout();
             // 
             // metroTabGlobal
@@ -67,9 +75,10 @@
             this.metroTabGlobal.Controls.Add(this.tabVakcine);
             this.metroTabGlobal.Controls.Add(this.tabTermin);
             this.metroTabGlobal.Controls.Add(this.tabDijagnoze);
+            this.metroTabGlobal.Controls.Add(this.metroTabPageTerapije);
             this.metroTabGlobal.Location = new System.Drawing.Point(24, 129);
             this.metroTabGlobal.Name = "metroTabGlobal";
-            this.metroTabGlobal.SelectedIndex = 2;
+            this.metroTabGlobal.SelectedIndex = 4;
             this.metroTabGlobal.Size = new System.Drawing.Size(443, 282);
             this.metroTabGlobal.TabIndex = 0;
             this.metroTabGlobal.UseSelectable = true;
@@ -150,6 +159,9 @@
             this.metrogridVakcine.AllowUserToAddRows = false;
             this.metrogridVakcine.AllowUserToDeleteRows = false;
             this.metrogridVakcine.AllowUserToResizeRows = false;
+            this.metrogridVakcine.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metrogridVakcine.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metrogridVakcine.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metrogridVakcine.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -254,6 +266,8 @@
             // metroGridDijagnoze
             // 
             this.metroGridDijagnoze.AllowUserToResizeRows = false;
+            this.metroGridDijagnoze.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroGridDijagnoze.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridDijagnoze.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.metroGridDijagnoze.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -304,6 +318,77 @@
             this.metroLabelJMBGLBO.TabIndex = 1;
             this.metroLabelJMBGLBO.Text = "jmbg + lbo ovde";
             // 
+            // metroTabPageTerapije
+            // 
+            this.metroTabPageTerapije.Controls.Add(this.metroGridTerapije);
+            this.metroTabPageTerapije.Controls.Add(this.metroLabel5);
+            this.metroTabPageTerapije.HorizontalScrollbarBarColor = true;
+            this.metroTabPageTerapije.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPageTerapije.HorizontalScrollbarSize = 10;
+            this.metroTabPageTerapije.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPageTerapije.Name = "metroTabPageTerapije";
+            this.metroTabPageTerapije.Size = new System.Drawing.Size(435, 240);
+            this.metroTabPageTerapije.TabIndex = 4;
+            this.metroTabPageTerapije.Text = "Terapije";
+            this.metroTabPageTerapije.VerticalScrollbarBarColor = true;
+            this.metroTabPageTerapije.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPageTerapije.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(3, 10);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(110, 19);
+            this.metroLabel5.TabIndex = 5;
+            this.metroLabel5.Text = "Terapije pacijenta";
+            // 
+            // metroGridTerapije
+            // 
+            this.metroGridTerapije.AllowUserToResizeRows = false;
+            this.metroGridTerapije.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroGridTerapije.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGridTerapije.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.metroGridTerapije.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.metroGridTerapije.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGridTerapije.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.metroGridTerapije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGridTerapije.DefaultCellStyle = dataGridViewCellStyle8;
+            this.metroGridTerapije.EnableHeadersVisualStyles = false;
+            this.metroGridTerapije.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.metroGridTerapije.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGridTerapije.Location = new System.Drawing.Point(3, 32);
+            this.metroGridTerapije.Name = "metroGridTerapije";
+            this.metroGridTerapije.ReadOnly = true;
+            this.metroGridTerapije.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGridTerapije.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.metroGridTerapije.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.metroGridTerapije.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.metroGridTerapije.Size = new System.Drawing.Size(429, 205);
+            this.metroGridTerapije.TabIndex = 6;
+            // 
             // PacijentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -327,6 +412,9 @@
             this.tabDijagnoze.ResumeLayout(false);
             this.tabDijagnoze.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridDijagnoze)).EndInit();
+            this.metroTabPageTerapije.ResumeLayout(false);
+            this.metroTabPageTerapije.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGridTerapije)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,5 +437,8 @@
         private MetroFramework.Controls.MetroGrid metroGridDijagnoze;
         private MetroFramework.Controls.MetroLabel metroLabelJMBGLBO;
         private MetroFramework.Controls.MetroLabel metroLabelPravoZaZakazivanje;
+        private MetroFramework.Controls.MetroTabPage metroTabPageTerapije;
+        private MetroFramework.Controls.MetroGrid metroGridTerapije;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
     }
 }
