@@ -52,5 +52,17 @@ namespace HippocratesPatient
             controller.OnLogin();
             //controller.OnSuccessfulConnection(); // OnSuccessfulConnection is called in OnLogin function
         }
+
+        private void metroTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsDigit(e.KeyChar) || Char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
+
+        private void metroTextBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsDigit(e.KeyChar) || Char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
     }
 }
