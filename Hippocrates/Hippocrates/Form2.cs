@@ -28,8 +28,9 @@ namespace Hippocrates
         {
 
             InitializeComponent();
-            this.MaximumSize = new System.Drawing.Size(1268, 872);
-            this.MinimumSize = new System.Drawing.Size(1268, 872);
+            
+            //this.MaximumSize = new System.Drawing.Size(1268, 872);
+            //this.MinimumSize = new System.Drawing.Size(1268, 872);
             dTP_lekara.CustomFormat = "dd ,MMMM ,yyyy";
             dTP_pacijenta.CustomFormat = "dd ,MMMM ,yyyy";
             pomIndex = string.Empty;
@@ -2263,6 +2264,8 @@ namespace Hippocrates
                 }
                 label_lekar_pac.Text = pac.Lekar.Ime;
                 label_lekar_prezime_pac.Text = pac.Lekar.Prezime;
+                lblImeLekTabTermin.Text = pac.Lekar.Ime;
+                lblPrezimeLekTabTermin.Text = pac.Lekar.Prezime;
                 iq1 = s.CreateQuery("from IzabraniLekar");
                 IList<IzabraniLekar> lekari = iq1.List<IzabraniLekar>();
                 foreach (IzabraniLekar l in lekari)
@@ -2286,6 +2289,22 @@ namespace Hippocrates
             }
             
             s.Close();
+        }
+
+        private void btn_zakazi_pregled_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                Pacijent pac = s.Load<Pacijent>(pomIndex);
+               // FormRaspored fr = new FormRaspored(pac.Lekar.Jmbg, pac.Jmbg);
+              //  fr.Show();
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
 
         private void btn_azuriraj_pac_Click(object sender, EventArgs e)
@@ -3218,8 +3237,9 @@ namespace Hippocrates
 
 
 
+
         #endregion
 
-       
+      
     }
 }

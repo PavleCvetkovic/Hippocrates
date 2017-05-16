@@ -49,7 +49,7 @@ namespace Hippocrates
 
         }
         //----------------------------------------------
-        //Ovaj konstruktor mi treba za medicinskog radnika (Andrija)
+        //Ovaj konstruktor mi treba za medicinskog radnika i glob Admina (Andrija)
         public FormRaspored(string lekar, string p)
         {
             InitializeComponent();
