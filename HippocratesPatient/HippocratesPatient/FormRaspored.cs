@@ -202,7 +202,7 @@ namespace Hippocrates
             //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
             string napomena = "Treba da dodam formu za upis napomene"; // Add form
             DialogResult dr = MetroMessageBox.Show(this, "Question", "Da li ste sigurni da želite da zakažete " + GetDate() + " " + metro_button.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.No) // Doesn't work okay
+            if (dr == DialogResult.No)
                 return;
 
             Napomena_Form nf = new Napomena_Form();

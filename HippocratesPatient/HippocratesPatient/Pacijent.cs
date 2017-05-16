@@ -110,6 +110,12 @@ namespace HippocratesPatient
                 metroGridDijagnoze.Columns[i].Width = metroGridDijagnoze.Width / metroGridDijagnoze.ColumnCount;
         } // Fill metroDataGrid in Dijagnoze
 
+        private void GetContactInfo(Pacijent pacijent)
+        {
+            metroTextBoxEmail.Text = pacijent.Email;
+            metroTextBoxTelefon.Text = pacijent.Telefon;
+        }// Fill textBoxes in "Kontakt" tab
+
         private void tabGlobal_SelectedIndexChanged(object sender, EventArgs e)
         {
             MetroFramework.Controls.MetroTabControl mtc = sender as MetroFramework.Controls.MetroTabControl;
@@ -120,10 +126,11 @@ namespace HippocratesPatient
                 case "Vakcine" : { GetVakcineData(pacijent); break; }
                 case "Dijagnoze" : { GetDijagnozeData(pacijent); break; }
                 case "Terapije": { GetTerapijeData(pacijent); break; }
+                case "Kontakt": { GetContactInfo(pacijent); break; }
             }
         }
 
-       
+        
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
@@ -145,6 +152,29 @@ namespace HippocratesPatient
         {
             session.Save(pacijent); // just in case
             session.Close();
+        }
+
+        private void metroButtonSacuvajKontakt_Click(object sender, EventArgs e)
+        {
+            pacijent.Email = metroTextBoxEmail.Text;
+            pacijent.Telefon = metroTextBoxTelefon.Text;
+            try
+            {
+                session.Save(pacijent);
+                session.Flush();
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "Greška prilikom čuvanja podataka " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            MetroMessageBox.Show(this, "Uspešno sačuvane kontaktne informacije", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void metroTextBoxTelefon_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsDigit(e.KeyChar) || Char.IsControl(e.KeyChar)))
+                e.Handled = true;
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
