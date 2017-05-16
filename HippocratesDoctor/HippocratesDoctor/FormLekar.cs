@@ -132,13 +132,13 @@ namespace HippocratesDoctor
             //lekar_local.Termini[0].Pacijent
             IQuery query = session.CreateQuery("from Termin t where t.Lekar.Jmbg = :lekar and t.Datum = :datum");
             query.SetParameter("lekar", lekar_local.Jmbg);
-            query.SetParameter("datum", System.DateTime.Today);
+            query.SetParameter("datum", metroDateTime1.Value.Date);
 
             IList<Termin> termini_lekara = query.List<Termin>(); // lista svih danasnjih termina zadatog lekara
 
 
             #region Reset all buttons
-            foreach (Control c in pnlPopodne.Controls)
+            foreach (Control c in pnlPrepodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
                 if (mb != null)
@@ -171,7 +171,7 @@ namespace HippocratesDoctor
                     if (mb != null)
                     {
                         mb.Highlight = true;
-                        mb.Enabled = true; // moze biti kliknutu jer je zakazan termin (postoji pacijent)
+                        mb.Enabled = true; // moze biti kliknut jer je zakazan termin (postoji pacijent)
                         //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
                         //this.pnlPrepodne.Controls["metroButton" + time.ToString()].Enabled = false;
                     }
@@ -194,7 +194,7 @@ namespace HippocratesDoctor
         {
             Smena smena = null;
             foreach (Smena s in lekar.Smene)
-                if (s.Id.Datum_Od <= System.DateTime.Now && s.Datum_Do >= System.DateTime.Now)
+                if (s.Id.Datum_Od <= metroDateTime1.Value.Date && s.Datum_Do >= metroDateTime1.Value.Date)
                 {
                     smena = s;
                     break;

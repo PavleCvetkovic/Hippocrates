@@ -18,13 +18,13 @@ namespace HippocratesPatient
 {
     public partial class PacijentForm : MetroFramework.Forms.MetroForm//, View.IView
     {
-        private string jmbg_pacijenta, jmbg_lekara;
-        private string puno_ime;
+        //private string jmbg_pacijenta, jmbg_lekara;
+       // private string puno_ime;
         private Pacijent pacijent;
         private ISession session;
         //private int pravo_da_zakaze;
-        private byte pravo_da_zakaze;
-        private string connection = "server=139.59.132.29;user=paja;charset=utf8;database=Hippocrates;port=3306;password=pajapro1234;protocol=TCP";
+        //private byte pravo_da_zakaze;
+        //private string connection = "server=139.59.132.29;user=paja;charset=utf8;database=Hippocrates;port=3306;password=pajapro1234;protocol=TCP";
         //private MySqlDataAdapter daCountry;
         //private DataSet dsCountry;
         public PacijentForm(string jmbg, string lbo)
@@ -34,12 +34,8 @@ namespace HippocratesPatient
             metroTabGlobal.SelectedIndex = 0; // Show 'Izabrani Lekar' tab
             this.Text = pacijent.Ime + " " + pacijent.Prezime;
             metrolabInfoLekar.Text = pacijent.Lekar.Ime + " " + pacijent.Lekar.Prezime;
-            //pravo_da_zakaze = (byte)pacijent.Pravo_da_zakaze;
             metroLabelJMBGLBO.Text = pacijent.Jmbg + " " + pacijent.Lbo;
 
-            //
-            //jmbg_pacijenta = pacijent.Jmbg;
-            //
             UpdateAppointment(pacijent.Pravo_da_zakaze);
         }
 
@@ -116,6 +112,8 @@ namespace HippocratesPatient
             metroTextBoxTelefon.Text = pacijent.Telefon;
         }// Fill textBoxes in "Kontakt" tab
 
+        // Events
+
         private void tabGlobal_SelectedIndexChanged(object sender, EventArgs e)
         {
             MetroFramework.Controls.MetroTabControl mtc = sender as MetroFramework.Controls.MetroTabControl;
@@ -130,11 +128,14 @@ namespace HippocratesPatient
             }
         }
 
-        
-
         private void metroButton2_Click(object sender, EventArgs e)
         {
             //MetroMessageBox.Show(this, "This is a message in MetroBox");
+            if (pacijent.Pravo_da_zakaze == 0)
+            {
+                MetroMessageBox.Show(this, "Nemate pravo da zakažete termin. Vaš lekar još uvek nije ubeležio Vaš prethodni dolazak", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             FormRaspored raspored_form = new FormRaspored(session, pacijent);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
             raspored_form.ShowDialog();

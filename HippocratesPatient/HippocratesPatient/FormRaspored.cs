@@ -167,7 +167,9 @@ namespace Hippocrates
             };
 
             //termin_list.Add(temp_termin);
+            pacijent_local.Pravo_da_zakaze = 0; // nema vise prava za zakazivanje
             session_local.Save(temp_termin);
+            session_local.Update(pacijent_local);
             session_local.Flush(); // to see changes
             #region SQL nacin
             //MySqlConnection conn = new MySqlConnection(conStr);
@@ -199,6 +201,11 @@ namespace Hippocrates
         private void metroButton_Click(object sender, EventArgs e)
         {
             MetroButton metro_button = (MetroButton)sender;
+            if (pacijent_local.Pravo_da_zakaze == 0)
+            {
+                MetroMessageBox.Show(this, "Nemate pravo da zakažete termin. Vaš lekar još uvek nije ubeležio Vaš prethodni dolazak", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
             string napomena = "Treba da dodam formu za upis napomene"; // Add form
             DialogResult dr = MetroMessageBox.Show(this, "Question", "Da li ste sigurni da želite da zakažete " + GetDate() + " " + metro_button.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
