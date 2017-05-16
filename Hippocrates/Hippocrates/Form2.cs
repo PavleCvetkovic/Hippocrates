@@ -29,8 +29,6 @@ namespace Hippocrates
 
             InitializeComponent();
             
-            //this.MaximumSize = new System.Drawing.Size(1268, 872);
-            //this.MinimumSize = new System.Drawing.Size(1268, 872);
             dTP_lekara.CustomFormat = "dd ,MMMM ,yyyy";
             dTP_pacijenta.CustomFormat = "dd ,MMMM ,yyyy";
             pomIndex = string.Empty;
