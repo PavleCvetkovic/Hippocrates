@@ -157,8 +157,10 @@ namespace HippocratesDoctor
         {
             if (lblImeLekara.Text != string.Empty && lblImePacijenta.Text != string.Empty)
             {
-                FormRaspored fr = new FormRaspored(il.Jmbg, pac.Jmbg);
-                fr.Show();
+                // NikolaCeranic stavio u komentar jer nije hteo Build
+                // Nista nije menjano samo je ovo u komentar stavljeno
+                //FormRaspored fr = new FormRaspored(il.Jmbg, pac.Jmbg);
+                //fr.Show();
             }
             else
             {

@@ -107,9 +107,19 @@ namespace Hippocrates
 
         private void RefreshControls(IzabraniLekar lekar)
         {
+            Smena s = GetDoctorShift(lekar);
+            if (s == null)
+            {
+                MetroMessageBox.Show(this, "Lekaru izabranog pacijenta nije podešena smena za traženi datum, i nije moguće zakazati termin", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                metroLabelSmenaLekara.Text = "Lekaru nije određena smena. Odaberite drugi datum.";
+                pnlPopodne.Enabled = false; // za slucaj kada se promeni datum a lekar nema definisanu smenu za taj datum
+                pnlPrepodne.Enabled = false; // za slucaj kada se promeni datum a lekar nema definisanu smenu za taj datum
+                return;
+            }
+            pnlPrepodne.Enabled = true; // jer je moguce da je bilo false (za pogresni datum)
+            pnlPopodne.Enabled = true; // jer je moguce da je bilo false (za pogresni datum)
             UpdateForm(GetDoctorShift(lekar).SmenaLekara);
 
-            //lekar_local.Termini[0].Pacijent
             IQuery query = session_local.CreateQuery("from Termin t where t.Lekar.Jmbg = :lekar and t.Datum = :datum");
             query.SetParameter("lekar", lekar_local.Jmbg);
             query.SetParameter("datum", metroDateTime1.Value.Date);
@@ -243,7 +253,13 @@ namespace Hippocrates
         private void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
         {
             session_local.Flush();
-            session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
+            //session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
+
+            // Ti koji si sklonio ovo (budi fin da se potpisi sledeci put) NikolaCeranic trenutno ovo pise
+            // Zasto se "to" ne zatvara:
+            // Sessija je prosledjena od strane prethodne forme
+            // Jedna sesija se vuce kroz celu aplikaciju (samo jedna)
+            // Zato ako se ovde zatvori u prethodnoj formi nije moguce raditi sa objektima (javlja se izuzetak)
         }
     }
 }

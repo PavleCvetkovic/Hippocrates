@@ -106,9 +106,15 @@ namespace HippocratesPatient
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
-            FormRaspored raspored_form = new FormRaspored(session_local ,pacijent_local.Lekar, pacijent_local);
+            if (pacijent_local.Lekar == null)
+            {
+                MetroMessageBox.Show(this, "Izabrani pacijent nema izabranog lekara, i nije moguće zakazati termin", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            FormRaspored raspored_form = new FormRaspored(session_local , pacijent_local.Lekar, pacijent_local);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
-            raspored_form.Show();
+            raspored_form.ShowDialog();
         }
 
         private void PacijentForm_Load(object sender, EventArgs e)
