@@ -166,16 +166,27 @@ namespace HippocratesPatient
             {
                 if (metroGridPonudjeniLekari.SelectedRows.Count == 1)
                 {
+                    IList<ZahtevZaPromenu> zahtevi = session.QueryOver<ZahtevZaPromenu>().List();
+                    bool request_sent = false;
+                    foreach (ZahtevZaPromenu z in zahtevi)
+                        if (z.ZahtevPacijenta == pacijent_local)
+                            request_sent = true;
+
+                    if (request_sent)
+                    {
+                        MetroMessageBox.Show(this, "Ne možete da podnesete još jedan zahtev. Vaš prethodno podneti zahtev nije obrađen.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     //MetroMessageBox.Show(this, "Info", "Selected count == 1", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     string jmbg_from_grid = "";
                     jmbg_from_grid = metroGridPonudjeniLekari.SelectedRows[0].Cells[0].Value.ToString();
                     if (ChangeDoctor(jmbg_from_grid))
-                        MetroMessageBox.Show(this, "Info", "Zahtev uspešno poslat na obradu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MetroMessageBox.Show(this, "Zahtev uspešno poslat na obradu", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else
-                        MetroMessageBox.Show(this, "Error", "Greška prilikom slanja zahteva na obradu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this, "Greška prilikom slanja zahteva na obradu", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                    MetroMessageBox.Show(this, "Warning", "Odaberite željenog lekara", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MetroMessageBox.Show(this, "Odaberite željenog lekara", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
