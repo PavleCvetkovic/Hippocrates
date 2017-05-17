@@ -17,6 +17,7 @@ using NHibernate;
 using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using Hippocrates.SharedForms;
 
 namespace Hippocrates
 {
@@ -2295,8 +2296,8 @@ namespace Hippocrates
             {
                 ISession s = DataLayer.GetSession();
                 Pacijent pac = s.Load<Pacijent>(pomIndex);
-               // FormRaspored fr = new FormRaspored(pac.Lekar.Jmbg, pac.Jmbg);
-              //  fr.Show();
+                Hippocrates.SharedForms.FormRaspored fr = new SharedForms.FormRaspored(pac.Lekar.Jmbg, pac.Jmbg);
+                fr.Show();
                 s.Close();
             }
             catch (Exception ex)
