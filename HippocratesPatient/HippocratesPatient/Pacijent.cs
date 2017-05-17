@@ -67,6 +67,7 @@ namespace HippocratesPatient
                 metroLabelPravoZaZakazivanje.ForeColor = System.Drawing.Color.Aqua;
                 metroLabelPravoZaZakazivanje.BackColor = System.Drawing.Color.Aqua;
                 metroButtonZakaziteTermin.Enabled = true;
+                metroButtonZakazaniTermini.Enabled = false; // Nema sta da otkaze (moze samo da zakaze)
             }
             else
             {
@@ -74,6 +75,7 @@ namespace HippocratesPatient
                 metroLabelPravoZaZakazivanje.UseCustomForeColor = true;
                 metroLabelPravoZaZakazivanje.ForeColor = System.Drawing.Color.Red;
                 metroButtonZakaziteTermin.Enabled = false;
+                metroButtonZakazaniTermini.Enabled = true; // Nema privilegiju za zakazivanje (moze samo da otkaze termin)
             }
         }
 
@@ -139,6 +141,7 @@ namespace HippocratesPatient
             FormRaspored raspored_form = new FormRaspored(session, pacijent);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
             raspored_form.ShowDialog();
+            UpdateAppointment(pacijent.Pravo_da_zakaze); // Promena labela i dugmeta
         }
 
         private void PacijentForm_Load(object sender, EventArgs e)
@@ -184,6 +187,15 @@ namespace HippocratesPatient
             zahtev_form.StartPosition = FormStartPosition.CenterScreen;
             //zahtev_form.MdiParent = this; // To make it impossible to NOT focus
             zahtev_form.ShowDialog();
+        }
+
+        private void metroButtonZakazaniTermini_Click(object sender, EventArgs e)
+        {
+            session.Refresh(pacijent); // Ucitavanje termina iz baze nakon promene
+            FormZakazaniTermini fr = new FormZakazaniTermini(session, pacijent);
+            fr.StartPosition = FormStartPosition.CenterParent;
+            fr.ShowDialog();
+            UpdateAppointment(pacijent.Pravo_da_zakaze); // Za promenu labela i dugmeta za zakazivanje
         }
     }
 }

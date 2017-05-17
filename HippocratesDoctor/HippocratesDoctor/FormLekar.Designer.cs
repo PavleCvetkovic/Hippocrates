@@ -45,8 +45,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroTabGlobal = new MetroFramework.Controls.MetroTabControl();
             this.metroTabRasporedPregleda = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabelInfoOTerminu = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabelActivePatient = new MetroFramework.Controls.MetroLabel();
+            this.metroLabelInfoPacijenta = new MetroFramework.Controls.MetroLabel();
             this.metroLabelSmenaLekara = new MetroFramework.Controls.MetroLabel();
             this.pnlPopodne = new MetroFramework.Controls.MetroPanel();
             this.metroButton1915 = new MetroFramework.Controls.MetroButton();
@@ -162,8 +163,9 @@
             // 
             // metroTabRasporedPregleda
             // 
+            this.metroTabRasporedPregleda.Controls.Add(this.metroLabelInfoOTerminu);
             this.metroTabRasporedPregleda.Controls.Add(this.metroLabel1);
-            this.metroTabRasporedPregleda.Controls.Add(this.metroLabelActivePatient);
+            this.metroTabRasporedPregleda.Controls.Add(this.metroLabelInfoPacijenta);
             this.metroTabRasporedPregleda.Controls.Add(this.metroLabelSmenaLekara);
             this.metroTabRasporedPregleda.Controls.Add(this.pnlPopodne);
             this.metroTabRasporedPregleda.Controls.Add(this.pnlPrepodne);
@@ -180,23 +182,32 @@
             this.metroTabRasporedPregleda.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabRasporedPregleda.VerticalScrollbarSize = 10;
             // 
+            // metroLabelInfoOTerminu
+            // 
+            this.metroLabelInfoOTerminu.AutoSize = true;
+            this.metroLabelInfoOTerminu.Location = new System.Drawing.Point(6, 340);
+            this.metroLabelInfoOTerminu.Name = "metroLabelInfoOTerminu";
+            this.metroLabelInfoOTerminu.Size = new System.Drawing.Size(135, 19);
+            this.metroLabelInfoOTerminu.TabIndex = 9;
+            this.metroLabelInfoOTerminu.Text = "Informacija o terminu";
+            // 
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(3, 370);
+            this.metroLabel1.Location = new System.Drawing.Point(3, 402);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(125, 19);
             this.metroLabel1.TabIndex = 8;
             this.metroLabel1.Text = "Klik za detaljniji uvid";
             // 
-            // metroLabelActivePatient
+            // metroLabelInfoPacijenta
             // 
-            this.metroLabelActivePatient.AutoSize = true;
-            this.metroLabelActivePatient.Location = new System.Drawing.Point(3, 338);
-            this.metroLabelActivePatient.Name = "metroLabelActivePatient";
-            this.metroLabelActivePatient.Size = new System.Drawing.Size(271, 19);
-            this.metroLabelActivePatient.TabIndex = 7;
-            this.metroLabelActivePatient.Text = "ovde ide osnovni info o trenutnom pacijentu ";
+            this.metroLabelInfoPacijenta.AutoSize = true;
+            this.metroLabelInfoPacijenta.Location = new System.Drawing.Point(3, 371);
+            this.metroLabelInfoPacijenta.Name = "metroLabelInfoPacijenta";
+            this.metroLabelInfoPacijenta.Size = new System.Drawing.Size(271, 19);
+            this.metroLabelInfoPacijenta.TabIndex = 7;
+            this.metroLabelInfoPacijenta.Text = "ovde ide osnovni info o trenutnom pacijentu ";
             // 
             // metroLabelSmenaLekara
             // 
@@ -1306,7 +1317,7 @@
             // metroDateTimeDatumParametar
             // 
             this.metroDateTimeDatumParametar.Location = new System.Drawing.Point(528, 46);
-            this.metroDateTimeDatumParametar.MinimumSize = new System.Drawing.Size(0, 29);
+            this.metroDateTimeDatumParametar.MinimumSize = new System.Drawing.Size(4, 29);
             this.metroDateTimeDatumParametar.Name = "metroDateTimeDatumParametar";
             this.metroDateTimeDatumParametar.Size = new System.Drawing.Size(215, 29);
             this.metroDateTimeDatumParametar.TabIndex = 7;
@@ -1522,7 +1533,7 @@
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
         private MetroFramework.Controls.MetroTabPage metroTabPage4;
         private MetroFramework.Controls.MetroLabel metroLabelSmenaLekara;
-        private MetroFramework.Controls.MetroLabel metroLabelActivePatient;
+        private MetroFramework.Controls.MetroLabel metroLabelInfoPacijenta;
         private MetroFramework.Controls.MetroGrid metroGridPacijenti;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTabPage metroTabOceniPacijenta;
@@ -1544,5 +1555,6 @@
         private MetroFramework.Controls.MetroTextBox metroTextBoxUnosParametra;
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroLabel metroLabel7;
+        private MetroFramework.Controls.MetroLabel metroLabelInfoOTerminu;
     }
 }

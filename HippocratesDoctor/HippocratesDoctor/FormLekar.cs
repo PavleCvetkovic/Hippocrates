@@ -44,7 +44,10 @@ namespace HippocratesDoctor
             metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
             metroTabGlobal.SelectedIndex = 0; // Show 'Raspored pregleda' first
             metroComboBoxIzborPretrage.SelectedIndex = 1; // LBO default way of search
-            metroLabelActivePatient.Text = "Prelaz preko dugmeta za info o terminu";
+            
+            metroLabelInfoOTerminu.Text = "Prelaz preko dugmeta za info o terminu";
+            metroLabelInfoPacijenta.Text = string.Empty;
+            //metroLabelInfoPacijenta.Text = "Pacijent: ";
 
             smena_lekara_local = GetDoctorShift(lekar_local);
             metroLabelSmenaLekara.Text = smena_lekara_local == null ? "Smena nije postavljena" : GetShiftName(smena_lekara_local.SmenaLekara);
@@ -225,14 +228,14 @@ namespace HippocratesDoctor
             Pacijent p = null;
             IQuery query = session.CreateQuery("select Pacijent from Termin t where t.Lekar.Jmbg = :lekar and t.Datum = :datum and t.Vreme = :vreme");
             query.SetParameter("lekar", lekar_local.Jmbg);
-            query.SetParameter("datum", System.DateTime.Today);
+            query.SetParameter("datum", metroDateTime1.Value.Date);
             query.SetParameter("vreme", time);
 
             p = query.UniqueResult<Pacijent>();
+
             return p;
 
             //IList<Termin> termini_lekara = query.List<Termin>(); // lista svih danasnjih termina zadatog lekara
-            
         }
 
         private string GetDate() // Trebalo bi svuda se iskoristi funkcija GetDateFromControl jer univerzalno radi za svaki MetroDateTimePicker
@@ -452,9 +455,12 @@ namespace HippocratesDoctor
         private void metroButton_MouseLeave(object sender, EventArgs e)
         {
             MetroButton metro_button = (MetroButton)sender; // Current patient to show
-            metroLabelActivePatient.Text = "Prelaz preko dugmeta za kratak info";
-            metroLabelActivePatient.BackColor = Color.Aqua;
-            metroLabelActivePatient.UseCustomBackColor = true;
+            metroLabelInfoOTerminu.Text = "Prelaz preko dugmeta za kratak info";
+            metroLabelInfoOTerminu.BackColor = Color.Aqua;
+            metroLabelInfoOTerminu.UseCustomBackColor = true;
+            //metroLabelInfoPacijenta.Text = "Pacijent: ";
+            metroLabelInfoPacijenta.Text = string.Empty;
+            metroLabelInfoPacijenta.UseCustomBackColor = true;
         }
 
         private void metroButton_MouseHover(object sender, EventArgs e)
@@ -462,15 +468,40 @@ namespace HippocratesDoctor
             MetroButton metro_button = (MetroButton)sender;
             if (metro_button.Highlight == false) // Slobodan termin
             {
-                metroLabelActivePatient.Text = "Slobodan termin";
-                metroLabelActivePatient.BackColor = Color.Green;
+                metroLabelInfoOTerminu.Text = "Slobodan termin";
+                metroLabelInfoOTerminu.BackColor = Color.Green;
             }
             else
             {
-                metroLabelActivePatient.Text = "Zakazan termin (klik na dugme za info o pacijentu)";
-                metroLabelActivePatient.BackColor = Color.OrangeRed;
+                metroLabelInfoOTerminu.Text = "Zakazan termin (klik na dugme za info o pacijentu)";
+                metroLabelInfoOTerminu.BackColor = Color.OrangeRed;
+                
+
+                Int32 time = 0;
+                Pacijent p = null;
+                if (Int32.TryParse(metro_button.Text.Replace(":", string.Empty), out time))
+                    p = GetPatientFromClick(time);
+                if (p != null)
+                {
+                    metroLabelInfoPacijenta.Text = p.Ime + " " + p.Prezime;
+                    Termin trenutni_termin = null;
+                    foreach(Termin t in p.Termini)
+                    {
+                        if (t.Datum == metroDateTime1.Value.Date)
+                        {
+                            trenutni_termin = t;
+                            break;
+                        }
+                    }
+                    if (trenutni_termin != null)
+                        metroLabelInfoPacijenta.Text += " Napomena: " + trenutni_termin.Napomena;
+                }
             }
-            metroLabelActivePatient.UseCustomBackColor = true;
+
+            metroLabelInfoPacijenta.BackColor = Color.LightGoldenrodYellow;
+
+            metroLabelInfoOTerminu.UseCustomBackColor = true;
+            metroLabelInfoPacijenta.UseCustomBackColor = true;
 
         }
 
@@ -528,6 +559,5 @@ namespace HippocratesDoctor
             
             RefreshDijagnozeData(aktivni_pacijent);
         }
-
     }
 }
