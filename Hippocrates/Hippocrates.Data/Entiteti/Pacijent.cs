@@ -40,9 +40,9 @@ namespace Hippocrates.Data.Entiteti
             TerminiBolnica = new List<TerminBolnica>();
         }
 
-        //public override string ToString()
-        //{
-        //    return Ime + " " + Prezime;
-        //}
+        public override string ToString()
+        {
+            return Ime + " " + Prezime;
+        }
     }
 }

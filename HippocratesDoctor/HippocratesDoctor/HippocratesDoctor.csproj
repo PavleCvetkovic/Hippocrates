@@ -138,6 +138,12 @@
     <Compile Include="FormVakcine.Designer.cs">
       <DependentUpon>FormVakcine.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormZahteviPacijenata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZahteviPacijenata.Designer.cs">
+      <DependentUpon>FormZahteviPacijenata.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Napomena.cs">
@@ -184,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormVakcine.resx">
       <DependentUpon>FormVakcine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormZahteviPacijenata.resx">
+      <DependentUpon>FormZahteviPacijenata.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Napomena.resx">
       <DependentUpon>Napomena.cs</DependentUpon>

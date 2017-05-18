@@ -65,6 +65,8 @@
             this.metroTextBoxLozinka = new MetroFramework.Controls.MetroTextBox();
             this.metroButtonSmenaLekara = new MetroFramework.Controls.MetroButton();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            this.metroTabPageZahteviPacijenata = new MetroFramework.Controls.MetroTabPage();
+            this.metroButtonZahteviPacijenata = new MetroFramework.Controls.MetroButton();
             this.metroTabControlGlobal.SuspendLayout();
             this.tabLekar.SuspendLayout();
             this.metroTabControl2.SuspendLayout();
@@ -77,15 +79,17 @@
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridData)).BeginInit();
+            this.metroTabPageZahteviPacijenata.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControlGlobal
             // 
             this.metroTabControlGlobal.Controls.Add(this.tabLekar);
             this.metroTabControlGlobal.Controls.Add(this.tabOsoblje);
+            this.metroTabControlGlobal.Controls.Add(this.metroTabPageZahteviPacijenata);
             this.metroTabControlGlobal.Location = new System.Drawing.Point(23, 72);
             this.metroTabControlGlobal.Name = "metroTabControlGlobal";
-            this.metroTabControlGlobal.SelectedIndex = 0;
+            this.metroTabControlGlobal.SelectedIndex = 2;
             this.metroTabControlGlobal.Size = new System.Drawing.Size(849, 168);
             this.metroTabControlGlobal.TabIndex = 3;
             this.metroTabControlGlobal.UseSelectable = true;
@@ -589,6 +593,31 @@
             this.metroLabel8.TabIndex = 53;
             this.metroLabel8.Text = "Odaberite lekara/osobu za brisanje/ažuriranje iz tabele";
             // 
+            // metroTabPageZahteviPacijenata
+            // 
+            this.metroTabPageZahteviPacijenata.Controls.Add(this.metroButtonZahteviPacijenata);
+            this.metroTabPageZahteviPacijenata.HorizontalScrollbarBarColor = true;
+            this.metroTabPageZahteviPacijenata.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPageZahteviPacijenata.HorizontalScrollbarSize = 10;
+            this.metroTabPageZahteviPacijenata.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPageZahteviPacijenata.Name = "metroTabPageZahteviPacijenata";
+            this.metroTabPageZahteviPacijenata.Size = new System.Drawing.Size(841, 126);
+            this.metroTabPageZahteviPacijenata.TabIndex = 2;
+            this.metroTabPageZahteviPacijenata.Text = "Podaci o zahtevima za promenu lekara";
+            this.metroTabPageZahteviPacijenata.VerticalScrollbarBarColor = true;
+            this.metroTabPageZahteviPacijenata.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPageZahteviPacijenata.VerticalScrollbarSize = 10;
+            // 
+            // metroButtonZahteviPacijenata
+            // 
+            this.metroButtonZahteviPacijenata.Location = new System.Drawing.Point(0, 18);
+            this.metroButtonZahteviPacijenata.Name = "metroButtonZahteviPacijenata";
+            this.metroButtonZahteviPacijenata.Size = new System.Drawing.Size(833, 23);
+            this.metroButtonZahteviPacijenata.TabIndex = 2;
+            this.metroButtonZahteviPacijenata.Text = "Prikaži zahteve pacijenata";
+            this.metroButtonZahteviPacijenata.UseSelectable = true;
+            this.metroButtonZahteviPacijenata.Click += new System.EventHandler(this.metroButtonZahteviPacijenata_Click);
+            // 
             // FormDirektor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -627,6 +656,7 @@
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroGridData)).EndInit();
+            this.metroTabPageZahteviPacijenata.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -667,5 +697,7 @@
         private MetroFramework.Controls.MetroButton metroButtonAzurirajOsobu;
         private MetroFramework.Controls.MetroButton metroButtonSmenaLekara;
         private MetroFramework.Controls.MetroLabel metroLabel8;
+        private MetroFramework.Controls.MetroTabPage metroTabPageZahteviPacijenata;
+        private MetroFramework.Controls.MetroButton metroButtonZahteviPacijenata;
     }
 }

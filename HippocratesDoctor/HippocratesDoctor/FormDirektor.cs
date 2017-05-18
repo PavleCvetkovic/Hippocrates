@@ -91,7 +91,7 @@ namespace HippocratesDoctor
             for (int i = to_show_column_number; i < metroGridData.ColumnCount; i++)
                 metroGridData.Columns[i].Visible = false;
             for (int i = 0; i < metroGridData.ColumnCount - to_show_column_number; i++)
-                metroGridData.Columns[i].Width = metroGridData.Width / (metroGridData.ColumnCount - to_show_column_number);
+                metroGridData.Columns[i].Width = (this.Width - 10) / (metroGridData.ColumnCount - to_show_column_number);
 
             #region SQL nacin
             //MySqlDataAdapter data_adapter;
@@ -172,7 +172,7 @@ namespace HippocratesDoctor
             /*for (int i = to_show_column_number; i < metroGridData.ColumnCount; i++)
                 metroGridData.Columns[i].Visible = false;*/
             for (int i = 0; i < metroGridData.ColumnCount - to_show_column_number; i++)
-                metroGridData.Columns[i].Width = metroGridData.Width / (metroGridData.ColumnCount - to_show_column_number);
+                metroGridData.Columns[i].Width = (this.Width - 10) / (metroGridData.ColumnCount - to_show_column_number);
 
             #region SQL nacin
             /*
@@ -733,6 +733,14 @@ namespace HippocratesDoctor
         {
             session.Close();
         }
+
+        private void metroButtonZahteviPacijenata_Click(object sender, EventArgs e)
+        {
+            FormZahteviPacijenata fzp = new FormZahteviPacijenata(session, dom_zdravlja_local);
+            fzp.StartPosition = FormStartPosition.CenterScreen;
+            fzp.ShowDialog();
+        }
+
         #endregion
 
         #region MVC
@@ -743,5 +751,6 @@ namespace HippocratesDoctor
 
         #endregion
 
+        
     }
 }
