@@ -155,7 +155,7 @@
             this.metroTabGlobal.Controls.Add(this.metroTabPretragaPacijenata);
             this.metroTabGlobal.Location = new System.Drawing.Point(23, 63);
             this.metroTabGlobal.Name = "metroTabGlobal";
-            this.metroTabGlobal.SelectedIndex = 0;
+            this.metroTabGlobal.SelectedIndex = 2;
             this.metroTabGlobal.Size = new System.Drawing.Size(754, 514);
             this.metroTabGlobal.TabIndex = 0;
             this.metroTabGlobal.UseSelectable = true;
@@ -1280,9 +1280,9 @@
             this.metroLabelOceniPacijentaInfo.AutoSize = true;
             this.metroLabelOceniPacijentaInfo.Location = new System.Drawing.Point(4, 14);
             this.metroLabelOceniPacijentaInfo.Name = "metroLabelOceniPacijentaInfo";
-            this.metroLabelOceniPacijentaInfo.Size = new System.Drawing.Size(180, 19);
+            this.metroLabelOceniPacijentaInfo.Size = new System.Drawing.Size(87, 19);
             this.metroLabelOceniPacijentaInfo.TabIndex = 2;
-            this.metroLabelOceniPacijentaInfo.Text = "ovde osnovni info o pacijentu";
+            this.metroLabelOceniPacijentaInfo.Text = "Info pacijenta";
             // 
             // metroTabPretragaPacijenata
             // 

@@ -36,7 +36,7 @@ namespace HippocratesDoctor
             InitializeComponent();
             session = DataLayer.GetSession();
             lekar_local = session.Load<IzabraniLekar>(jmbg_lekara);
-
+            
             //this.jmbg_lekara = lekar_local.Jmbg;
             this.Text = lekar_local.Ime + " " + lekar_local.Prezime;
             //this.Text = GetDoctorNameAndSurname(jmbg_lekara);
@@ -370,7 +370,17 @@ namespace HippocratesDoctor
             EmptyMetroDataGrid(metroGridPretragaPacijenata);
             IList<Pacijent> pacijenti = query.List<Pacijent>();
             metroGridPretragaPacijenata.DataSource = pacijenti;
-        }   
+        }
+
+        private bool ActivePatientNotNull(Pacijent aktivni_pacijent)
+        {
+            if (aktivni_pacijent == null)
+            {
+                MetroMessageBox.Show(this, "Nije selektovan pacijent", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
 
         private void EmptyMetroDataGrid(MetroGrid mg)
         {
@@ -432,9 +442,15 @@ namespace HippocratesDoctor
             {
                 case 0: { RefreshControls(lekar_local); break; }
                 case 1: { GetAllPatientBasicInfo(); break; }
+                case 2: {
+                            if (ActivePatientNotNull(aktivni_pacijent))
+                                RefreshDijagnozeData(aktivni_pacijent);
+                                break;
+                        }
             }
         }
 
+       
         private void metroGridPacijenti_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             MetroGrid mg = sender as MetroGrid;
@@ -509,7 +525,15 @@ namespace HippocratesDoctor
         {
             MetroFramework.Controls.MetroTabControl mtc = sender as MetroFramework.Controls.MetroTabControl;
             //MessageBox.Show("Selected inex changed event" + mtc.SelectedIndex);
-            switch (mtc.SelectedIndex)
+            if (!ActivePatientNotNull(aktivni_pacijent))
+            {
+                metroButtonOceniPacijenta.Enabled = false;
+                return; // ActivePatient is null
+            }
+            else
+                metroButtonOceniPacijenta.Enabled = true;
+
+           switch (mtc.SelectedIndex)
             {
                 case 0: { RefreshDijagnozeData(aktivni_pacijent); break; }
                 case 1: { RefreshVakcineData(aktivni_pacijent); break; }
@@ -522,7 +546,7 @@ namespace HippocratesDoctor
         {
             //MetroMessageBox.Show(this, "Da li ste sigurni da želite da ocenite dolazak pacijenta?", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             DialogResult dr = MetroMessageBox.Show(this, "Da li ste sigurni da želite da ocenite dolazak pacijenta?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Cancel)
+            if (dr == DialogResult.No)
                 return;
 
             bool dolazak = metroCheckBoxDosaoUTerminu.Checked;
@@ -556,8 +580,9 @@ namespace HippocratesDoctor
             Int32 time = 0;
             if (Int32.TryParse(metro_button.Text.Replace(":", string.Empty), out time))
                 aktivni_pacijent = GetPatientFromClick(time);
-            
-            RefreshDijagnozeData(aktivni_pacijent);
+
+            if (ActivePatientNotNull(aktivni_pacijent))
+                RefreshDijagnozeData(aktivni_pacijent);
         }
     }
 }

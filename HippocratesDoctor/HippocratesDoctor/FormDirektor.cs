@@ -717,8 +717,28 @@ namespace HippocratesDoctor
             MetroTabControl mtc = sender as MetroTabControl;
             switch(mtc.SelectedIndex)
             {
-                case 0: { metroButtonSmenaLekara.Enabled = true; GetAllDoctors(dom_zdravlja_local);  break; }
-                case 1: { metroButtonSmenaLekara.Enabled = false; GetMedicalStaffData(dom_zdravlja_local); break; }
+                case 0: // Lekari
+                    {
+                        //metroPanel1.Enabled = true;
+                        metroButtonSmenaLekara.Enabled = true; GetAllDoctors(dom_zdravlja_local);
+                        if (metroGridData.Rows.Count != 0)
+                            metroGridData.Rows[0].Selected = true;
+                        TransferDataFromGridToControl(metroGridData); break;
+                    }
+                case 1: // Medicinsko osoblje
+                    {
+                        //metroPanel1.Enabled = true;
+                        metroButtonSmenaLekara.Enabled = false; GetMedicalStaffData(dom_zdravlja_local);
+                        if (metroGridData.Rows.Count != 0)
+                            metroGridData.Rows[0].Selected = true;
+                        TransferDataFromGridToControl(metroGridData);
+                        break;
+                    }
+                case 2: // Zahtevi pacijenata
+                    {
+                        //metroPanel1.Enabled = false;
+                        break;
+                    }
             }
         }
 
@@ -749,8 +769,7 @@ namespace HippocratesDoctor
             throw new NotImplementedException();
         }
 
-        #endregion
 
-        
+        #endregion
     }
 }

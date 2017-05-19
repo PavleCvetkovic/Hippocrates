@@ -41,7 +41,7 @@ namespace HippocratesPatient
         public void Message(string s)
         {
             //MetroMessageBox
-            //MetroMessageBox.Show(this, s, "Obavestenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MetroMessageBox.Show(this, s, "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             
             //StandardMessageBox
             //MessageBox.Show(s, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -50,6 +50,8 @@ namespace HippocratesPatient
         private void metroButton1_Click(object sender, EventArgs e)
         {
             controller.OnLogin();
+            //MetroMessageBox.Show(this, s, "Obavestenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             //controller.OnSuccessfulConnection(); // OnSuccessfulConnection is called in OnLogin function
         }
 

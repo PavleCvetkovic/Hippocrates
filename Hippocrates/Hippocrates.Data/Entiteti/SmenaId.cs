@@ -21,7 +21,7 @@ namespace Hippocrates.Data.Entiteti
         }
         public override string ToString()
         {
-            return Lekar.Ime + " " + Lekar.Prezime + " " + Datum_Od;
+            return Lekar.Ime + " " + Lekar.Prezime + " " + Datum_Od.Date.ToShortDateString();
         }
     }
 }

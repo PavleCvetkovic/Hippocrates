@@ -83,6 +83,7 @@
             this.metroGridSmenaLekara.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGridSmenaLekara.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridSmenaLekara.Location = new System.Drawing.Point(23, 296);
+            this.metroGridSmenaLekara.MultiSelect = false;
             this.metroGridSmenaLekara.Name = "metroGridSmenaLekara";
             this.metroGridSmenaLekara.ReadOnly = true;
             this.metroGridSmenaLekara.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
