@@ -221,6 +221,7 @@ namespace HippocratesDoctor
             //        metroRadioButtonSmenaPoslepodne.Checked = true;
             //}
             string str = mg.SelectedRows[0].Cells["DATUM_RODJENJA"].Value.ToString();
+            DateTime temp_date = (DateTime)mg.SelectedRows[0].Cells["DATUM_RODJENJA"].Value;
             // dd.MM.yyyy.
             // 0123456789
             //MessageBox.Show(Int32.Parse(str.Substring(0, 4)).ToString() + " " + Int32.Parse(str.Substring(5, 2)).ToString() + " " + Int32.Parse(str.Substring(8, 2)).ToString());
@@ -233,7 +234,7 @@ namespace HippocratesDoctor
 
 
             //MessageBox.Show(ParseYear(str).ToString() + ParseMonth(str).ToString() + ParseDay(str).ToString());
-            System.DateTime temp_date = new DateTime(ParseYear(str), ParseMonth(str), ParseDay(str));
+            
             metroDateTimeDatumRodjenja.Value = temp_date;
             //metroDateTimeDatumRodjenja.Value.Year = 2000;
 
