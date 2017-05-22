@@ -1747,6 +1747,7 @@ namespace Hippocrates
 
         #region tab_za_azuriranje_lekara
 
+
         private void btnZatvoriPanelDodavanjeSmene_Click(object sender, EventArgs e)
         {
             pnlDodavanjeSmene.Visible = false;
@@ -1765,9 +1766,9 @@ namespace Hippocrates
                 {
                     if (s1.Id.Datum_Od == DateTime.Parse(datumOd))
                     {
-                        
+
                         smen = s1;
-                       
+
                     }
                 }
                 il.Smene.Remove(smen);
@@ -1809,7 +1810,7 @@ namespace Hippocrates
             }
             s.Close();
         }
-        
+
         private void cb_lekar_azuriranje_pretraga_SelectedIndexChanged(object sender, EventArgs e)
         {
             dGV_lekari_azuriranje.DataSource = null;
@@ -1847,7 +1848,7 @@ namespace Hippocrates
             {
                 int rowindex = dGV_lekari_azuriranje.CurrentCell.RowIndex;
                 pomIndex = dGV_lekari_azuriranje.Rows[rowindex].Cells[0].Value.ToString();
-                
+
                 IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
 
                 lBSmeneLekara.Items.Clear();
@@ -1858,22 +1859,22 @@ namespace Hippocrates
                 tb_azuriranje_pass_lekar.Text = il.Password;
                 dTP_azuriranje_lekar.Value = il.Datum_rodjenja;
                 tb_azuriranje_lekar_srednjeSlovo.Text = il.Srednje_slovo;
-                foreach(Smena smen in il.Smene)
+                foreach (Smena smen in il.Smene)
                 {
                     lBSmeneLekara.Items.Add(smen.Id.Datum_Od.ToShortDateString() + " - " + smen.Datum_Do.ToShortDateString() + " smena: " + smen.SmenaLekara);
                 }
-               
+
                 cb_domovi_za_promenu_lekar.Items.Clear();
                 cb_domovi_za_promenu_lekar.Text = string.Empty;
                 IQuery iq = s.CreateQuery("from DomZdravlja");
                 IList<DomZdravlja> domovi = iq.List<DomZdravlja>();
-                foreach(DomZdravlja dz in domovi)
+                foreach (DomZdravlja dz in domovi)
                 {
-                    if(il.RadiUDomuZdravlja.Mbr != dz.Mbr)
+                    if (il.RadiUDomuZdravlja.Mbr != dz.Mbr)
                         cb_domovi_za_promenu_lekar.Items.Add(dz.Mbr + " " + dz.Ime);
                 }
-               
-                
+
+
             }
             catch (Exception ex)
             {
@@ -1887,7 +1888,7 @@ namespace Hippocrates
             ISession s = DataLayer.GetSession();
             try
             {
-                
+
                 IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
                 il.Ime = tb_azuriranje_ime_lekar.Text;
                 il.Prezime = tb_azuriranje_prezime_lekar.Text;
@@ -1904,18 +1905,29 @@ namespace Hippocrates
             }
 
             s.Close();
-            
+
         }
 
         private void btn_dodaj_smenu_Click(object sender, EventArgs e)
         {
+
             ISession s = DataLayer.GetSession();
             pnlDodavanjeSmene.Visible = true;
             IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
-            dTP_dodavanjeSmene_od.Value = il.Smene[il.Smene.Count - 1].Datum_Do;
-            dTP_dodavanjeSmene_od.Value = dTP_dodavanjeSmene_od.Value.AddDays(1);
-            dTP_dodavanjeSmene_do.Value = dTP_dodavanjeSmene_od.Value;
-            dTP_dodavanjeSmene_do.Value = dTP_dodavanjeSmene_do.Value.AddDays(1);
+            if (lBSmeneLekara.Items.Count != 0)
+            {
+                dTP_dodavanjeSmene_od.Value = il.Smene[il.Smene.Count - 1].Datum_Do;
+                dTP_dodavanjeSmene_od.Value = dTP_dodavanjeSmene_od.Value.AddDays(1);
+                dTP_dodavanjeSmene_do.Value = dTP_dodavanjeSmene_od.Value;
+                dTP_dodavanjeSmene_do.Value = dTP_dodavanjeSmene_do.Value.AddDays(1);
+            }
+            else
+            {
+                dTP_dodavanjeSmene_od.Value = DateTime.Now;
+                dTP_dodavanjeSmene_od.Value = dTP_dodavanjeSmene_od.Value.AddDays(1);
+                dTP_dodavanjeSmene_do.Value = DateTime.Now;
+                dTP_dodavanjeSmene_do.Value = dTP_dodavanjeSmene_do.Value.AddDays(1);
+            }
             s.Close();
         }
 
@@ -1929,7 +1941,9 @@ namespace Hippocrates
                     IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
                     if (dTP_dodavanjeSmene_od.Value < dTP_dodavanjeSmene_do.Value)
                     {
-                        double razlika = (dTP_dodavanjeSmene_od.Value - il.Smene[il.Smene.Count - 1].Datum_Do).TotalDays;
+                        double razlika = 1;
+                        if (lBSmeneLekara.Items.Count != 0)
+                            razlika = (dTP_dodavanjeSmene_od.Value - il.Smene[il.Smene.Count - 1].Datum_Do).TotalDays;
 
                         if (razlika == 1 || (razlika > 1 && razlika < 2))
                         {
@@ -1975,10 +1989,10 @@ namespace Hippocrates
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Morate oznaciti lekara kome zelite smenu da dodate. " + ex);
+                MessageBox.Show(" " + ex);
             }
             s.Close();
-            
+
         }
 
         private void btn_azuriraj_smenu_Click(object sender, EventArgs e)
@@ -2005,14 +2019,14 @@ namespace Hippocrates
                     }
                 }
                 s.Flush();
-                
+
                 lBSmeneLekara.Items.Clear();
                 foreach (Smena smene in il.Smene)
                 {
                     lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Morate oznaciti lekara za kojeg zelite da azurirate smenu." + ex);
             }
@@ -2040,9 +2054,9 @@ namespace Hippocrates
                     s.Flush();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Svi pacijenti moraju promeniti izabranog lekara da bi lekar mogao da promeni dom zdravlja. "+ ex);
+                MessageBox.Show("Svi pacijenti moraju promeniti izabranog lekara da bi lekar mogao da promeni dom zdravlja. " + ex);
             }
 
 
@@ -2056,7 +2070,7 @@ namespace Hippocrates
             {
                 string datumOd = lBSmeneLekara.SelectedItem.ToString();
                 datumOd = datumOd.Substring(0, datumOd.IndexOf(" "));
-                
+
                 IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
                 Smena smen = new Smena();
                 foreach (Smena s1 in il.Smene)
@@ -2079,11 +2093,11 @@ namespace Hippocrates
                     }
                 }
 
-               
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Morate prvo oznaciti lekara za kojeg zelite da azurirate podatke." + ex);
+
             }
             s.Close();
         }
@@ -2091,7 +2105,7 @@ namespace Hippocrates
 
         #region tab_za_azuriranje_pacijenta
 
-        
+
         private void btn_brisanje_dijag_Click(object sender, EventArgs e)
         {
             try
