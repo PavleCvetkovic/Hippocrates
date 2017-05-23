@@ -3251,8 +3251,14 @@ namespace Hippocrates
 
 
 
+
+
         #endregion
 
-      
+        private void Form2_ResizeEnd(object sender, EventArgs e)
+        {
+           //videcemo
+
+        }
     }
 }
