@@ -823,6 +823,7 @@
             this.metroLabelSmenaLekara.Size = new System.Drawing.Size(141, 19);
             this.metroLabelSmenaLekara.TabIndex = 4;
             this.metroLabelSmenaLekara.Text = "ovde ide smena lekara";
+            this.metroLabelSmenaLekara.UseCustomForeColor = true;
             // 
             // FormRaspored
             // 
