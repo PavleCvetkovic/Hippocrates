@@ -128,6 +128,13 @@
             this.metroComboBoxIzborPretrage = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroGridPretragaPacijenata = new MetroFramework.Controls.MetroGrid();
+            this.metroButtonDodajDijagnozu = new MetroFramework.Controls.MetroButton();
+            this.metroButtonDodajVakcine = new MetroFramework.Controls.MetroButton();
+            this.metroButtonDodajTerapije = new MetroFramework.Controls.MetroButton();
+            this.metroButtonObrisiDijagnozu = new MetroFramework.Controls.MetroButton();
+            this.metroButtonObrisiVakcine = new MetroFramework.Controls.MetroButton();
+            this.metroButtonObrisiTerapije = new MetroFramework.Controls.MetroButton();
+            this.metroLabelSelektovaniPacijentInfo = new MetroFramework.Controls.MetroLabel();
             this.metroTabGlobal.SuspendLayout();
             this.metroTabRasporedPregleda.SuspendLayout();
             this.pnlPopodne.SuspendLayout();
@@ -156,7 +163,7 @@
             this.metroTabGlobal.Location = new System.Drawing.Point(23, 63);
             this.metroTabGlobal.Name = "metroTabGlobal";
             this.metroTabGlobal.SelectedIndex = 2;
-            this.metroTabGlobal.Size = new System.Drawing.Size(754, 514);
+            this.metroTabGlobal.Size = new System.Drawing.Size(754, 557);
             this.metroTabGlobal.TabIndex = 0;
             this.metroTabGlobal.UseSelectable = true;
             this.metroTabGlobal.SelectedIndexChanged += new System.EventHandler(this.metroTab_SelectedIndexChanged);
@@ -217,6 +224,8 @@
             this.metroLabelSmenaLekara.Size = new System.Drawing.Size(102, 19);
             this.metroLabelSmenaLekara.TabIndex = 6;
             this.metroLabelSmenaLekara.Text = "ovde ide smena";
+            this.metroLabelSmenaLekara.UseCustomBackColor = true;
+            this.metroLabelSmenaLekara.UseCustomForeColor = true;
             // 
             // pnlPopodne
             // 
@@ -926,7 +935,7 @@
             // 
             this.metroDateTime1.CustomFormat = "";
             this.metroDateTime1.Location = new System.Drawing.Point(3, 42);
-            this.metroDateTime1.MinimumSize = new System.Drawing.Size(0, 29);
+            this.metroDateTime1.MinimumSize = new System.Drawing.Size(4, 29);
             this.metroDateTime1.Name = "metroDateTime1";
             this.metroDateTime1.Size = new System.Drawing.Size(200, 29);
             this.metroDateTime1.TabIndex = 3;
@@ -1004,13 +1013,14 @@
             // 
             // metroTabTrenutniPacijent
             // 
+            this.metroTabTrenutniPacijent.Controls.Add(this.metroLabelSelektovaniPacijentInfo);
             this.metroTabTrenutniPacijent.Controls.Add(this.metroTabPacijentInfo);
             this.metroTabTrenutniPacijent.HorizontalScrollbarBarColor = true;
             this.metroTabTrenutniPacijent.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabTrenutniPacijent.HorizontalScrollbarSize = 10;
             this.metroTabTrenutniPacijent.Location = new System.Drawing.Point(4, 38);
             this.metroTabTrenutniPacijent.Name = "metroTabTrenutniPacijent";
-            this.metroTabTrenutniPacijent.Size = new System.Drawing.Size(746, 472);
+            this.metroTabTrenutniPacijent.Size = new System.Drawing.Size(746, 515);
             this.metroTabTrenutniPacijent.TabIndex = 6;
             this.metroTabTrenutniPacijent.Text = "Informacije o trenutnom pacijentu";
             this.metroTabTrenutniPacijent.VerticalScrollbarBarColor = true;
@@ -1023,16 +1033,18 @@
             this.metroTabPacijentInfo.Controls.Add(this.metroTabPage3);
             this.metroTabPacijentInfo.Controls.Add(this.metroTabPage4);
             this.metroTabPacijentInfo.Controls.Add(this.metroTabOceniPacijenta);
-            this.metroTabPacijentInfo.Location = new System.Drawing.Point(-4, 3);
+            this.metroTabPacijentInfo.Location = new System.Drawing.Point(-4, 41);
             this.metroTabPacijentInfo.Name = "metroTabPacijentInfo";
-            this.metroTabPacijentInfo.SelectedIndex = 0;
-            this.metroTabPacijentInfo.Size = new System.Drawing.Size(747, 425);
+            this.metroTabPacijentInfo.SelectedIndex = 2;
+            this.metroTabPacijentInfo.Size = new System.Drawing.Size(747, 486);
             this.metroTabPacijentInfo.TabIndex = 2;
             this.metroTabPacijentInfo.UseSelectable = true;
             this.metroTabPacijentInfo.SelectedIndexChanged += new System.EventHandler(this.metroTabPacijentInfo_SelectedIndexChanged);
             // 
             // metroTabDijagnoza
             // 
+            this.metroTabDijagnoza.Controls.Add(this.metroButtonObrisiDijagnozu);
+            this.metroTabDijagnoza.Controls.Add(this.metroButtonDodajDijagnozu);
             this.metroTabDijagnoza.Controls.Add(this.metroLabel2);
             this.metroTabDijagnoza.Controls.Add(this.metroGridDijagnoze);
             this.metroTabDijagnoza.HorizontalScrollbarBarColor = true;
@@ -1040,7 +1052,7 @@
             this.metroTabDijagnoza.HorizontalScrollbarSize = 10;
             this.metroTabDijagnoza.Location = new System.Drawing.Point(4, 38);
             this.metroTabDijagnoza.Name = "metroTabDijagnoza";
-            this.metroTabDijagnoza.Size = new System.Drawing.Size(739, 383);
+            this.metroTabDijagnoza.Size = new System.Drawing.Size(739, 444);
             this.metroTabDijagnoza.TabIndex = 0;
             this.metroTabDijagnoza.Text = "Dijagnoze pacijenta";
             this.metroTabDijagnoza.VerticalScrollbarBarColor = true;
@@ -1058,6 +1070,7 @@
             // 
             // metroGridDijagnoze
             // 
+            this.metroGridDijagnoze.AllowUserToAddRows = false;
             this.metroGridDijagnoze.AllowUserToResizeRows = false;
             this.metroGridDijagnoze.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridDijagnoze.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1102,6 +1115,8 @@
             // 
             // metroTabPage3
             // 
+            this.metroTabPage3.Controls.Add(this.metroButtonObrisiVakcine);
+            this.metroTabPage3.Controls.Add(this.metroButtonDodajVakcine);
             this.metroTabPage3.Controls.Add(this.metroLabel3);
             this.metroTabPage3.Controls.Add(this.metroGridVakcine);
             this.metroTabPage3.HorizontalScrollbarBarColor = true;
@@ -1109,7 +1124,7 @@
             this.metroTabPage3.HorizontalScrollbarSize = 10;
             this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(739, 383);
+            this.metroTabPage3.Size = new System.Drawing.Size(739, 444);
             this.metroTabPage3.TabIndex = 1;
             this.metroTabPage3.Text = "Vakcine pacijenta";
             this.metroTabPage3.VerticalScrollbarBarColor = true;
@@ -1127,6 +1142,7 @@
             // 
             // metroGridVakcine
             // 
+            this.metroGridVakcine.AllowUserToAddRows = false;
             this.metroGridVakcine.AllowUserToResizeRows = false;
             this.metroGridVakcine.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridVakcine.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1171,6 +1187,8 @@
             // 
             // metroTabPage4
             // 
+            this.metroTabPage4.Controls.Add(this.metroButtonObrisiTerapije);
+            this.metroTabPage4.Controls.Add(this.metroButtonDodajTerapije);
             this.metroTabPage4.Controls.Add(this.metroLabel4);
             this.metroTabPage4.Controls.Add(this.metroGridTerapije);
             this.metroTabPage4.HorizontalScrollbarBarColor = true;
@@ -1178,7 +1196,7 @@
             this.metroTabPage4.HorizontalScrollbarSize = 10;
             this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage4.Name = "metroTabPage4";
-            this.metroTabPage4.Size = new System.Drawing.Size(739, 383);
+            this.metroTabPage4.Size = new System.Drawing.Size(739, 444);
             this.metroTabPage4.TabIndex = 2;
             this.metroTabPage4.Text = "Terapije pacijenta";
             this.metroTabPage4.VerticalScrollbarBarColor = true;
@@ -1196,6 +1214,7 @@
             // 
             // metroGridTerapije
             // 
+            this.metroGridTerapije.AllowUserToAddRows = false;
             this.metroGridTerapije.AllowUserToResizeRows = false;
             this.metroGridTerapije.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridTerapije.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1248,7 +1267,7 @@
             this.metroTabOceniPacijenta.HorizontalScrollbarSize = 10;
             this.metroTabOceniPacijenta.Location = new System.Drawing.Point(4, 38);
             this.metroTabOceniPacijenta.Name = "metroTabOceniPacijenta";
-            this.metroTabOceniPacijenta.Size = new System.Drawing.Size(739, 383);
+            this.metroTabOceniPacijenta.Size = new System.Drawing.Size(739, 482);
             this.metroTabOceniPacijenta.TabIndex = 3;
             this.metroTabOceniPacijenta.Text = "Oceni dolazak pacijenta";
             this.metroTabOceniPacijenta.VerticalScrollbarBarColor = true;
@@ -1433,11 +1452,81 @@
             this.metroGridPretragaPacijenata.Size = new System.Drawing.Size(740, 256);
             this.metroGridPretragaPacijenata.TabIndex = 2;
             // 
+            // metroButtonDodajDijagnozu
+            // 
+            this.metroButtonDodajDijagnozu.Location = new System.Drawing.Point(3, 366);
+            this.metroButtonDodajDijagnozu.Name = "metroButtonDodajDijagnozu";
+            this.metroButtonDodajDijagnozu.Size = new System.Drawing.Size(736, 23);
+            this.metroButtonDodajDijagnozu.TabIndex = 3;
+            this.metroButtonDodajDijagnozu.Text = "Dodaj dijagnozu";
+            this.metroButtonDodajDijagnozu.UseSelectable = true;
+            this.metroButtonDodajDijagnozu.Click += new System.EventHandler(this.metroButtonDodajObrisiDijagnozu_Click);
+            // 
+            // metroButtonDodajVakcine
+            // 
+            this.metroButtonDodajVakcine.Location = new System.Drawing.Point(3, 364);
+            this.metroButtonDodajVakcine.Name = "metroButtonDodajVakcine";
+            this.metroButtonDodajVakcine.Size = new System.Drawing.Size(736, 23);
+            this.metroButtonDodajVakcine.TabIndex = 4;
+            this.metroButtonDodajVakcine.Text = "Dodaj vakcine";
+            this.metroButtonDodajVakcine.UseSelectable = true;
+            this.metroButtonDodajVakcine.Click += new System.EventHandler(this.metroButtonDodajObrisiVakcine_Click);
+            // 
+            // metroButtonDodajTerapije
+            // 
+            this.metroButtonDodajTerapije.Location = new System.Drawing.Point(3, 364);
+            this.metroButtonDodajTerapije.Name = "metroButtonDodajTerapije";
+            this.metroButtonDodajTerapije.Size = new System.Drawing.Size(736, 23);
+            this.metroButtonDodajTerapije.TabIndex = 4;
+            this.metroButtonDodajTerapije.Text = "Dodaj terapije";
+            this.metroButtonDodajTerapije.UseSelectable = true;
+            this.metroButtonDodajTerapije.Click += new System.EventHandler(this.metroButtonDodajObrisiTerapije_Click);
+            // 
+            // metroButtonObrisiDijagnozu
+            // 
+            this.metroButtonObrisiDijagnozu.Location = new System.Drawing.Point(4, 395);
+            this.metroButtonObrisiDijagnozu.Name = "metroButtonObrisiDijagnozu";
+            this.metroButtonObrisiDijagnozu.Size = new System.Drawing.Size(735, 23);
+            this.metroButtonObrisiDijagnozu.TabIndex = 4;
+            this.metroButtonObrisiDijagnozu.Text = "Obriši dijagnozu";
+            this.metroButtonObrisiDijagnozu.UseSelectable = true;
+            this.metroButtonObrisiDijagnozu.Click += new System.EventHandler(this.metroButtonObrisiDijagnozu_Click);
+            // 
+            // metroButtonObrisiVakcine
+            // 
+            this.metroButtonObrisiVakcine.Location = new System.Drawing.Point(4, 393);
+            this.metroButtonObrisiVakcine.Name = "metroButtonObrisiVakcine";
+            this.metroButtonObrisiVakcine.Size = new System.Drawing.Size(735, 23);
+            this.metroButtonObrisiVakcine.TabIndex = 5;
+            this.metroButtonObrisiVakcine.Text = "Obriši vakcine";
+            this.metroButtonObrisiVakcine.UseSelectable = true;
+            this.metroButtonObrisiVakcine.Click += new System.EventHandler(this.metroButtonObrisiVakcine_Click);
+            // 
+            // metroButtonObrisiTerapije
+            // 
+            this.metroButtonObrisiTerapije.Location = new System.Drawing.Point(4, 393);
+            this.metroButtonObrisiTerapije.Name = "metroButtonObrisiTerapije";
+            this.metroButtonObrisiTerapije.Size = new System.Drawing.Size(735, 23);
+            this.metroButtonObrisiTerapije.TabIndex = 6;
+            this.metroButtonObrisiTerapije.Text = "Obriši terapije";
+            this.metroButtonObrisiTerapije.UseSelectable = true;
+            this.metroButtonObrisiTerapije.Click += new System.EventHandler(this.metroButtonObrisiTerapije_Click);
+            // 
+            // metroLabelSelektovaniPacijentInfo
+            // 
+            this.metroLabelSelektovaniPacijentInfo.AutoSize = true;
+            this.metroLabelSelektovaniPacijentInfo.Location = new System.Drawing.Point(4, 16);
+            this.metroLabelSelektovaniPacijentInfo.Name = "metroLabelSelektovaniPacijentInfo";
+            this.metroLabelSelektovaniPacijentInfo.Size = new System.Drawing.Size(130, 19);
+            this.metroLabelSelektovaniPacijentInfo.TabIndex = 3;
+            this.metroLabelSelektovaniPacijentInfo.Text = "Selektovani pacijent: ";
+            this.metroLabelSelektovaniPacijentInfo.UseCustomForeColor = true;
+            // 
             // FormLekar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(808, 651);
             this.Controls.Add(this.metroTabGlobal);
             this.Name = "FormLekar";
             this.Text = "##Ide ime iz baze##";
@@ -1450,6 +1539,7 @@
             this.metroTabSviPacijenti.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridPacijenti)).EndInit();
             this.metroTabTrenutniPacijent.ResumeLayout(false);
+            this.metroTabTrenutniPacijent.PerformLayout();
             this.metroTabPacijentInfo.ResumeLayout(false);
             this.metroTabDijagnoza.ResumeLayout(false);
             this.metroTabDijagnoza.PerformLayout();
@@ -1556,5 +1646,12 @@
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroLabel metroLabel7;
         private MetroFramework.Controls.MetroLabel metroLabelInfoOTerminu;
+        private MetroFramework.Controls.MetroButton metroButtonDodajDijagnozu;
+        private MetroFramework.Controls.MetroButton metroButtonDodajVakcine;
+        private MetroFramework.Controls.MetroButton metroButtonDodajTerapije;
+        private MetroFramework.Controls.MetroLabel metroLabelSelektovaniPacijentInfo;
+        private MetroFramework.Controls.MetroButton metroButtonObrisiDijagnozu;
+        private MetroFramework.Controls.MetroButton metroButtonObrisiVakcine;
+        private MetroFramework.Controls.MetroButton metroButtonObrisiTerapije;
     }
 }

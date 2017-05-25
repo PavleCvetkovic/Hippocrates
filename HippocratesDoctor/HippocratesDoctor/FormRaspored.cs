@@ -79,7 +79,7 @@ namespace Hippocrates
         {
             Smena smena = null;
             foreach (Smena s in lekar.Smene)
-                if (s.Id.Datum_Od <= System.DateTime.Now && s.Datum_Do >= System.DateTime.Now)
+                if (s.Id.Datum_Od <= metroDateTime1.Value.Date && s.Datum_Do >= metroDateTime1.Value.Date)
                 {
                     smena = s;
                     break;
@@ -89,20 +89,25 @@ namespace Hippocrates
 
         private void UpdateForm(int smena_lek)
         {
+            metroLabelSmenaLekara.ForeColor = Color.DarkGreen;
             if (smena_lek == 1) // Promenjen Visible na Enable svojstvo 
             {
                 metroLabelSmenaLekara.Text = "Prepodne";
                 pnlPrepodne.Enabled = true;
                 pnlPopodne.Enabled = false;
-                //pnlPopodne.Enabled = false;
+                return;
             }
-            else
+            if (smena_lek == 2)
             {
                 metroLabelSmenaLekara.Text = "Poslepodne";
                 pnlPrepodne.Enabled = false;
                 pnlPopodne.Enabled = true;
-                //pnlPrepodne.Enabled = false;
+                return;
             }
+            metroLabelSmenaLekara.ForeColor = Color.Red;
+            metroLabelSmenaLekara.Text = "Lekaru nije podešena smena za izabrani datum";
+            pnlPrepodne.Enabled = false;
+            pnlPopodne.Enabled = false;
         }
 
         private void RefreshControls(IzabraniLekar lekar)
@@ -111,13 +116,9 @@ namespace Hippocrates
             if (s == null)
             {
                 MetroMessageBox.Show(this, "Lekaru izabranog pacijenta nije podešena smena za traženi datum, i nije moguće zakazati termin", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                metroLabelSmenaLekara.Text = "Lekaru nije određena smena. Odaberite drugi datum.";
-                pnlPopodne.Enabled = false; // za slucaj kada se promeni datum a lekar nema definisanu smenu za taj datum
-                pnlPrepodne.Enabled = false; // za slucaj kada se promeni datum a lekar nema definisanu smenu za taj datum
+                UpdateForm(3); // lekaru nije podesena smena
                 return;
             }
-            pnlPrepodne.Enabled = true; // jer je moguce da je bilo false (za pogresni datum)
-            pnlPopodne.Enabled = true; // jer je moguce da je bilo false (za pogresni datum)
             UpdateForm(GetDoctorShift(lekar).SmenaLekara);
 
             IQuery query = session_local.CreateQuery("from Termin t where t.Lekar.Jmbg = :lekar and t.Datum = :datum");

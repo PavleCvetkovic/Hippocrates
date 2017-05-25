@@ -57,6 +57,7 @@
             // 
             // metroGridSmenaLekara
             // 
+            this.metroGridSmenaLekara.AllowUserToAddRows = false;
             this.metroGridSmenaLekara.AllowUserToResizeRows = false;
             this.metroGridSmenaLekara.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridSmenaLekara.BorderStyle = System.Windows.Forms.BorderStyle.None;

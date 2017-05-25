@@ -35,14 +35,14 @@ namespace HippocratesDoctor
 
         private void FormDijagnoze_Load(object sender, EventArgs e)
         {
-            this.Text = "Dodavanje dijagnoze";
+            this.Text = "Dodavanje dijagnoze " + pacijent_local.Ime + " " + pacijent_local.Prezime;
             sve_dijagnoze = session_local.QueryOver<Dijagnoza>().List(); // sve dijagnoze
 
             metroGridDijagnoze.DataSource = sve_dijagnoze;
 
             metroGridDijagnoze.Columns[2].Visible = false;
             metroGridDijagnoze.Columns[3].Visible = false;
-            metroGridDijagnoze.Columns[4].Visible = false;
+            //metroGridDijagnoze.Columns[4].Visible = false;
             for (int i = 0; i < metroGridDijagnoze.ColumnCount; i++)
                 metroGridDijagnoze.Columns[i].Width = metroGridDijagnoze.Width / (metroGridDijagnoze.ColumnCount - 3);
 
@@ -68,7 +68,7 @@ namespace HippocratesDoctor
             pacijent_local.DijagnostifikovanoDijagnoze.Add(d);
             try
             {
-                session_local.Update(pacijent_local);
+                session_local.Save(pacijent_local); // sesija vrsi update (ne SAVE) ?????
                 session_local.Flush();
             }
             catch(Exception ex)
