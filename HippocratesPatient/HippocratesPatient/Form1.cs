@@ -41,15 +41,18 @@ namespace HippocratesPatient
         public void Message(string s)
         {
             //MetroMessageBox
-            MetroMessageBox.Show(this, s, "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
+            //MetroMessageBox.Show(this, s, "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //StandardMessageBox
             //MessageBox.Show(s, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
+            metroButton1.Text = "Učitavanje u toku...";
+
             controller.OnLogin();
+            metroButton1.Text = "Uloguj se";
+
             //MetroMessageBox.Show(this, s, "Obavestenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //controller.OnSuccessfulConnection(); // OnSuccessfulConnection is called in OnLogin function
