@@ -401,9 +401,9 @@ namespace HippocratesDoctor
             return success;
         }
 
-        private bool DeleteSelectedDoctor(IzabraniLekar lekar_za_brisanje)
+        private int DeleteSelectedDoctor(IzabraniLekar lekar_za_brisanje)
         {
-            bool success = false;
+            int success = -1;
             bool to_delete_permission = true;
             #region SQL nacin
             /*
@@ -432,7 +432,10 @@ namespace HippocratesDoctor
                 MetroMessageBox.Show(this, "Izabrani lekar ima pacijente. Preporuka je da pacijentima promenite izabranog lekara pre brisanja", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dr = MetroMessageBox.Show(this, "Da li ste sigurni da želite da obrišete selektovanog lekara?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
+                {
                     to_delete_permission = false;
+                    success = 2;
+                }
             }
             else
             {
@@ -442,11 +445,11 @@ namespace HippocratesDoctor
                         session.Delete(lekar_za_brisanje);
                         dom_zdravlja_local.Lekari.Remove(lekar_za_brisanje); //     
                         session.Flush();
-                        success = true;
+                        success = 1;
                     }
                     catch (Exception ex)
                     {
-                        success = false;
+                        success = -1;
                         MetroMessageBox.Show(this, "Greska u DeleteSelectedDoctor " + ex.Message);
                     }
             }
@@ -613,10 +616,12 @@ namespace HippocratesDoctor
             if (IsDoctorDataSelected(metroGridData, out lekar_za_brisanje))
             {
                 MetroMessageBox.Show(this, "Selektovan je: " + lekar_za_brisanje.Jmbg + " " + lekar_za_brisanje.Ime);
-                if (DeleteSelectedDoctor(lekar_za_brisanje))
+                int result = DeleteSelectedDoctor(lekar_za_brisanje);
+                if ( result == 1)
                     MetroMessageBox.Show(this, "Uspešno obrisan lekar", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else
+                if (result == -1)
                     MetroMessageBox.Show(this, "Greška prilikom brisanja lekara", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
             else
                 MetroMessageBox.Show(this, "Odaberite lekara iz tabele", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
