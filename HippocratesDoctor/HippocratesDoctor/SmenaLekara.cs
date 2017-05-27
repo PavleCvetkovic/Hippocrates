@@ -55,6 +55,20 @@ namespace HippocratesDoctor
                 metroRadioButtonSmenaPoslepodne.Checked = true;
         }
 
+        private bool IsDateRegular()
+        {
+            bool success = true;
+            if (metroDateTimeDatumOd.Value.Date > metroDateTimeDatumDo.Value.Date)
+            {
+                MetroMessageBox.Show(this, "Početak datuma smene ne može biti veći od kraja datuma smene", "Error!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                metroDateTimeDatumDo.Value = metroDateTimeDatumOd.Value.AddDays(1);
+                success = false;
+            }
+            return success;
+
+        }
+
         private bool IsShiftSelected(MetroGrid mg)
         {
             if (mg.SelectedRows.Count > 0)
@@ -165,7 +179,7 @@ namespace HippocratesDoctor
 
         private void metroButtonDodajSmenu_Click(object sender, EventArgs e)
         {
-            if (AddDoctorShift(lekar_local))
+            if (/*IsDateRegular() &&*/ AddDoctorShift(lekar_local))
                 MetroMessageBox.Show(this, "Uspešno dodata smena", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MetroMessageBox.Show(this, "Error prilikom insert funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -178,7 +192,7 @@ namespace HippocratesDoctor
 
         private void metroButtonAzurirajSmenu_Click(object sender, EventArgs e)
         {
-            if (!IsShiftSelected(metroGridSmenaLekara))
+            if (!IsShiftSelected(metroGridSmenaLekara)/* || !IsDateRegular()*/)
                 return;
             if (UpdateDoctorShift(lekar_local))
                 MetroMessageBox.Show(this, "Uspešno ažurirana smena", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -195,6 +209,17 @@ namespace HippocratesDoctor
         {
             if (metroGridSmenaLekara.Rows.Count > 0) // Nula elemenata
                 FromGridToControl();
+        }
+
+        private void metroDateTimeDatumOd_ValueChanged(object sender, EventArgs e)
+        {
+            IsDateRegular();
+            //if (metroDateTimeDatumOd.Value.Date > metroDateTimeDatumDo.Value.Date)
+            //{
+            //    MetroMessageBox.Show(this, "Početak datuma smene ne može biti veći od kraja datuma smene", "Error!",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    metroDateTimeDatumDo.Value = metroDateTimeDatumOd.Value.AddDays(1);
+            //}
         }
     }
 }

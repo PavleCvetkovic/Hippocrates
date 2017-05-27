@@ -35,6 +35,13 @@ namespace HippocratesDoctor
             
             for (int i = 0; i < metroGridDijagnoze.ColumnCount; i++)
                 metroGridDijagnoze.Columns[i].Width = metroGridDijagnoze.Width / (metroGridDijagnoze.ColumnCount);
+
+            if (pacijent_local.DijagnostifikovanoDijagnoze.Count == 0) // nema dodatih dijagnoza
+            {
+                metroButtonDodajTerapiju.Enabled = false;
+                metroButtonDodajTerapiju.Text = "Ne postoje dijagnoze za koje je moguće dodati terapiju";
+                metroButtonDodajTerapiju.ForeColor = Color.Red;
+            }
         }
 
         private void metroButtonDodajTerapiju_Click(object sender, EventArgs e)
