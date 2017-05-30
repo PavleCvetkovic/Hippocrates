@@ -1,4 +1,5 @@
 <?php
+require '../lib/PHPMailer/PHPMailerAutoload.php';
 date_default_timezone_set("Europe/Belgrade");
 include_once '../MySmarty.php';
 include_once '../lib.php';
@@ -29,6 +30,29 @@ $status=zakazi($_SESSION['JMBG'],$termin,$napomena);
 $terminText=$termin->datum->dan.'/'.$termin->datum->mesec.'/'.$termin->datum->godina." ".$termin->sat.":".$termin->minut;
 if($status==FALSE)
     $statusZakazivanja="NEMATE PRAVO DA ZAKAŽETE";
+else{
+    $mail = new PHPMailer(); 
+    $mail->IsSMTP();                              // send via SMTP
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;                       // turn on SMTP authentication
+    $mail->Username='mshippocrates@gmail.com';
+    $mail->Password='morfijum';
+    $mail->SMTPSecure='tls';
+    
+    $mail->From='mshippocrates@gmail.com';
+    $mail->Port=587;
+    $mail->FromName='MSHippocrates sistem';
+    $mail->addAddress($_SESSION['email']);
+    $mail->isHTML(true);
+    $mail->Subject='Uspesno zakazan termin';
+    $mail->Body=$statusZakazivanja." ".$terminText;
+    if(!$mail->send()){
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    }
+    else {
+    
+        }
+    }
 $smarty=new MySmarty();
 $smarty->assign("statusZakazivanja",$statusZakazivanja);
 $smarty->assign("status",$status);
