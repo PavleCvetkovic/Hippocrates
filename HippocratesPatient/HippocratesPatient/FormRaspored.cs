@@ -62,7 +62,11 @@ namespace Hippocrates
 
         private void RefreshControls(IzabraniLekar lekar)
         {
-            UpdateForm(GetDoctorShift(lekar).SmenaLekara);
+            Smena s = GetDoctorShift(lekar);
+            if (s == null)
+                UpdateForm(3);
+            else
+                UpdateForm(GetDoctorShift(lekar).SmenaLekara);
 
             //lekar_local.Termini[0].Pacijent
             IQuery query = session_local.CreateQuery("from Termin t where t.Lekar.Jmbg = :lekar and t.Datum = :datum");
@@ -125,20 +129,27 @@ namespace Hippocrates
 
         private void UpdateForm(int smena_lek)
         {
+            metroLabelSmenaLekara.ForeColor = Color.DarkGreen;
             if (smena_lek == 1) // Promenjen Visible na Enable svojstvo 
             {
                 metroLabelSmenaLekara.Text = "Prepodne";
                 pnlPrepodne.Enabled = true;
                 pnlPopodne.Enabled = false;
+                return;
                 //pnlPopodne.Enabled = false;
             }
-            else
+            if (smena_lek == 2)
             {
                 metroLabelSmenaLekara.Text = "Poslepodne";
                 pnlPrepodne.Enabled = false;
                 pnlPopodne.Enabled = true;
+                return;
                 //pnlPrepodne.Enabled = false;
             }
+            metroLabelSmenaLekara.Text = "Nije određena smena lekara za traženi datum";
+            metroLabelSmenaLekara.ForeColor = Color.Red;
+            pnlPrepodne.Enabled = false;
+            pnlPopodne.Enabled = false;
         }
 
         private string GetDate()

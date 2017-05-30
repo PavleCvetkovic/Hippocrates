@@ -36,7 +36,9 @@ namespace HippocratesDoctor
         {
             metroGridSmenaLekara.DataSource = null;
             //session_local.Refresh(lekar_local);
-            metroGridSmenaLekara.DataSource = lekar_local.Smene;
+            metroGridSmenaLekara.DataSource = new
+                BindingList<Smena>(lekar_local.Smene.ToList<Smena>());
+
             for (int i = 0; i < metroGridSmenaLekara.ColumnCount; i++)
                 metroGridSmenaLekara.Columns[i].Width = (this.Width) / (metroGridSmenaLekara.ColumnCount);
         }
@@ -51,6 +53,20 @@ namespace HippocratesDoctor
                 metroRadioButtonSmenaPrepodne.Checked = true;
             else
                 metroRadioButtonSmenaPoslepodne.Checked = true;
+        }
+
+        private bool IsDateRegular()
+        {
+            bool success = true;
+            if (metroDateTimeDatumOd.Value.Date > metroDateTimeDatumDo.Value.Date)
+            {
+                MetroMessageBox.Show(this, "Početak datuma smene ne može biti veći od kraja datuma smene", "Error!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                metroDateTimeDatumDo.Value = metroDateTimeDatumOd.Value.AddDays(1);
+                success = false;
+            }
+            return success;
+
         }
 
         private bool IsShiftSelected(MetroGrid mg)
@@ -78,6 +94,7 @@ namespace HippocratesDoctor
                     Lekar = lekar
                 }
             };
+
             lekar.Smene.Add(s);
             try
             {
@@ -96,8 +113,10 @@ namespace HippocratesDoctor
         {
             bool success = true;
 
+
             Smena s = (Smena)metroGridSmenaLekara.SelectedRows[0].DataBoundItem;
             lekar.Smene.Remove(s);
+            metroGridSmenaLekara.Rows.RemoveAt(metroGridSmenaLekara.SelectedRows[0].Index);
             try
             {
                 session_local.Delete(s);
@@ -143,53 +162,6 @@ namespace HippocratesDoctor
             return success;
         }
 
-        #region Prethodne funkcije
-        //private string ParseYear(string date)
-        //{
-        //    string year = string.Empty;
-        //    int occurence = 0, i = 0;
-        //    while (occurence != 2)
-        //    {
-        //        if (date[i] == '.')
-        //            occurence++;
-        //        i++;
-        //    }
-        //    year += date[i];
-        //    year += date[i + 1];
-        //    year += date[i + 2];
-        //    year += date[i + 3];
-        //    return year;
-        //}
-
-        //private string ParseMonth(string date)
-        //{
-        //    // dd.MM.yyyy or dd.M.yyyy or d.MM.yyyy or d.M.yyyy
-        //    // 0123456789
-        //    string month = string.Empty;
-        //    int i = 0;
-        //    while (date[i] != '.')
-        //        i++;
-        //    month += date[i + 1];
-
-        //    if (date[i + 2] != '.')
-        //        month += date[i + 2];
-
-        //    return month;
-        //}
-
-        //private string ParseDay(string date)
-        //{
-        //    // dd.MM.yyyy or d.MM.yyyy
-        //    // 0123456789
-        //    string day = string.Empty;
-        //    day += date[0];
-        //    if (date[1] != '.')
-        //        day += date[1];
-
-        //    return day;
-        //}
-        #endregion
-
         private void metroButtonObrisiSelektovanuSmenu_Click(object sender, EventArgs e)
         {
             if (!IsShiftSelected(metroGridSmenaLekara))
@@ -199,28 +171,28 @@ namespace HippocratesDoctor
             else
                 MetroMessageBox.Show(this, "Error prilikom delete funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            GetDoctorShift();
-            if (metroGridSmenaLekara.Rows.Count > 0)
-                metroGridSmenaLekara.Rows[0].Selected = true;
+            //GetDoctorShift();
+            //if (metroGridSmenaLekara.Rows.Count > 0)
+            //    metroGridSmenaLekara.Rows[0].Selected = true;
             //metroGridSmenaLekara.Refresh();
         }
 
         private void metroButtonDodajSmenu_Click(object sender, EventArgs e)
         {
-            if (AddDoctorShift(lekar_local))
+            if (/*IsDateRegular() &&*/ AddDoctorShift(lekar_local))
                 MetroMessageBox.Show(this, "Uspešno dodata smena", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MetroMessageBox.Show(this, "Error prilikom insert funkcije za smenu", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             GetDoctorShift();
-            if (metroGridSmenaLekara.Rows.Count > 0)
-                metroGridSmenaLekara.Rows[0].Selected = true;
+            //if (metroGridSmenaLekara.Rows.Count > 0)
+            //    metroGridSmenaLekara.Rows[0].Selected = true;
             //metroGridSmenaLekara.Refresh();
         }
 
         private void metroButtonAzurirajSmenu_Click(object sender, EventArgs e)
         {
-            if (!IsShiftSelected(metroGridSmenaLekara))
+            if (!IsShiftSelected(metroGridSmenaLekara)/* || !IsDateRegular()*/)
                 return;
             if (UpdateDoctorShift(lekar_local))
                 MetroMessageBox.Show(this, "Uspešno ažurirana smena", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -237,6 +209,17 @@ namespace HippocratesDoctor
         {
             if (metroGridSmenaLekara.Rows.Count > 0) // Nula elemenata
                 FromGridToControl();
+        }
+
+        private void metroDateTimeDatumOd_ValueChanged(object sender, EventArgs e)
+        {
+            IsDateRegular();
+            //if (metroDateTimeDatumOd.Value.Date > metroDateTimeDatumDo.Value.Date)
+            //{
+            //    MetroMessageBox.Show(this, "Početak datuma smene ne može biti veći od kraja datuma smene", "Error!",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    metroDateTimeDatumDo.Value = metroDateTimeDatumOd.Value.AddDays(1);
+            //}
         }
     }
 }

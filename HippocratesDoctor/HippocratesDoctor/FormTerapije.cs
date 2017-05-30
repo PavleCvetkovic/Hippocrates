@@ -28,13 +28,20 @@ namespace HippocratesDoctor
        
         private void FormTerapije_Load(object sender, EventArgs e)
         {
-            this.Text = "Dodavanje terapije";
+            this.Text = "Dodavanje terapije " + pacijent_local.Ime + " " + pacijent_local.Prezime;
             dijagnoze_pacijenta = pacijent_local.DijagnostifikovanoDijagnoze; // sve dijagnoze
 
             metroGridDijagnoze.DataSource = dijagnoze_pacijenta;
             
             for (int i = 0; i < metroGridDijagnoze.ColumnCount; i++)
                 metroGridDijagnoze.Columns[i].Width = metroGridDijagnoze.Width / (metroGridDijagnoze.ColumnCount);
+
+            if (pacijent_local.DijagnostifikovanoDijagnoze.Count == 0) // nema dodatih dijagnoza
+            {
+                metroButtonDodajTerapiju.Enabled = false;
+                metroButtonDodajTerapiju.Text = "Ne postoje dijagnoze za koje je moguće dodati terapiju";
+                metroButtonDodajTerapiju.ForeColor = Color.Red;
+            }
         }
 
         private void metroButtonDodajTerapiju_Click(object sender, EventArgs e)
@@ -70,7 +77,7 @@ namespace HippocratesDoctor
                 MetroMessageBox.Show(this, "Greška prilikom dodavanja terapije " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            MetroMessageBox.Show(this, "Uspešno dodata terapija", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MetroMessageBox.Show(this, "Uspešno dodata terapija pacijentu " + pacijent_local.Ime + " " + pacijent_local.Prezime, "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void FormTerapije_FormClosing(object sender, FormClosingEventArgs e)

@@ -327,7 +327,7 @@
             // lblImeDomaZ
             // 
             this.lblImeDomaZ.AutoSize = true;
-            this.lblImeDomaZ.Location = new System.Drawing.Point(698, 50);
+            this.lblImeDomaZ.Location = new System.Drawing.Point(604, 60);
             this.lblImeDomaZ.Name = "lblImeDomaZ";
             this.lblImeDomaZ.Size = new System.Drawing.Size(174, 19);
             this.lblImeDomaZ.TabIndex = 4;
