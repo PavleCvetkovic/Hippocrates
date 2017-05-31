@@ -13,6 +13,8 @@ using MetroFramework;
 using NHibernate;
 using Hippocrates.Data.Entiteti;
 using Hippocrates.Data;
+using System.Net.Mail;
+using System.Net;
 
 namespace Hippocrates.SharedForms
 {
@@ -240,6 +242,14 @@ namespace Hippocrates.SharedForms
             if (MakeAnApointment(time, napomena)) // Replace(string old_string, string new_string) 11:30 -> 1130
             {
                 RefreshControls(lekar_local); //Each appointment change refreshed controls
+                if(SendEmailConfirmation(metro_button.Text, metroDateTime1.Value.Date.ToShortDateString()))
+                {
+                    MessageBox.Show("Pacijentu je poslat mail za potvrdu termina.");
+                }
+                else
+                {
+                    MessageBox.Show("Mail nije uspeno poslat.");
+                }
                 MetroMessageBox.Show(this, "Info", "Uspešno zakazan termin", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -258,6 +268,57 @@ namespace Hippocrates.SharedForms
             // Sessija je prosledjena od strane prethodne forme
             // Jedna sesija se vuce kroz celu aplikaciju (samo jedna)
             // Zato ako se ovde zatvori u prethodnoj formi nije moguce raditi sa objektima (javlja se izuzetak)
+        }
+        public bool SendEmailConfirmation(string termin_time, string termin_date)
+        {
+            // 587 port, smtp.gmail.com, tls (secure)
+            bool success = true;
+            if (pacijent_local.Email == null) // 
+            {
+                MetroMessageBox.Show(this, "Niste podesili e-mail. Potvrda o zakazanom terminu nije poslata", "Warning!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            var fromAddress = new MailAddress("mshippocrates@gmail.com", "MS Hippocrates");
+            var toAddress = new MailAddress(pacijent_local.Email, pacijent_local.Ime + " " + pacijent_local.Prezime);
+
+
+            const string fromPassword = "morfijum";
+            const string subject = "Hippocrates sistem - Potvrda o zakazanom terminu";
+            string body = "Uspešno ste zakazali termin kod lekara " + lekar_local.Ime + " " + lekar_local.Prezime + " \n\n"
+                + "Zakazani termin je: " + termin_time + " " + termin_date + "\n" + "Molimo da ispoštujete zakazani termin ili" +
+                " blagovremeno otkažete isti. U slučaju nepoštovanja i ne dolaska na termin gubite pravo na mogućnost zakazivanja" +
+                "termina." + "\n\n" + "Hippocrates sistem\n" +
+                "Ovo je automatski generisana poruka, molimo Vas da ne odgovarate na ovaj e-mail.";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                try
+                {
+                    smtp.Send(message);
+                }
+                catch (Exception ex)
+                {
+                    MetroMessageBox.Show(this, "Greška prilikom slanja e-mail za potvrdu zakazanog termina " + ex.Message, "Error!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    success = false;
+                }
+            }
+            return success;
         }
     }
 }

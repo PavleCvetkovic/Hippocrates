@@ -18,6 +18,8 @@ using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Hippocrates.SharedForms;
+using System.Net.Mail;
+using System.Net;
 
 namespace Hippocrates
 {
@@ -712,25 +714,44 @@ namespace Hippocrates
         #region tab_za_unos_DZ
         private void btn_unosDomaZdr_Click(object sender, EventArgs e)
         {
-            
-            ISession s = DataLayer.GetSession();
-
-            Data.Entiteti.DomZdravlja dz = new Data.Entiteti.DomZdravlja()
+            try
             {
-                Mbr = tb_MBR_doma_zdravlja.Text,
-                Ime = tb_ime_doma_zdravlja.Text,
-                Adresa = tb_adresa_doma_zdravlja.Text,
-                Lokacija = tb_lokacija_doma_zdravlja.Text,
-                Opstina = tb_opstina_doma_zdravlja.Text
-            };
+                ISession s = DataLayer.GetSession();
+                if (tb_MBR_doma_zdravlja.Text != string.Empty && tb_ime_doma_zdravlja.Text != string.Empty && tb_adresa_doma_zdravlja.Text != string.Empty && tb_opstina_doma_zdravlja.Text != string.Empty && tb_lokacija_doma_zdravlja.Text != string.Empty)
+                {
+                    Data.Entiteti.DomZdravlja dz = new Data.Entiteti.DomZdravlja()
+                    {
+                        Mbr = tb_MBR_doma_zdravlja.Text,
+                        Ime = tb_ime_doma_zdravlja.Text,
+                        Adresa = tb_adresa_doma_zdravlja.Text,
+                        Lokacija = tb_lokacija_doma_zdravlja.Text,
+                        Opstina = tb_opstina_doma_zdravlja.Text
+                    };
 
-            s.Save(dz);
-            s.Flush();
+                    s.Save(dz);
+                    s.Flush();
 
-           
-            s.Close();
-            popuni_dgv_domovi(dGV_unosenje_DZ);
-            MessageBox.Show("Uspeno ste uneli nov dom zdravlja ");
+
+                    
+                    popuni_dgv_domovi(dGV_unosenje_DZ);
+                    MessageBox.Show("Uspeno ste uneli nov dom zdravlja ");
+                    tb_opstina_doma_zdravlja.Text = string.Empty;
+                    tb_lokacija_doma_zdravlja.Text = string.Empty;
+                    tb_ime_doma_zdravlja.Text = string.Empty;
+                    tb_MBR_doma_zdravlja.Text = string.Empty;
+                    tb_adresa_doma_zdravlja.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                }
+                s.Close();
+                
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         #endregion
@@ -789,35 +810,45 @@ namespace Hippocrates
         }
         private void btn_Unesi_lekara_Click(object sender, EventArgs e)
         {
+            
             pomIndex = cb_odabirDZ_lekar_unos.SelectedItem.ToString();
             pomIndex = pomIndex.Substring(0, pomIndex.IndexOf(" "));
             ISession s = DataLayer.GetSession();
-            Data.Entiteti.IzabraniLekar il = new Data.Entiteti.IzabraniLekar()
+            if (tb_jmbg_lekara.Text!=string.Empty && tb_ime_lekara_unos.Text!=string.Empty && tb_pass_lekara_unos.Text != string.Empty && tb_prezime_lekara.Text!=string.Empty && tb_srednje_slovo.Text != string.Empty) {
+                Data.Entiteti.IzabraniLekar il = new Data.Entiteti.IzabraniLekar()
+                {
+                    Jmbg = tb_jmbg_lekara.Text,
+                    Ime = tb_ime_lekara_unos.Text,
+                    Datum_rodjenja = dTP_lekara.Value,
+                    Password = tb_pass_lekara_unos.Text,
+                    Prezime = tb_prezime_lekara.Text,
+                    Srednje_slovo = tb_srednje_slovo.Text
+                };
+
+                Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
+                dzi = s.Load<DomZdravlja>(pomIndex);
+
+                dzi.Lekari.Add(il);
+                il.RadiUDomuZdravlja = dzi;
+
+                s.Save(il);
+                s.Flush();
+                tb_srednje_slovo.Text = string.Empty;
+                tb_prezime_lekara.Text = string.Empty;
+                tb_pass_lekara_unos.Text = string.Empty;
+                tb_ime_lekara_unos.Text = string.Empty;
+                tb_jmbg_lekara.Text = string.Empty;
+
+
+                dGV_unosenje_lekar.Rows.Add(il.Jmbg, il.Ime, il.Srednje_slovo, il.Prezime);
+
+                MessageBox.Show("Uspeno ste uneli novog lekara ");
+            }
+            else
             {
-                Jmbg = tb_jmbg_lekara.Text,
-                Ime = tb_ime_lekara_unos.Text,
-                Datum_rodjenja = dTP_lekara.Value,
-                Password = tb_pass_lekara_unos.Text,
-                Prezime = tb_prezime_lekara.Text,
-                Srednje_slovo = tb_srednje_slovo.Text
-            };
-            
-            Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
-            dzi = s.Load<DomZdravlja>(pomIndex);
-            
-            dzi.Lekari.Add(il);
-            il.RadiUDomuZdravlja = dzi;
-
-            s.Save(il);
-            s.Flush();
-
-            
+                MessageBox.Show("Sva polja moraju biti popunjena!");
+            }
             s.Close();
-            dGV_unosenje_lekar.Rows.Add(il.Jmbg, il.Ime, il.Srednje_slovo, il.Prezime);
-
-            MessageBox.Show("Uspeno ste uneli novog lekara ");
-
-
         }
         #endregion
 
@@ -827,32 +858,62 @@ namespace Hippocrates
 
         private void btn_unesi_pacijenta_Click(object sender, EventArgs e)
         {
-            ISession s = DataLayer.GetSession();
-            Data.Entiteti.Pacijent pac1 = new Data.Entiteti.Pacijent()
+            try{
+                ISession s = DataLayer.GetSession();
+                if (tb_JMBG_pacijenta.Text != string.Empty && tb_ime_pac.Text != string.Empty && tb_prezime_pacijenta.Text != string.Empty && tb_LBO_pacujenta.Text != string.Empty && tb_LBO_pacujenta.Text != string.Empty && tb_opstina.Text != string.Empty && tb_srednjeSlovo.Text != string.Empty)
+                {
+                    if (dTP_Vazi_do.Value >= DateTime.Now)
+                    {
+                        Data.Entiteti.Pacijent pac1 = new Data.Entiteti.Pacijent()
+                        {
+                            Jmbg = tb_JMBG_pacijenta.Text,
+                            Ime = tb_ime_pac.Text,
+                            Prezime = tb_prezime_pacijenta.Text,
+                            Datum_rodjenja = dTP_pacijenta.Value,
+                            Telefon = tb_pac_unos_brTel.Text,
+                            Lbo = tb_LBO_pacujenta.Text,
+                            Opstina = tb_opstina.Text,
+                            Srednje_slovo = tb_srednjeSlovo.Text,
+                            Vazi_do = dTP_Vazi_do.Value,
+                            Email = tb_pac_unos_mail.Text,
+                        };
+
+                        IzabraniLekar l = new IzabraniLekar();
+                        l = s.Load<IzabraniLekar>(pomIndex);
+
+                        l.Pacijenti.Add(pac1);
+                        pac1.Lekar = l;
+                        s.Save(pac1);
+                        s.Flush();
+                        
+
+                        MessageBox.Show("Uspeno ste uneli novog pacijenta");
+                        string[] parametars = cb_izborLekara_pac_unos.SelectedItem.ToString().Split(' ');
+                        refreshDGVPacijent(dGV_unosenje_pacijent, parametars[1], parametars[2]);
+                        tb_pac_unos_mail.Text = string.Empty;
+                        tb_srednjeSlovo.Text = string.Empty;
+                        tb_opstina.Text = string.Empty;
+                        tb_LBO_pacujenta.Text = string.Empty;
+                        tb_pac_unos_brTel.Text = string.Empty;
+                        tb_prezime_pacijenta.Text = string.Empty;
+                        tb_ime_pac.Text = string.Empty;
+                        tb_JMBG_pacijenta.Text = string.Empty;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Neispravno unet datum do kojeg vazi osiguranje.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                }
+                s.Close();
+            }
+            catch(Exception ex)
             {
-                Jmbg = tb_JMBG_pacijenta.Text,
-                Ime = tb_ime_pac.Text,
-                Prezime = tb_prezime_pacijenta.Text,
-                Datum_rodjenja = dTP_pacijenta.Value,
-                Telefon =  tb_pac_unos_brTel.Text,
-                Lbo = tb_LBO_pacujenta.Text,
-                Opstina = tb_opstina.Text,
-                Srednje_slovo = tb_srednjeSlovo.Text,
-                Vazi_do = dTP_Vazi_do.Value,
-            };
-            
-            IzabraniLekar l = new IzabraniLekar();
-            l = s.Load<IzabraniLekar>(pomIndex);
-            
-            l.Pacijenti.Add(pac1);
-            pac1.Lekar = l;
-            s.Save(pac1);
-            s.Flush();
-            s.Close();
-            
-            MessageBox.Show("Uspeno ste uneli novog pacijenta");
-            string[] parametars = cb_izborLekara_pac_unos.SelectedItem.ToString().Split(' ');
-            refreshDGVPacijent(dGV_unosenje_pacijent, parametars[1], parametars[2]);
+
+            }
         }
 
         private void cb_izborLekara_pac_unos_SelectedIndexChanged(object sender, EventArgs e)
@@ -981,29 +1042,42 @@ namespace Hippocrates
             try
             {
                 ISession s = DataLayer.GetSession();
-                Data.Entiteti.AdministratorDomaZdravlja admin = new Data.Entiteti.AdministratorDomaZdravlja()
+                if (tb_adminDZ_azuriranje_JMBG.Text != string.Empty && tb_adminDZ_azuriranje_Ime.Text != string.Empty && tb_adminDZ_azuriranje_SredSlovo.Text != string.Empty && tb_adminDZ_azuriranje_Prezime.Text != string.Empty && tb_adminDZ_azuriranje_PASS.Text != string.Empty)
                 {
-                    JMBG = tb_adminDZ_azuriranje_JMBG.Text,
-                    Ime = tb_adminDZ_azuriranje_Ime.Text,
-                    SrednjeSlovo = tb_adminDZ_azuriranje_SredSlovo.Text,
-                    Prezime = tb_adminDZ_azuriranje_Prezime.Text,
-                    Password = tb_adminDZ_azuriranje_PASS.Text
-                };
-                Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
-                dzi = s.Load<DomZdravlja>(pomIndex);
-                dzi.Administratori.Add(admin);
-                admin.RadiUDomuZdravlja = dzi;
-                s.Save(admin);
-                s.Flush();
-                s.Close();
-                dGV_unos_AdminDZ.Rows.Add(admin.JMBG, admin.Ime, admin.SrednjeSlovo, admin.Prezime);
-                MessageBox.Show("Uspeno ste uneli novog administratora doma zdravlja");
-                //cB_izborDZ_adminDZ_unos.SelectedItem.ToString();
+                    Data.Entiteti.AdministratorDomaZdravlja admin = new Data.Entiteti.AdministratorDomaZdravlja()
+                    {
+                        JMBG = tb_adminDZ_azuriranje_JMBG.Text,
+                        Ime = tb_adminDZ_azuriranje_Ime.Text,
+                        SrednjeSlovo = tb_adminDZ_azuriranje_SredSlovo.Text,
+                        Prezime = tb_adminDZ_azuriranje_Prezime.Text,
+                        Password = tb_adminDZ_azuriranje_PASS.Text
+                    };
+                    Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
+                    dzi = s.Load<DomZdravlja>(pomIndex);
+                    dzi.Administratori.Add(admin);
+                    admin.RadiUDomuZdravlja = dzi;
+                    s.Save(admin);
+                    s.Flush();
+                    s.Close();
+                    dGV_unos_AdminDZ.Rows.Add(admin.JMBG, admin.Ime, admin.SrednjeSlovo, admin.Prezime);
+                    MessageBox.Show("Uspeno ste uneli novog administratora doma zdravlja");
+                    //cB_izborDZ_adminDZ_unos.SelectedItem.ToString();
+                    tb_adminDZ_azuriranje_JMBG.Text = string.Empty;
+                    tb_adminDZ_azuriranje_Ime.Text = string.Empty;
+                    tb_adminDZ_azuriranje_SredSlovo.Text = string.Empty;
+                    tb_adminDZ_azuriranje_Prezime.Text = string.Empty;
+                    tb_adminDZ_azuriranje_PASS.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Morate prvo izabrati dom zdravlja");
             }
+          
         }
 
         #endregion
@@ -1017,31 +1091,41 @@ namespace Hippocrates
             ISession s = DataLayer.GetSession();
             try
             {
-                MedicinskoOsoblje m = new MedicinskoOsoblje()
+                if (tb_unos_medRadnik_jmbg.Text != string.Empty && tb_unos_medRad_Ime.Text != string.Empty && tb_unos_medRad_srednjeS.Text != string.Empty && tb_unos_medRad_Prezime.Text != string.Empty && tb_unos_medRadnik_jmbg.Text != string.Empty) {
+                    MedicinskoOsoblje m = new MedicinskoOsoblje()
+                    {
+                        Jmbg = tb_unos_medRadnik_jmbg.Text,
+                        Ime = tb_unos_medRad_Ime.Text,
+                        Srednje_slovo = tb_unos_medRad_srednjeS.Text,
+                        Prezime = tb_unos_medRad_Prezime.Text,
+                        Password = tb_unos_medRad_Password.Text
+                    };
+                    Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
+                    dzi = s.Load<DomZdravlja>(pomIndex);
+                    dzi.MedicinskoOsoblje.Add(m);
+                    m.RadiUDomuZdravlja = dzi;
+                    s.Flush();
+                    MessageBox.Show("Uspeno ste uneli novog medicinskog radnika");
+                    string parametars = cB_medRad_unosenje_domZ.SelectedItem.ToString();
+                    parametars = parametars.Substring(0, parametars.IndexOf(" "));
+                    refreshDGVMedRad(dgv_unos_medRad, parametars);
+                    tb_unos_medRadnik_jmbg.Text = string.Empty;
+                    tb_unos_medRad_Prezime.Text = string.Empty;
+                    tb_unos_medRad_srednjeS.Text = string.Empty;
+                    tb_unos_medRad_Ime.Text = string.Empty;
+                    tb_unos_medRadnik_jmbg.Text = string.Empty;
+                }
+                else
                 {
-                    Jmbg = tb_unos_medRadnik_jmbg.Text,
-                    Ime = tb_unos_medRad_Ime.Text,
-                    Srednje_slovo = tb_unos_medRad_srednjeS.Text,
-                    Prezime = tb_unos_medRad_Prezime.Text,
-                    Password = tb_unos_medRad_Password.Text
-                };
-                Data.Entiteti.DomZdravlja dzi = new Data.Entiteti.DomZdravlja();
-                dzi = s.Load<DomZdravlja>(pomIndex);
-                dzi.MedicinskoOsoblje.Add(m);
-                m.RadiUDomuZdravlja = dzi;
-                s.Flush();
-                MessageBox.Show("Uspeno ste uneli novog medicinskog radnika");
-                string parametars = cB_medRad_unosenje_domZ.SelectedItem.ToString();
-                parametars = parametars.Substring(0, parametars.IndexOf(" "));
-                refreshDGVMedRad(dgv_unos_medRad, parametars);
+                    MessageBox.Show("Sva polja moraju biti popunjena");
+                }
             }
             catch(Exception ex)
             {
                 MessageBox.Show("Morate odabrati dom zdravlja u koji zelite da unesete medicinskog radnika." + ex);
             }
             s.Close();
-            
-            
+
         }
         private void cB_medRad_unosenje_domZ_Enter(object sender, EventArgs e)
         {
@@ -1086,17 +1170,26 @@ namespace Hippocrates
 
         private void btn_unos_vakcina_Click(object sender, EventArgs e)
         {
+            
             ISession s = DataLayer.GetSession();
-            Vakcina v = new Vakcina()
+            if (tb_unos_vakcina_Sifra.Text != string.Empty && tb_unos_vakcina_opis.Text!= string.Empty && tb_unos_vakcina_ime.Text != string.Empty)              
             {
-                Ime = tb_unos_vakcina_ime.Text,
-                Opis = tb_unos_vakcina_opis.Text,
-                Sifra = tb_unos_vakcina_Sifra.Text
-            };
-            s.Save(v);
-            s.Flush();
-            MessageBox.Show("Uspesno ste uneli vakcinu.");
-            s.Close();
+
+                Vakcina v = new Vakcina()
+                {
+                    Ime = tb_unos_vakcina_ime.Text,
+                    Opis = tb_unos_vakcina_opis.Text,
+                    Sifra = tb_unos_vakcina_Sifra.Text
+                };
+                s.Save(v);
+                s.Flush();
+                MessageBox.Show("Uspesno ste uneli vakcinu.");
+                s.Close();
+            }
+            else
+            {
+                MessageBox.Show("Sva polja moraju biti popunjena!");
+            }
             tb_unos_vakcina_ime.Text = string.Empty;
             tb_unos_vakcina_opis.Text = string.Empty;
             tb_unos_vakcina_Sifra.Text = string.Empty;
@@ -1104,16 +1197,23 @@ namespace Hippocrates
 
         private void btn_unos_dijagnoze_Click(object sender, EventArgs e)
         {
-            ISession s = DataLayer.GetSession();
-            Dijagnoza d = new Dijagnoza()
+            if (tb_unos_dijagnoza_ime.Text != string.Empty && tb_unos_dijagnoza_sifra.Text != string.Empty)
             {
-                Ime = tb_unos_dijagnoza_ime.Text,
-                Sifra = tb_unos_dijagnoza_sifra.Text
-            };
-            s.Save(d);
-            s.Flush();
-            MessageBox.Show("Uspesno ste uneli dijagnozu.");
-            s.Close();
+                ISession s = DataLayer.GetSession();
+                Dijagnoza d = new Dijagnoza()
+                {
+                    Ime = tb_unos_dijagnoza_ime.Text,
+                    Sifra = tb_unos_dijagnoza_sifra.Text
+                };
+                s.Save(d);
+                s.Flush();
+                MessageBox.Show("Uspesno ste uneli dijagnozu.");
+                s.Close();
+            }
+            {
+                MessageBox.Show("Sva polja moraju biti popunjena!");
+            }
+          
             tb_unos_dijagnoza_ime.Text = string.Empty;
             tb_unos_dijagnoza_sifra.Text = string.Empty;
         }
@@ -1134,31 +1234,45 @@ namespace Hippocrates
                         dijag = d;
                     }
                 }
-                if(dTP_vakcine_unos_od.Value >= DateTime.Now && dTP_vakcine_unos_do.Value > dTP_vakcine_unos_od.Value){
-                    Terapija ter = new Terapija()
+                if (tb_unos_terapiju_opis.Text != string.Empty)
+                {
+                    if (dTP_vakcine_unos_od.Value >= DateTime.Now && dTP_vakcine_unos_do.Value > dTP_vakcine_unos_od.Value)
                     {
-                        Datum_do = dTP_vakcine_unos_od.Value,
-                        Datum_od = dTP_vakcine_unos_do.Value,
-                        Opis = tb_unos_terapiju_opis.Text
-                    };
-                    ter.TerapijaPacijent = p;
-                    ter.TerapijaLekar = p.Lekar;
-                    p.Lekar.Terapije.Add(ter);
-                    p.Terapije.Add(ter);
-                    ter.TerapijaDijagnoza = dijag.Id.DijagnozaDijagnoza;
-                    dijag.Id.DijagnozaDijagnoza.Terapije.Add(ter);
-                    s.Flush();
-                    MessageBox.Show("Uspeno ste uneli novu terapiju pacijentu .");
+                        Terapija ter = new Terapija()
+                        {
+                            Datum_do = dTP_vakcine_unos_od.Value,
+                            Datum_od = dTP_vakcine_unos_do.Value,
+                            Opis = tb_unos_terapiju_opis.Text
+                        };
+                        ter.TerapijaPacijent = p;
+                        ter.TerapijaLekar = p.Lekar;
+                        p.Lekar.Terapije.Add(ter);
+                        p.Terapije.Add(ter);
+                        ter.TerapijaDijagnoza = dijag.Id.DijagnozaDijagnoza;
+                        dijag.Id.DijagnozaDijagnoza.Terapije.Add(ter);
+                        s.Flush();
+                        MessageBox.Show("Uspeno ste uneli novu terapiju pacijentu .");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Neispravno uneti datumi za odredjenu terapiju.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Neispravno uneti datumi za odredjenu terapiju.");
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show("morate izabrati lekara,pacijenta i dijagnozu za koju zelite da dodate terapiju" + ex);
             }
+            cb_unos_terapija_lekari.Items.Clear();
+            cb_unos_terapija_pacijenti.Items.Clear();
+            cb_unos_terapije_dijagnoza.Items.Clear();
+            tb_unos_terapiju_opis.Text = string.Empty;
+            dTP_vakcine_unos_od.Value = DateTime.Now;
+            dTP_vakcine_unos_do.Value = DateTime.Now;
             s.Close();
         }
 
@@ -1775,21 +1889,30 @@ namespace Hippocrates
             try
             {
                 ISession s = DataLayer.GetSession();
-                DomZdravlja dzi = new DomZdravlja();
-                dzi = s.Load<DomZdravlja>(pomIndex);
-                dzi.Mbr = tb_azuriranje_MBR_domZ.Text;
-                dzi.Ime = tb_azuriranje_Ime_domZ.Text;
-                dzi.Lokacija = tb_azuriranje_lokacija_domZ.Text;
-                dzi.Opstina = tb_azuriranje_opstina_domZ.Text;
-                dzi.Adresa = tb_azuriranje_adresa_domZ.Text;
-                s.Save(dzi);
-                s.Flush();
-
-
-                s.Close();
-
-                MessageBox.Show("Uspesno ste azurirali dom zdravlja");
-                refreshDGVDomovi(dGV_domZdravlja_azuriranje);
+                if (tb_azuriranje_MBR_domZ.Text != string.Empty && tb_azuriranje_Ime_domZ.Text != string.Empty && tb_azuriranje_lokacija_domZ.Text != string.Empty && tb_azuriranje_opstina_domZ.Text != string.Empty && tb_azuriranje_adresa_domZ.Text != string.Empty)
+                {
+                    DomZdravlja dzi = new DomZdravlja();
+                    dzi = s.Load<DomZdravlja>(pomIndex);
+                    dzi.Mbr = tb_azuriranje_MBR_domZ.Text;
+                    dzi.Ime = tb_azuriranje_Ime_domZ.Text;
+                    dzi.Lokacija = tb_azuriranje_lokacija_domZ.Text;
+                    dzi.Opstina = tb_azuriranje_opstina_domZ.Text;
+                    dzi.Adresa = tb_azuriranje_adresa_domZ.Text;
+                    s.Save(dzi);
+                    s.Flush();
+                    tb_azuriranje_MBR_domZ.Text = string.Empty;
+                    tb_azuriranje_Ime_domZ.Text = string.Empty;
+                    tb_azuriranje_lokacija_domZ.Text = string.Empty;
+                    tb_azuriranje_opstina_domZ.Text = string.Empty;
+                    tb_azuriranje_adresa_domZ.Text = string.Empty;
+                    MessageBox.Show("Uspesno ste azurirali dom zdravlja");
+                    refreshDGVDomovi(dGV_domZdravlja_azuriranje);
+                    s.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                }
             }
             catch(Exception ex)
             {
@@ -1943,16 +2066,29 @@ namespace Hippocrates
             try
             {
                 ISession s = DataLayer.GetSession();
-                IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
-                il.Ime = tb_azuriranje_ime_lekar.Text;
-                il.Prezime = tb_azuriranje_prezime_lekar.Text;
-                il.Password = tb_azuriranje_pass_lekar.Text;
-                il.Datum_rodjenja = dTP_azuriranje_lekar.Value;
-                il.Jmbg = tb_azuriranje_jmbg_lekar.Text;
-                il.Srednje_slovo = tb_azuriranje_lekar_srednjeSlovo.Text;
-                s.Flush();
+                if (tb_azuriranje_ime_lekar.Text!=string.Empty && tb_azuriranje_prezime_lekar.Text!=string.Empty && tb_azuriranje_pass_lekar.Text != string.Empty && tb_azuriranje_jmbg_lekar.Text != string.Empty && tb_azuriranje_lekar_srednjeSlovo.Text != string.Empty) {
+                    IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
+                    il.Ime = tb_azuriranje_ime_lekar.Text;
+                    il.Prezime = tb_azuriranje_prezime_lekar.Text;
+                    il.Password = tb_azuriranje_pass_lekar.Text;
+                    il.Datum_rodjenja = dTP_azuriranje_lekar.Value;
+                    il.Jmbg = tb_azuriranje_jmbg_lekar.Text;
+                    il.Srednje_slovo = tb_azuriranje_lekar_srednjeSlovo.Text;
+                    s.Flush();
+                    MessageBox.Show("Uspeno ste azurirali podatke o lekaru.");
+                    refreshDGVLekari(dGV_lekari_azuriranje, cb_lekar_azuriranje_pretraga.SelectedItem.ToString());
+                    tb_azuriranje_ime_lekar.Text = string.Empty;
+                    tb_azuriranje_prezime_lekar.Text = string.Empty;
+                    tb_azuriranje_pass_lekar.Text = string.Empty;
+                    tb_azuriranje_jmbg_lekar.Text = string.Empty;
+                    tb_azuriranje_lekar_srednjeSlovo.Text = string.Empty;
+                    lBSmeneLekara.Items.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                }
                 s.Close();
-                refreshDGVLekari(dGV_lekari_azuriranje,cb_lekar_azuriranje_pretraga.SelectedItem.ToString());
             }
             catch (Exception ex)
             {
@@ -2400,29 +2536,52 @@ namespace Hippocrates
             {
                 ISession s = DataLayer.GetSession();
                 Pacijent pac = s.Load<Pacijent>(pomIndex);
-                pac.Jmbg = tb_pacijent_azuriranje_jmbg.Text;
-                pac.Srednje_slovo = tb_pacijent_azuriranje_srednjeSlovo.Text;
-                if(cB_pravo_da_zakaze.Checked == true)
+                if (tb_pacijent_azuriranje_jmbg.Text != string.Empty && tb_pacijent_azuriranje_srednjeSlovo.Text != string.Empty && tb_pacijent_azuriranje_prezime.Text != string.Empty && tb_pacijent_azuriranje_ime.Text != string.Empty && tb_pacijent_azuriranje_opstina.Text != string.Empty && tb_pacijent_azuriranje_lbo.Text != string.Empty)
                 {
-                    pac.Pravo_da_zakaze = 1;
+                    pac.Jmbg = tb_pacijent_azuriranje_jmbg.Text;
+                    pac.Srednje_slovo = tb_pacijent_azuriranje_srednjeSlovo.Text;
+                    if (cB_pravo_da_zakaze.Checked == true)
+                    {
+                        pac.Pravo_da_zakaze = 1;
+                    }
+                    else
+                    {
+                        pac.Pravo_da_zakaze = 0;
+                    }
+
+                    pac.Prezime = tb_pacijent_azuriranje_prezime.Text;
+
+                    pac.Ime = tb_pacijent_azuriranje_ime.Text;
+
+                    pac.Opstina = tb_pacijent_azuriranje_opstina.Text;
+                    pac.Datum_rodjenja = dTP_pacijent_azuriranje.Value;
+                    pac.Lbo = tb_pacijent_azuriranje_lbo.Text;
+                    pac.Vazi_do = dTP_vaziDo_pacijent.Value;
+                    if (tb_pacijent_azuriranje_telefon.Text != string.Empty)
+                        pac.Telefon = tb_pacijent_azuriranje_telefon.Text;
+                    if (tb_pacijent_azuriranje_email.Text != string.Empty)
+                        pac.Email = tb_pacijent_azuriranje_email.Text;
+                    s.Flush();
+                    s.Close();
+                    MessageBox.Show("Uspeno ste azurirali podatke o pacijentu");
+                    string[] parametars = cb_pac_azuriranje_lek_pretraga.SelectedItem.ToString().Split(' ');
+                    refreshDGVPacijent(dGV_pacijenti_azuriranje, parametars[0], parametars[1]);
+                    tb_pacijent_azuriranje_jmbg.Text = string.Empty;
+                    tb_pacijent_azuriranje_srednjeSlovo.Text = string.Empty;
+                    tb_pacijent_azuriranje_prezime.Text = string.Empty;
+                    tb_pacijent_azuriranje_ime.Text = string.Empty;
+                    tb_pacijent_azuriranje_opstina.Text = string.Empty;
+                    tb_pacijent_azuriranje_lbo.Text = string.Empty;
+                    tb_pacijent_azuriranje_telefon.Text = string.Empty;
+                    tb_pacijent_azuriranje_email.Text = string.Empty;
+                    lb_pac_vakcine.Items.Clear();
+                    dGV_pac_dijagnoze.DataSource = null;
+                    dGV_pac_dijagnoze.Columns.Clear();
                 }
                 else
                 {
-                    pac.Pravo_da_zakaze = 0;
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
                 }
-                pac.Prezime = tb_pacijent_azuriranje_prezime.Text;
-                pac.Ime = tb_pacijent_azuriranje_ime.Text;
-                pac.Opstina = tb_pacijent_azuriranje_opstina.Text;
-                pac.Datum_rodjenja = dTP_pacijent_azuriranje.Value;
-                pac.Lbo = tb_pacijent_azuriranje_lbo.Text;
-                pac.Vazi_do = dTP_vaziDo_pacijent.Value;
-                pac.Telefon = tb_pacijent_azuriranje_telefon.Text;
-                pac.Email = tb_pacijent_azuriranje_email.Text;
-                s.Flush();
-                s.Close();
-                MessageBox.Show("Uspeno ste azurirali podatke o pacijentu");
-                string[] parametars = cb_pac_azuriranje_lek_pretraga.SelectedItem.ToString().Split(' ');
-                refreshDGVPacijent(dGV_pacijenti_azuriranje, parametars[0], parametars[1]);
             }
             catch (Exception ex)
             {
@@ -2709,22 +2868,35 @@ namespace Hippocrates
             try
             {
                 ISession s = DataLayer.GetSession();
-                AdministratorDomaZdravlja adz = s.Load<AdministratorDomaZdravlja>(pomIndex);
-                adz.JMBG = tb_azuriranje_admindz_jmbg.Text;
-                adz.Ime = tb_azuriranje_admindz_ime.Text;
-                adz.SrednjeSlovo = tb_azuriranje_admindz_srednjeS.Text;
-                adz.Prezime = tb_azuriranje_admindz_prezime.Text;
-                adz.Password = tb_azuriranje_admindz_password.Text;
+                if (tb_azuriranje_admindz_jmbg.Text != string.Empty && tb_azuriranje_admindz_ime.Text != string.Empty && tb_azuriranje_admindz_srednjeS.Text != string.Empty && tb_azuriranje_admindz_prezime.Text != string.Empty && tb_azuriranje_admindz_password.Text != string.Empty)
+                {
+                    AdministratorDomaZdravlja adz = s.Load<AdministratorDomaZdravlja>(pomIndex);
+                    adz.JMBG = tb_azuriranje_admindz_jmbg.Text;
+                    adz.Ime = tb_azuriranje_admindz_ime.Text;
+                    adz.SrednjeSlovo = tb_azuriranje_admindz_srednjeS.Text;
+                    adz.Prezime = tb_azuriranje_admindz_prezime.Text;
+                    adz.Password = tb_azuriranje_admindz_password.Text;
 
-                MessageBox.Show("Uspeno ste azurirali podatke o administratoru doma zdravlja.");
-                s.Flush();
-                //cb_azuriranje_adminDZ_pretraga.SelectedItem.ToString()
-                s.Close();
-                refreshDGVAdmini(dGV_azuriranje_adminDZ, cb_azuriranje_adminDZ_pretraga.SelectedItem.ToString());
+                    MessageBox.Show("Uspeno ste azurirali podatke o administratoru doma zdravlja.");
+                    s.Flush();
+                    //cb_azuriranje_adminDZ_pretraga.SelectedItem.ToString()
+                    s.Close();
+                    refreshDGVAdmini(dGV_azuriranje_adminDZ, cb_azuriranje_adminDZ_pretraga.SelectedItem.ToString());
+                    tb_azuriranje_admindz_jmbg.Text = string.Empty;
+                    tb_azuriranje_admindz_ime.Text = string.Empty;
+                    tb_azuriranje_admindz_srednjeS.Text = string.Empty;
+                    tb_azuriranje_admindz_prezime.Text = string.Empty;
+                    tb_azuriranje_admindz_password.Text = string.Empty;
+
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Morate oznaciti administratora kojem zelite da promenite podatke " + ex);
+                MessageBox.Show("Morate oznaciti administratora kojem zelite da promenite podatke ");
             }
            
         }
@@ -2868,15 +3040,27 @@ namespace Hippocrates
             ISession s = DataLayer.GetSession();
             try
             {
-                MedicinskoOsoblje mo = s.Load<MedicinskoOsoblje>(pomIndex);
-                mo.Jmbg = tb_jmbg_mr_azuriranje.Text;
-                mo.Ime = tb_ime_mr_azuriranje.Text;
-                mo.Prezime = tb_prezime_mr_azuriranje.Text;
-                mo.Password = tb_pass_mr_azuriranje.Text;
-                mo.Datum_rodjenja = dTP_mr_datumRodj_azuriranje.Value;
-                mo.Srednje_slovo = tb_ss_mr_azuriranje.Text;
-                s.Flush();
-
+                if (tb_jmbg_mr_azuriranje.Text != string.Empty && tb_ime_mr_azuriranje.Text != string.Empty && tb_prezime_mr_azuriranje.Text != string.Empty && tb_pass_mr_azuriranje.Text != string.Empty && tb_ss_mr_azuriranje.Text != string.Empty)
+                {
+                    MedicinskoOsoblje mo = s.Load<MedicinskoOsoblje>(pomIndex);
+                    mo.Jmbg = tb_jmbg_mr_azuriranje.Text;
+                    mo.Ime = tb_ime_mr_azuriranje.Text;
+                    mo.Prezime = tb_prezime_mr_azuriranje.Text;
+                    mo.Password = tb_pass_mr_azuriranje.Text;
+                    mo.Datum_rodjenja = dTP_mr_datumRodj_azuriranje.Value;
+                    mo.Srednje_slovo = tb_ss_mr_azuriranje.Text;
+                    s.Flush();
+                    tb_jmbg_mr_azuriranje.Text = string.Empty;
+                    tb_ime_mr_azuriranje.Text = string.Empty;
+                    tb_prezime_mr_azuriranje.Text = string.Empty;
+                    tb_pass_mr_azuriranje.Text = string.Empty;
+                    tb_ss_mr_azuriranje.Text = string.Empty;
+                    MessageBox.Show("Uspesno ste azurirali podatke o medicinskom radniku.");
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                }
             }
             catch (Exception ex)
             {
@@ -3007,10 +3191,19 @@ namespace Hippocrates
             {
                 string[] parametars = cb_azuriranje_vakcine.SelectedItem.ToString().Split(' ');
                 Vakcina v = s.Load<Vakcina>(parametars[1]);
-                v.Ime = tb_azuriranje_vak_ime.Text;
-                v.Opis = tb_azuriranje_vak_opis.Text;
-                s.Flush();
-                MessageBox.Show("Uspesno ste azurirali vakcinu.");
+                if (tb_azuriranje_vak_ime.Text != string.Empty && tb_azuriranje_vak_opis.Text != string.Empty)
+                {
+                    v.Ime = tb_azuriranje_vak_ime.Text;                   
+                    v.Opis = tb_azuriranje_vak_opis.Text;
+                    s.Flush();
+                    MessageBox.Show("Uspesno ste azurirali vakcinu.");
+                    tb_azuriranje_vak_ime.Text = string.Empty;
+                    tb_azuriranje_vak_opis.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                }
             }
             catch(Exception ex)
             {
@@ -3026,9 +3219,19 @@ namespace Hippocrates
             {
                 string[] parametars = cb_azuriranje_dijagnoza.SelectedItem.ToString().Split(' ');
                 Dijagnoza d = s.Load<Dijagnoza>(parametars[1]);
-                d.Ime = tb_azuriranje_dijag_ime.Text;
-                s.Flush();
-                MessageBox.Show("Uspesno ste azurirali dijagnozu. ");
+                if (tb_azuriranje_dijag_ime.Text != string.Empty)
+                {
+                    d.Ime = tb_azuriranje_dijag_ime.Text;
+
+
+                    s.Flush();
+                    MessageBox.Show("Uspesno ste azurirali dijagnozu. ");
+                    tb_azuriranje_dijag_ime.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                }
             }
             catch(Exception ex)
             {
@@ -3061,11 +3264,17 @@ namespace Hippocrates
                 Terapija t = s.Load<Terapija>(parametar);
                 if (dTP_azuriranje_ter_do.Value >= DateTime.Now && dTP_azuriranje_ter_do.Value > dTP_azuriranje_ter_od.Value)
                 {
-                    t.Opis = tb_azuriranje_ter_opis.Text;
-                    t.Datum_od = dTP_azuriranje_ter_od.Value;
-                    t.Datum_do = dTP_azuriranje_ter_do.Value;
-                    s.Flush();
-                    MessageBox.Show("Uspeno ste azurirali terapiju. ");
+                    if (tb_azuriranje_ter_opis.Text != string.Empty)
+                    {
+                        t.Opis = tb_azuriranje_ter_opis.Text;
+                        t.Datum_od = dTP_azuriranje_ter_od.Value;
+                        t.Datum_do = dTP_azuriranje_ter_do.Value;
+                        s.Flush();
+                        MessageBox.Show("Uspeno ste azurirali terapiju. ");
+                        tb_azuriranje_ter_opis.Text = string.Empty;
+                    }
+                    else
+                        MessageBox.Show("Sva polja moraju biti popunjena");
                 }
                 else
                 {
@@ -3081,10 +3290,279 @@ namespace Hippocrates
 
         #endregion
 
+        #region upravljanje_zahtevima
+        private void btn_ucitajZahteve_Click(object sender, EventArgs e)
+        {
+            dGV_spisak_zahteva.DataSource = null;
+            dGV_spisak_zahteva.Columns.Clear();
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                IQuery q = s.CreateQuery("from ZahtevZaPromenu");
+                IList<ZahtevZaPromenu> zahtevi = q.List<ZahtevZaPromenu>();
+                dGV_spisak_zahteva.ColumnCount = 7;
+                dGV_spisak_zahteva.Columns[0].Name = "Id";
+                dGV_spisak_zahteva.Columns[1].Name = "Jmbg pacijenta";
+                dGV_spisak_zahteva.Columns[2].Name = "Ime pacijenta";
+                dGV_spisak_zahteva.Columns[3].Name = "Prezime pacijenta";
+                dGV_spisak_zahteva.Columns[4].Name = "Jmbg lekara";
+                dGV_spisak_zahteva.Columns[5].Name = "Ime lekara";
+                dGV_spisak_zahteva.Columns[6].Name = "Prezime lekara";
+                foreach (ZahtevZaPromenu z in zahtevi)
+                {
+                    dGV_spisak_zahteva.Rows.Add(z.Id,z.ZahtevPacijenta.Jmbg,z.ZahtevPacijenta.Ime,z.ZahtevPacijenta.Prezime,z.ZeljeniLekar.Jmbg,z.ZeljeniLekar.Ime,z.ZeljeniLekar.Prezime);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problem : " + ex);
+            }
+            s.Close();
+        }
+
+        private void dGV_spisak_zahteva_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dGV_spisak_zahteva.Rows.Count != 0)
+            {
+                int rowindex = dGV_spisak_zahteva.CurrentCell.RowIndex;
+                string imeP = dGV_spisak_zahteva.Rows[rowindex].Cells[2].Value.ToString();
+                string PrezimeP = dGV_spisak_zahteva.Rows[rowindex].Cells[3].Value.ToString();
+                string ImeL = dGV_spisak_zahteva.Rows[rowindex].Cells[5].Value.ToString();
+                string PrezimeL = dGV_spisak_zahteva.Rows[rowindex].Cells[6].Value.ToString();
+                tb_zahtev.Text = "Pacijent: " + imeP + " " + PrezimeP + "zeli da promeni izabranog lekara,novi lekar kojeg pacijent zeli za izabranog je: " + ImeL + " " + PrezimeL;
+            }
+        }
+
+        private void btn_Odobri_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                int rowindex = dGV_spisak_zahteva.CurrentCell.RowIndex;
+                Pacijent p = s.Load<Pacijent>(dGV_spisak_zahteva.Rows[rowindex].Cells[1].Value.ToString());
+                IzabraniLekar il = s.Load<IzabraniLekar>(dGV_spisak_zahteva.Rows[rowindex].Cells[4].Value.ToString());
+                p.Lekar.Pacijenti.Remove(p);
+                p.Lekar = il;
+                il.Pacijenti.Add(p);
+                ZahtevZaPromenu z = s.Load<ZahtevZaPromenu>(Int32.Parse(dGV_spisak_zahteva.Rows[rowindex].Cells[0].Value.ToString()));
+                s.Delete(z);
+                s.Flush();
+                MessageBox.Show("Odobren je zahtev o promeni izabranog lekara.");
+                dGV_spisak_zahteva.Rows.Remove(dGV_spisak_zahteva.Rows[rowindex]);
+            }
+            catch(Exception ex)
+            {
+                
+            }
+            tb_zahtev.Text = string.Empty;
+            s.Close();
+        }
+
+        private void btn_Odbi_Click(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                int rowindex = dGV_spisak_zahteva.CurrentCell.RowIndex;
+                ZahtevZaPromenu z = s.Load<ZahtevZaPromenu>(Int32.Parse(dGV_spisak_zahteva.Rows[rowindex].Cells[0].Value.ToString()));
+                s.Delete(z);
+                s.Flush();
+                MessageBox.Show("Odbijen je zahtev o promeni izabranog lekara.");
+                dGV_spisak_zahteva.Rows.Remove(dGV_spisak_zahteva.Rows[rowindex]);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            tb_zahtev.Text = string.Empty;
+            s.Close();
+        }
+        #endregion
+
         #endregion
 
         #region validacija_za_unos_u_kontrole
+        //Combo boxovi
+        private void cB_medRad_unosenje_domZ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
 
+        private void cb_odabirDZ_lekar_unos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_izborDZ_pac_unos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_izborLekara_pac_unos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_izborDZ_adminDZ_unos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_unos_terapija_lekari_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_unos_terapija_pacijenti_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_unos_terapije_dijagnoza_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_odabirDZ_adminDz_brisanje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_izborDZ_pac_brisanje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_izborLekara_pac_brisanje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_odabriDZ_lekar_brisanje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_odabirDZ_medRad_brisanje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_vakcina_brisanje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_brisanje_dijagnoze_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_brisanje_ter_lekar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_brisanje_ter_dijag_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_brisanje_ter_pac_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_brisanje_ter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_pac_azuriranje_dz_pretraga_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_pac_azuriranje_lek_pretraga_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_Dijagnoze_pacijenta_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_dijagnoze_Azuriranje_tabDij_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_lekari_za_izmenu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+
+        }
+
+        private void cb_azuriranje_vakcine_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_azuriranje_dijagnoza_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_azuriranje_ter_pac_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_azuriranje_ter_dijagnoza_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_azuriranje_ter_ter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_azuriranje_adminDZ_pretraga_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_domovi_za_menjanje_adz_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_dz_pretraga_mr_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_promeniDZ_MR_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_lekar_azuriranje_pretraga_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cB_dodavanjeSmene_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cb_domovi_za_promenu_lekar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         //tab za unos doma zdravlja
         private void tb_MBR_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -3509,8 +3987,12 @@ namespace Hippocrates
         }
 
 
+
+
+
         #endregion
 
-      
+     
+        
     }
 }
