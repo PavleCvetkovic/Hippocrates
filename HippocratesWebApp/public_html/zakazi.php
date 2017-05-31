@@ -17,7 +17,7 @@ else{
             header("Location: podesavanja.php");
 
 }
-    
+
 $dan=$_GET['dan'];
 $mesec=$_GET['mesec'];
 $sat=$_GET['sat'];
@@ -31,14 +31,14 @@ $terminText=$termin->datum->dan.'/'.$termin->datum->mesec.'/'.$termin->datum->go
 if($status==FALSE)
     $statusZakazivanja="NEMATE PRAVO DA ZAKAŽETE";
 else{
-    $mail = new PHPMailer(); 
+    $mail = new PHPMailer();
     $mail->IsSMTP();                              // send via SMTP
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;                       // turn on SMTP authentication
     $mail->Username='mshippocrates@gmail.com';
     $mail->Password='morfijum';
     $mail->SMTPSecure='tls';
-    
+
     $mail->From='mshippocrates@gmail.com';
     $mail->Port=587;
     $mail->FromName='MSHippocrates sistem';
@@ -50,7 +50,7 @@ else{
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     }
     else {
-    
+
         }
     }
 $smarty=new MySmarty();
