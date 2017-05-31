@@ -52,7 +52,7 @@ namespace Hippocrates
         {
             Smena smena = null;
             foreach (Smena s in lekar.Smene)
-                if (s.Id.Datum_Od <= System.DateTime.Now && s.Datum_Do >= System.DateTime.Now)
+                if (s.Id.Datum_Od <= metroDateTime1.Value.Date && s.Datum_Do >= metroDateTime1.Value.Date)
                 {
                     smena = s;
                     break;
