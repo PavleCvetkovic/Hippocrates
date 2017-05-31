@@ -15,6 +15,8 @@ using HippocratesPatient;
 using Hippocrates.Data.Entiteti;
 using NHibernate;
 using Hippocrates.Data;
+using System.Net;
+using System.Net.Mail;
 
 namespace Hippocrates
 {
@@ -203,6 +205,62 @@ namespace Hippocrates
             return success;
         }
 
+        public bool SendEmailConfirmation(string termin_time, string termin_date)
+        {
+            // 587 port, smtp.gmail.com, tls (secure)
+            bool success = true;
+            if (pacijent_local.Email == null) // 
+            {
+                MetroMessageBox.Show(this, "Niste podesili e-mail. Potvrda o zakazanom terminu nije poslata", "Warning!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            var fromAddress = new MailAddress("mshippocrates@gmail.com", "MS Hippocrates");
+            var toAddress = new MailAddress(pacijent_local.Email, pacijent_local.Ime + " " + pacijent_local.Prezime);
+
+            
+            const string fromPassword = "morfijum";
+            const string subject = "Hippocrates sistem - Potvrda o zakazanom terminu";
+            string body = "Uspešno ste zakazali termin kod lekara " + lekar_local.Ime + " " + lekar_local.Prezime + ".\n\n"
+                + "Zakazani termin je: " + termin_time + " " + termin_date + "\n" + "Molimo da ispoštujete zakazani termin ili" +
+                " blagovremeno otkažete isti. U slučaju nepoštovanja i ne dolaska na termin gubite pravo na mogućnost zakazivanja" +
+                " termina." + "\n\n" + "Hippocrates sistem © MorphineSurgeons\n" +
+                "admin@pavlecvetkovic.me \n" +
+                "www.pavlecvetkovic.me\n" +
+                "Ovo je automatski generisana poruka, molimo Vas da ne odgovarate na ovaj e-mail.";
+            
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                try
+                {
+                    smtp.Send(message);
+                }
+                catch (Exception ex)
+                {
+                    MetroMessageBox.Show(this, "Greška prilikom slanja e-mail za potvrdu zakazanog termina " + ex.Message, "Error!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    success = false;
+                }
+            }
+            return success;
+        }
+
+        ////////// Events
+
         private void metroDateTime1_ValueChanged(object sender, EventArgs e)
         {
             //Each date change refreshes controls
@@ -212,6 +270,15 @@ namespace Hippocrates
         private void metroButton_Click(object sender, EventArgs e)
         {
             MetroButton metro_button = (MetroButton)sender;
+            RefreshControls(lekar_local); // Za slucaj da je neko u medjuvremenu zakazao zeljeni termin
+            if (metro_button.Enabled == false)
+            {
+                MetroMessageBox.Show(this, "Željeni termin je u međuvremenu popunjen. Molimo izaberite drugi termin", "Warning!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+
+            }
+
             if (pacijent_local.Pravo_da_zakaze == 0)
             {
                 MetroMessageBox.Show(this, "Nemate pravo da zakažete termin. Vaš lekar još uvek nije ubeležio Vaš prethodni dolazak", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -231,9 +298,17 @@ namespace Hippocrates
             {
                 RefreshControls(lekar_local); //Each appointment change refreshed controls
                 MetroMessageBox.Show(this, "Info", "Uspešno zakazan termin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (SendEmailConfirmation(metro_button.Text, metroDateTime1.Value.Date.ToShortDateString()))
+                {
+                    MetroMessageBox.Show(this, "Info", "Uspešno poslat e-mail za potvrdu zakazanog termina", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MetroMessageBox.Show(this, "Info", "Greška prilikom slanja e-mail za potvrdu zakazanog termina", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MetroMessageBox.Show(this, "Info", "Greška prilikom zakazivanja termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MetroMessageBox.Show(this, "Info", "Greška prilikom zakazivanja termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
