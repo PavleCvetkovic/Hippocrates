@@ -17,13 +17,14 @@ using HippocratesPatient;
 using NHibernate;
 using Hippocrates.Data.Entiteti;
 using Hippocrates.Data;
+using Hippocrates.Data.EntitetiOracle;
 
 namespace HippocratesDoctor
 {
     public partial class FormLekar : MetroForm, IView
     {
         private IController _controller;
-        private ISession session;
+        private ISession session, oracle_session;
         private IzabraniLekar lekar_local;
         private Smena smena_lekara_local;
         private Pacijent aktivni_pacijent = null;
@@ -35,6 +36,8 @@ namespace HippocratesDoctor
         {
             InitializeComponent();
             session = DataLayer.GetSession();
+            oracle_session = DataLayerOracle.GetSession();
+
             lekar_local = session.Load<IzabraniLekar>(jmbg_lekara);
             
             //this.jmbg_lekara = lekar_local.Jmbg;
@@ -222,30 +225,6 @@ namespace HippocratesDoctor
                               mdt.Value.Day.ToString();
         }
 
-        //private string GetPatientJMBG(string vreme)
-        //{
-        //    string to_return = string.Empty;
-        //    MySqlConnection conn = new MySqlConnection(Hippocrates.Data.ConnectionInfo.connection_string_nikola);
-        //    try
-        //    {
-        //        conn.Open();
-        //        string comm = "select MATBRP from TERMIN where MATBRL = '" + jmbg_lekara + "'" +
-        //            "and DATUM = '" + GetDate() + "' and VREME = '" + vreme + "';";
-        //        MySqlCommand cmd = new MySqlCommand(comm, conn);
-        //        to_return = cmd.ExecuteScalar().ToString();
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        MessageBox.Show("Error during connection (in GetPatientJMBG())" + ex.Message.ToString());
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
-        //    return to_return;
-
-        //}
-
         private string GetPatientBasicInfo()
         {
             string to_return = string.Empty;
@@ -278,7 +257,56 @@ namespace HippocratesDoctor
                     "where MBR = (select MBRZU from IZABRANI_LEKAR where JMBG = '" + jmbg_lekara + "'))";
             */
         }
+        
+        private void GetKlinickiCentriData()
+        {
+            IList<KlinickiCentar> klinicki_centri = oracle_session.QueryOver<KlinickiCentar>().List();
+            metroGridKlinickiCentri.DataSource = new BindingList<KlinickiCentar>(klinicki_centri);
+            //if (metroGridKlinickiCentri.Rows.Count > 0)
+            //    metroGridKlinickiCentri.Rows[0].Selected = true; // Select first
+        }
 
+        private void GetKlinikeData(KlinickiCentar klinicki_centar)
+        {
+            //metroGridKlinike.Rows.Clear();
+            metroGridKlinike.DataSource = new BindingList<Klinika>(klinicki_centar.Klinike);
+        }
+        
+        private void GetSpecijalisteData(Klinika k)
+        {
+            //k.Specijaliste je lista svih zaposlenih (ne specijalista), zato se vrsi filtriranje
+            IList<SpecijalistaKC> lista_specijalista = k.Specijaliste;
+            for (int i = lista_specijalista.Count - 1; i > 0; i--)
+                if (lista_specijalista[i].TipZaposlenog != "SPECIJALISTA")
+                    lista_specijalista.RemoveAt(i);
+
+            //metroGridKlinike.Rows.Clear();
+            //metroGridSpecijaliste.Rows.Clear();
+            metroGridSpecijaliste.DataSource = new BindingList<SpecijalistaKC>(lista_specijalista);
+            //if (metroGridKlinike.Rows.Count > 0)
+            //    metroGridKlinike.Rows[0].Selected = true;
+            //if (metroGridSpecijaliste.Rows.Count > 0)
+            //    metroGridSpecijaliste.Rows[0].Selected = true; // selektuj prvog specijalistu
+        }
+
+        private KlinickiCentar SelectedKlinickiCentar(MetroGrid mg)
+        {
+            KlinickiCentar kc = null;
+            if (mg.Rows.Count > 0)
+                kc = (KlinickiCentar)mg.SelectedRows[0].DataBoundItem;
+
+            return kc;
+        }
+
+        private Klinika SelectedKlinika(MetroGrid mg)
+        {
+            Klinika k = null;
+            if (mg.Rows.Count > 0)
+                k = (Klinika)mg.SelectedRows[0].DataBoundItem;
+            return k;
+        }
+
+        
         private void RefreshTerapijeData(Pacijent pacijent)
         {
             metroGridTerapije.DataSource = null;
@@ -314,6 +342,26 @@ namespace HippocratesDoctor
                   metroGridDijagnoze.Columns[i].Width = metroGridDijagnoze.Width / metroGridDijagnoze.ColumnCount;
           
         }
+
+        private void RefreshUputData(Pacijent pacijent)
+        {
+            GetKlinickiCentriData();
+            KlinickiCentar kc = SelectedKlinickiCentar(metroGridKlinickiCentri);
+            if (kc != null)
+            {
+                GetKlinikeData(kc);
+                Klinika k = SelectedKlinika(metroGridKlinike);
+                if (k != null)
+                {
+                    GetSpecijalisteData(k);
+                    metroButtonZakaziKodSpecijaliste.Enabled = true;
+                }
+                else
+                    metroButtonZakaziKodSpecijaliste.Enabled = false;
+            }
+        }
+
+       
 
         private bool ChangePatientRightForAppointment(out Pacijent pacijent, bool pravo_da_zakaze) 
         {
@@ -446,7 +494,6 @@ namespace HippocratesDoctor
             }
         }
 
-       
         private void metroGridPacijenti_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             MetroGrid mg = sender as MetroGrid;
@@ -536,6 +583,7 @@ namespace HippocratesDoctor
                 case 1: { RefreshVakcineData(aktivni_pacijent); break; }
                 case 2: { RefreshTerapijeData(aktivni_pacijent); break; }
                 case 3: { metroLabelOceniPacijentaInfo.Text = GetPatientBasicInfo(); break; }
+                case 4: { RefreshUputData(aktivni_pacijent); break; }
             }
         }
 
@@ -681,6 +729,47 @@ namespace HippocratesDoctor
             else
                 MetroMessageBox.Show(this, "Ne postoje vakcine koje je moguće obrisati", "Warning!",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void metroGridKlinickiCentri_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MetroGrid mg = sender as MetroGrid;
+            if (mg.Rows.Count > 0)
+            {
+                KlinickiCentar kc = SelectedKlinickiCentar(metroGridKlinickiCentri);
+                if (kc != null)
+                    GetKlinikeData(kc);
+            }
+        }
+
+        private void metroGridKlinike_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MetroGrid mg = sender as MetroGrid;
+
+            if (mg.Rows.Count > 0)
+            {
+                Klinika k = SelectedKlinika(metroGridKlinike);
+                if (k != null)
+                    GetSpecijalisteData(k);
+            }
+        }
+
+        private void metroGridKlinickiCentri_SelectionChanged(object sender, EventArgs e)
+        {
+            //metroGridKlinike.Rows.Clear();
+            //metroGridSpecijaliste.Rows.Clear();
+
+            GetKlinikeData((KlinickiCentar)metroGridKlinickiCentri.SelectedRows[0].DataBoundItem);
+            GetSpecijalisteData((Klinika)metroGridKlinike.SelectedRows[0].DataBoundItem);
+            //RefreshUputData(aktivni_pacijent);
+        }
+
+        private void metroButtonZakaziKodSpecijaliste_Click(object sender, EventArgs e)
+        {
+            SpecijalistaKC s = (SpecijalistaKC) metroGridSpecijaliste.SelectedRows[0].DataBoundItem;
+            FormZakaziKodSpecijaliste fzks = new FormZakaziKodSpecijaliste(oracle_session, session, aktivni_pacijent, s);
+            fzks.StartPosition = FormStartPosition.CenterScreen;
+            fzks.ShowDialog();
         }
 
         private void metroButtonObrisiTerapije_Click(object sender, EventArgs e)

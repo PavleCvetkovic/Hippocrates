@@ -24,28 +24,40 @@ namespace Hippocrates
         private IzabraniLekar lekar_local = null;
         private Pacijent pacijent_local = null;
 
-        public FormRaspored(ISession session_passed, IzabraniLekar lekar, Pacijent p)
+        public FormRaspored()
         {
             InitializeComponent();
+            foreach (Control c in pnlPopodne.Controls)
+                c.Click += metroButton_Click;
+            foreach (Control c in pnlPrepodne.Controls)
+                c.Click += metroButton_Click;
+            this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
+                Screen.PrimaryScreen.WorkingArea.Height);
+            this.MinimumSize = new System.Drawing.Size(698, 365);
+        }
+
+        public FormRaspored(ISession session_passed, IzabraniLekar lekar, Pacijent p) : this()
+        {
+            //InitializeComponent();
             session_local = session_passed;
             pacijent_local = p;
             lekar_local = lekar;
             //session_local = DataLayer.GetSession();
             
             //this.WindowState = FormWindowState.Maximized;
-            this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
-                Screen.PrimaryScreen.WorkingArea.Height);
-            this.MinimumSize = new System.Drawing.Size(698, 365);
+            //this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
+            //    Screen.PrimaryScreen.WorkingArea.Height);
+            //this.MinimumSize = new System.Drawing.Size(698, 365);
 
             metroDateTime1.MinDate = System.DateTime.Today;
             metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
             metroLabelLekarInfo.Text = "Izabrani lekar: " + lekar.Ime + " " + lekar.Prezime + " " + lekar.Jmbg;
 
             // Binding handler to control
-            foreach (Control c in pnlPopodne.Controls)
-                c.Click += metroButton_Click;
-            foreach (Control c in pnlPrepodne.Controls)
-                c.Click += metroButton_Click;
+            //foreach (Control c in pnlPopodne.Controls)
+            //    c.Click += metroButton_Click;
+            //foreach (Control c in pnlPrepodne.Controls)
+            //    c.Click += metroButton_Click;
 
         }
         //----------------------------------------------
@@ -87,7 +99,7 @@ namespace Hippocrates
             return smena;
         }
 
-        private void UpdateForm(int smena_lek)
+        protected void UpdateForm(int smena_lek)
         {
             metroLabelSmenaLekara.ForeColor = Color.DarkGreen;
             if (smena_lek == 1) // Promenjen Visible na Enable svojstvo 
@@ -215,13 +227,13 @@ namespace Hippocrates
             return success;
         }
 
-        private void metroDateTime1_ValueChanged(object sender, EventArgs e)
+        protected virtual void metroDateTime1_ValueChanged(object sender, EventArgs e)
         {
             //Each date change refreshes controls
             RefreshControls(lekar_local);
         }
-        
-        private void metroButton_Click(object sender, EventArgs e)
+
+        protected virtual void metroButton_Click(object sender, EventArgs e)
         {
             MetroButton metro_button = (MetroButton)sender;
             //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -251,12 +263,12 @@ namespace Hippocrates
             RefreshControls(lekar_local);
         }
 
-        private void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
+        protected void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
         {
             session_local.Flush();
             //session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
 
-            // Ti koji si sklonio ovo (budi fin da se potpisi sledeci put) NikolaCeranic trenutno ovo pise
+            // Ti koji si sklonio ovo (budi fin pa se potpisi sledeci put) NikolaCeranic trenutno ovo pise
             // Zasto se "to" ne zatvara:
             // Sessija je prosledjena od strane prethodne forme
             // Jedna sesija se vuce kroz celu aplikaciju (samo jedna)
