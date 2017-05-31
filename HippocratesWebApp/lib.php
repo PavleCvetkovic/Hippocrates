@@ -95,8 +95,9 @@ function zahtevZaPromenu($matbrp,$matbrl){
     else {
         $res=$con->query("SELECT * FROM ZAHTEV_ZA_PROMENU WHERE MATBRP=$matbrp;");
 
-        if($res->num_rows==0)
-            $res=$con->query("INSERT INTO ZAHTEV_ZA_PROMENU(MATBRP,MATBR_ŽELJENOG) VALUES('$matbrp',$matbrl);");
+        if($res->num_rows==0){
+            $res=$con->query("INSERT INTO ZAHTEV_ZA_PROMENU(MATBRP,MATBR_ŽELJENOG) VALUES('$matbrp','$matbrl');");
+          }
         else{
             $con->close();
             return false;
