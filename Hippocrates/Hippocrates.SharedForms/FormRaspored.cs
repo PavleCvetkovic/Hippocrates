@@ -24,28 +24,40 @@ namespace Hippocrates.SharedForms
         private IzabraniLekar lekar_local = null;
         private Pacijent pacijent_local = null;
 
-        public FormRaspored(ISession session_passed, IzabraniLekar lekar, Pacijent p)
+        public FormRaspored()
         {
             InitializeComponent();
+            foreach (Control c in pnlPopodne.Controls)
+                c.Click += metroButton_Click;
+            foreach (Control c in pnlPrepodne.Controls)
+                c.Click += metroButton_Click;
+            this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
+                Screen.PrimaryScreen.WorkingArea.Height);
+            this.MinimumSize = new System.Drawing.Size(698, 365);
+        }
+
+        public FormRaspored(ISession session_passed, IzabraniLekar lekar, Pacijent p) : this()
+        {
+            //InitializeComponent();
             session_local = session_passed;
             pacijent_local = p;
             lekar_local = lekar;
             //session_local = DataLayer.GetSession();
 
             //this.WindowState = FormWindowState.Maximized;
-            this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
-                Screen.PrimaryScreen.WorkingArea.Height);
-            this.MinimumSize = new System.Drawing.Size(698, 365);
+            //this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
+            //    Screen.PrimaryScreen.WorkingArea.Height);
+            //this.MinimumSize = new System.Drawing.Size(698, 365);
 
             metroDateTime1.MinDate = System.DateTime.Today;
             metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
             metroLabelLekarInfo.Text = "Izabrani lekar: " + lekar.Ime + " " + lekar.Prezime + " " + lekar.Jmbg;
 
             // Binding handler to control
-            foreach (Control c in pnlPopodne.Controls)
-                c.Click += metroButton_Click;
-            foreach (Control c in pnlPrepodne.Controls)
-                c.Click += metroButton_Click;
+            //foreach (Control c in pnlPopodne.Controls)
+            //    c.Click += metroButton_Click;
+            //foreach (Control c in pnlPrepodne.Controls)
+            //    c.Click += metroButton_Click;
 
         }
         //----------------------------------------------
@@ -79,7 +91,7 @@ namespace Hippocrates.SharedForms
         {
             Smena smena = null;
             foreach (Smena s in lekar.Smene)
-                if (s.Id.Datum_Od <= System.DateTime.Now && s.Datum_Do >= System.DateTime.Now)
+                if (s.Id.Datum_Od <= metroDateTime1.Value.Date && s.Datum_Do >= metroDateTime1.Value.Date)
                 {
                     smena = s;
                     break;
@@ -87,22 +99,27 @@ namespace Hippocrates.SharedForms
             return smena;
         }
 
-        private void UpdateForm(int smena_lek)
+        protected void UpdateForm(int smena_lek)
         {
+            metroLabelSmenaLekara.ForeColor = Color.DarkGreen;
             if (smena_lek == 1) // Promenjen Visible na Enable svojstvo 
             {
                 metroLabelSmenaLekara.Text = "Prepodne";
                 pnlPrepodne.Enabled = true;
                 pnlPopodne.Enabled = false;
-                //pnlPopodne.Enabled = false;
+                return;
             }
-            else
+            if (smena_lek == 2)
             {
                 metroLabelSmenaLekara.Text = "Poslepodne";
                 pnlPrepodne.Enabled = false;
                 pnlPopodne.Enabled = true;
-                //pnlPrepodne.Enabled = false;
+                return;
             }
+            metroLabelSmenaLekara.ForeColor = Color.Red;
+            metroLabelSmenaLekara.Text = "Lekaru nije podešena smena za izabrani datum";
+            pnlPrepodne.Enabled = false;
+            pnlPopodne.Enabled = false;
         }
 
         private void RefreshControls(IzabraniLekar lekar)
@@ -111,13 +128,9 @@ namespace Hippocrates.SharedForms
             if (s == null)
             {
                 MetroMessageBox.Show(this, "Lekaru izabranog pacijenta nije podešena smena za traženi datum, i nije moguće zakazati termin", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                metroLabelSmenaLekara.Text = "Lekaru nije određena smena. Odaberite drugi datum.";
-                pnlPopodne.Enabled = false; // za slucaj kada se promeni datum a lekar nema definisanu smenu za taj datum
-                pnlPrepodne.Enabled = false; // za slucaj kada se promeni datum a lekar nema definisanu smenu za taj datum
+                UpdateForm(3); // lekaru nije podesena smena
                 return;
             }
-            pnlPrepodne.Enabled = true; // jer je moguce da je bilo false (za pogresni datum)
-            pnlPopodne.Enabled = true; // jer je moguce da je bilo false (za pogresni datum)
             UpdateForm(GetDoctorShift(lekar).SmenaLekara);
 
             IQuery query = session_local.CreateQuery("from Termin t where t.Lekar.Jmbg = :lekar and t.Datum = :datum");
@@ -128,14 +141,12 @@ namespace Hippocrates.SharedForms
 
 
             #region Reset all buttons
-            foreach (Control c in pnlPopodne.Controls)
+            foreach (Control c in pnlPrepodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
                 if (mb != null)
                 {
-                    //mb.Highlight = false;
-                    mb.Enabled = true; // ne mogu biti kliknuti (jer nije zakazan termin)
-                    //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    mb.Enabled = true;
                 }
 
             }
@@ -144,9 +155,7 @@ namespace Hippocrates.SharedForms
                 MetroButton mb = c as MetroButton;
                 if (mb != null)
                 {
-                    // mb.Highlight = false;
-                    mb.Enabled = true; // ne mogu biti kliknuti (jer nije zakazan termin)
-                    //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    mb.Enabled = true;
                 }
             }
             #endregion
@@ -214,13 +223,13 @@ namespace Hippocrates.SharedForms
             return success;
         }
 
-        private void metroDateTime1_ValueChanged(object sender, EventArgs e)
+        protected virtual void metroDateTime1_ValueChanged(object sender, EventArgs e)
         {
             //Each date change refreshes controls
             RefreshControls(lekar_local);
         }
 
-        private void metroButton_Click(object sender, EventArgs e)
+        protected virtual void metroButton_Click(object sender, EventArgs e)
         {
             MetroButton metro_button = (MetroButton)sender;
             //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -242,14 +251,6 @@ namespace Hippocrates.SharedForms
             if (MakeAnApointment(time, napomena)) // Replace(string old_string, string new_string) 11:30 -> 1130
             {
                 RefreshControls(lekar_local); //Each appointment change refreshed controls
-                if(SendEmailConfirmation(metro_button.Text, metroDateTime1.Value.Date.ToShortDateString()))
-                {
-                    MessageBox.Show("Pacijentu je poslat mail za potvrdu termina.");
-                }
-                else
-                {
-                    MessageBox.Show("Mail nije uspeno poslat.");
-                }
                 MetroMessageBox.Show(this, "Info", "Uspešno zakazan termin", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -258,67 +259,16 @@ namespace Hippocrates.SharedForms
             RefreshControls(lekar_local);
         }
 
-        private void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
+        protected void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
         {
             session_local.Flush();
-            //session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
+            session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
 
-            // Ti koji si sklonio ovo (budi fin da se potpisi sledeci put) NikolaCeranic trenutno ovo pise
+            // Ti koji si sklonio ovo (budi fin pa se potpisi sledeci put) NikolaCeranic trenutno ovo pise
             // Zasto se "to" ne zatvara:
             // Sessija je prosledjena od strane prethodne forme
             // Jedna sesija se vuce kroz celu aplikaciju (samo jedna)
             // Zato ako se ovde zatvori u prethodnoj formi nije moguce raditi sa objektima (javlja se izuzetak)
-        }
-        public bool SendEmailConfirmation(string termin_time, string termin_date)
-        {
-            // 587 port, smtp.gmail.com, tls (secure)
-            bool success = true;
-            if (pacijent_local.Email == null) // 
-            {
-                MetroMessageBox.Show(this, "Niste podesili e-mail. Potvrda o zakazanom terminu nije poslata", "Warning!",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            var fromAddress = new MailAddress("mshippocrates@gmail.com", "MS Hippocrates");
-            var toAddress = new MailAddress(pacijent_local.Email, pacijent_local.Ime + " " + pacijent_local.Prezime);
-
-
-            const string fromPassword = "morfijum";
-            const string subject = "Hippocrates sistem - Potvrda o zakazanom terminu";
-            string body = "Uspešno ste zakazali termin kod lekara " + lekar_local.Ime + " " + lekar_local.Prezime + " \n\n"
-                + "Zakazani termin je: " + termin_time + " " + termin_date + "\n" + "Molimo da ispoštujete zakazani termin ili" +
-                " blagovremeno otkažete isti. U slučaju nepoštovanja i ne dolaska na termin gubite pravo na mogućnost zakazivanja" +
-                "termina." + "\n\n" + "Hippocrates sistem\n" +
-                "Ovo je automatski generisana poruka, molimo Vas da ne odgovarate na ovaj e-mail.";
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            })
-            {
-                try
-                {
-                    smtp.Send(message);
-                }
-                catch (Exception ex)
-                {
-                    MetroMessageBox.Show(this, "Greška prilikom slanja e-mail za potvrdu zakazanog termina " + ex.Message, "Error!",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    success = false;
-                }
-            }
-            return success;
         }
     }
 }
