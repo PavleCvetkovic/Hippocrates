@@ -29,6 +29,7 @@ namespace Hippocrates.Data.MapiranjaOracle
 
             References(x => x.Klinika).Column("ID_KLINIKE").LazyLoad();
             HasMany(x => x.Smene).KeyColumn("ID_ZAPOSLENOG").LazyLoad().Inverse().Cascade.All();
+            HasMany(x => x.Pregledi).KeyColumn("ID_SPECIJALISTE").LazyLoad().Cascade.All().Inverse();
 
         }
     }

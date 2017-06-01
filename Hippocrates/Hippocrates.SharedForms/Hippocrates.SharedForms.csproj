@@ -91,6 +91,9 @@
     <EmbeddedResource Include="FormRaspored.resx">
       <DependentUpon>FormRaspored.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormZakaziKodSpecijaliste.resx">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -20,11 +20,13 @@ namespace Hippocrates.Data.EntitetiOracle
         public virtual string Pol { get; set; }
         public virtual string Adresa { get; set; }
         public virtual IList<SmenaKC> Smene { get; set; }
+        public virtual IList<Pregled> Pregledi { get; set; }
         
 
         public SpecijalistaKC()
         {
             Smene = new List<SmenaKC>();
+            Pregledi = new List<Pregled>();
         }
     }
 }

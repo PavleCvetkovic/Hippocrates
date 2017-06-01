@@ -17,7 +17,7 @@ using MetroFramework.Controls;
 
 namespace Hippocrates.SharedForms
 {
-    public partial class FormZakaziKodSpecijaliste :  FormRaspored
+    public partial class FormZakaziKodSpecijaliste : FormRaspored
     {
         private SpecijalistaKC specijalista_local;
         private Pacijent pacijent_local;
@@ -39,7 +39,7 @@ namespace Hippocrates.SharedForms
         {
             SmenaKC smena = null;
             foreach (SmenaKC s in skc.Smene)
-                if (s.DatumOd <=metroDateTime1.Value.Date && s.DatumDo >= metroDateTime1.Value.Date)
+                if (s.DatumOd <= metroDateTime1.Value.Date && s.DatumDo >= metroDateTime1.Value.Date)
                 {
                     smena = s;
                     break;
@@ -56,27 +56,26 @@ namespace Hippocrates.SharedForms
                 UpdateForm(3); // lekaru nije podesena smena
                 return;
             }
-            int smena_num = 1;
+            int smena_num = -1;
             if (Int32.TryParse(s.TipSmene, out smena_num))
                 UpdateForm(smena_num);
             else
                 return;
 
-            IQuery query = oracle_session_local.CreateQuery("from Pregled p where p.Specijalista = :spec and p.Datum = :datum");
+            /*IQuery query = oracle_session_local.CreateQuery("from Pregled p where p.Specijalista = :spec and p.Datum = :datum");
             query.SetParameter("spec", specijalista_local);
-            query.SetParameter("datum", metroDateTime1.Value.Date);
+            query.SetParameter("datum", metroDateTime1.Value.Date);*/
 
-            IList<Pregled> termini_lekara = query.List<Pregled>(); // lista svih danasnjih termina zadatog lekara
-            IList<Pregled> pregledi = oracle_session_local.QueryOver<Pregled>().List<Pregled>();
-            foreach (Pregled pr in pregledi)
+
+            IList<Pregled> termini_lekara = specijalista_local.Pregledi.ToList<Pregled>();
+            IList<Pregled> zauzetitermini = new List<Pregled>();
+            foreach (Pregled preg in termini_lekara)
             {
-                if (metroDateTime1.Value.Day == pr.Datum.Day && metroDateTime1.Value.Month == pr.Datum.Month && pr.Datum.Year == metroDateTime1.Value.Year)
-                {
-                    List<Control> lista = this.Controls.Find("metroButton" + pr.Vreme, true).ToList<Control>();
-                    lista[0].Enabled = false;
-                }
+                if (preg.Datum.Date == metroDateTime1.Value.Date)
+                    zauzetitermini.Add(preg);
             }
-            #region Reset all buttons
+
+            /*#region Reset all buttons
             foreach (Control c in pnlPrepodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
@@ -98,9 +97,25 @@ namespace Hippocrates.SharedForms
                     //mb.BackColor = Color.LightCyan; // LightCyan = Free
                 }
             }
-            #endregion
+            #endregion*/
+            int[] termini = { 700, 745, 830, 915, 1000, 1045, 1130, 1215, 1300, 1330, 1415, 1500, 1545, 1630, 1715, 1800, 1845 };
+            foreach (int ter in termini)
+            {
+                if (ter <= 1330)
+                {
+                    MetroButton mb = this.pnlPrepodne.Controls["metroButton" + ter.ToString()] as MetroButton;
+                    if (mb != null)
+                        mb.Enabled = true;
+                }
+                else
+                {
+                    MetroButton mb = this.pnlPopodne.Controls["metroButton" + ter.ToString()] as MetroButton;
+                    if (mb != null)
+                        mb.Enabled = true;
+                }
+            }
 
-            foreach (Pregled p in termini_lekara)
+            foreach (Pregled p in zauzetitermini)
             {
                 int time = p.Vreme;
                 //MetroMessageBox.Show(this, "Enter while loop in rdr.Read() " + time.ToString(), "rdr.Read()", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -124,7 +139,7 @@ namespace Hippocrates.SharedForms
             IList<Pregled> zakazaniPregledi = oracle_session_local.QueryOver<Pregled>().List<Pregled>();
             foreach (Pregled p in zakazaniPregledi)
             {
-                if (p.Datum == metroDateTime1.Value && p.Vreme == time)
+                if (p.Datum.Date == metroDateTime1.Value.Date && p.Vreme == time)
                     return false; //zakazan u medjuvremenu
             }
             PacijentKlinickogCentra pkc = oracle_session_local.QueryOver<PacijentKlinickogCentra>().Where(x => x.JMBG == pacijent_local.Jmbg).SingleOrDefault<PacijentKlinickogCentra>();
@@ -247,7 +262,9 @@ namespace Hippocrates.SharedForms
             };
             mysql_session_local.Save(t);
             mysql_session_local.Flush();
-
+            oracle_session_local.Flush();
+            oracle_session_local.Refresh(specijalista_local);
+            RefreshControls(specijalista_local);
             return true;
         }
 
@@ -290,7 +307,6 @@ namespace Hippocrates.SharedForms
             else
                 MetroMessageBox.Show(this, "Info", "Greška prilikom zakazivanja termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            RefreshControls(specijalista_local);
 
         }
 
@@ -300,6 +316,8 @@ namespace Hippocrates.SharedForms
         {
             RefreshControls(specijalista_local);
         }
+
+
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {

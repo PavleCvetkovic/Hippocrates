@@ -4188,7 +4188,7 @@ namespace Hippocrates
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Morate oznaciti pacijenta i specijalistu!");
+                MessageBox.Show("Problem: " + ex);
             }
             session.Close();
             oracleSession.Close();
