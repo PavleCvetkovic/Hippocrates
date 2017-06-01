@@ -203,6 +203,9 @@
     <EmbeddedResource Include="FormZahteviPacijenata.resx">
       <DependentUpon>FormZahteviPacijenata.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormZakaziKodSpecijaliste.resx">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Napomena.resx">
       <DependentUpon>Napomena.cs</DependentUpon>
     </EmbeddedResource>

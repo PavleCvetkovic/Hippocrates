@@ -67,7 +67,15 @@ namespace HippocratesDoctor
             query.SetParameter("datum", metroDateTime1.Value.Date);
 
             IList<Pregled> termini_lekara = query.List<Pregled>(); // lista svih danasnjih termina zadatog lekara
-
+            IList<Pregled> pregledi = oracle_session_local.QueryOver<Pregled>().List<Pregled>();
+            foreach (Pregled pr in pregledi)
+            {
+                if (metroDateTime1.Value.Day == pr.Datum.Day && metroDateTime1.Value.Month == pr.Datum.Month && pr.Datum.Year == metroDateTime1.Value.Year)
+                {
+                    List<Control> lista = this.Controls.Find("metroButton" + pr.Vreme, true).ToList<Control>();
+                    lista[0].Enabled = false;
+                }
+            }
             #region Reset all buttons
             foreach (Control c in pnlPopodne.Controls)
             {
@@ -113,48 +121,134 @@ namespace HippocratesDoctor
 
         private bool MakeAnApointment(int time, string napomena, SpecijalistaKC specijalista_oracle)
         {
-            bool success = true;
-            //// (MySQL, TerminBolnica)
-            //Specijalista spec_mysql = null;
-            //IList<Specijalista> lista_specijalista = mysql_session_local.QueryOver<Specijalista>().List<Specijalista>();
-            //bool found = false;
-            //foreach (Specijalista s in lista_specijalista)
-            //{
-            //    if (s.Jmbg == specijalista_oracle.JMBG)
-            //    {
-            //        found = true;
-            //        break;
-            //    }
-            //}
-            //if (!found) // Dodaj specijalistu
-            //{
+            IList<Pregled> zakazaniPregledi = oracle_session_local.QueryOver<Pregled>().List<Pregled>();
+            foreach(Pregled p in zakazaniPregledi)
+            {
+                if (p.Datum == metroDateTime1.Value && p.Vreme == time)
+                    return false; //zakazan u medjuvremenu
+            }
+            PacijentKlinickogCentra pkc = oracle_session_local.QueryOver<PacijentKlinickogCentra>().Where(x => x.JMBG == pacijent_local.Jmbg).SingleOrDefault<PacijentKlinickogCentra>();
+            if (pkc == null) //nema ga pacijent u evidenciji KC, treba da se unese
+            {
+                DomZdravljaOracle dz = new DomZdravljaOracle()
+                {
+                    Mbr = pacijent_local.Lekar.RadiUDomuZdravlja.Mbr,
+                    Adresa = pacijent_local.Lekar.RadiUDomuZdravlja.Adresa,
+                    Ime = pacijent_local.Lekar.RadiUDomuZdravlja.Ime,
+                    Lokacija = pacijent_local.Lekar.RadiUDomuZdravlja.Lokacija,
+                    Opstina = pacijent_local.Lekar.RadiUDomuZdravlja.Opstina
+                };
+                IzabraniLekarOracle il = new IzabraniLekarOracle()
+                {
+                    Jmbg = pacijent_local.Lekar.Jmbg,
+                    Adresa = "/",
+                    DatumRodjenja = pacijent_local.Lekar.Datum_rodjenja,
+                    Ime = pacijent_local.Lekar.Ime,
+                    DomZdravlja = dz,
+                    Prezime = pacijent_local.Lekar.Prezime,
+                    Password="/"
+                };
+                dz.Lekari.Add(il);
+                oracle_session_local.SaveOrUpdate(dz);
+                oracle_session_local.Flush(); //snimljeni DZ i IL u ORACLE
+                PacijentKlinickogCentra pkdodaj = new PacijentKlinickogCentra()
+                {
+                    Adresa = "/",
+                    BracniStatus = "/",
+                    DatumRodjenja = pacijent_local.Datum_rodjenja,
+                    Ime = pacijent_local.Ime,
+                    JMBG = pacijent_local.Jmbg,
+                    Pol = "/",
+                    Prezime = pacijent_local.Prezime
+                };
+                Pregled pregled = new Pregled()
+                {
+                    Datum = metroDateTime1.Value,
+                    IdIzabranogLekara = il.Jmbg,
+                    Pacijent = pkdodaj,
+                    Prostorija = specijalista_local.BrojOrdinacije,
+                    Specijalista = specijalista_local,
+                    Vreme = time
+                };
+                oracle_session_local.Save(pkdodaj);
+                oracle_session_local.Flush();
+                oracle_session_local.Save(pregled);
+                oracle_session_local.Flush();
+            }
+            else
+            {
+                IzabraniLekarOracle il = oracle_session_local.QueryOver<IzabraniLekarOracle>().Where(x => x.Jmbg == pacijent_local.Lekar.Jmbg).SingleOrDefault<IzabraniLekarOracle>();
+                if (il == null)
+                {
+                    DomZdravljaOracle dz = new DomZdravljaOracle()
+                    {
+                        Mbr = pacijent_local.Lekar.RadiUDomuZdravlja.Mbr,
+                        Adresa = pacijent_local.Lekar.RadiUDomuZdravlja.Adresa,
+                        Ime = pacijent_local.Lekar.RadiUDomuZdravlja.Ime,
+                        Lokacija = pacijent_local.Lekar.RadiUDomuZdravlja.Lokacija,
+                        Opstina = pacijent_local.Lekar.RadiUDomuZdravlja.Opstina
+                    };
+                    IzabraniLekarOracle iz = new IzabraniLekarOracle()
+                    {
+                        Jmbg = pacijent_local.Lekar.Jmbg,
+                        Adresa = "/",
+                        DatumRodjenja = pacijent_local.Lekar.Datum_rodjenja,
+                        Ime = pacijent_local.Lekar.Ime,
+                        DomZdravlja = dz,
+                        Prezime = pacijent_local.Lekar.Prezime
+                    };
+                    dz.Lekari.Add(iz);
+                    oracle_session_local.SaveOrUpdate(dz);
+                    oracle_session_local.Flush();
+                }
+                
+                Pregled pregled = new Pregled()
+                {
+                    Datum = metroDateTime1.Value,
+                    IdIzabranogLekara = il.Jmbg,
+                    Pacijent = pkc,
+                    Prostorija = specijalista_local.BrojOrdinacije,
+                    Specijalista = specijalista_local,
+                    Vreme = time
+                };
+                oracle_session_local.Save(pregled);
+                oracle_session_local.Flush();
+            }
+            //termini i bolnica
+            Bolnica b = new Bolnica()
+            {
+                Mbr = specijalista_local.Klinika.Id.ToString(),
+                Ime = specijalista_local.Klinika.Naziv,
+                Adresa = specijalista_local.Klinika.Lokacija,
+                Opstina = "/",
+                Lokacija = "/",
+            };
+            Specijalista spec = new Specijalista()
+            {
+                Ime = specijalista_local.Ime,
+                Datum_rodjenja = specijalista_local.DatumRodjenja,
+                Jmbg = specijalista_local.JMBG,
+                Prezime = specijalista_local.Prezime,
+                Srednje_slovo = "/",
+                Titula = "/",
+            };
+            if(!b.Specijaliste.Contains(spec))
+                b.Specijaliste.Add(spec);
+            spec.RadiUBolnici = b;
+            mysql_session_local.SaveOrUpdate(b);
+            mysql_session_local.Flush();
+            TerminBolnica t = new TerminBolnica()
+            {
+                LSpecijalista=spec,
+                Datum = metroDateTime1.Value,
+                Napomena = napomena,
+                Pacijent = pacijent_local,
+                Vreme = time
+            };
+            mysql_session_local.Save(t);
+            mysql_session_local.Flush();
 
-            //}
-            //TerminBolnica t = new TerminBolnica
-            //{
-            //    LSpecijalista = specijalista_local,
-            //    Pacijent = pacijent_local,
-            //    Napomena = napomena,
-            //    Datum = metroDateTime1.Value.Date,
-            //    Vreme = time
-            //};
-            //try
-            //{
-
-            //    lekar_local.Termini.Add(t);
-            //    pacijent_local.Termini.Add(t);
-
-            //    session_local.Update(lekar_local);
-            //    session_local.Update(pacijent_local);
-            //    session_local.Flush();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MetroMessageBox.Show(this, "Greška prilikom zakazivanja termina " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    success = false;
-            //}
-            //// (Oracle, Pregled)
-            return success;
+            return true;
         }
 
         private void UpdateConsistency()
