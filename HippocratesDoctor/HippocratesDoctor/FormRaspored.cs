@@ -141,7 +141,7 @@ namespace Hippocrates
 
 
             #region Reset all buttons
-            foreach (Control c in pnlPopodne.Controls)
+            foreach (Control c in pnlPrepodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
                 if (mb != null)
