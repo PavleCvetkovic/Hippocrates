@@ -73,6 +73,12 @@
     <Compile Include="FormRaspored.Designer.cs">
       <DependentUpon>FormRaspored.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormZakaziKodSpecijaliste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZakaziKodSpecijaliste.Designer.cs">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
+    </Compile>
     <Compile Include="NapomenaForm.cs">
       <SubType>Form</SubType>
     </Compile>

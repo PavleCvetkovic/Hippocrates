@@ -262,7 +262,7 @@ namespace Hippocrates.SharedForms
         protected void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
         {
             session_local.Flush();
-            session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
+            //session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
 
             // Ti koji si sklonio ovo (budi fin pa se potpisi sledeci put) NikolaCeranic trenutno ovo pise
             // Zasto se "to" ne zatvara:
