@@ -31,32 +31,32 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.mTabLogin = new MetroFramework.Controls.MetroTabControl();
             this.mTabDirektor = new MetroFramework.Controls.MetroTabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mbtnDirektorSubmit = new MetroFramework.Controls.MetroButton();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.mtbxDirektorSifra = new MetroFramework.Controls.MetroTextBox();
             this.mtbxDirektorJMBG = new MetroFramework.Controls.MetroTextBox();
             this.mTabLekar = new MetroFramework.Controls.MetroTabPage();
+            this.mtbxLekarJMBG = new MetroFramework.Controls.MetroTextBox();
+            this.mtbxLekarSifra = new MetroFramework.Controls.MetroTextBox();
             this.mbtnLekarSubmit = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.mtbxLekarSifra = new MetroFramework.Controls.MetroTextBox();
-            this.mtbxLekarJMBG = new MetroFramework.Controls.MetroTextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.mTabOsoblje = new MetroFramework.Controls.MetroTabPage();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.mbtnOsobljeSubmit = new MetroFramework.Controls.MetroButton();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.mtbxOsobljeSifra = new MetroFramework.Controls.MetroTextBox();
             this.mtbxOsobljeJMBG = new MetroFramework.Controls.MetroTextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.mTabLogin.SuspendLayout();
             this.mTabDirektor.SuspendLayout();
-            this.mTabLekar.SuspendLayout();
-            this.mTabOsoblje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.mTabLekar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.mTabOsoblje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,6 +91,16 @@
             this.mTabDirektor.VerticalScrollbarBarColor = true;
             this.mTabDirektor.VerticalScrollbarHighlightOnWheel = false;
             this.mTabDirektor.VerticalScrollbarSize = 10;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.Image = global::HippocratesDoctor.Properties.Resources.database;
+            this.pictureBox1.Location = new System.Drawing.Point(-27, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(225, 383);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
             // 
             // mbtnDirektorSubmit
             // 
@@ -171,7 +181,7 @@
             this.mtbxDirektorJMBG.Lines = new string[] {
         "1236549877899"};
             this.mtbxDirektorJMBG.Location = new System.Drawing.Point(254, 90);
-            this.mtbxDirektorJMBG.MaxLength = 32767;
+            this.mtbxDirektorJMBG.MaxLength = 13;
             this.mtbxDirektorJMBG.Name = "mtbxDirektorJMBG";
             this.mtbxDirektorJMBG.PasswordChar = '\0';
             this.mtbxDirektorJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -185,6 +195,7 @@
             this.mtbxDirektorJMBG.UseSelectable = true;
             this.mtbxDirektorJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbxDirektorJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbxDirektorJMBG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbxDirektorJMBG_KeyPress);
             // 
             // mTabLekar
             // 
@@ -206,34 +217,38 @@
             this.mTabLekar.VerticalScrollbarHighlightOnWheel = false;
             this.mTabLekar.VerticalScrollbarSize = 10;
             // 
-            // mbtnLekarSubmit
+            // mtbxLekarJMBG
             // 
-            this.mbtnLekarSubmit.Location = new System.Drawing.Point(299, 223);
-            this.mbtnLekarSubmit.Name = "mbtnLekarSubmit";
-            this.mbtnLekarSubmit.Size = new System.Drawing.Size(75, 23);
-            this.mbtnLekarSubmit.TabIndex = 6;
-            this.mbtnLekarSubmit.Text = "Uloguj se";
-            this.mbtnLekarSubmit.UseSelectable = true;
-            this.mbtnLekarSubmit.Click += new System.EventHandler(this.mbtnLekarSubmit_Click);
             // 
-            // metroLabel2
             // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.metroLabel2.Location = new System.Drawing.Point(313, 139);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(52, 19);
-            this.metroLabel2.TabIndex = 5;
-            this.metroLabel2.Text = "Lozinka";
             // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(313, 46);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(43, 19);
-            this.metroLabel1.TabIndex = 4;
-            this.metroLabel1.Text = "JMBG";
+            this.mtbxLekarJMBG.CustomButton.Image = null;
+            this.mtbxLekarJMBG.CustomButton.Location = new System.Drawing.Point(144, 1);
+            this.mtbxLekarJMBG.CustomButton.Name = "";
+            this.mtbxLekarJMBG.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.mtbxLekarJMBG.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.mtbxLekarJMBG.CustomButton.TabIndex = 1;
+            this.mtbxLekarJMBG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.mtbxLekarJMBG.CustomButton.UseSelectable = true;
+            this.mtbxLekarJMBG.CustomButton.Visible = false;
+            this.mtbxLekarJMBG.Lines = new string[] {
+        "0112955445023"};
+            this.mtbxLekarJMBG.Location = new System.Drawing.Point(254, 90);
+            this.mtbxLekarJMBG.MaxLength = 13;
+            this.mtbxLekarJMBG.Name = "mtbxLekarJMBG";
+            this.mtbxLekarJMBG.PasswordChar = '\0';
+            this.mtbxLekarJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.mtbxLekarJMBG.SelectedText = "";
+            this.mtbxLekarJMBG.SelectionLength = 0;
+            this.mtbxLekarJMBG.SelectionStart = 0;
+            this.mtbxLekarJMBG.ShortcutsEnabled = true;
+            this.mtbxLekarJMBG.Size = new System.Drawing.Size(166, 23);
+            this.mtbxLekarJMBG.TabIndex = 2;
+            this.mtbxLekarJMBG.Text = "0112955445023";
+            this.mtbxLekarJMBG.UseSelectable = true;
+            this.mtbxLekarJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.mtbxLekarJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbxLekarJMBG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbxDirektorJMBG_KeyPress);
             // 
             // mtbxLekarSifra
             // 
@@ -268,37 +283,44 @@
             this.mtbxLekarSifra.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbxLekarSifra.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // mtbxLekarJMBG
+            // mbtnLekarSubmit
             // 
+            this.mbtnLekarSubmit.Location = new System.Drawing.Point(299, 223);
+            this.mbtnLekarSubmit.Name = "mbtnLekarSubmit";
+            this.mbtnLekarSubmit.Size = new System.Drawing.Size(75, 23);
+            this.mbtnLekarSubmit.TabIndex = 6;
+            this.mbtnLekarSubmit.Text = "Uloguj se";
+            this.mbtnLekarSubmit.UseSelectable = true;
+            this.mbtnLekarSubmit.Click += new System.EventHandler(this.mbtnLekarSubmit_Click);
             // 
+            // metroLabel2
             // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.metroLabel2.Location = new System.Drawing.Point(313, 139);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(52, 19);
+            this.metroLabel2.TabIndex = 5;
+            this.metroLabel2.Text = "Lozinka";
             // 
-            this.mtbxLekarJMBG.CustomButton.Image = null;
-            this.mtbxLekarJMBG.CustomButton.Location = new System.Drawing.Point(144, 1);
-            this.mtbxLekarJMBG.CustomButton.Name = "";
-            this.mtbxLekarJMBG.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.mtbxLekarJMBG.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.mtbxLekarJMBG.CustomButton.TabIndex = 1;
-            this.mtbxLekarJMBG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.mtbxLekarJMBG.CustomButton.UseSelectable = true;
-            this.mtbxLekarJMBG.CustomButton.Visible = false;
-            this.mtbxLekarJMBG.Lines = new string[] {
-        "0112955445023"};
-            this.mtbxLekarJMBG.Location = new System.Drawing.Point(254, 90);
-            this.mtbxLekarJMBG.MaxLength = 32767;
-            this.mtbxLekarJMBG.Name = "mtbxLekarJMBG";
-            this.mtbxLekarJMBG.PasswordChar = '\0';
-            this.mtbxLekarJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.mtbxLekarJMBG.SelectedText = "";
-            this.mtbxLekarJMBG.SelectionLength = 0;
-            this.mtbxLekarJMBG.SelectionStart = 0;
-            this.mtbxLekarJMBG.ShortcutsEnabled = true;
-            this.mtbxLekarJMBG.Size = new System.Drawing.Size(166, 23);
-            this.mtbxLekarJMBG.TabIndex = 2;
-            this.mtbxLekarJMBG.Text = "0112955445023";
-            this.mtbxLekarJMBG.UseSelectable = true;
-            this.mtbxLekarJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.mtbxLekarJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(313, 46);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(43, 19);
+            this.metroLabel1.TabIndex = 4;
+            this.metroLabel1.Text = "JMBG";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.White;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(-4, 19);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(282, 358);
+            this.pictureBox2.TabIndex = 12;
+            this.pictureBox2.TabStop = false;
             // 
             // mTabOsoblje
             // 
@@ -319,6 +341,16 @@
             this.mTabOsoblje.VerticalScrollbarBarColor = true;
             this.mTabOsoblje.VerticalScrollbarHighlightOnWheel = false;
             this.mTabOsoblje.VerticalScrollbarSize = 10;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.White;
+            this.pictureBox3.Image = global::HippocratesDoctor.Properties.Resources.nurse;
+            this.pictureBox3.Location = new System.Drawing.Point(17, -1);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(220, 355);
+            this.pictureBox3.TabIndex = 11;
+            this.pictureBox3.TabStop = false;
             // 
             // mbtnOsobljeSubmit
             // 
@@ -399,7 +431,7 @@
             this.mtbxOsobljeJMBG.Lines = new string[] {
         "1234567891231"};
             this.mtbxOsobljeJMBG.Location = new System.Drawing.Point(254, 91);
-            this.mtbxOsobljeJMBG.MaxLength = 32767;
+            this.mtbxOsobljeJMBG.MaxLength = 13;
             this.mtbxOsobljeJMBG.Name = "mtbxOsobljeJMBG";
             this.mtbxOsobljeJMBG.PasswordChar = '\0';
             this.mtbxOsobljeJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -413,36 +445,7 @@
             this.mtbxOsobljeJMBG.UseSelectable = true;
             this.mtbxOsobljeJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbxOsobljeJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Image = global::HippocratesDoctor.Properties.Resources.database;
-            this.pictureBox1.Location = new System.Drawing.Point(-27, 27);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(225, 383);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.White;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(-4, 19);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(282, 358);
-            this.pictureBox2.TabIndex = 12;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.White;
-            this.pictureBox3.Image = global::HippocratesDoctor.Properties.Resources.nurse;
-            this.pictureBox3.Location = new System.Drawing.Point(17, -1);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(220, 355);
-            this.pictureBox3.TabIndex = 11;
-            this.pictureBox3.TabStop = false;
+            this.mtbxOsobljeJMBG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbxDirektorJMBG_KeyPress);
             // 
             // FormLogin
             // 
@@ -455,12 +458,12 @@
             this.mTabLogin.ResumeLayout(false);
             this.mTabDirektor.ResumeLayout(false);
             this.mTabDirektor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mTabLekar.ResumeLayout(false);
             this.mTabLekar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.mTabOsoblje.ResumeLayout(false);
             this.mTabOsoblje.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 

@@ -146,9 +146,7 @@ namespace Hippocrates
                 MetroButton mb = c as MetroButton;
                 if (mb != null)
                 {
-                    //mb.Highlight = false;
-                    mb.Enabled = true; // ne mogu biti kliknuti (jer nije zakazan termin)
-                    //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    mb.Enabled = true;
                 }
 
             }
@@ -157,9 +155,7 @@ namespace Hippocrates
                 MetroButton mb = c as MetroButton;
                 if (mb != null)
                 {
-                   // mb.Highlight = false;
-                    mb.Enabled = true; // ne mogu biti kliknuti (jer nije zakazan termin)
-                    //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    mb.Enabled = true; 
                 }
             }
             #endregion
