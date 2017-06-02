@@ -692,7 +692,7 @@
             this.GeneralControl.Controls.Add(this.tab_zakazi_spec);
             this.GeneralControl.Location = new System.Drawing.Point(200, 76);
             this.GeneralControl.Name = "GeneralControl";
-            this.GeneralControl.SelectedIndex = 1;
+            this.GeneralControl.SelectedIndex = 3;
             this.GeneralControl.Size = new System.Drawing.Size(801, 750);
             this.GeneralControl.TabIndex = 4;
             this.GeneralControl.UseSelectable = true;
@@ -1225,7 +1225,7 @@
             this.TabControl_za_unos.Controls.Add(this.tab_za_unosenje_novog_lekara);
             this.TabControl_za_unos.Location = new System.Drawing.Point(3, 0);
             this.TabControl_za_unos.Name = "TabControl_za_unos";
-            this.TabControl_za_unos.SelectedIndex = 0;
+            this.TabControl_za_unos.SelectedIndex = 1;
             this.TabControl_za_unos.Size = new System.Drawing.Size(794, 718);
             this.TabControl_za_unos.TabIndex = 2;
             this.TabControl_za_unos.UseSelectable = true;
@@ -3253,7 +3253,7 @@
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_domaZdravlja);
             this.tab_azuriranje.Location = new System.Drawing.Point(1, 1);
             this.tab_azuriranje.Name = "tab_azuriranje";
-            this.tab_azuriranje.SelectedIndex = 6;
+            this.tab_azuriranje.SelectedIndex = 2;
             this.tab_azuriranje.Size = new System.Drawing.Size(778, 696);
             this.tab_azuriranje.TabIndex = 4;
             this.tab_azuriranje.UseSelectable = true;
@@ -3472,7 +3472,7 @@
             this.mTC_pacijent_azuriranje_VakDokTer.Controls.Add(this.tab_pregled_termin);
             this.mTC_pacijent_azuriranje_VakDokTer.Location = new System.Drawing.Point(376, 363);
             this.mTC_pacijent_azuriranje_VakDokTer.Name = "mTC_pacijent_azuriranje_VakDokTer";
-            this.mTC_pacijent_azuriranje_VakDokTer.SelectedIndex = 0;
+            this.mTC_pacijent_azuriranje_VakDokTer.SelectedIndex = 3;
             this.mTC_pacijent_azuriranje_VakDokTer.Size = new System.Drawing.Size(329, 233);
             this.mTC_pacijent_azuriranje_VakDokTer.TabIndex = 74;
             this.mTC_pacijent_azuriranje_VakDokTer.UseSelectable = true;
@@ -3535,6 +3535,7 @@
             // label62
             // 
             this.label62.AutoSize = true;
+            this.label62.BackColor = System.Drawing.Color.White;
             this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label62.Location = new System.Drawing.Point(-3, 146);
             this.label62.Name = "label62";
@@ -3555,6 +3556,7 @@
             // label61
             // 
             this.label61.AutoSize = true;
+            this.label61.BackColor = System.Drawing.Color.White;
             this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label61.Location = new System.Drawing.Point(3, 6);
             this.label61.Name = "label61";
@@ -3599,6 +3601,7 @@
             // label39
             // 
             this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.Color.White;
             this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label39.Location = new System.Drawing.Point(159, 1);
             this.label39.Name = "label39";
@@ -3648,16 +3651,18 @@
             // label92
             // 
             this.label92.AutoSize = true;
+            this.label92.BackColor = System.Drawing.Color.White;
             this.label92.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label92.Location = new System.Drawing.Point(190, 20);
             this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(190, 16);
+            this.label92.Size = new System.Drawing.Size(130, 16);
             this.label92.TabIndex = 12;
-            this.label92.Text = "Vakcine koje je primio pacijent";
+            this.label92.Text = "Vakcine pacijentove";
             // 
             // label91
             // 
             this.label91.AutoSize = true;
+            this.label91.BackColor = System.Drawing.Color.White;
             this.label91.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label91.Location = new System.Drawing.Point(104, 20);
             this.label91.Name = "label91";
@@ -3735,6 +3740,7 @@
             // label64
             // 
             this.label64.AutoSize = true;
+            this.label64.BackColor = System.Drawing.Color.White;
             this.label64.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label64.Location = new System.Drawing.Point(177, 20);
             this.label64.Name = "label64";
@@ -3764,6 +3770,7 @@
             // lb_izaberiteDija
             // 
             this.lb_izaberiteDija.AutoSize = true;
+            this.lb_izaberiteDija.BackColor = System.Drawing.Color.White;
             this.lb_izaberiteDija.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_izaberiteDija.Location = new System.Drawing.Point(3, 22);
             this.lb_izaberiteDija.Name = "lb_izaberiteDija";
@@ -3803,6 +3810,7 @@
             // label_lekar_prezime_pac
             // 
             this.label_lekar_prezime_pac.AutoSize = true;
+            this.label_lekar_prezime_pac.BackColor = System.Drawing.Color.White;
             this.label_lekar_prezime_pac.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_lekar_prezime_pac.Location = new System.Drawing.Point(21, 80);
             this.label_lekar_prezime_pac.Name = "label_lekar_prezime_pac";
@@ -3833,6 +3841,7 @@
             // label67
             // 
             this.label67.AutoSize = true;
+            this.label67.BackColor = System.Drawing.Color.White;
             this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label67.Location = new System.Drawing.Point(140, 27);
             this.label67.Name = "label67";
@@ -3843,6 +3852,7 @@
             // label_lekar_pac
             // 
             this.label_lekar_pac.AutoSize = true;
+            this.label_lekar_pac.BackColor = System.Drawing.Color.White;
             this.label_lekar_pac.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_lekar_pac.Location = new System.Drawing.Point(21, 52);
             this.label_lekar_pac.Name = "label_lekar_pac";
@@ -3853,6 +3863,7 @@
             // label65
             // 
             this.label65.AutoSize = true;
+            this.label65.BackColor = System.Drawing.Color.White;
             this.label65.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label65.Location = new System.Drawing.Point(21, 27);
             this.label65.Name = "label65";
@@ -4250,7 +4261,7 @@
             this.pnlDodavanjeSmene.Controls.Add(this.label135);
             this.pnlDodavanjeSmene.Location = new System.Drawing.Point(439, 329);
             this.pnlDodavanjeSmene.Name = "pnlDodavanjeSmene";
-            this.pnlDodavanjeSmene.Size = new System.Drawing.Size(272, 155);
+            this.pnlDodavanjeSmene.Size = new System.Drawing.Size(262, 155);
             this.pnlDodavanjeSmene.TabIndex = 65;
             this.pnlDodavanjeSmene.Visible = false;
             // 

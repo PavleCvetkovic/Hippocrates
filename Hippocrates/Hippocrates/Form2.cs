@@ -1724,6 +1724,7 @@ namespace Hippocrates
                 s.Delete(v);
                 s.Flush();
                 MessageBox.Show("Uspeno ste obrisali vakcinu. ");
+                cb_vakcina_brisanje.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -1752,6 +1753,7 @@ namespace Hippocrates
                 s.Delete(d);
                 s.Flush();
                 MessageBox.Show("Uspeno ste obrisali dijagnozu. ");
+                cb_brisanje_dijagnoze.Text = string.Empty;
             }
             catch(Exception ex)
             {
@@ -1863,7 +1865,11 @@ namespace Hippocrates
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Morate oznaciti terapiju koju zelite da obrisete. " + ex);
+                MessageBox.Show("Morate oznaciti terapiju koju zelite da obrisete. ");
+                cb_brisanje_ter.Text = string.Empty;
+                cb_brisanje_ter_lekar.Text = string.Empty;
+                cb_brisanje_ter_dijag.Text = string.Empty;
+                cb_brisanje_ter_pac.Text = string.Empty;
             }
             s.Close();
         }
@@ -2172,7 +2178,7 @@ namespace Hippocrates
                 if (cB_dodavanjeSmene.Text != string.Empty)
                 {
                     IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
-                    if (dTP_dodavanjeSmene_od.Value < dTP_dodavanjeSmene_do.Value && dTP_dodavanjeSmene_od.Value>DateTime.Now)
+                    if (dTP_dodavanjeSmene_od.Value < dTP_dodavanjeSmene_do.Value && dTP_dodavanjeSmene_od.Value>=DateTime.Now)
                     {
                         double razlika = 1;
                         if (lBSmeneLekara.Items.Count != 0)
@@ -2212,7 +2218,7 @@ namespace Hippocrates
                     }
                     else
                     {
-                        MessageBox.Show("Datum do kojeg traje smena ne moze da bude manji od datuma koji je postavljen za pocetak smene!");
+                        MessageBox.Show("Datum do kojeg traje smena ne moze da bude manji od datuma koji je postavljen za pocetak smene,i pocetak smene moze da bude od danasnjeg dana!");
                     }
                 }
                 else
@@ -2222,10 +2228,34 @@ namespace Hippocrates
             }
             catch (Exception ex)
             {
-                MessageBox.Show(" " + ex);
+              
             }
             s.Close();
 
+        }
+
+        public bool ProveriSmene(IzabraniLekar il,DateTime od_smena,DateTime do_smena)
+        {
+            int i = 0;
+            foreach(Smena s in il.Smene)
+            {
+                if(s.Datum_Do != do_smena && s.Id.Datum_Od != od_smena)
+                {
+                    if(s.Id.Datum_Od > od_smena)
+                    {
+                        if(do_smena > s.Id.Datum_Od)
+                        {
+                            i = 1;
+                        }
+                    }
+                  
+                }
+            }
+            if(i==1)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void btn_azuriraj_smenu_Click(object sender, EventArgs e)
@@ -2240,31 +2270,50 @@ namespace Hippocrates
                 {
                     IzabraniLekar il = s.Load<IzabraniLekar>(pomIndex);
                     Smena smen = new Smena();
-                    foreach (Smena s1 in il.Smene)
+                    if (dTP_smena_od.Value < dTP_smena_do.Value)
                     {
-                        if (s1.Id.Datum_Od == DateTime.Parse(datumOd))
+                        foreach (Smena s1 in il.Smene)
                         {
-                            if (cb_azuriranje_smenaPrva_leakr.Checked == true)
+                            if (s1.Id.Datum_Od == DateTime.Parse(datumOd))
                             {
-                                s1.SmenaLekara = 1;
-                            }
-                            else
-                            {
-                                s1.SmenaLekara = 2;
+                                if (cb_azuriranje_smenaPrva_leakr.Checked == true)
+                                {
+                                    s1.SmenaLekara = 1;
+                                }
+                                else
+                                {
+                                    s1.SmenaLekara = 2;
+                                }
+                                s1.Datum_Do = dTP_smena_do.Value;
+                                if (s1.Id.Datum_Od < DateTime.Now)
+                                {
+                                    s1.Id.Datum_Od = dTP_smena_od.Value;
+                                }
                             }
                         }
+                        if (ProveriSmene(il, dTP_smena_od.Value, dTP_smena_do.Value))
+                        {
+                            s.Flush();
+                            lBSmeneLekara.Items.Clear();
+                            foreach (Smena smene in il.Smene)
+                            {
+                                lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Datumi smena vam se preklapaju,pokusajte ponovo!");
+                        }
                     }
-                    s.Flush();
-
-                    lBSmeneLekara.Items.Clear();
-                    foreach (Smena smene in il.Smene)
+                    else
                     {
-                        lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
+                        MessageBox.Show("Nepravilno uneti datumi!");
                     }
+                    
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Morate oznaciti lekara za kojeg zelite da azurirate smenu." + ex);
+                    MessageBox.Show("Morate oznaciti lekara za kojeg zelite da azurirate smenu.");
                 }
                 s.Close();
                 dTP_smena_do.Value = DateTime.Now;
@@ -2293,13 +2342,19 @@ namespace Hippocrates
                     il.RadiUDomuZdravlja = dz;
                     dz.Lekari.Add(il);
                     s.Flush();
+                    MessageBox.Show("Uspeno ste promenili dom zdravlja!");
                 }
+                else
+                {
+                    MessageBox.Show("Svi pacijenti moraju promeniti izabranog lekara da bi lekar mogao da promeni dom zdravlja. ");
+                }
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Svi pacijenti moraju promeniti izabranog lekara da bi lekar mogao da promeni dom zdravlja. " + ex);
+                MessageBox.Show("Svi pacijenti moraju promeniti izabranog lekara da bi lekar mogao da promeni dom zdravlja. " );
             }
-            MessageBox.Show("Uspeno ste promenili dom zdravlja!");
+            
 
             s.Close();
         }
@@ -2379,6 +2434,7 @@ namespace Hippocrates
                     s.Delete(dijagn);
                     s.Flush();
                     MessageBox.Show("Uspeno ste obrisali dijagnozu pacijentu.");
+                    popuni_dGV_pac_dijagnoze(dGV_pac_dijagnoze, pac);
                     s.Close();
                 }
                 else
@@ -2388,7 +2444,7 @@ namespace Hippocrates
             }
             catch (Exception ex)
             {
-                MessageBox.Show(" " + ex);
+                
             }
         }
 
@@ -2473,10 +2529,11 @@ namespace Hippocrates
                 s.Delete(t);
                 s.Flush();
                 MessageBox.Show("Uspesno ste obrisali terapiju. ");
+                dgv_azuriranje_pac_terapije.Rows.RemoveAt(indexic);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Morate oznaciti terapiju koju zelite da obrisete. " + ex);
+                MessageBox.Show("Morate oznaciti terapiju koju zelite da obrisete. ");
             }
             s.Close();
         }
@@ -2719,7 +2776,7 @@ namespace Hippocrates
                 d.Terapije.Add(ter);
                 s.Flush();
 
-
+                popuni_dgv_azuriranje_pac_terapije(dgv_azuriranje_pac_terapije, pac);
                 s.Close();
             }
             catch (Exception ex)
@@ -2749,8 +2806,9 @@ namespace Hippocrates
                 pac.DijagnostifikovanoDijagnoze.Add(dij);
                 s.Save(dij);
                 s.Flush();
-
+                popuni_dGV_pac_dijagnoze(dGV_pac_dijagnoze, pac);
                 s.Close();
+                
             }
             catch (Exception ex)
             {
