@@ -16,7 +16,7 @@ using Hippocrates.Data.Entiteti;
 using NHibernate;
 using Hippocrates.Data;
 
-namespace Hippocrates
+namespace HippocratesDoctor
 {
     public partial class FormRaspored : MetroForm
     {

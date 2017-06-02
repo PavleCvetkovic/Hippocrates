@@ -1,8 +1,4 @@
-﻿using Hippocrates;
-using Hippocrates.Data.Entiteti;
-using Hippocrates.Data.EntitetiOracle;
-using NHibernate;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 using MetroFramework;
+using Hippocrates.Data.Entiteti;
+using Hippocrates.Data.EntitetiOracle;
+using Hippocrates.Data;
+using NHibernate;
 using MetroFramework.Controls;
-using HippocratesPatient;
 
-namespace HippocratesDoctor
+namespace Hippocrates.SharedForms
 {
     public partial class FormZakaziKodSpecijaliste : FormRaspored
     {
@@ -69,7 +69,7 @@ namespace HippocratesDoctor
 
             IList<Pregled> termini_lekara = specijalista_local.Pregledi.ToList<Pregled>();
             IList<Pregled> zauzetitermini = new List<Pregled>();
-            foreach(Pregled preg in termini_lekara)
+            foreach (Pregled preg in termini_lekara)
             {
                 if (preg.Datum.Date == metroDateTime1.Value.Date)
                     zauzetitermini.Add(preg);
@@ -99,7 +99,7 @@ namespace HippocratesDoctor
             }
             #endregion*/
             int[] termini = { 700, 745, 830, 915, 1000, 1045, 1130, 1215, 1300, 1330, 1415, 1500, 1545, 1630, 1715, 1800, 1845 };
-            foreach(int ter in termini)
+            foreach (int ter in termini)
             {
                 if (ter <= 1330)
                 {
@@ -137,7 +137,7 @@ namespace HippocratesDoctor
         private bool MakeAnApointment(int time, string napomena, SpecijalistaKC specijalista_oracle)
         {
             IList<Pregled> zakazaniPregledi = oracle_session_local.QueryOver<Pregled>().List<Pregled>();
-            foreach(Pregled p in zakazaniPregledi)
+            foreach (Pregled p in zakazaniPregledi)
             {
                 if (p.Datum.Date == metroDateTime1.Value.Date && p.Vreme == time)
                     return false; //zakazan u medjuvremenu
@@ -161,7 +161,7 @@ namespace HippocratesDoctor
                     Ime = pacijent_local.Lekar.Ime,
                     DomZdravlja = dz,
                     Prezime = pacijent_local.Lekar.Prezime,
-                    Password="/"
+                    Password = "/"
                 };
                 dz.Lekari.Add(il);
                 oracle_session_local.SaveOrUpdate(dz);
@@ -216,7 +216,7 @@ namespace HippocratesDoctor
                     oracle_session_local.SaveOrUpdate(dz);
                     oracle_session_local.Flush();
                 }
-                
+
                 Pregled pregled = new Pregled()
                 {
                     Datum = metroDateTime1.Value,
@@ -247,14 +247,14 @@ namespace HippocratesDoctor
                 Srednje_slovo = "/",
                 Titula = "/",
             };
-            if(!b.Specijaliste.Contains(spec))
+            if (!b.Specijaliste.Contains(spec))
                 b.Specijaliste.Add(spec);
             spec.RadiUBolnici = b;
             mysql_session_local.SaveOrUpdate(b);
             mysql_session_local.Flush();
             TerminBolnica t = new TerminBolnica()
             {
-                LSpecijalista=spec,
+                LSpecijalista = spec,
                 Datum = metroDateTime1.Value,
                 Napomena = napomena,
                 Pacijent = pacijent_local,
@@ -283,7 +283,7 @@ namespace HippocratesDoctor
             MetroButton metro_button = (MetroButton)sender;
             //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
             string napomena = "Treba da dodam formu za upis napomene"; // Add form
-            DialogResult dr = MetroMessageBox.Show(this, "Question", "Da li ste sigurni da želite da zakažete " + 
+            DialogResult dr = MetroMessageBox.Show(this, "Question", "Da li ste sigurni da želite da zakažete " +
                 metroDateTime1.Value.ToShortDateString() + " " + metro_button.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.No)
                 return;
@@ -298,7 +298,7 @@ namespace HippocratesDoctor
                 MetroMessageBox.Show(this, "Info", "Error u parsovanju", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-           
+
             if (MakeAnApointment(time, napomena, specijalista_local)) // Replace(string old_string, string new_string) 11:30 -> 1130
             {
                 RefreshControls(specijalista_local); //Each appointment change refreshed controls
@@ -307,17 +307,17 @@ namespace HippocratesDoctor
             else
                 MetroMessageBox.Show(this, "Info", "Greška prilikom zakazivanja termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            
+
         }
 
-       
+
 
         protected override void metroDateTime1_ValueChanged(object sender, EventArgs e)
         {
             RefreshControls(specijalista_local);
         }
 
-     
+
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {

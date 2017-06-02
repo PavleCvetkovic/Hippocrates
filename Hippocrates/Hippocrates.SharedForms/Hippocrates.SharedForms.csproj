@@ -73,6 +73,12 @@
     <Compile Include="FormRaspored.Designer.cs">
       <DependentUpon>FormRaspored.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormZakaziKodSpecijaliste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZakaziKodSpecijaliste.Designer.cs">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
+    </Compile>
     <Compile Include="NapomenaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormRaspored.resx">
       <DependentUpon>FormRaspored.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormZakaziKodSpecijaliste.resx">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

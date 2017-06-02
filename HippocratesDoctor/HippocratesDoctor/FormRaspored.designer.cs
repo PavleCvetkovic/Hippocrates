@@ -1,4 +1,4 @@
-﻿namespace Hippocrates
+﻿namespace HippocratesDoctor
 {
     partial class FormRaspored
     {

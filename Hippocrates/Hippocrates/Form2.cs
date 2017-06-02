@@ -20,6 +20,7 @@ using FluentNHibernate.Cfg.Db;
 using Hippocrates.SharedForms;
 using System.Net.Mail;
 using System.Net;
+using Hippocrates.Data.EntitetiOracle;
 
 namespace Hippocrates
 {
@@ -2344,7 +2345,6 @@ namespace Hippocrates
 
         #region tab_za_azuriranje_pacijenta
 
-
         private void btn_brisanje_dijag_Click(object sender, EventArgs e)
         {
             try
@@ -4019,9 +4019,180 @@ namespace Hippocrates
 
 
 
+
+
+
         #endregion
 
-     
+        private void tab_zakazi_spec_Enter(object sender, EventArgs e)
+        {
+            ISession s = DataLayerOracle.GetSession();
+            try
+            {
+                IList<KlinickiCentar> klinicki_centri = s.QueryOver<KlinickiCentar>().List();
+                dGV_klinicki_centar.DataSource = new BindingList<KlinickiCentar>(klinicki_centri);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            s.Close();
+            lbl_JmbgPacSpec.Text = string.Empty;
+        }
+
+        private void GetKlinikeData(KlinickiCentar klinicki_centar)
+        {
+            dGV_klinike.DataSource = new BindingList<Klinika>(klinicki_centar.Klinike);
+        }
+
+        private void GetSpecijalisteData(Klinika k)
+        {
+            
+            IList<SpecijalistaKC> lista_specijalista = k.Specijaliste;
+            for (int i = lista_specijalista.Count - 1; i > 0; i--)
+                if (lista_specijalista[i].TipZaposlenog != "SPECIJALISTA")
+                    lista_specijalista.RemoveAt(i);
+
+            
+            dGV_specijaliste.DataSource = new BindingList<SpecijalistaKC>(lista_specijalista);
+            
+        }
+
+        private void dGV_klinicki_centar_SelectionChanged(object sender, EventArgs e)
+        {
+            ISession oracle_session = DataLayerOracle.GetSession();
+            try
+            {
+                int rowindex = dGV_klinicki_centar.CurrentCell.RowIndex;
+                pomIndex = dGV_klinicki_centar.Rows[rowindex].Cells[0].Value.ToString();
+                KlinickiCentar kc = oracle_session.Load<KlinickiCentar>(Int32.Parse(pomIndex));
+                GetKlinikeData(kc);
+            }
+            catch(Exception ex)
+            {
+                
+            }
+            oracle_session.Close();
+            
+        }
+
+        private void dGV_klinike_SelectionChanged(object sender, EventArgs e)
+        {
+            ISession oracle_session = DataLayerOracle.GetSession();
+            try
+            {
+                int rowindex = dGV_klinike.CurrentCell.RowIndex;
+                pomIndex = dGV_klinike.Rows[rowindex].Cells[0].Value.ToString();
+                Klinika kl = oracle_session.Load<Klinika>(Int32.Parse(pomIndex));
+                GetSpecijalisteData(kl);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            oracle_session.Close();
+        }
+
+        private void cb_lekarpacijenta_spec_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_lekarpacijenta_spec_Enter(object sender, EventArgs e)
+        {
+          
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                cb_lekarpacijenta_spec.Items.Clear();
+                cb_lekarpacijenta_spec.Text = string.Empty;
+                IQuery iq = s.CreateQuery("from IzabraniLekar");
+
+                IList<IzabraniLekar> lekari = iq.List<IzabraniLekar>();
+                foreach (IzabraniLekar il in lekari)
+                {
+                    cb_lekarpacijenta_spec.Items.Add(il.Jmbg + " " + il.Ime + " " + il.Prezime);
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            s.Close();           
+        }
+
+        private void cb_pacijent_spec_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                string[] parametars = cb_pacijent_spec.SelectedItem.ToString().Split(' ');
+                Pacijent pac = s.Load<Pacijent>(parametars[0]);
+                lbl_JmbgPacSpec.Text = pac.Jmbg;
+                lbl_ImePacSpec.Text = pac.Ime;
+                lbl_PrezimePacSpec.Text = pac.Prezime;
+                lbl_PrezimePacSpec.Visible = true;
+                lbl_ImePacSpec.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            s.Close();
+        }
+
+        private void cb_pacijent_spec_Enter(object sender, EventArgs e)
+        {
+            ISession s = DataLayer.GetSession();
+            try
+            {
+                string[] parametars = cb_lekarpacijenta_spec.SelectedItem.ToString().Split(' ');
+                cb_pacijent_spec.Items.Clear();
+                cb_pacijent_spec.Text = string.Empty;
+                IQuery iq = s.CreateQuery("select o from Pacijent as o where o.Lekar.Jmbg = : jmbg");
+                iq.SetString("jmbg", parametars[0]);
+                IList<Pacijent> pacijenti = iq.List<Pacijent>();
+                foreach (Pacijent pac in pacijenti)
+                {
+                    cb_pacijent_spec.Items.Add(pac.Jmbg + " " + pac.Ime + " " + pac.Prezime);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Morate odabrati prvo izabranog lekara pacijenta!");
+            }
+            s.Close();
+        }
+
+        private void btn_spec_zazivanje_Click(object sender, EventArgs e)
+        {
+
+            ISession oracleSession = DataLayerOracle.GetSession();
+            ISession session = DataLayer.GetSession();
+            try
+            {
+                Pacijent pac = session.Load<Pacijent>(lbl_JmbgPacSpec.Text);
+                int rowindex = dGV_specijaliste.CurrentCell.RowIndex;
+                pomIndex = dGV_specijaliste.Rows[rowindex].Cells[0].Value.ToString();
+                SpecijalistaKC spec = oracleSession.Load<SpecijalistaKC>(Int32.Parse(pomIndex));
+                FormZakaziKodSpecijaliste fz = new FormZakaziKodSpecijaliste(oracleSession,session,pac,spec);
+                fz.ShowDialog();
+                lbl_JmbgPacSpec.Text = string.Empty;
+                lbl_ImePacSpec.Visible = false;
+                lbl_PrezimePacSpec.Visible = false;
+                cb_pacijent_spec.Items.Clear();
+                cb_pacijent_spec.Text = string.Empty;
+                cb_lekarpacijenta_spec.Items.Clear();
+                cb_lekarpacijenta_spec.Text = string.Empty;
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problem: " + ex);
+            }
+            session.Close();
+            oracleSession.Close();
+        }
         
     }
 }
