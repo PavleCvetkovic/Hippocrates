@@ -1211,6 +1211,7 @@ namespace Hippocrates
                 MessageBox.Show("Uspesno ste uneli dijagnozu.");
                 s.Close();
             }
+            else
             {
                 MessageBox.Show("Sva polja moraju biti popunjena!");
             }
@@ -3605,7 +3606,7 @@ namespace Hippocrates
 
         private void tb_lokacija_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Space);
         }
 
         private void tb_opstina_doma_zdravlja_KeyPress(object sender, KeyPressEventArgs e)
@@ -4024,6 +4025,7 @@ namespace Hippocrates
 
         #endregion
 
+        #region zakazi_kod_specijaliste
         private void tab_zakazi_spec_Enter(object sender, EventArgs e)
         {
             ISession s = DataLayerOracle.GetSession();
@@ -4188,11 +4190,11 @@ namespace Hippocrates
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Problem: " + ex);
+                MessageBox.Show("Morate izabrati pacijenta i specijalistu");
             }
             session.Close();
             oracleSession.Close();
         }
-        
+        #endregion
     }
 }

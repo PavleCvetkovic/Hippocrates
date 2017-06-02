@@ -471,6 +471,13 @@
             this.label22 = new System.Windows.Forms.Label();
             this.tb_azuriranje_MBR_domZ = new System.Windows.Forms.TextBox();
             this.tab_zakazi_spec = new MetroFramework.Controls.MetroTabPage();
+            this.lbl_PrezimePacSpec = new System.Windows.Forms.Label();
+            this.lbl_ImePacSpec = new System.Windows.Forms.Label();
+            this.lbl_JmbgPacSpec = new System.Windows.Forms.Label();
+            this.label152 = new System.Windows.Forms.Label();
+            this.label151 = new System.Windows.Forms.Label();
+            this.cb_pacijent_spec = new System.Windows.Forms.ComboBox();
+            this.cb_lekarpacijenta_spec = new System.Windows.Forms.ComboBox();
             this.label150 = new System.Windows.Forms.Label();
             this.label149 = new System.Windows.Forms.Label();
             this.label147 = new System.Windows.Forms.Label();
@@ -478,13 +485,6 @@
             this.dGV_specijaliste = new System.Windows.Forms.DataGridView();
             this.dGV_klinike = new System.Windows.Forms.DataGridView();
             this.dGV_klinicki_centar = new System.Windows.Forms.DataGridView();
-            this.cb_lekarpacijenta_spec = new System.Windows.Forms.ComboBox();
-            this.cb_pacijent_spec = new System.Windows.Forms.ComboBox();
-            this.label151 = new System.Windows.Forms.Label();
-            this.label152 = new System.Windows.Forms.Label();
-            this.lbl_JmbgPacSpec = new System.Windows.Forms.Label();
-            this.lbl_ImePacSpec = new System.Windows.Forms.Label();
-            this.lbl_PrezimePacSpec = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -692,7 +692,7 @@
             this.GeneralControl.Controls.Add(this.tab_zakazi_spec);
             this.GeneralControl.Location = new System.Drawing.Point(200, 76);
             this.GeneralControl.Name = "GeneralControl";
-            this.GeneralControl.SelectedIndex = 4;
+            this.GeneralControl.SelectedIndex = 1;
             this.GeneralControl.Size = new System.Drawing.Size(801, 750);
             this.GeneralControl.TabIndex = 4;
             this.GeneralControl.UseSelectable = true;
@@ -1275,7 +1275,7 @@
             // 
             this.tb_pac_unos_mail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_pac_unos_mail.Location = new System.Drawing.Point(515, 128);
-            this.tb_pac_unos_mail.MaxLength = 9;
+            this.tb_pac_unos_mail.MaxLength = 50;
             this.tb_pac_unos_mail.Name = "tb_pac_unos_mail";
             this.tb_pac_unos_mail.Size = new System.Drawing.Size(184, 26);
             this.tb_pac_unos_mail.TabIndex = 86;
@@ -5851,6 +5851,85 @@
             this.tab_zakazi_spec.VerticalScrollbarSize = 10;
             this.tab_zakazi_spec.Enter += new System.EventHandler(this.tab_zakazi_spec_Enter);
             // 
+            // lbl_PrezimePacSpec
+            // 
+            this.lbl_PrezimePacSpec.AutoSize = true;
+            this.lbl_PrezimePacSpec.BackColor = System.Drawing.Color.White;
+            this.lbl_PrezimePacSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PrezimePacSpec.Location = new System.Drawing.Point(137, 596);
+            this.lbl_PrezimePacSpec.Name = "lbl_PrezimePacSpec";
+            this.lbl_PrezimePacSpec.Size = new System.Drawing.Size(135, 20);
+            this.lbl_PrezimePacSpec.TabIndex = 15;
+            this.lbl_PrezimePacSpec.Text = "Izaberite Pacijent:";
+            this.lbl_PrezimePacSpec.Visible = false;
+            // 
+            // lbl_ImePacSpec
+            // 
+            this.lbl_ImePacSpec.AutoSize = true;
+            this.lbl_ImePacSpec.BackColor = System.Drawing.Color.White;
+            this.lbl_ImePacSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ImePacSpec.Location = new System.Drawing.Point(6, 596);
+            this.lbl_ImePacSpec.Name = "lbl_ImePacSpec";
+            this.lbl_ImePacSpec.Size = new System.Drawing.Size(135, 20);
+            this.lbl_ImePacSpec.TabIndex = 14;
+            this.lbl_ImePacSpec.Text = "Izaberite Pacijent:";
+            this.lbl_ImePacSpec.Visible = false;
+            // 
+            // lbl_JmbgPacSpec
+            // 
+            this.lbl_JmbgPacSpec.AutoSize = true;
+            this.lbl_JmbgPacSpec.BackColor = System.Drawing.Color.White;
+            this.lbl_JmbgPacSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_JmbgPacSpec.Location = new System.Drawing.Point(68, 628);
+            this.lbl_JmbgPacSpec.Name = "lbl_JmbgPacSpec";
+            this.lbl_JmbgPacSpec.Size = new System.Drawing.Size(0, 20);
+            this.lbl_JmbgPacSpec.TabIndex = 13;
+            this.lbl_JmbgPacSpec.Visible = false;
+            // 
+            // label152
+            // 
+            this.label152.AutoSize = true;
+            this.label152.BackColor = System.Drawing.Color.White;
+            this.label152.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label152.Location = new System.Drawing.Point(6, 517);
+            this.label152.Name = "label152";
+            this.label152.Size = new System.Drawing.Size(135, 20);
+            this.label152.TabIndex = 12;
+            this.label152.Text = "Izaberite Pacijent:";
+            // 
+            // label151
+            // 
+            this.label151.AutoSize = true;
+            this.label151.BackColor = System.Drawing.Color.White;
+            this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label151.Location = new System.Drawing.Point(6, 469);
+            this.label151.Name = "label151";
+            this.label151.Size = new System.Drawing.Size(176, 20);
+            this.label151.TabIndex = 11;
+            this.label151.Text = "Izabrani lekar pacijenta:";
+            // 
+            // cb_pacijent_spec
+            // 
+            this.cb_pacijent_spec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_pacijent_spec.FormattingEnabled = true;
+            this.cb_pacijent_spec.Location = new System.Drawing.Point(7, 540);
+            this.cb_pacijent_spec.Name = "cb_pacijent_spec";
+            this.cb_pacijent_spec.Size = new System.Drawing.Size(353, 24);
+            this.cb_pacijent_spec.TabIndex = 10;
+            this.cb_pacijent_spec.SelectedIndexChanged += new System.EventHandler(this.cb_pacijent_spec_SelectedIndexChanged);
+            this.cb_pacijent_spec.Enter += new System.EventHandler(this.cb_pacijent_spec_Enter);
+            // 
+            // cb_lekarpacijenta_spec
+            // 
+            this.cb_lekarpacijenta_spec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_lekarpacijenta_spec.FormattingEnabled = true;
+            this.cb_lekarpacijenta_spec.Location = new System.Drawing.Point(7, 492);
+            this.cb_lekarpacijenta_spec.Name = "cb_lekarpacijenta_spec";
+            this.cb_lekarpacijenta_spec.Size = new System.Drawing.Size(353, 24);
+            this.cb_lekarpacijenta_spec.TabIndex = 9;
+            this.cb_lekarpacijenta_spec.SelectedIndexChanged += new System.EventHandler(this.cb_lekarpacijenta_spec_SelectedIndexChanged);
+            this.cb_lekarpacijenta_spec.Enter += new System.EventHandler(this.cb_lekarpacijenta_spec_Enter);
+            // 
             // label150
             // 
             this.label150.AutoSize = true;
@@ -5922,85 +6001,6 @@
             this.dGV_klinicki_centar.Size = new System.Drawing.Size(757, 108);
             this.dGV_klinicki_centar.TabIndex = 2;
             this.dGV_klinicki_centar.SelectionChanged += new System.EventHandler(this.dGV_klinicki_centar_SelectionChanged);
-            // 
-            // cb_lekarpacijenta_spec
-            // 
-            this.cb_lekarpacijenta_spec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_lekarpacijenta_spec.FormattingEnabled = true;
-            this.cb_lekarpacijenta_spec.Location = new System.Drawing.Point(7, 492);
-            this.cb_lekarpacijenta_spec.Name = "cb_lekarpacijenta_spec";
-            this.cb_lekarpacijenta_spec.Size = new System.Drawing.Size(353, 24);
-            this.cb_lekarpacijenta_spec.TabIndex = 9;
-            this.cb_lekarpacijenta_spec.SelectedIndexChanged += new System.EventHandler(this.cb_lekarpacijenta_spec_SelectedIndexChanged);
-            this.cb_lekarpacijenta_spec.Enter += new System.EventHandler(this.cb_lekarpacijenta_spec_Enter);
-            // 
-            // cb_pacijent_spec
-            // 
-            this.cb_pacijent_spec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_pacijent_spec.FormattingEnabled = true;
-            this.cb_pacijent_spec.Location = new System.Drawing.Point(7, 540);
-            this.cb_pacijent_spec.Name = "cb_pacijent_spec";
-            this.cb_pacijent_spec.Size = new System.Drawing.Size(353, 24);
-            this.cb_pacijent_spec.TabIndex = 10;
-            this.cb_pacijent_spec.SelectedIndexChanged += new System.EventHandler(this.cb_pacijent_spec_SelectedIndexChanged);
-            this.cb_pacijent_spec.Enter += new System.EventHandler(this.cb_pacijent_spec_Enter);
-            // 
-            // label151
-            // 
-            this.label151.AutoSize = true;
-            this.label151.BackColor = System.Drawing.Color.White;
-            this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label151.Location = new System.Drawing.Point(6, 469);
-            this.label151.Name = "label151";
-            this.label151.Size = new System.Drawing.Size(176, 20);
-            this.label151.TabIndex = 11;
-            this.label151.Text = "Izabrani lekar pacijenta:";
-            // 
-            // label152
-            // 
-            this.label152.AutoSize = true;
-            this.label152.BackColor = System.Drawing.Color.White;
-            this.label152.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label152.Location = new System.Drawing.Point(6, 517);
-            this.label152.Name = "label152";
-            this.label152.Size = new System.Drawing.Size(135, 20);
-            this.label152.TabIndex = 12;
-            this.label152.Text = "Izaberite Pacijent:";
-            // 
-            // lbl_JmbgPacSpec
-            // 
-            this.lbl_JmbgPacSpec.AutoSize = true;
-            this.lbl_JmbgPacSpec.BackColor = System.Drawing.Color.White;
-            this.lbl_JmbgPacSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_JmbgPacSpec.Location = new System.Drawing.Point(68, 628);
-            this.lbl_JmbgPacSpec.Name = "lbl_JmbgPacSpec";
-            this.lbl_JmbgPacSpec.Size = new System.Drawing.Size(0, 20);
-            this.lbl_JmbgPacSpec.TabIndex = 13;
-            this.lbl_JmbgPacSpec.Visible = false;
-            // 
-            // lbl_ImePacSpec
-            // 
-            this.lbl_ImePacSpec.AutoSize = true;
-            this.lbl_ImePacSpec.BackColor = System.Drawing.Color.White;
-            this.lbl_ImePacSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ImePacSpec.Location = new System.Drawing.Point(6, 596);
-            this.lbl_ImePacSpec.Name = "lbl_ImePacSpec";
-            this.lbl_ImePacSpec.Size = new System.Drawing.Size(135, 20);
-            this.lbl_ImePacSpec.TabIndex = 14;
-            this.lbl_ImePacSpec.Text = "Izaberite Pacijent:";
-            this.lbl_ImePacSpec.Visible = false;
-            // 
-            // lbl_PrezimePacSpec
-            // 
-            this.lbl_PrezimePacSpec.AutoSize = true;
-            this.lbl_PrezimePacSpec.BackColor = System.Drawing.Color.White;
-            this.lbl_PrezimePacSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_PrezimePacSpec.Location = new System.Drawing.Point(137, 596);
-            this.lbl_PrezimePacSpec.Name = "lbl_PrezimePacSpec";
-            this.lbl_PrezimePacSpec.Size = new System.Drawing.Size(135, 20);
-            this.lbl_PrezimePacSpec.TabIndex = 15;
-            this.lbl_PrezimePacSpec.Text = "Izaberite Pacijent:";
-            this.lbl_PrezimePacSpec.Visible = false;
             // 
             // Form2
             // 
