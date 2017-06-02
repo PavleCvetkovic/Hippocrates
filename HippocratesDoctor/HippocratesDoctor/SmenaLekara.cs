@@ -27,7 +27,7 @@ namespace HippocratesDoctor
             lekar_local = selektovani_lekar;
             session_local = s;
 
-            //metroButtonAzurirajSmenu.Enabled = false;
+            metroButtonAzurirajSmenu.Visible = false;
             metroLabelInfoLekara.Text = selektovani_lekar.Ime + " " + selektovani_lekar.Prezime;
             GetDoctorShift();
         }
