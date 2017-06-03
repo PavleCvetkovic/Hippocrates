@@ -453,6 +453,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 460);
             this.Controls.Add(this.mTabLogin);
+            this.MaximumSize = new System.Drawing.Size(505, 460);
+            this.MinimumSize = new System.Drawing.Size(505, 460);
             this.Name = "FormLogin";
             this.Text = "Hippocrates";
             this.mTabLogin.ResumeLayout(false);

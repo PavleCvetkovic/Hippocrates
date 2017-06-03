@@ -36,7 +36,7 @@ namespace Hippocrates
 
             this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
                 Screen.PrimaryScreen.WorkingArea.Height);
-            this.MinimumSize = new System.Drawing.Size(698, 365);
+           // this.MinimumSize = new System.Drawing.Size(698, 365);
 
             metroLabelLekarInfo.Text = "Izabrani lekar: " + pacijent.Lekar.Ime + " " + pacijent.Lekar.Prezime + " " + pacijent.Lekar.Jmbg;
             metroDateTime1.MinDate = System.DateTime.Today;
@@ -68,9 +68,8 @@ namespace Hippocrates
             if (s == null)
                 UpdateForm(3);
             else
-                UpdateForm(GetDoctorShift(lekar).SmenaLekara);
+                UpdateForm(s.SmenaLekara);
 
-            //lekar_local.Termini[0].Pacijent
             IQuery query = session_local.CreateQuery("from Termin t where t.Lekar.Jmbg = :lekar and t.Datum = :datum");
             query.SetParameter("lekar", lekar_local.Jmbg);
             query.SetParameter("datum", metroDateTime1.Value.Date);
@@ -79,22 +78,39 @@ namespace Hippocrates
 
 
             #region Reset all buttons
+
             foreach (Control c in pnlPrepodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
+                int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+                // ShortTimeString (example 14.16)
+
                 if (mb != null)
                 {
                     mb.Enabled = true; // svi termini dostupni
-                    //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    if (metroDateTime1.Value.Date == System.DateTime.Now.Date &&
+                        s.SmenaLekara == 1 && 
+                        Int32.Parse(mb.Text.Replace(":", String.Empty)) <= (time + 100)) // sledeci sat
+                    {
+                        mb.Enabled = false;
+                    }
                 }
 
             }
             foreach (Control c in pnlPopodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
+                int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+
                 if (mb != null)
                 {
                     mb.Enabled = true; // svi termini dostupni
+                    if (metroDateTime1.Value.Date == System.DateTime.Now.Date &&
+                        s.SmenaLekara == 2 &&
+                        Int32.Parse(mb.Text.Replace(":", String.Empty)) <= (time + 100))
+                    {
+                        mb.Enabled = false;
+                    }
                     //mb.BackColor = Color.LightCyan; // LightCyan = Free
                 }
             }
@@ -103,16 +119,12 @@ namespace Hippocrates
             foreach (Termin t in termini_lekara)
             {
                 int time = t.Vreme;
-                //MetroMessageBox.Show(this, "Enter while loop in rdr.Read() " + time.ToString(), "rdr.Read()", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (time <= 1330)
                 {
                     MetroButton mb = this.pnlPrepodne.Controls["metroButton" + time.ToString()] as MetroButton;
                     if (mb != null)
                     {
-                        //mb.Highlight = true;
-                        mb.Enabled = false; // ne moze biti kliknuto (zakazan termin)
-                        //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
-                        //this.pnlPrepodne.Controls["metroButton" + time.ToString()].Enabled = false;
+                        mb.Enabled = false; 
                     }
                 }
                 else
@@ -120,10 +132,7 @@ namespace Hippocrates
                     MetroButton mb = this.pnlPopodne.Controls["metroButton" + time.ToString()] as MetroButton;
                     if (mb != null)
                     {
-                        //mb.Highlight = true;
-                        mb.Enabled = false;  // ne moze biti kliknuto (zakazan termin)
-                        //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
-                        //this.pnlPopodne.Controls["metroButton" + time.ToString()].Enabled = false;
+                        mb.Enabled = false;  
                     }
                 }
             }

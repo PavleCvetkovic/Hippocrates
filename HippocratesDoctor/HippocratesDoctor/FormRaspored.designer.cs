@@ -835,6 +835,7 @@
             this.Controls.Add(this.pnlPopodne);
             this.Controls.Add(this.pnlPrepodne);
             this.Controls.Add(this.metroDateTime1);
+            this.MinimumSize = new System.Drawing.Size(736, 511);
             this.Name = "FormRaspored";
             this.Text = "Termini za zakazivanje";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRaspored_FormClosing);

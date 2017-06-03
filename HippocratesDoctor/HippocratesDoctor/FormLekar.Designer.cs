@@ -1755,6 +1755,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 680);
             this.Controls.Add(this.metroTabGlobal);
+            this.MinimumSize = new System.Drawing.Size(808, 680);
             this.Name = "FormLekar";
             this.Text = "##Ide ime iz baze##";
             this.metroTabGlobal.ResumeLayout(false);

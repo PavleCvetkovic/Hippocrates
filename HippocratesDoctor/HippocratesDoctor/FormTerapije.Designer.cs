@@ -200,6 +200,7 @@
             this.Controls.Add(this.metroTextBoxOpisTerapije);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroLabel5);
+            this.MinimumSize = new System.Drawing.Size(840, 409);
             this.Name = "FormTerapije";
             this.Text = "FormTerapije";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTerapije_FormClosing);

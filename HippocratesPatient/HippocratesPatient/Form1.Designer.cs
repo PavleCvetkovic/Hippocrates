@@ -139,6 +139,8 @@
             this.Controls.Add(this.metroTextBox2);
             this.Controls.Add(this.metroTextBox1);
             this.Controls.Add(this.metroButton1);
+            this.MaximumSize = new System.Drawing.Size(400, 402);
+            this.MinimumSize = new System.Drawing.Size(400, 402);
             this.Name = "Form1";
             this.Text = "Pacijent Login";
             this.ResumeLayout(false);
