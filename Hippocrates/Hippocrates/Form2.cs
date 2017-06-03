@@ -3153,7 +3153,7 @@ namespace Hippocrates
                 dom.MedicinskoOsoblje.Add(mo);
                 mo.RadiUDomuZdravlja = dom;
                 s.Flush();
-
+                MessageBox.Show("Uspesno je promenjen dom zdravlja medicinskom radniku.");
             }
             catch(Exception ex)
             {
