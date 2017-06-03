@@ -238,6 +238,7 @@ namespace HippocratesDoctor
                 Opstina = "/",
                 Lokacija = "/",
             };
+           
             Specijalista spec = new Specijalista()
             {
                 Ime = specijalista_local.Ime,
@@ -247,11 +248,14 @@ namespace HippocratesDoctor
                 Srednje_slovo = "/",
                 Titula = "/",
             };
-            if(!b.Specijaliste.Contains(spec))
-                b.Specijaliste.Add(spec);
-            spec.RadiUBolnici = b;
-            mysql_session_local.SaveOrUpdate(b);
-            mysql_session_local.Flush();
+            if (mysql_session_local.Get<Bolnica>(specijalista_local.Klinika.Id.ToString()) == null) // ne postoji bolnica sa tim ID-om
+            {
+                if (!b.Specijaliste.Contains(spec))
+                    b.Specijaliste.Add(spec);
+                spec.RadiUBolnici = b;
+                mysql_session_local.SaveOrUpdate(b);
+                mysql_session_local.Flush();
+            }
             TerminBolnica t = new TerminBolnica()
             {
                 LSpecijalista=spec,

@@ -766,7 +766,14 @@ namespace HippocratesDoctor
 
         private void metroButtonZakaziKodSpecijaliste_Click(object sender, EventArgs e)
         {
-            SpecijalistaKC s = (SpecijalistaKC) metroGridSpecijaliste.SelectedRows[0].DataBoundItem;
+            SpecijalistaKC s = null;
+            if (metroGridSpecijaliste.Rows.Count == 0)
+            {
+                MetroMessageBox.Show(this, "Klinika nema nijednog specijalistu", "Warning!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            s = (SpecijalistaKC)metroGridSpecijaliste.SelectedRows[0].DataBoundItem;
             FormZakaziKodSpecijaliste fzks = new FormZakaziKodSpecijaliste(oracle_session, session, aktivni_pacijent, s);
             fzks.StartPosition = FormStartPosition.CenterScreen;
             fzks.ShowDialog();

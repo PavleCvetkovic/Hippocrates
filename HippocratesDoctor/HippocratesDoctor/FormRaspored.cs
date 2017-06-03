@@ -31,6 +31,7 @@ namespace HippocratesDoctor
                 c.Click += metroButton_Click;
             foreach (Control c in pnlPrepodne.Controls)
                 c.Click += metroButton_Click;
+
             this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
                 Screen.PrimaryScreen.WorkingArea.Height);
             this.MinimumSize = new System.Drawing.Size(698, 365);
