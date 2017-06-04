@@ -66,7 +66,7 @@ namespace HippocratesPatient
         private void GetAppointmentData(Pacijent p)
         {
             metroGridZakazaniTermini.DataSource = null;
-            IList<Termin> lista_termina = null;
+            List<Termin> lista_termina = new List<Termin>();
             foreach (Termin t in p.Termini)
                 if (t.Datum >= System.DateTime.Now.Date)
                     lista_termina.Add(t);
