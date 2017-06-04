@@ -66,7 +66,12 @@ namespace HippocratesPatient
         private void GetAppointmentData(Pacijent p)
         {
             metroGridZakazaniTermini.DataSource = null;
-            metroGridZakazaniTermini.DataSource = p.Termini;
+            IList<Termin> lista_termina = null;
+            foreach (Termin t in p.Termini)
+                if (t.Datum >= System.DateTime.Now.Date)
+                    lista_termina.Add(t);
+            //metroGridZakazaniTermini.DataSource = p.Termini;
+            metroGridZakazaniTermini.DataSource = lista_termina;
             metroGridZakazaniTermini.Columns["Id"].Visible = false;
             metroGridZakazaniTermini.Columns["Pacijent"].Visible = false;
             for (int i = 0; i < metroGridZakazaniTermini.Columns.Count - 2; i++)
