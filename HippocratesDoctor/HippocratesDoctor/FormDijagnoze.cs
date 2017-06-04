@@ -24,6 +24,7 @@ namespace HippocratesDoctor
             InitializeComponent();
             session_local = s;
             pacijent_local = p;
+            metroDateTimeDatumDijagnoze.MinDate = System.DateTime.Now; // Danasnji datum
         }
 
         private void FromDataToControl(int row_index)

@@ -255,7 +255,7 @@ namespace HippocratesDoctor
                 spec.RadiUBolnici = b;
                 mysql_session_local.SaveOrUpdate(b);
                 mysql_session_local.Flush();
-            }
+            }   
             TerminBolnica t = new TerminBolnica()
             {
                 LSpecijalista=spec,

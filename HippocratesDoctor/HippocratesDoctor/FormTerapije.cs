@@ -24,6 +24,7 @@ namespace HippocratesDoctor
             InitializeComponent();
             session_local = s;
             pacijent_local = p;
+            metroDateTimeDatumPocetka.MinDate = System.DateTime.Now;
         }
        
         private void FormTerapije_Load(object sender, EventArgs e)
@@ -42,6 +43,19 @@ namespace HippocratesDoctor
                 metroButtonDodajTerapiju.Text = "Ne postoje dijagnoze za koje je moguće dodati terapiju";
                 metroButtonDodajTerapiju.ForeColor = Color.Red;
             }
+        }
+
+        private bool IsDateRegular()
+        {
+            bool success = true;
+            if (metroDateTimeDatumPocetka.Value.Date > metroDateTimeDatumKraja.Value.Date)
+            {
+                MetroMessageBox.Show(this, "Početak datuma smene ne može biti veći od kraja datuma smene", "Error!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                metroDateTimeDatumKraja.Value = metroDateTimeDatumPocetka.Value.AddDays(1);
+                success = false;
+            }
+            return success;
         }
 
         private void metroButtonDodajTerapiju_Click(object sender, EventArgs e)
@@ -84,5 +98,12 @@ namespace HippocratesDoctor
         {
             session_local.Flush();
         }
+
+        private void metroDateTimeDatumPocetka_ValueChanged(object sender, EventArgs e)
+        {
+            IsDateRegular();
+        }
+
+       
     }
 }

@@ -69,6 +69,36 @@ namespace HippocratesDoctor
 
         }
 
+        private bool IsShiftRegular(Smena nova_smena)
+        {
+            bool success = true;
+            IQuery query = session_local.CreateQuery("from Smena s where s.Id.Lekar = :lekar");
+            query.SetParameter("lekar", nova_smena.Id.Lekar);
+            IList<Smena> lista_smena = query.List<Smena>();
+
+            foreach (Smena s in lista_smena)
+            {
+                if (s.Id.Datum_Od == nova_smena.Id.Datum_Od)
+                    return false;
+                if (s.Id.Datum_Od < nova_smena.Id.Datum_Od)
+                {
+                    if (s.Datum_Do < nova_smena.Id.Datum_Od)
+                        continue;
+                    else
+                        return false;
+                }
+                else // s.Id.Datum_od > nova_smena.Id.Datum_od
+                {
+                    if (s.Id.Datum_Od > nova_smena.Datum_Do)
+                        continue;
+                    else
+                        return false;
+                }
+            }
+            return success;
+
+        }
+
         private bool IsShiftSelected(MetroGrid mg)
         {
             if (mg.SelectedRows.Count > 0)
@@ -94,7 +124,13 @@ namespace HippocratesDoctor
                     Lekar = lekar
                 }
             };
-
+            // Proveri da li je smena regularna (nema preklapanja)
+            if (!IsShiftRegular(s))
+            {
+                MetroMessageBox.Show(this, "Smena koju želite da unesete se preklapa po datumima sa već unetim smenama", "Error!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             lekar.Smene.Add(s);
             try
             {
@@ -103,7 +139,7 @@ namespace HippocratesDoctor
             }
             catch(Exception ex)
             {
-                MetroMessageBox.Show(this, "Error u funkciji za dodavanje smene " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Greška u funkciji za dodavanje smene " + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 success = false;
             }
             return success;

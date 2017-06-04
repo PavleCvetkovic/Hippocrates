@@ -145,18 +145,34 @@ namespace HippocratesDoctor
             foreach (Control c in pnlPrepodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
+                int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+
                 if (mb != null)
                 {
                     mb.Enabled = true;
+                    if (metroDateTime1.Value.Date == System.DateTime.Now.Date &&
+                      s.SmenaLekara == 1 &&
+                      Int32.Parse(mb.Text.Replace(":", String.Empty)) <= (time + 100)) // sledeci sat
+                    {
+                        mb.Enabled = false;
+                    }
                 }
 
             }
             foreach (Control c in pnlPopodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
+                int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+
                 if (mb != null)
                 {
-                    mb.Enabled = true; 
+                    mb.Enabled = true;
+                    if (metroDateTime1.Value.Date == System.DateTime.Now.Date &&
+                        s.SmenaLekara == 2 &&
+                        Int32.Parse(mb.Text.Replace(":", String.Empty)) <= (time + 100))
+                    {
+                        mb.Enabled = false;
+                    }
                 }
             }
             #endregion
@@ -170,10 +186,7 @@ namespace HippocratesDoctor
                     MetroButton mb = this.pnlPrepodne.Controls["metroButton" + time.ToString()] as MetroButton;
                     if (mb != null)
                     {
-                        //mb.Highlight = true;
                         mb.Enabled = false; // moze biti kliknutu jer je zakazan termin (postoji pacijent)
-                        //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
-                        //this.pnlPrepodne.Controls["metroButton" + time.ToString()].Enabled = false;
                     }
                 }
                 else
@@ -181,10 +194,7 @@ namespace HippocratesDoctor
                     MetroButton mb = this.pnlPopodne.Controls["metroButton" + time.ToString()] as MetroButton;
                     if (mb != null)
                     {
-                        //mb.Highlight = true;
                         mb.Enabled = false; // moze biti kliknutu jer je zakazan termin (postoji pacijent)
-                        //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
-                        //this.pnlPopodne.Controls["metroButton" + time.ToString()].Enabled = false;
                     }
                 }
             }

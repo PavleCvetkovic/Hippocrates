@@ -28,6 +28,7 @@ namespace HippocratesDoctor
             pacijent = p;
             //this.jmbg_pacijenta = jmbg_pacijenta;
             this.Text = "Dodavanje vakcine " + pacijent.Ime + " " + pacijent.Prezime;
+            metroDateTimeDatumVakcine.MinDate = System.DateTime.Now; // Danasnji datum
         }
 
         private void FromDataToControl(int row_index)

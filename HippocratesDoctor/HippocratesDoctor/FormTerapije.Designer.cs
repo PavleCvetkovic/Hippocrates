@@ -103,6 +103,7 @@
             this.metroDateTimeDatumPocetka.Name = "metroDateTimeDatumPocetka";
             this.metroDateTimeDatumPocetka.Size = new System.Drawing.Size(254, 29);
             this.metroDateTimeDatumPocetka.TabIndex = 23;
+            this.metroDateTimeDatumPocetka.ValueChanged += new System.EventHandler(this.metroDateTimeDatumPocetka_ValueChanged);
             // 
             // metroButtonDodajTerapiju
             // 

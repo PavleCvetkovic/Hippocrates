@@ -455,13 +455,13 @@ namespace HippocratesDoctor
         {
             MetroGrid mg = metroGridData; // hard-coded
             metroButtonAzurirajLekara.Text = "Ažuriranje u toku ...";
-            if (!ValidateDoctorJMBG(dom_zdravlja_local, metroTextBoxJMBG.Text))
-            {
-                MetroMessageBox.Show(this, "Nije moguće ažurirati lekara sa unetim JMBG-om. " +
-                    "Lekar sa JMBG-om " + metroTextBoxJMBG.Text + " već postoji",
-                    "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (!ValidateDoctorJMBG(dom_zdravlja_local, metroTextBoxJMBG.Text))
+            //{
+            //    MetroMessageBox.Show(this, "Nije moguće ažurirati lekara sa unetim JMBG-om. " +
+            //        "Lekar sa JMBG-om " + metroTextBoxJMBG.Text + " već postoji",
+            //        "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
             //string jmbg = string.Empty;
             IzabraniLekar lekar_za_azuriranje;
             if (IsDoctorDataSelected(mg, out lekar_za_azuriranje))
@@ -546,13 +546,13 @@ namespace HippocratesDoctor
         private void metroButtonAzurirajOsobu_Click(object sender, EventArgs e)
         {
             metroButtonAzurirajOsobu.Text = "Ažuriranje u toku ... ";
-            if (!ValidateMedicalStaffJMBG(dom_zdravlja_local, metroTextBoxJMBG.Text))
-            {
-                MetroMessageBox.Show(this, "Nije moguće ažurirati medicinsko osoblje sa unetim JMBG-om. " +
-                    "Osoba sa JMBG-om " + metroTextBoxJMBG.Text + " već postoji",
-                    "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (!ValidateMedicalStaffJMBG(dom_zdravlja_local, metroTextBoxJMBG.Text))
+            //{
+            //    MetroMessageBox.Show(this, "Nije moguće ažurirati medicinsko osoblje sa unetim JMBG-om. " +
+            //        "Osoba sa JMBG-om " + metroTextBoxJMBG.Text + " već postoji",
+            //        "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
             MetroGrid mg = metroGridData; // hard-coded
             MedicinskoOsoblje selektovano_osoblje;
             if (IsMedicalStaffDataSelected(mg, out selektovano_osoblje))
