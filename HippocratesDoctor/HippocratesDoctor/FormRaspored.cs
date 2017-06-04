@@ -145,8 +145,9 @@ namespace HippocratesDoctor
             foreach (Control c in pnlPrepodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
-                int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
-
+                //int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+                DateTime datetime = System.DateTime.Now;
+                int time = Int32.Parse(datetime.Hour.ToString() + datetime.Minute.ToString());
                 if (mb != null)
                 {
                     mb.Enabled = true;
@@ -162,7 +163,9 @@ namespace HippocratesDoctor
             foreach (Control c in pnlPopodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
-                int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+                //int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+                DateTime datetime = System.DateTime.Now;
+                int time = Int32.Parse(datetime.Hour.ToString() + datetime.Minute.ToString());
 
                 if (mb != null)
                 {

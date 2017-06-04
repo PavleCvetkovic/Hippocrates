@@ -27,7 +27,9 @@ namespace HippocratesPatient
             pacijent_local = p;
             session_local = s;
             metroLabel1.Text = pacijent_local.Jmbg + " " + pacijent_local.Lbo;
-            UpdateAppointment(pacijent_local.Pravo_da_zakaze);
+
+            UpdateAppointment(1); // Uvek ima pravo da zakaze
+            //UpdateAppointment(pacijent_local.Pravo_da_zakaze);
         }
 
         private void UpdateAppointment(int priviledge)
@@ -126,7 +128,8 @@ namespace HippocratesPatient
             GetVakcineData(pacijent_local);
             GetDijagnozeData(pacijent_local);
             this.Text = GetNameAndSurname(pacijent_local);
-            UpdateAppointment(pacijent_local.Pravo_da_zakaze); // UpdateAppointment MORA ISPOD GetNameAndSurname jer se tu vrsi inicijalizacija za "pravo_da_zakaze"
+            UpdateAppointment(1); // Ostaje pravo da zakaze (jer je Lekar pogled)
+            //UpdateAppointment(pacijent_local.Pravo_da_zakaze); 
             metrolabInfoLekar.Text = GetDoctorNameAndSurname(pacijent_local);
             metroTabGlobal.SelectedIndex = 0; // Show 'Izabrani Lekar' tab
         }
