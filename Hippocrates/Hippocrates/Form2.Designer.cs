@@ -583,7 +583,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 78);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(194, 757);
+            this.panel1.Size = new System.Drawing.Size(194, 701);
             this.panel1.TabIndex = 0;
             // 
             // panel5
@@ -593,7 +593,7 @@
             this.panel5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel5.Location = new System.Drawing.Point(0, 51);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(194, 641);
+            this.panel5.Size = new System.Drawing.Size(194, 585);
             this.panel5.TabIndex = 4;
             // 
             // label3
@@ -692,8 +692,8 @@
             this.GeneralControl.Controls.Add(this.tab_zakazi_spec);
             this.GeneralControl.Location = new System.Drawing.Point(200, 76);
             this.GeneralControl.Name = "GeneralControl";
-            this.GeneralControl.SelectedIndex = 1;
-            this.GeneralControl.Size = new System.Drawing.Size(801, 750);
+            this.GeneralControl.SelectedIndex = 4;
+            this.GeneralControl.Size = new System.Drawing.Size(801, 694);
             this.GeneralControl.TabIndex = 4;
             this.GeneralControl.UseSelectable = true;
             // 
@@ -1205,7 +1205,7 @@
             this.tab_za_unosenje.HorizontalScrollbarSize = 10;
             this.tab_za_unosenje.Location = new System.Drawing.Point(4, 38);
             this.tab_za_unosenje.Name = "tab_za_unosenje";
-            this.tab_za_unosenje.Size = new System.Drawing.Size(793, 708);
+            this.tab_za_unosenje.Size = new System.Drawing.Size(793, 652);
             this.tab_za_unosenje.TabIndex = 0;
             this.tab_za_unosenje.Text = "Unosenje podataka";
             this.tab_za_unosenje.VerticalScrollbarBarColor = true;
@@ -1226,7 +1226,7 @@
             this.TabControl_za_unos.Location = new System.Drawing.Point(3, 0);
             this.TabControl_za_unos.Name = "TabControl_za_unos";
             this.TabControl_za_unos.SelectedIndex = 0;
-            this.TabControl_za_unos.Size = new System.Drawing.Size(794, 718);
+            this.TabControl_za_unos.Size = new System.Drawing.Size(794, 662);
             this.TabControl_za_unos.TabIndex = 2;
             this.TabControl_za_unos.UseSelectable = true;
             this.TabControl_za_unos.SelectedIndexChanged += new System.EventHandler(this.TabControl_za_unos_SelectedIndexChanged);
@@ -1264,7 +1264,7 @@
             this.tab_nov_pacijent.HorizontalScrollbarSize = 10;
             this.tab_nov_pacijent.Location = new System.Drawing.Point(4, 38);
             this.tab_nov_pacijent.Name = "tab_nov_pacijent";
-            this.tab_nov_pacijent.Size = new System.Drawing.Size(786, 676);
+            this.tab_nov_pacijent.Size = new System.Drawing.Size(786, 620);
             this.tab_nov_pacijent.TabIndex = 2;
             this.tab_nov_pacijent.Text = "Unosenje novog pacijenta";
             this.tab_nov_pacijent.VerticalScrollbarBarColor = true;
@@ -1396,7 +1396,7 @@
             this.dGV_unosenje_pacijent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGV_unosenje_pacijent.Location = new System.Drawing.Point(14, 347);
             this.dGV_unosenje_pacijent.Name = "dGV_unosenje_pacijent";
-            this.dGV_unosenje_pacijent.Size = new System.Drawing.Size(696, 304);
+            this.dGV_unosenje_pacijent.Size = new System.Drawing.Size(696, 248);
             this.dGV_unosenje_pacijent.TabIndex = 49;
             // 
             // dTP_pacijenta
@@ -5865,7 +5865,7 @@
             this.tab_zakazi_spec.HorizontalScrollbarSize = 10;
             this.tab_zakazi_spec.Location = new System.Drawing.Point(4, 38);
             this.tab_zakazi_spec.Name = "tab_zakazi_spec";
-            this.tab_zakazi_spec.Size = new System.Drawing.Size(793, 708);
+            this.tab_zakazi_spec.Size = new System.Drawing.Size(793, 652);
             this.tab_zakazi_spec.TabIndex = 4;
             this.tab_zakazi_spec.Text = "Zakazi termin kod specijaliste";
             this.tab_zakazi_spec.VerticalScrollbarBarColor = true;
@@ -5987,7 +5987,7 @@
             // 
             // btn_spec_zazivanje
             // 
-            this.btn_spec_zazivanje.Location = new System.Drawing.Point(583, 628);
+            this.btn_spec_zazivanje.Location = new System.Drawing.Point(390, 507);
             this.btn_spec_zazivanje.Name = "btn_spec_zazivanje";
             this.btn_spec_zazivanje.Size = new System.Drawing.Size(181, 43);
             this.btn_spec_zazivanje.TabIndex = 5;
@@ -6028,15 +6028,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1000, 836);
+            this.ClientSize = new System.Drawing.Size(1000, 780);
             this.Controls.Add(this.GeneralControl);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximumSize = new System.Drawing.Size(1920, 1024);
-            this.MinimumSize = new System.Drawing.Size(1000, 836);
+            this.MinimumSize = new System.Drawing.Size(1000, 726);
             this.Name = "Form2";
             this.Text = "\\";
             this.panel1.ResumeLayout(false);
