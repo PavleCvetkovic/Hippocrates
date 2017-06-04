@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippocrates.Data", "Hippocr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippocrates.SharedForms", "Hippocrates.SharedForms\Hippocrates.SharedForms.csproj", "{D90B5A36-69C4-4771-A70B-4E26EF67C33C}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HippocratesGlobalAdminSetup", "HippocratesGlobalAdminSetup\HippocratesGlobalAdminSetup.vdproj", "{0113FFC1-4DD6-44B8-96BF-8AF5D8DF3302}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{D90B5A36-69C4-4771-A70B-4E26EF67C33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D90B5A36-69C4-4771-A70B-4E26EF67C33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D90B5A36-69C4-4771-A70B-4E26EF67C33C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0113FFC1-4DD6-44B8-96BF-8AF5D8DF3302}.Debug|Any CPU.ActiveCfg = Debug
+		{0113FFC1-4DD6-44B8-96BF-8AF5D8DF3302}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

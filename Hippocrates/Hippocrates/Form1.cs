@@ -26,8 +26,6 @@ namespace Hippocrates
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             connstr = "server=pavlecvetkovic.me; user=aki;charset=utf8;database=Hippocrates;port=3306;password=jetion123c;";
             conn = new MySqlConnection(connstr);
-            tb_username.Text = "admin";
-            tb_pass.Text = "12345";
         }
 
         private void btn_login_Click(object sender, EventArgs e)
