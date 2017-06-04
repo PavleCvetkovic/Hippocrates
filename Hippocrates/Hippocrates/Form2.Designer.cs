@@ -692,7 +692,7 @@
             this.GeneralControl.Controls.Add(this.tab_zakazi_spec);
             this.GeneralControl.Location = new System.Drawing.Point(200, 76);
             this.GeneralControl.Name = "GeneralControl";
-            this.GeneralControl.SelectedIndex = 3;
+            this.GeneralControl.SelectedIndex = 1;
             this.GeneralControl.Size = new System.Drawing.Size(801, 750);
             this.GeneralControl.TabIndex = 4;
             this.GeneralControl.UseSelectable = true;
@@ -1344,7 +1344,7 @@
             this.tb_pac_unos_brTel.Name = "tb_pac_unos_brTel";
             this.tb_pac_unos_brTel.Size = new System.Drawing.Size(184, 26);
             this.tb_pac_unos_brTel.TabIndex = 54;
-            this.tb_pac_unos_brTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_lekar_unos_brTel_KeyPress);
+            this.tb_pac_unos_brTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pac_unos_brTel_KeyPress);
             // 
             // label54
             // 
@@ -3256,7 +3256,7 @@
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_domaZdravlja);
             this.tab_azuriranje.Location = new System.Drawing.Point(1, 1);
             this.tab_azuriranje.Name = "tab_azuriranje";
-            this.tab_azuriranje.SelectedIndex = 0;
+            this.tab_azuriranje.SelectedIndex = 3;
             this.tab_azuriranje.Size = new System.Drawing.Size(778, 696);
             this.tab_azuriranje.TabIndex = 4;
             this.tab_azuriranje.UseSelectable = true;
@@ -3383,6 +3383,7 @@
             this.tb_ss_mr_azuriranje.Name = "tb_ss_mr_azuriranje";
             this.tb_ss_mr_azuriranje.Size = new System.Drawing.Size(66, 26);
             this.tb_ss_mr_azuriranje.TabIndex = 16;
+            this.tb_ss_mr_azuriranje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ss_mr_azuriranje_KeyPress);
             // 
             // tb_pass_mr_azuriranje
             // 
@@ -3392,6 +3393,7 @@
             this.tb_pass_mr_azuriranje.Name = "tb_pass_mr_azuriranje";
             this.tb_pass_mr_azuriranje.Size = new System.Drawing.Size(284, 26);
             this.tb_pass_mr_azuriranje.TabIndex = 15;
+            this.tb_pass_mr_azuriranje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pass_mr_azuriranje_KeyPress);
             // 
             // tb_radiU_mr_azuriranje
             // 
@@ -3401,6 +3403,7 @@
             this.tb_radiU_mr_azuriranje.Name = "tb_radiU_mr_azuriranje";
             this.tb_radiU_mr_azuriranje.Size = new System.Drawing.Size(284, 26);
             this.tb_radiU_mr_azuriranje.TabIndex = 14;
+            this.tb_radiU_mr_azuriranje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_radiU_mr_azuriranje_KeyPress);
             // 
             // tb_prezime_mr_azuriranje
             // 
@@ -3410,6 +3413,7 @@
             this.tb_prezime_mr_azuriranje.Name = "tb_prezime_mr_azuriranje";
             this.tb_prezime_mr_azuriranje.Size = new System.Drawing.Size(284, 26);
             this.tb_prezime_mr_azuriranje.TabIndex = 13;
+            this.tb_prezime_mr_azuriranje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_prezime_mr_azuriranje_KeyPress);
             // 
             // tb_ime_mr_azuriranje
             // 
@@ -3419,6 +3423,7 @@
             this.tb_ime_mr_azuriranje.Name = "tb_ime_mr_azuriranje";
             this.tb_ime_mr_azuriranje.Size = new System.Drawing.Size(284, 26);
             this.tb_ime_mr_azuriranje.TabIndex = 12;
+            this.tb_ime_mr_azuriranje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ime_mr_azuriranje_KeyPress);
             // 
             // tb_jmbg_mr_azuriranje
             // 
@@ -3428,6 +3433,7 @@
             this.tb_jmbg_mr_azuriranje.Name = "tb_jmbg_mr_azuriranje";
             this.tb_jmbg_mr_azuriranje.Size = new System.Drawing.Size(284, 26);
             this.tb_jmbg_mr_azuriranje.TabIndex = 11;
+            this.tb_jmbg_mr_azuriranje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_jmbg_mr_azuriranje_KeyPress);
             // 
             // label79
             // 
@@ -4753,6 +4759,7 @@
             this.tb_pacijent_azuriranje_telefon.Name = "tb_pacijent_azuriranje_telefon";
             this.tb_pacijent_azuriranje_telefon.Size = new System.Drawing.Size(144, 26);
             this.tb_pacijent_azuriranje_telefon.TabIndex = 73;
+            this.tb_pacijent_azuriranje_telefon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_telefon_KeyPress);
             // 
             // label57
             // 
@@ -4830,6 +4837,7 @@
             this.tb_pacijent_azuriranje_srednjeSlovo.Name = "tb_pacijent_azuriranje_srednjeSlovo";
             this.tb_pacijent_azuriranje_srednjeSlovo.Size = new System.Drawing.Size(53, 26);
             this.tb_pacijent_azuriranje_srednjeSlovo.TabIndex = 64;
+            this.tb_pacijent_azuriranje_srednjeSlovo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pacijent_azuriranje_srednjeSlovo_KeyPress);
             // 
             // dTP_pacijent_azuriranje
             // 

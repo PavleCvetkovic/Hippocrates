@@ -2001,6 +2001,7 @@ namespace Hippocrates
 
         private void btn_brisanje_smene_Click(object sender, EventArgs e)
         {
+            bool postojiTermin = false;
             ISession s = DataLayer.GetSession();
             try
             {
@@ -2017,14 +2018,28 @@ namespace Hippocrates
 
                     }
                 }
-                il.Smene.Remove(smen);
-                s.Delete(smen);
-                s.Flush();
-                MessageBox.Show("Uspeno ste obrisali smenu.");
-                lBSmeneLekara.Items.Clear();
-                foreach (Smena smene in il.Smene)
+                foreach (Termin t in il.Termini)
                 {
-                    lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
+                    if (t.Datum >= smen.Id.Datum_Od && t.Datum <= smen.Datum_Do)
+                    {
+                        postojiTermin = true;
+                    }
+                }
+                if (postojiTermin == false)
+                {
+                    il.Smene.Remove(smen);
+                    s.Delete(smen);
+                    s.Flush();
+                    MessageBox.Show("Uspeno ste obrisali smenu.");
+                    lBSmeneLekara.Items.Clear();
+                    foreach (Smena smene in il.Smene)
+                    {
+                        lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Postoje termini u periodu ove smene!");
                 }
             }
             catch (Exception ex)
@@ -2081,7 +2096,7 @@ namespace Hippocrates
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Problem : " + ex);
+               
             }
             s.Close();
         }
@@ -2292,7 +2307,7 @@ namespace Hippocrates
 
         private void btn_azuriraj_smenu_Click(object sender, EventArgs e)
         {
-            
+            bool postojiTermin = false;
             if (lBSmeneLekara.SelectedIndex != -1)
             {
                 string datumOd = lBSmeneLekara.SelectedItem.ToString();
@@ -2305,36 +2320,54 @@ namespace Hippocrates
                     if (dTP_smena_od.Value < dTP_smena_do.Value)
                     {
                         foreach (Smena s1 in il.Smene)
-                        {
+                        {   
                             if (s1.Id.Datum_Od == DateTime.Parse(datumOd))
                             {
-                                if (cb_azuriranje_smenaPrva_leakr.Checked == true)
+                               
+                                foreach (Termin t in il.Termini)
                                 {
-                                    s1.SmenaLekara = 1;
+                                    if (t.Datum >= s1.Id.Datum_Od && t.Datum <= s1.Datum_Do)
+                                    {
+                                        postojiTermin = true;
+                                    }
                                 }
-                                else
+                                if (postojiTermin == false)
                                 {
-                                    s1.SmenaLekara = 2;
-                                }
-                                s1.Datum_Do = dTP_smena_do.Value;
-                                if (s1.Id.Datum_Od < DateTime.Now)
-                                {
-                                    s1.Id.Datum_Od = dTP_smena_od.Value;
+                                    if (cb_azuriranje_smenaPrva_leakr.Checked == true)
+                                    {
+                                        s1.SmenaLekara = 1;
+                                    }
+                                    else
+                                    {
+                                        s1.SmenaLekara = 2;
+                                    }
+                                    s1.Datum_Do = dTP_smena_do.Value;
+                                    if (s1.Id.Datum_Od < DateTime.Now)
+                                    {
+                                        s1.Id.Datum_Od = dTP_smena_od.Value;
+                                    }
                                 }
                             }
                         }
-                        if (ProveriSmene(il, dTP_smena_od.Value, dTP_smena_do.Value))
+                        if (postojiTermin == false)
                         {
-                            s.Flush();
-                            lBSmeneLekara.Items.Clear();
-                            foreach (Smena smene in il.Smene)
+                            if (ProveriSmene(il, dTP_smena_od.Value, dTP_smena_do.Value))
                             {
-                                lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
+                                s.Flush();
+                                lBSmeneLekara.Items.Clear();
+                                foreach (Smena smene in il.Smene)
+                                {
+                                    lBSmeneLekara.Items.Add(smene.Id.Datum_Od.ToShortDateString() + " - " + smene.Datum_Do.ToShortDateString() + " smena: " + smene.SmenaLekara);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Datumi smena vam se preklapaju,pokusajte ponovo!");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Datumi smena vam se preklapaju,pokusajte ponovo!");
+                            MessageBox.Show("Postoje termini zakazani u ovom periodu za smenu lekara.");
                         }
                     }
                     else
@@ -3761,10 +3794,7 @@ namespace Hippocrates
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
 
-        private void tb_lekar_unos_brTel_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
+        
         //tab za unos pacijenta
         private void tb_JMBG_pacijenta_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -3796,6 +3826,10 @@ namespace Hippocrates
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
         }
 
+        private void tb_pac_unos_brTel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '-';
+        }
         //tab za unos admina domaZdravlja
         private void tb_adminDZ_azuriranje_JMBG_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -3983,6 +4017,45 @@ namespace Hippocrates
 
 
 
+        private void tb_jmbg_mr_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tb_ime_mr_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_prezime_mr_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_radiU_mr_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tb_pass_mr_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tb_ss_mr_azuriranje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_pacijent_azuriranje_srednjeSlovo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void tb_pacijent_azuriranje_telefon_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '-';
+        }
 
 
 
@@ -4314,8 +4387,9 @@ namespace Hippocrates
             oracleSession.Close();
         }
 
+
         #endregion
 
-      
+       
     }
 }
