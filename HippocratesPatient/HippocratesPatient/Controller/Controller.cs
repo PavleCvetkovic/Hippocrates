@@ -33,15 +33,15 @@ namespace HippocratesPatient.Controller
             if (model.ValidateJMBG(jmbg) && model.ValidateLBO(lbo))
                 if (model.ConnectToDatabase(constring))
                 {
-                    view.Message("Connected to database");
+                    view.Message("Učitavanje u toku...");
                     // check for JMBG and LBO in database
                     OnSuccessfulConnection();
 
                 }
                 else
-                    view.Message("Error during database connection");
+                    view.Message("Greška prilikom konekcije na bazu");
             else
-                view.Message("Validation not okay");
+                view.Message("Validacija nije u redu");
             
         }
 
@@ -53,7 +53,7 @@ namespace HippocratesPatient.Controller
 
             pacijent_form.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             pacijent_form.ShowDialog();
-
+            //view.Message("Uspešno učitani podaci iz baze");
             
         }
 

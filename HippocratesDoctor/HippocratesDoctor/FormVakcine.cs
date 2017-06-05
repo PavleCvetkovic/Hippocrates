@@ -27,7 +27,8 @@ namespace HippocratesDoctor
             session_local = s;
             pacijent = p;
             //this.jmbg_pacijenta = jmbg_pacijenta;
-            this.Text = "Dodavanje vakcine";
+            this.Text = "Dodavanje vakcine " + pacijent.Ime + " " + pacijent.Prezime;
+            metroDateTimeDatumVakcine.MinDate = System.DateTime.Now; // Danasnji datum
         }
 
         private void FromDataToControl(int row_index)
@@ -65,7 +66,7 @@ namespace HippocratesDoctor
             vakcina.PrimioVakcinuPacijenti.Add(pv);
             try
             {
-                session_local.SaveOrUpdate(pacijent);
+                session_local.Save(pacijent);
                 session_local.Flush();
             }
             catch(Exception ex)

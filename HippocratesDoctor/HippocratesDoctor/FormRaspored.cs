@@ -16,7 +16,7 @@ using Hippocrates.Data.Entiteti;
 using NHibernate;
 using Hippocrates.Data;
 
-namespace Hippocrates
+namespace HippocratesDoctor
 {
     public partial class FormRaspored : MetroForm
     {
@@ -24,62 +24,75 @@ namespace Hippocrates
         private IzabraniLekar lekar_local = null;
         private Pacijent pacijent_local = null;
 
-        public FormRaspored(ISession session_passed, IzabraniLekar lekar, Pacijent p)
+        public FormRaspored()
         {
             InitializeComponent();
+            foreach (Control c in pnlPopodne.Controls)
+                c.Click += metroButton_Click;
+            foreach (Control c in pnlPrepodne.Controls)
+                c.Click += metroButton_Click;
+
+            this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
+                Screen.PrimaryScreen.WorkingArea.Height);
+            this.MinimumSize = new System.Drawing.Size(698, 365);
+        }
+
+        public FormRaspored(ISession session_passed, IzabraniLekar lekar, Pacijent p) : this()
+        {
+            //InitializeComponent();
             session_local = session_passed;
             pacijent_local = p;
             lekar_local = lekar;
             //session_local = DataLayer.GetSession();
             
             //this.WindowState = FormWindowState.Maximized;
-            this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
-                Screen.PrimaryScreen.WorkingArea.Height);
-            this.MinimumSize = new System.Drawing.Size(698, 365);
+            //this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
+            //    Screen.PrimaryScreen.WorkingArea.Height);
+            //this.MinimumSize = new System.Drawing.Size(698, 365);
 
             metroDateTime1.MinDate = System.DateTime.Today;
             metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
             metroLabelLekarInfo.Text = "Izabrani lekar: " + lekar.Ime + " " + lekar.Prezime + " " + lekar.Jmbg;
 
             // Binding handler to control
-            foreach (Control c in pnlPopodne.Controls)
-                c.Click += metroButton_Click;
-            foreach (Control c in pnlPrepodne.Controls)
-                c.Click += metroButton_Click;
+            //foreach (Control c in pnlPopodne.Controls)
+            //    c.Click += metroButton_Click;
+            //foreach (Control c in pnlPrepodne.Controls)
+            //    c.Click += metroButton_Click;
 
         }
         //----------------------------------------------
-
-        //public FormRaspored(string lekar, string p)
-        //{
-        //    InitializeComponent();
-        //    session_local = DataLayer.GetSession();
-        //    pacijent_local = session_local.Load<Pacijent>(p);
-        //    lekar_local = session_local.Load<IzabraniLekar>(lekar);
+        //Ovaj konstruktor mi treba za medicinskog radnika i glob Admina (Andrija)
+        public FormRaspored(string lekar, string p)
+        {
+            InitializeComponent();
+            session_local = DataLayer.GetSession();
+            pacijent_local = session_local.Load<Pacijent>(p);
+            lekar_local = session_local.Load<IzabraniLekar>(lekar);
 
         //    //this.WindowState = FormWindowState.Maximized;
-        //    this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
-        //        Screen.PrimaryScreen.WorkingArea.Height);
-        //    this.MinimumSize = new System.Drawing.Size(698, 365);
+            this.MaximumSize = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width,
+            Screen.PrimaryScreen.WorkingArea.Height);
+            this.MinimumSize = new System.Drawing.Size(698, 365);
 
-        //    metroDateTime1.MinDate = System.DateTime.Today;
-        //    metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
-        //    metroLabelLekarInfo.Text = "Izabrani lekar: " + lekar_local.Ime + " " + lekar_local.Prezime + " " + lekar_local.Jmbg;
+            metroDateTime1.MinDate = System.DateTime.Today;
+            metroDateTime1.Value = System.DateTime.Now; // causes event that calls RefreshControls to initialize the controls
+            metroLabelLekarInfo.Text = "Izabrani lekar: " + lekar_local.Ime + " " + lekar_local.Prezime + " " + lekar_local.Jmbg;
 
         //    // Binding handler to control
-        //    foreach (Control c in pnlPopodne.Controls)
-        //        c.Click += metroButton_Click;
-        //    foreach (Control c in pnlPrepodne.Controls)
-        //        c.Click += metroButton_Click;
+            foreach (Control c in pnlPopodne.Controls)
+               c.Click += metroButton_Click;
+            foreach (Control c in pnlPrepodne.Controls)
+               c.Click += metroButton_Click;
 
-        //}
+       }
 
         //----------------------------------------------
         private Smena GetDoctorShift(IzabraniLekar lekar)
         {
             Smena smena = null;
             foreach (Smena s in lekar.Smene)
-                if (s.Id.Datum_Od <= System.DateTime.Now && s.Datum_Do >= System.DateTime.Now)
+                if (s.Id.Datum_Od <= metroDateTime1.Value.Date && s.Datum_Do >= metroDateTime1.Value.Date)
                 {
                     smena = s;
                     break;
@@ -87,29 +100,40 @@ namespace Hippocrates
             return smena;
         }
 
-        private void UpdateForm(int smena_lek)
+        protected void UpdateForm(int smena_lek)
         {
+            metroLabelSmenaLekara.ForeColor = Color.DarkGreen;
             if (smena_lek == 1) // Promenjen Visible na Enable svojstvo 
             {
                 metroLabelSmenaLekara.Text = "Prepodne";
                 pnlPrepodne.Enabled = true;
                 pnlPopodne.Enabled = false;
-                //pnlPopodne.Enabled = false;
+                return;
             }
-            else
+            if (smena_lek == 2)
             {
                 metroLabelSmenaLekara.Text = "Poslepodne";
                 pnlPrepodne.Enabled = false;
                 pnlPopodne.Enabled = true;
-                //pnlPrepodne.Enabled = false;
+                return;
             }
+            metroLabelSmenaLekara.ForeColor = Color.Red;
+            metroLabelSmenaLekara.Text = "Lekaru nije podešena smena za izabrani datum";
+            pnlPrepodne.Enabled = false;
+            pnlPopodne.Enabled = false;
         }
 
         private void RefreshControls(IzabraniLekar lekar)
         {
+            Smena s = GetDoctorShift(lekar);
+            if (s == null)
+            {
+                MetroMessageBox.Show(this, "Lekaru izabranog pacijenta nije podešena smena za traženi datum, i nije moguće zakazati termin", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UpdateForm(3); // lekaru nije podesena smena
+                return;
+            }
             UpdateForm(GetDoctorShift(lekar).SmenaLekara);
 
-            //lekar_local.Termini[0].Pacijent
             IQuery query = session_local.CreateQuery("from Termin t where t.Lekar.Jmbg = :lekar and t.Datum = :datum");
             query.SetParameter("lekar", lekar_local.Jmbg);
             query.SetParameter("datum", metroDateTime1.Value.Date);
@@ -118,25 +142,40 @@ namespace Hippocrates
 
 
             #region Reset all buttons
-            foreach (Control c in pnlPopodne.Controls)
+            foreach (Control c in pnlPrepodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
+                //int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+                DateTime datetime = System.DateTime.Now;
+                int time = Int32.Parse(datetime.Hour.ToString() + datetime.Minute.ToString());
                 if (mb != null)
                 {
-                    //mb.Highlight = false;
-                    mb.Enabled = true; // ne mogu biti kliknuti (jer nije zakazan termin)
-                    //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    mb.Enabled = true;
+                    if (metroDateTime1.Value.Date == System.DateTime.Now.Date &&
+                      s.SmenaLekara == 1 &&
+                      Int32.Parse(mb.Text.Replace(":", String.Empty)) <= (time + 100)) // sledeci sat
+                    {
+                        mb.Enabled = false;
+                    }
                 }
 
             }
             foreach (Control c in pnlPopodne.Controls)
             {
                 MetroButton mb = c as MetroButton;
+                //int time = Int32.Parse(System.DateTime.Now.ToShortTimeString().Replace(".", String.Empty));
+                DateTime datetime = System.DateTime.Now;
+                int time = Int32.Parse(datetime.Hour.ToString() + datetime.Minute.ToString());
+
                 if (mb != null)
                 {
-                   // mb.Highlight = false;
-                    mb.Enabled = true; // ne mogu biti kliknuti (jer nije zakazan termin)
-                    //mb.BackColor = Color.LightCyan; // LightCyan = Free
+                    mb.Enabled = true;
+                    if (metroDateTime1.Value.Date == System.DateTime.Now.Date &&
+                        s.SmenaLekara == 2 &&
+                        Int32.Parse(mb.Text.Replace(":", String.Empty)) <= (time + 100))
+                    {
+                        mb.Enabled = false;
+                    }
                 }
             }
             #endregion
@@ -150,10 +189,7 @@ namespace Hippocrates
                     MetroButton mb = this.pnlPrepodne.Controls["metroButton" + time.ToString()] as MetroButton;
                     if (mb != null)
                     {
-                        //mb.Highlight = true;
                         mb.Enabled = false; // moze biti kliknutu jer je zakazan termin (postoji pacijent)
-                        //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
-                        //this.pnlPrepodne.Controls["metroButton" + time.ToString()].Enabled = false;
                     }
                 }
                 else
@@ -161,10 +197,7 @@ namespace Hippocrates
                     MetroButton mb = this.pnlPopodne.Controls["metroButton" + time.ToString()] as MetroButton;
                     if (mb != null)
                     {
-                        //mb.Highlight = true;
                         mb.Enabled = false; // moze biti kliknutu jer je zakazan termin (postoji pacijent)
-                        //mb.BackColor = Color.LightGoldenrodYellow; // NOT Free
-                        //this.pnlPopodne.Controls["metroButton" + time.ToString()].Enabled = false;
                     }
                 }
             }
@@ -204,19 +237,19 @@ namespace Hippocrates
             return success;
         }
 
-        private void metroDateTime1_ValueChanged(object sender, EventArgs e)
+        protected virtual void metroDateTime1_ValueChanged(object sender, EventArgs e)
         {
             //Each date change refreshes controls
             RefreshControls(lekar_local);
         }
-        
-        private void metroButton_Click(object sender, EventArgs e)
+
+        protected virtual void metroButton_Click(object sender, EventArgs e)
         {
             MetroButton metro_button = (MetroButton)sender;
             //MetroMessageBox.Show(this, "Info", "Button " + metro_button.Text + "is clicked", MessageBoxButtons.OK, MessageBoxIcon.Information);
             string napomena = "Treba da dodam formu za upis napomene"; // Add form
             DialogResult dr = MetroMessageBox.Show(this, "Question", "Da li ste sigurni da želite da zakažete " + GetDate() + " " + metro_button.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Cancel)
+            if (dr == DialogResult.No)
                 return;
 
             Napomena_Form nf = new Napomena_Form();
@@ -240,10 +273,16 @@ namespace Hippocrates
             RefreshControls(lekar_local);
         }
 
-        private void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
+        protected void FormRaspored_FormClosing(object sender, FormClosingEventArgs e)
         {
             session_local.Flush();
-            session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
+            //session_local.Close();//ja sam ovo zamenio,tj sklonio da je komentar
+
+            // Ti koji si sklonio ovo (budi fin pa se potpisi sledeci put) NikolaCeranic trenutno ovo pise
+            // Zasto se "to" ne zatvara:
+            // Sessija je prosledjena od strane prethodne forme
+            // Jedna sesija se vuce kroz celu aplikaciju (samo jedna)
+            // Zato ako se ovde zatvori u prethodnoj formi nije moguce raditi sa objektima (javlja se izuzetak)
         }
     }
 }

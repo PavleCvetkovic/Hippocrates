@@ -17,5 +17,9 @@ namespace Hippocrates.Data.EntitetiOracle
         {
             Klinike = new List<Klinika>();
         }
+        public override string ToString()
+        {
+            return Ime;
+        }
     }
 }

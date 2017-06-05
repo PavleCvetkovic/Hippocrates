@@ -23,6 +23,7 @@ namespace HippocratesDoctor
 
         private void mbtnLekarSubmit_Click(object sender, EventArgs e)
         {
+            mbtnLekarSubmit.Text = "Učitavanje ...";
             string conStr =
                 "server=139.59.132.29;user=djeki;charset=utf8;database=Hippocrates;port=3306;password=volimdoroteju1;";
             MySqlConnection conn = new MySqlConnection(conStr);
@@ -44,6 +45,8 @@ namespace HippocratesDoctor
                     //this.Hide();
                     FormLekar f = new FormLekar(mtbxLekarJMBG.Text);
                     f.ShowDialog();
+                   
+
                     //this.Close();
                 }
                 else
@@ -59,6 +62,7 @@ namespace HippocratesDoctor
             finally
             {
                 conn.Close();
+                mbtnLekarSubmit.Text = "Uloguj se";
             }
         }
 
@@ -69,6 +73,7 @@ namespace HippocratesDoctor
 
         private void mbtnOsobljeSubmit_Click(object sender, EventArgs e)
         {
+            mbtnOsobljeSubmit.Text = "Učitavanje ...";
             string conStr =
                 "server=139.59.132.29;user=djeki;charset=utf8;database=Hippocrates;port=3306;password=volimdoroteju1;";
             MySqlConnection conn = new MySqlConnection(conStr);
@@ -85,6 +90,7 @@ namespace HippocratesDoctor
                     //this.Hide();
                     FormOsoblje f = new FormOsoblje(mtbxOsobljeJMBG.Text);
                     f.ShowDialog();
+                   
                     //this.Close();
                 }
                 else
@@ -99,11 +105,13 @@ namespace HippocratesDoctor
             finally
             {
                 conn.Close();
+                mbtnOsobljeSubmit.Text = "Uloguj se";
             }
         }
 
         private void mbtnDirektorSubmit_Click(object sender, EventArgs e)
         {
+            mbtnDirektorSubmit.Text = "Učitavanje ...";
             string conStr =
                 "server=139.59.132.29;user=aki;charset=utf8;database=Hippocrates;port=3306;password=jetion123c;";
             MySqlConnection conn = new MySqlConnection(conStr);
@@ -120,6 +128,7 @@ namespace HippocratesDoctor
                     //this.Hide();
                     FormDirektor f = new FormDirektor(this.mtbxDirektorJMBG.Text);
                     f.ShowDialog();
+                   
                     //this.Close();
                 }
                 else
@@ -134,9 +143,14 @@ namespace HippocratesDoctor
             finally
             {
                 conn.Close();
+                mbtnDirektorSubmit.Text = "Uloguj se";
             }
         }
 
-       
+        private void mtbxDirektorJMBG_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsDigit(e.KeyChar) || (Char.IsControl(e.KeyChar))))
+                e.Handled = true;
+        }
     }
 }

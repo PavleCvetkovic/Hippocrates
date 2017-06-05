@@ -48,6 +48,8 @@
             this.metroButtonUnesiOsobu = new MetroFramework.Controls.MetroButton();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.metroButtonAzurirajOsobu = new MetroFramework.Controls.MetroButton();
+            this.metroTabPageZahteviPacijenata = new MetroFramework.Controls.MetroTabPage();
+            this.metroButtonZahteviPacijenata = new MetroFramework.Controls.MetroButton();
             this.lblImeDomaZ = new MetroFramework.Controls.MetroLabel();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
@@ -76,6 +78,7 @@
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
+            this.metroTabPageZahteviPacijenata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,9 +86,10 @@
             // 
             this.metroTabControlGlobal.Controls.Add(this.tabLekar);
             this.metroTabControlGlobal.Controls.Add(this.tabOsoblje);
+            this.metroTabControlGlobal.Controls.Add(this.metroTabPageZahteviPacijenata);
             this.metroTabControlGlobal.Location = new System.Drawing.Point(23, 72);
             this.metroTabControlGlobal.Name = "metroTabControlGlobal";
-            this.metroTabControlGlobal.SelectedIndex = 0;
+            this.metroTabControlGlobal.SelectedIndex = 1;
             this.metroTabControlGlobal.Size = new System.Drawing.Size(849, 168);
             this.metroTabControlGlobal.TabIndex = 3;
             this.metroTabControlGlobal.UseSelectable = true;
@@ -139,7 +143,7 @@
             this.metroButtonObrisiLekara.Name = "metroButtonObrisiLekara";
             this.metroButtonObrisiLekara.Size = new System.Drawing.Size(831, 23);
             this.metroButtonObrisiLekara.TabIndex = 2;
-            this.metroButtonObrisiLekara.Text = "Obriši lekara";
+            this.metroButtonObrisiLekara.Text = "Obrišite lekara";
             this.metroButtonObrisiLekara.UseSelectable = true;
             this.metroButtonObrisiLekara.Click += new System.EventHandler(this.metroButtonObrisiLekara_Click);
             // 
@@ -215,7 +219,7 @@
             this.metroTabControl1.Controls.Add(this.metroTabPage3);
             this.metroTabControl1.Location = new System.Drawing.Point(3, 4);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(841, 100);
             this.metroTabControl1.TabIndex = 2;
             this.metroTabControl1.UseSelectable = true;
@@ -241,7 +245,7 @@
             this.metroButtonObrisiOsobu.Name = "metroButtonObrisiOsobu";
             this.metroButtonObrisiOsobu.Size = new System.Drawing.Size(831, 23);
             this.metroButtonObrisiOsobu.TabIndex = 3;
-            this.metroButtonObrisiOsobu.Text = "Obriši osobu";
+            this.metroButtonObrisiOsobu.Text = "Obrišite osobu";
             this.metroButtonObrisiOsobu.UseSelectable = true;
             this.metroButtonObrisiOsobu.Click += new System.EventHandler(this.metroButtonObrisiOsobu_Click);
             // 
@@ -295,14 +299,39 @@
             this.metroButtonAzurirajOsobu.UseSelectable = true;
             this.metroButtonAzurirajOsobu.Click += new System.EventHandler(this.metroButtonAzurirajOsobu_Click);
             // 
+            // metroTabPageZahteviPacijenata
+            // 
+            this.metroTabPageZahteviPacijenata.Controls.Add(this.metroButtonZahteviPacijenata);
+            this.metroTabPageZahteviPacijenata.HorizontalScrollbarBarColor = true;
+            this.metroTabPageZahteviPacijenata.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPageZahteviPacijenata.HorizontalScrollbarSize = 10;
+            this.metroTabPageZahteviPacijenata.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPageZahteviPacijenata.Name = "metroTabPageZahteviPacijenata";
+            this.metroTabPageZahteviPacijenata.Size = new System.Drawing.Size(841, 126);
+            this.metroTabPageZahteviPacijenata.TabIndex = 2;
+            this.metroTabPageZahteviPacijenata.Text = "Podaci o zahtevima za promenu lekara";
+            this.metroTabPageZahteviPacijenata.VerticalScrollbarBarColor = true;
+            this.metroTabPageZahteviPacijenata.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPageZahteviPacijenata.VerticalScrollbarSize = 10;
+            // 
+            // metroButtonZahteviPacijenata
+            // 
+            this.metroButtonZahteviPacijenata.Location = new System.Drawing.Point(0, 18);
+            this.metroButtonZahteviPacijenata.Name = "metroButtonZahteviPacijenata";
+            this.metroButtonZahteviPacijenata.Size = new System.Drawing.Size(833, 23);
+            this.metroButtonZahteviPacijenata.TabIndex = 2;
+            this.metroButtonZahteviPacijenata.Text = "Prikaži zahteve pacijenata";
+            this.metroButtonZahteviPacijenata.UseSelectable = true;
+            this.metroButtonZahteviPacijenata.Click += new System.EventHandler(this.metroButtonZahteviPacijenata_Click);
+            // 
             // lblImeDomaZ
             // 
             this.lblImeDomaZ.AutoSize = true;
-            this.lblImeDomaZ.Location = new System.Drawing.Point(698, 50);
+            this.lblImeDomaZ.Location = new System.Drawing.Point(604, 60);
             this.lblImeDomaZ.Name = "lblImeDomaZ";
-            this.lblImeDomaZ.Size = new System.Drawing.Size(174, 19);
+            this.lblImeDomaZ.Size = new System.Drawing.Size(87, 19);
             this.lblImeDomaZ.TabIndex = 4;
-            this.lblImeDomaZ.Text = "ovde ide ime doma zdravlja";
+            this.lblImeDomaZ.Text = "Dom zdravlja";
             // 
             // metroLabel7
             // 
@@ -324,6 +353,8 @@
             // 
             // metroGridData
             // 
+            this.metroGridData.AllowUserToAddRows = false;
+            this.metroGridData.AllowUserToDeleteRows = false;
             this.metroGridData.AllowUserToResizeRows = false;
             this.metroGridData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridData.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -351,6 +382,7 @@
             this.metroGridData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.metroGridData.Location = new System.Drawing.Point(31, 442);
             this.metroGridData.Name = "metroGridData";
+            this.metroGridData.ReadOnly = true;
             this.metroGridData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
@@ -418,7 +450,7 @@
             this.metroTextBoxJMBG.CustomButton.Visible = false;
             this.metroTextBoxJMBG.Lines = new string[0];
             this.metroTextBoxJMBG.Location = new System.Drawing.Point(148, 256);
-            this.metroTextBoxJMBG.MaxLength = 32767;
+            this.metroTextBoxJMBG.MaxLength = 13;
             this.metroTextBoxJMBG.Name = "metroTextBoxJMBG";
             this.metroTextBoxJMBG.PasswordChar = '\0';
             this.metroTextBoxJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -431,6 +463,7 @@
             this.metroTextBoxJMBG.UseSelectable = true;
             this.metroTextBoxJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.metroTextBoxJMBG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.metroTextBoxJMBG_KeyPress);
             // 
             // metroLabel2
             // 
@@ -457,7 +490,7 @@
             this.metroTextBoxSrednjeSlovo.CustomButton.Visible = false;
             this.metroTextBoxSrednjeSlovo.Lines = new string[0];
             this.metroTextBoxSrednjeSlovo.Location = new System.Drawing.Point(555, 256);
-            this.metroTextBoxSrednjeSlovo.MaxLength = 32767;
+            this.metroTextBoxSrednjeSlovo.MaxLength = 1;
             this.metroTextBoxSrednjeSlovo.Name = "metroTextBoxSrednjeSlovo";
             this.metroTextBoxSrednjeSlovo.PasswordChar = '\0';
             this.metroTextBoxSrednjeSlovo.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -475,6 +508,7 @@
             // 
             this.metroDateTimeDatumRodjenja.CustomFormat = "yyyy-MM-dd";
             this.metroDateTimeDatumRodjenja.Location = new System.Drawing.Point(555, 349);
+            this.metroDateTimeDatumRodjenja.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.metroDateTimeDatumRodjenja.MinimumSize = new System.Drawing.Size(0, 29);
             this.metroDateTimeDatumRodjenja.Name = "metroDateTimeDatumRodjenja";
             this.metroDateTimeDatumRodjenja.Size = new System.Drawing.Size(223, 29);
@@ -496,7 +530,7 @@
             this.metroTextBoxIme.CustomButton.Visible = false;
             this.metroTextBoxIme.Lines = new string[0];
             this.metroTextBoxIme.Location = new System.Drawing.Point(148, 291);
-            this.metroTextBoxIme.MaxLength = 32767;
+            this.metroTextBoxIme.MaxLength = 40;
             this.metroTextBoxIme.Name = "metroTextBoxIme";
             this.metroTextBoxIme.PasswordChar = '\0';
             this.metroTextBoxIme.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -526,7 +560,7 @@
             this.metroTextBoxPrezime.CustomButton.Visible = false;
             this.metroTextBoxPrezime.Lines = new string[0];
             this.metroTextBoxPrezime.Location = new System.Drawing.Point(148, 323);
-            this.metroTextBoxPrezime.MaxLength = 32767;
+            this.metroTextBoxPrezime.MaxLength = 40;
             this.metroTextBoxPrezime.Name = "metroTextBoxPrezime";
             this.metroTextBoxPrezime.PasswordChar = '\0';
             this.metroTextBoxPrezime.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -556,7 +590,7 @@
             this.metroTextBoxLozinka.CustomButton.Visible = false;
             this.metroTextBoxLozinka.Lines = new string[0];
             this.metroTextBoxLozinka.Location = new System.Drawing.Point(148, 355);
-            this.metroTextBoxLozinka.MaxLength = 32767;
+            this.metroTextBoxLozinka.MaxLength = 50;
             this.metroTextBoxLozinka.Name = "metroTextBoxLozinka";
             this.metroTextBoxLozinka.PasswordChar = '\0';
             this.metroTextBoxLozinka.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -612,6 +646,7 @@
             this.Controls.Add(this.metroTextBoxLozinka);
             this.Controls.Add(this.lblImeDomaZ);
             this.Controls.Add(this.metroTabControlGlobal);
+            this.MinimumSize = new System.Drawing.Size(895, 673);
             this.Name = "FormDirektor";
             this.Text = "Administrator panel";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormDirektor_FormClosing);
@@ -626,6 +661,7 @@
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
+            this.metroTabPageZahteviPacijenata.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroGridData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -667,5 +703,7 @@
         private MetroFramework.Controls.MetroButton metroButtonAzurirajOsobu;
         private MetroFramework.Controls.MetroButton metroButtonSmenaLekara;
         private MetroFramework.Controls.MetroLabel metroLabel8;
+        private MetroFramework.Controls.MetroTabPage metroTabPageZahteviPacijenata;
+        private MetroFramework.Controls.MetroButton metroButtonZahteviPacijenata;
     }
 }

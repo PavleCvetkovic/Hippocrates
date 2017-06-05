@@ -31,32 +31,32 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.mTabLogin = new MetroFramework.Controls.MetroTabControl();
             this.mTabDirektor = new MetroFramework.Controls.MetroTabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mbtnDirektorSubmit = new MetroFramework.Controls.MetroButton();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.mtbxDirektorSifra = new MetroFramework.Controls.MetroTextBox();
             this.mtbxDirektorJMBG = new MetroFramework.Controls.MetroTextBox();
             this.mTabLekar = new MetroFramework.Controls.MetroTabPage();
+            this.mtbxLekarJMBG = new MetroFramework.Controls.MetroTextBox();
+            this.mtbxLekarSifra = new MetroFramework.Controls.MetroTextBox();
             this.mbtnLekarSubmit = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.mtbxLekarSifra = new MetroFramework.Controls.MetroTextBox();
-            this.mtbxLekarJMBG = new MetroFramework.Controls.MetroTextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.mTabOsoblje = new MetroFramework.Controls.MetroTabPage();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.mbtnOsobljeSubmit = new MetroFramework.Controls.MetroButton();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.mtbxOsobljeSifra = new MetroFramework.Controls.MetroTextBox();
             this.mtbxOsobljeJMBG = new MetroFramework.Controls.MetroTextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.mTabLogin.SuspendLayout();
             this.mTabDirektor.SuspendLayout();
-            this.mTabLekar.SuspendLayout();
-            this.mTabOsoblje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.mTabLekar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.mTabOsoblje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +67,7 @@
             this.mTabLogin.Controls.Add(this.mTabOsoblje);
             this.mTabLogin.Location = new System.Drawing.Point(23, 55);
             this.mTabLogin.Name = "mTabLogin";
-            this.mTabLogin.SelectedIndex = 1;
+            this.mTabLogin.SelectedIndex = 2;
             this.mTabLogin.Size = new System.Drawing.Size(467, 396);
             this.mTabLogin.TabIndex = 0;
             this.mTabLogin.UseSelectable = true;
@@ -91,6 +91,16 @@
             this.mTabDirektor.VerticalScrollbarBarColor = true;
             this.mTabDirektor.VerticalScrollbarHighlightOnWheel = false;
             this.mTabDirektor.VerticalScrollbarSize = 10;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.Image = global::HippocratesDoctor.Properties.Resources.database;
+            this.pictureBox1.Location = new System.Drawing.Point(-27, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(225, 383);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
             // 
             // mbtnDirektorSubmit
             // 
@@ -135,8 +145,7 @@
             this.mtbxDirektorSifra.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbxDirektorSifra.CustomButton.UseSelectable = true;
             this.mtbxDirektorSifra.CustomButton.Visible = false;
-            this.mtbxDirektorSifra.Lines = new string[] {
-        "12345"};
+            this.mtbxDirektorSifra.Lines = new string[0];
             this.mtbxDirektorSifra.Location = new System.Drawing.Point(254, 180);
             this.mtbxDirektorSifra.MaxLength = 32767;
             this.mtbxDirektorSifra.Name = "mtbxDirektorSifra";
@@ -148,7 +157,6 @@
             this.mtbxDirektorSifra.ShortcutsEnabled = true;
             this.mtbxDirektorSifra.Size = new System.Drawing.Size(166, 23);
             this.mtbxDirektorSifra.TabIndex = 7;
-            this.mtbxDirektorSifra.Text = "12345";
             this.mtbxDirektorSifra.UseSelectable = true;
             this.mtbxDirektorSifra.UseSystemPasswordChar = true;
             this.mtbxDirektorSifra.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -168,10 +176,9 @@
             this.mtbxDirektorJMBG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbxDirektorJMBG.CustomButton.UseSelectable = true;
             this.mtbxDirektorJMBG.CustomButton.Visible = false;
-            this.mtbxDirektorJMBG.Lines = new string[] {
-        "1236549877899"};
+            this.mtbxDirektorJMBG.Lines = new string[0];
             this.mtbxDirektorJMBG.Location = new System.Drawing.Point(254, 90);
-            this.mtbxDirektorJMBG.MaxLength = 32767;
+            this.mtbxDirektorJMBG.MaxLength = 13;
             this.mtbxDirektorJMBG.Name = "mtbxDirektorJMBG";
             this.mtbxDirektorJMBG.PasswordChar = '\0';
             this.mtbxDirektorJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -181,10 +188,10 @@
             this.mtbxDirektorJMBG.ShortcutsEnabled = true;
             this.mtbxDirektorJMBG.Size = new System.Drawing.Size(166, 23);
             this.mtbxDirektorJMBG.TabIndex = 6;
-            this.mtbxDirektorJMBG.Text = "1236549877899";
             this.mtbxDirektorJMBG.UseSelectable = true;
             this.mtbxDirektorJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbxDirektorJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbxDirektorJMBG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbxDirektorJMBG_KeyPress);
             // 
             // mTabLekar
             // 
@@ -205,6 +212,68 @@
             this.mTabLekar.VerticalScrollbarBarColor = true;
             this.mTabLekar.VerticalScrollbarHighlightOnWheel = false;
             this.mTabLekar.VerticalScrollbarSize = 10;
+            // 
+            // mtbxLekarJMBG
+            // 
+            // 
+            // 
+            // 
+            this.mtbxLekarJMBG.CustomButton.Image = null;
+            this.mtbxLekarJMBG.CustomButton.Location = new System.Drawing.Point(144, 1);
+            this.mtbxLekarJMBG.CustomButton.Name = "";
+            this.mtbxLekarJMBG.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.mtbxLekarJMBG.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.mtbxLekarJMBG.CustomButton.TabIndex = 1;
+            this.mtbxLekarJMBG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.mtbxLekarJMBG.CustomButton.UseSelectable = true;
+            this.mtbxLekarJMBG.CustomButton.Visible = false;
+            this.mtbxLekarJMBG.Lines = new string[0];
+            this.mtbxLekarJMBG.Location = new System.Drawing.Point(254, 90);
+            this.mtbxLekarJMBG.MaxLength = 13;
+            this.mtbxLekarJMBG.Name = "mtbxLekarJMBG";
+            this.mtbxLekarJMBG.PasswordChar = '\0';
+            this.mtbxLekarJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.mtbxLekarJMBG.SelectedText = "";
+            this.mtbxLekarJMBG.SelectionLength = 0;
+            this.mtbxLekarJMBG.SelectionStart = 0;
+            this.mtbxLekarJMBG.ShortcutsEnabled = true;
+            this.mtbxLekarJMBG.Size = new System.Drawing.Size(166, 23);
+            this.mtbxLekarJMBG.TabIndex = 2;
+            this.mtbxLekarJMBG.UseSelectable = true;
+            this.mtbxLekarJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.mtbxLekarJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbxLekarJMBG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbxDirektorJMBG_KeyPress);
+            // 
+            // mtbxLekarSifra
+            // 
+            // 
+            // 
+            // 
+            this.mtbxLekarSifra.CustomButton.Image = null;
+            this.mtbxLekarSifra.CustomButton.Location = new System.Drawing.Point(144, 1);
+            this.mtbxLekarSifra.CustomButton.Name = "";
+            this.mtbxLekarSifra.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.mtbxLekarSifra.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.mtbxLekarSifra.CustomButton.TabIndex = 1;
+            this.mtbxLekarSifra.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.mtbxLekarSifra.CustomButton.UseSelectable = true;
+            this.mtbxLekarSifra.CustomButton.Visible = false;
+            this.mtbxLekarSifra.Lines = new string[0];
+            this.mtbxLekarSifra.Location = new System.Drawing.Point(254, 180);
+            this.mtbxLekarSifra.MaxLength = 32767;
+            this.mtbxLekarSifra.Name = "mtbxLekarSifra";
+            this.mtbxLekarSifra.PasswordChar = '●';
+            this.mtbxLekarSifra.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.mtbxLekarSifra.SelectedText = "";
+            this.mtbxLekarSifra.SelectionLength = 0;
+            this.mtbxLekarSifra.SelectionStart = 0;
+            this.mtbxLekarSifra.ShortcutsEnabled = true;
+            this.mtbxLekarSifra.Size = new System.Drawing.Size(166, 23);
+            this.mtbxLekarSifra.TabIndex = 3;
+            this.mtbxLekarSifra.UseSelectable = true;
+            this.mtbxLekarSifra.UseSystemPasswordChar = true;
+            this.mtbxLekarSifra.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.mtbxLekarSifra.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // mbtnLekarSubmit
             // 
@@ -235,70 +304,15 @@
             this.metroLabel1.TabIndex = 4;
             this.metroLabel1.Text = "JMBG";
             // 
-            // mtbxLekarSifra
+            // pictureBox2
             // 
-            // 
-            // 
-            // 
-            this.mtbxLekarSifra.CustomButton.Image = null;
-            this.mtbxLekarSifra.CustomButton.Location = new System.Drawing.Point(144, 1);
-            this.mtbxLekarSifra.CustomButton.Name = "";
-            this.mtbxLekarSifra.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.mtbxLekarSifra.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.mtbxLekarSifra.CustomButton.TabIndex = 1;
-            this.mtbxLekarSifra.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.mtbxLekarSifra.CustomButton.UseSelectable = true;
-            this.mtbxLekarSifra.CustomButton.Visible = false;
-            this.mtbxLekarSifra.Lines = new string[] {
-        "12345"};
-            this.mtbxLekarSifra.Location = new System.Drawing.Point(254, 180);
-            this.mtbxLekarSifra.MaxLength = 32767;
-            this.mtbxLekarSifra.Name = "mtbxLekarSifra";
-            this.mtbxLekarSifra.PasswordChar = '●';
-            this.mtbxLekarSifra.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.mtbxLekarSifra.SelectedText = "";
-            this.mtbxLekarSifra.SelectionLength = 0;
-            this.mtbxLekarSifra.SelectionStart = 0;
-            this.mtbxLekarSifra.ShortcutsEnabled = true;
-            this.mtbxLekarSifra.Size = new System.Drawing.Size(166, 23);
-            this.mtbxLekarSifra.TabIndex = 3;
-            this.mtbxLekarSifra.Text = "12345";
-            this.mtbxLekarSifra.UseSelectable = true;
-            this.mtbxLekarSifra.UseSystemPasswordChar = true;
-            this.mtbxLekarSifra.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.mtbxLekarSifra.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // mtbxLekarJMBG
-            // 
-            // 
-            // 
-            // 
-            this.mtbxLekarJMBG.CustomButton.Image = null;
-            this.mtbxLekarJMBG.CustomButton.Location = new System.Drawing.Point(144, 1);
-            this.mtbxLekarJMBG.CustomButton.Name = "";
-            this.mtbxLekarJMBG.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.mtbxLekarJMBG.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.mtbxLekarJMBG.CustomButton.TabIndex = 1;
-            this.mtbxLekarJMBG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.mtbxLekarJMBG.CustomButton.UseSelectable = true;
-            this.mtbxLekarJMBG.CustomButton.Visible = false;
-            this.mtbxLekarJMBG.Lines = new string[] {
-        "0112955445023"};
-            this.mtbxLekarJMBG.Location = new System.Drawing.Point(254, 90);
-            this.mtbxLekarJMBG.MaxLength = 32767;
-            this.mtbxLekarJMBG.Name = "mtbxLekarJMBG";
-            this.mtbxLekarJMBG.PasswordChar = '\0';
-            this.mtbxLekarJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.mtbxLekarJMBG.SelectedText = "";
-            this.mtbxLekarJMBG.SelectionLength = 0;
-            this.mtbxLekarJMBG.SelectionStart = 0;
-            this.mtbxLekarJMBG.ShortcutsEnabled = true;
-            this.mtbxLekarJMBG.Size = new System.Drawing.Size(166, 23);
-            this.mtbxLekarJMBG.TabIndex = 2;
-            this.mtbxLekarJMBG.Text = "0112955445023";
-            this.mtbxLekarJMBG.UseSelectable = true;
-            this.mtbxLekarJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.mtbxLekarJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.pictureBox2.BackColor = System.Drawing.Color.White;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(-4, 19);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(282, 358);
+            this.pictureBox2.TabIndex = 12;
+            this.pictureBox2.TabStop = false;
             // 
             // mTabOsoblje
             // 
@@ -319,6 +333,16 @@
             this.mTabOsoblje.VerticalScrollbarBarColor = true;
             this.mTabOsoblje.VerticalScrollbarHighlightOnWheel = false;
             this.mTabOsoblje.VerticalScrollbarSize = 10;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.White;
+            this.pictureBox3.Image = global::HippocratesDoctor.Properties.Resources.nurse;
+            this.pictureBox3.Location = new System.Drawing.Point(17, -1);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(220, 355);
+            this.pictureBox3.TabIndex = 11;
+            this.pictureBox3.TabStop = false;
             // 
             // mbtnOsobljeSubmit
             // 
@@ -363,8 +387,7 @@
             this.mtbxOsobljeSifra.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbxOsobljeSifra.CustomButton.UseSelectable = true;
             this.mtbxOsobljeSifra.CustomButton.Visible = false;
-            this.mtbxOsobljeSifra.Lines = new string[] {
-        "12345"};
+            this.mtbxOsobljeSifra.Lines = new string[0];
             this.mtbxOsobljeSifra.Location = new System.Drawing.Point(254, 181);
             this.mtbxOsobljeSifra.MaxLength = 32767;
             this.mtbxOsobljeSifra.Name = "mtbxOsobljeSifra";
@@ -376,7 +399,6 @@
             this.mtbxOsobljeSifra.ShortcutsEnabled = true;
             this.mtbxOsobljeSifra.Size = new System.Drawing.Size(166, 23);
             this.mtbxOsobljeSifra.TabIndex = 7;
-            this.mtbxOsobljeSifra.Text = "12345";
             this.mtbxOsobljeSifra.UseSelectable = true;
             this.mtbxOsobljeSifra.UseSystemPasswordChar = true;
             this.mtbxOsobljeSifra.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -396,10 +418,9 @@
             this.mtbxOsobljeJMBG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbxOsobljeJMBG.CustomButton.UseSelectable = true;
             this.mtbxOsobljeJMBG.CustomButton.Visible = false;
-            this.mtbxOsobljeJMBG.Lines = new string[] {
-        "1234567891231"};
+            this.mtbxOsobljeJMBG.Lines = new string[0];
             this.mtbxOsobljeJMBG.Location = new System.Drawing.Point(254, 91);
-            this.mtbxOsobljeJMBG.MaxLength = 32767;
+            this.mtbxOsobljeJMBG.MaxLength = 13;
             this.mtbxOsobljeJMBG.Name = "mtbxOsobljeJMBG";
             this.mtbxOsobljeJMBG.PasswordChar = '\0';
             this.mtbxOsobljeJMBG.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -409,40 +430,10 @@
             this.mtbxOsobljeJMBG.ShortcutsEnabled = true;
             this.mtbxOsobljeJMBG.Size = new System.Drawing.Size(166, 23);
             this.mtbxOsobljeJMBG.TabIndex = 6;
-            this.mtbxOsobljeJMBG.Text = "1234567891231";
             this.mtbxOsobljeJMBG.UseSelectable = true;
             this.mtbxOsobljeJMBG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbxOsobljeJMBG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Image = global::HippocratesDoctor.Properties.Resources.database;
-            this.pictureBox1.Location = new System.Drawing.Point(-27, 27);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(225, 383);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.White;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(-4, 19);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(282, 358);
-            this.pictureBox2.TabIndex = 12;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.White;
-            this.pictureBox3.Image = global::HippocratesDoctor.Properties.Resources.nurse;
-            this.pictureBox3.Location = new System.Drawing.Point(17, -1);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(220, 355);
-            this.pictureBox3.TabIndex = 11;
-            this.pictureBox3.TabStop = false;
+            this.mtbxOsobljeJMBG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbxDirektorJMBG_KeyPress);
             // 
             // FormLogin
             // 
@@ -450,17 +441,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 460);
             this.Controls.Add(this.mTabLogin);
+            this.MaximumSize = new System.Drawing.Size(505, 460);
+            this.MinimumSize = new System.Drawing.Size(505, 460);
             this.Name = "FormLogin";
             this.Text = "Hippocrates";
             this.mTabLogin.ResumeLayout(false);
             this.mTabDirektor.ResumeLayout(false);
             this.mTabDirektor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mTabLekar.ResumeLayout(false);
             this.mTabLekar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.mTabOsoblje.ResumeLayout(false);
             this.mTabOsoblje.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 

@@ -26,43 +26,46 @@ namespace Hippocrates
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             connstr = "server=pavlecvetkovic.me; user=aki;charset=utf8;database=Hippocrates;port=3306;password=jetion123c;";
             conn = new MySqlConnection(connstr);
-            tb_username.Text = "admin";
-            tb_pass.Text = "12345";
         }
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            conn.Open();
-            MySqlCommand command = new MySqlCommand("SELECT * FROM ADMINISTRATOR WHERE USERNAME='"+ tb_username.Text + "'",conn);
-            MySqlDataReader dr = command.ExecuteReader();
-            if (dr.Read())
-            {  
-            if(tb_pass.Text == dr.GetString("PASSWORD"))
-              {
-                conn.Close();
-                this.Hide();
-                Form2 f = new Form2();
-                f.ShowDialog();
-                this.Close();   
-              }
-                    
-             else
-              {
-                conn.Close();
-                MessageBox.Show("Pogresno ste uneli password,pokusajte ponovo!");
+            try {
+                conn.Open();
+                MySqlCommand command = new MySqlCommand("SELECT * FROM ADMINISTRATOR WHERE USERNAME='" + tb_username.Text + "'", conn);
+                MySqlDataReader dr = command.ExecuteReader();
+                if (dr.Read())
+                {
+                    if (tb_pass.Text == dr.GetString("PASSWORD"))
+                    {
+                        conn.Close();
+                        this.Hide();
+                        Form2 f = new Form2();
+                        f.ShowDialog();
+                        this.Close();
+                    }
+
+                    else
+                    {
+                        conn.Close();
+                        MessageBox.Show("Pogresno ste uneli password,pokusajte ponovo!");
+                        tb_pass.Text = string.Empty;
+
+                    }
+                }
+                else
+                {
+                    conn.Close();
+                    MessageBox.Show("Pogresno ste uneli username,pokusajte ponovo!");
                     tb_pass.Text = string.Empty;
-                    
-              }
-             }
-            else
+                    tb_username.Text = string.Empty;
+                }
+            }
+            catch(Exception ex)
             {
-                conn.Close();
-                MessageBox.Show("Pogresno ste uneli username,pokusajte ponovo!");
-                tb_pass.Text = string.Empty;
-                tb_username.Text = string.Empty;
+                MessageBox.Show("Postoji problem u konekciji,proverite internet.");
             }
         }
-
        
     }
 }

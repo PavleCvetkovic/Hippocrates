@@ -56,6 +56,8 @@
     <Compile Include="ConnectionInfo.cs" />
     <Compile Include="DataLayer.cs" />
     <Compile Include="DataLayerOracle.cs" />
+    <Compile Include="EntitetiOracle\DomZdravljaOracle.cs" />
+    <Compile Include="EntitetiOracle\IzabraniLekarOracle.cs" />
     <Compile Include="EntitetiOracle\KlinickiCentar.cs" />
     <Compile Include="EntitetiOracle\Klinika.cs" />
     <Compile Include="EntitetiOracle\PacijentKlinickogCentra.cs" />
@@ -83,6 +85,8 @@
     <Compile Include="Entiteti\TerminBolnica.cs" />
     <Compile Include="Entiteti\Vakcina.cs" />
     <Compile Include="Entiteti\ZahtevZaPromenu.cs" />
+    <Compile Include="MapiranjaOracle\DomZdravljaOracleMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\IzabraniLekarOracleMapiranja.cs" />
     <Compile Include="MapiranjaOracle\KlinickiCentarMapiranja.cs" />
     <Compile Include="MapiranjaOracle\KlinikaMapiranja.cs" />
     <Compile Include="MapiranjaOracle\PacijentKlinickogCentraMapiranja.cs" />

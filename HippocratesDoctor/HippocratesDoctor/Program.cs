@@ -17,7 +17,7 @@ namespace HippocratesDoctor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormLogin());
-            //Application.Run(new FormDirektor("1236549877899"));
+           // Application.Run(new FormDirektor("1236549877899"));
             //Application.Run(new FormLekar("0112955445023"));
             //Application.Run(new FormOsoblje("1234567891234"));
             //Application.Run(new FormVakcine("0106940168994"));

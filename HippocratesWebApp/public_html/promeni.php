@@ -9,7 +9,7 @@ if(!isset($_SESSION['isValid'])){
 else{
      if(!(strlen($_SESSION['email'])>0 && strlen($_SESSION['telefon'])>0))
             header("Location: podesavanja.php");
-        
+
 }
 if(!isset($_POST['MATBRL'])){
     header("Location: index.php");

@@ -75,6 +75,12 @@
     <Compile Include="FormRaspored.designer.cs">
       <DependentUpon>FormRaspored.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormZakazaniTermini.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZakazaniTermini.Designer.cs">
+      <DependentUpon>FormZakazaniTermini.cs</DependentUpon>
+    </Compile>
     <Compile Include="Napomena.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     </Compile>
     <EmbeddedResource Include="FormRaspored.resx">
       <DependentUpon>FormRaspored.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormZakazaniTermini.resx">
+      <DependentUpon>FormZakazaniTermini.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Napomena.resx">
       <DependentUpon>Napomena.cs</DependentUpon>

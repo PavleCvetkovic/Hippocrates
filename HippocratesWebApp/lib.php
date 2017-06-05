@@ -58,7 +58,7 @@ function vecOcenio($matbrp){
         return true;
         $con->close();
     }
-    
+
 }
 function postaviTelefonPacijenta($matbrp,$telefon){
     $con=new mysqli("139.59.132.29","paja","pajapro1234","Hippocrates");
@@ -70,7 +70,7 @@ function postaviTelefonPacijenta($matbrp,$telefon){
             $res=$con->query("UPDATE PACIJENT SET KONTAKT_TELEFON='$telefon' WHERE JMBG='$matbrp'");
         }
         $con->close();
-        
+
     }
 
 
@@ -81,9 +81,9 @@ function postaviEmailPacijenta($matbrp,$email){
         print("Connection errot(".$con->connect_errno."): $con->connect_error");
     }
             $res=$con->query("UPDATE PACIJENT SET EMAIL='$email' WHERE JMBG='$matbrp'");
-       
+
         $con->close();
-     
+
     }
 
 function zahtevZaPromenu($matbrp,$matbrl){
@@ -94,9 +94,10 @@ function zahtevZaPromenu($matbrp,$matbrl){
     }
     else {
         $res=$con->query("SELECT * FROM ZAHTEV_ZA_PROMENU WHERE MATBRP=$matbrp;");
-        
-        if($res->num_rows==0)
-            $res=$con->query("INSERT INTO ZAHTEV_ZA_PROMENU(MATBRP,MATBR_ŽELJENOG) VALUES('$matbrp',$matbrl);");
+
+        if($res->num_rows==0){
+            $res=$con->query("INSERT INTO ZAHTEV_ZA_PROMENU(MATBRP,MATBR_ŽELJENOG) VALUES('$matbrp','$matbrl');");
+          }
         else{
             $con->close();
             return false;
@@ -300,13 +301,13 @@ function vratiZakazaneTermine($matbrp){
                 $vreme=$row['VREME'];
                 $sat=floor($vreme/100);
                 $minut=$vreme%100;
-                
+
                $termin=new Termin($sat,$minut,$row['DATUM']);
                $termin->dodajNapomenu($row['NAPOMENA']);
                $nizTermina[$k++]=$termin;
             }
             return $nizTermina;
-        }   
+        }
         $con->close();
     }
 }
@@ -344,7 +345,7 @@ function otkazi($matbrp,$datum,$vreme){
     else{
         $con->query("DELETE FROM TERMIN WHERE MATBRP=$matbrp AND DATUM='$datum' AND VREME='$vreme'");
         $con->query("UPDATE PACIJENT SET PRAVO_DA_ZAKAŽE=1;");
-        $con->close();     
+        $con->close();
     }
 }
 function zakazi($matbrp,Termin $termin,$napomena){
@@ -361,6 +362,8 @@ function zakazi($matbrp,Termin $termin,$napomena){
             $matbrl=$row['MATBRL'];
             $datum=$termin->datum;
             $vreme=$termin->vreme();
+            if(!slobodanTermin($matbrl,$datum,$vreme))
+              return false;
             if($row["PRAVO_DA_ZAKAŽE"]==1){
                 if($napomena=="")
                     $napomena=" ";
@@ -379,7 +382,7 @@ function zakazi($matbrp,Termin $termin,$napomena){
                 return false;
             }
             $con->close();
-            
+
     }
 }
 }

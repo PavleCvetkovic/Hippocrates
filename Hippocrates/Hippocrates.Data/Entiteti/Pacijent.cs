@@ -39,5 +39,10 @@ namespace Hippocrates.Data.Entiteti
             Zahtevi = new List<ZahtevZaPromenu>();
             TerminiBolnica = new List<TerminBolnica>();
         }
+
+        public override string ToString()
+        {
+            return Ime + " " + Prezime;
+        }
     }
 }

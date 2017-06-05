@@ -98,6 +98,7 @@
             this.Controls.Add(this.metroButtonOK);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.metroTextBoxNapomena);
+            this.MinimumSize = new System.Drawing.Size(380, 295);
             this.Name = "Napomena_Form";
             this.Text = "Napomena";
             this.ResumeLayout(false);

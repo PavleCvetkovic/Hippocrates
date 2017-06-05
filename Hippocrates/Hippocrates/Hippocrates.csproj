@@ -152,6 +152,10 @@
       <Project>{ef33cead-242b-4f45-849d-5717f474c00a}</Project>
       <Name>Hippocrates.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hippocrates.SharedForms\Hippocrates.SharedForms.csproj">
+      <Project>{d90b5a36-69c4-4771-a70b-4e26ef67c33c}</Project>
+      <Name>Hippocrates.SharedForms</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logoHipoDesktopAppZaForm2.png" />

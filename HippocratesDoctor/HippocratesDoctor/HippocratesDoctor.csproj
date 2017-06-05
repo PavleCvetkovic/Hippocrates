@@ -73,6 +73,9 @@
     <Reference Include="NHibernate">
       <HintPath>..\..\Hippocrates\Hippocrates.Data\bin\Debug\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.24160719\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -138,6 +141,18 @@
     <Compile Include="FormVakcine.Designer.cs">
       <DependentUpon>FormVakcine.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormZahteviPacijenata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZahteviPacijenata.Designer.cs">
+      <DependentUpon>FormZahteviPacijenata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormZakaziKodSpecijaliste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZakaziKodSpecijaliste.Designer.cs">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Napomena.cs">
@@ -184,6 +199,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormVakcine.resx">
       <DependentUpon>FormVakcine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormZahteviPacijenata.resx">
+      <DependentUpon>FormZahteviPacijenata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormZakaziKodSpecijaliste.resx">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Napomena.resx">
       <DependentUpon>Napomena.cs</DependentUpon>
