@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6DB06111-84AE-427B-A18C-85730B7E59C9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HippocratesDoctor</RootNamespace>
+    <AssemblyName>HippocratesDoctor</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\Hippocrates\Hippocrates.Data\bin\Debug\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Hippocrates.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Hippocrates\Hippocrates.Data\bin\Debug\Hippocrates.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\Hippocrates\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\Hippocrates\Hippocrates.Data\bin\Debug\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.24160719\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\ControllerAdministrator.cs" />
+    <Compile Include="Controller\ControllerDoctor.cs" />
+    <Compile Include="Controller\ControllerOsoblje.cs" />
+    <Compile Include="Controller\IController.cs" />
+    <Compile Include="FormDijagnoze.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDijagnoze.Designer.cs">
+      <DependentUpon>FormDijagnoze.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDirektor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDirektor.Designer.cs">
+      <DependentUpon>FormDirektor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLekar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLekar.Designer.cs">
+      <DependentUpon>FormLekar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOsoblje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOsoblje.Designer.cs">
+      <DependentUpon>FormOsoblje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRaspored.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRaspored.designer.cs">
+      <DependentUpon>FormRaspored.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTerapije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTerapije.Designer.cs">
+      <DependentUpon>FormTerapije.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormVakcine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormVakcine.Designer.cs">
+      <DependentUpon>FormVakcine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormZahteviPacijenata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZahteviPacijenata.Designer.cs">
+      <DependentUpon>FormZahteviPacijenata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormZakaziKodSpecijaliste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormZakaziKodSpecijaliste.Designer.cs">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IModel.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Napomena.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Napomena.designer.cs">
+      <DependentUpon>Napomena.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pacijent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pacijent.designer.cs">
+      <DependentUpon>Pacijent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmenaLekara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SmenaLekara.Designer.cs">
+      <DependentUpon>SmenaLekara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\IView.cs" />
+    <EmbeddedResource Include="FormDijagnoze.resx">
+      <DependentUpon>FormDijagnoze.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDirektor.resx">
+      <DependentUpon>FormDirektor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLekar.resx">
+      <DependentUpon>FormLekar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOsoblje.resx">
+      <DependentUpon>FormOsoblje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRaspored.resx">
+      <DependentUpon>FormRaspored.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTerapije.resx">
+      <DependentUpon>FormTerapije.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVakcine.resx">
+      <DependentUpon>FormVakcine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormZahteviPacijenata.resx">
+      <DependentUpon>FormZahteviPacijenata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormZakaziKodSpecijaliste.resx">
+      <DependentUpon>FormZakaziKodSpecijaliste.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Napomena.resx">
+      <DependentUpon>Napomena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pacijent.resx">
+      <DependentUpon>Pacijent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SmenaLekara.resx">
+      <DependentUpon>SmenaLekara.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doctor_PNG16012.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\patient.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nurse.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

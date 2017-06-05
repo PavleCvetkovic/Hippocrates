@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippocrates", "Hippocrates\Hippocrates.csproj", "{D142FE3C-477E-4C63-8FCC-1635E221CFE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippocrates.Data", "Hippocrates.Data\Hippocrates.Data.csproj", "{EF33CEAD-242B-4F45-849D-5717F474C00A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippocrates.SharedForms", "Hippocrates.SharedForms\Hippocrates.SharedForms.csproj", "{D90B5A36-69C4-4771-A70B-4E26EF67C33C}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HippocratesGlobalAdminSetup", "HippocratesGlobalAdminSetup\HippocratesGlobalAdminSetup.vdproj", "{0113FFC1-4DD6-44B8-96BF-8AF5D8DF3302}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D142FE3C-477E-4C63-8FCC-1635E221CFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D142FE3C-477E-4C63-8FCC-1635E221CFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D142FE3C-477E-4C63-8FCC-1635E221CFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D142FE3C-477E-4C63-8FCC-1635E221CFE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF33CEAD-242B-4F45-849D-5717F474C00A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF33CEAD-242B-4F45-849D-5717F474C00A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF33CEAD-242B-4F45-849D-5717F474C00A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF33CEAD-242B-4F45-849D-5717F474C00A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90B5A36-69C4-4771-A70B-4E26EF67C33C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90B5A36-69C4-4771-A70B-4E26EF67C33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90B5A36-69C4-4771-A70B-4E26EF67C33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90B5A36-69C4-4771-A70B-4E26EF67C33C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0113FFC1-4DD6-44B8-96BF-8AF5D8DF3302}.Debug|Any CPU.ActiveCfg = Debug
+		{0113FFC1-4DD6-44B8-96BF-8AF5D8DF3302}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

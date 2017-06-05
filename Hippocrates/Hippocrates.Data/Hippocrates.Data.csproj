@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EF33CEAD-242B-4F45-849D-5717F474C00A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hippocrates.Data</RootNamespace>
+    <AssemblyName>Hippocrates.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="DataLayer.cs" />
+    <Compile Include="DataLayerOracle.cs" />
+    <Compile Include="EntitetiOracle\DomZdravljaOracle.cs" />
+    <Compile Include="EntitetiOracle\IzabraniLekarOracle.cs" />
+    <Compile Include="EntitetiOracle\KlinickiCentar.cs" />
+    <Compile Include="EntitetiOracle\Klinika.cs" />
+    <Compile Include="EntitetiOracle\PacijentKlinickogCentra.cs" />
+    <Compile Include="EntitetiOracle\Pregled.cs" />
+    <Compile Include="EntitetiOracle\SmenaKC.cs" />
+    <Compile Include="EntitetiOracle\SpecijalistaKC.cs" />
+    <Compile Include="Entiteti\AdministratorDomaZdravlja.cs" />
+    <Compile Include="Entiteti\Bolnica.cs" />
+    <Compile Include="Entiteti\Dijagnostifikovano.cs" />
+    <Compile Include="Entiteti\DijagnostifikovanoId.cs" />
+    <Compile Include="Entiteti\Dijagnoza.cs" />
+    <Compile Include="Entiteti\DomZdravlja.cs" />
+    <Compile Include="Entiteti\IzabraniLekar.cs" />
+    <Compile Include="Entiteti\MedicinskoOsoblje.cs" />
+    <Compile Include="Entiteti\Ocena.cs" />
+    <Compile Include="Entiteti\OcenaId.cs" />
+    <Compile Include="Entiteti\Pacijent.cs" />
+    <Compile Include="Entiteti\PrimioVakcinu.cs" />
+    <Compile Include="Entiteti\PrimioVakcinuId.cs" />
+    <Compile Include="Entiteti\Smena.cs" />
+    <Compile Include="Entiteti\SmenaId.cs" />
+    <Compile Include="Entiteti\Specijalista.cs" />
+    <Compile Include="Entiteti\Terapija.cs" />
+    <Compile Include="Entiteti\Termin.cs" />
+    <Compile Include="Entiteti\TerminBolnica.cs" />
+    <Compile Include="Entiteti\Vakcina.cs" />
+    <Compile Include="Entiteti\ZahtevZaPromenu.cs" />
+    <Compile Include="MapiranjaOracle\DomZdravljaOracleMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\IzabraniLekarOracleMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\KlinickiCentarMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\KlinikaMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\PacijentKlinickogCentraMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\PregledMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\SmenaMapiranja.cs" />
+    <Compile Include="MapiranjaOracle\SpecijalistaMapiranja.cs" />
+    <Compile Include="Mapiranja\AdminDomaZdravljaMapiranje.cs" />
+    <Compile Include="Mapiranja\BolnicaMapiranja.cs" />
+    <Compile Include="Mapiranja\DijagnostifikovanoMapiranja.cs" />
+    <Compile Include="Mapiranja\DijagnozaMapiranja.cs" />
+    <Compile Include="Mapiranja\DomZdravljaMapiranja.cs" />
+    <Compile Include="Mapiranja\IzabraniLekarMapiranja.cs" />
+    <Compile Include="Mapiranja\MedicinskoOsobljeMapiranja.cs" />
+    <Compile Include="Mapiranja\OcenaMapiranja.cs" />
+    <Compile Include="Mapiranja\PacijentMapiranja.cs" />
+    <Compile Include="Mapiranja\PrimioVakcinuMapiranja.cs" />
+    <Compile Include="Mapiranja\SmenaMapiranja.cs" />
+    <Compile Include="Mapiranja\SpecijalistaMapiranja.cs" />
+    <Compile Include="Mapiranja\TerapijaMapiranja.cs" />
+    <Compile Include="Mapiranja\TerminBolnicaMapiranja.cs" />
+    <Compile Include="Mapiranja\TerminMapiranja.cs" />
+    <Compile Include="Mapiranja\VakcinaMapiranja.cs" />
+    <Compile Include="Mapiranja\ZahtevZaPromenuMapiranja.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
