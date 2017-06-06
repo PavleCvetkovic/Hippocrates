@@ -1374,26 +1374,25 @@ namespace Hippocrates
             
             ISession s = DataLayer.GetSession();
             DomZdravlja dz = s.Load<DomZdravlja>(pomIndex);
-            if(dz.Lekari.Count == 0 && dz.Administratori.Count == 0 && dz.MedicinskoOsoblje.Count == 0)
+            try
             {
-                s.Delete(dz);
-                s.Flush();
-                s.Close();
-                MessageBox.Show("Uspesno ste obrisali dom zdravlja");
-                refreshDGVDomovi(dGV_brisanje_dz);
-            }
-            else
-            {
-                var result = MessageBox.Show("U domu zdravlja postoje medicinski radnici,administratori i lekari kao i njihovi pacijenti,terapije i dijagnoze,ako izvrsite opciju brisanja podaci o navedenim ce biti takodje obrisani. \n Da li zelite da nastavite sa brisanjem? ", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(result == DialogResult.Yes)
+                if (dz.Lekari.Count == 0 && dz.Administratori.Count == 0 && dz.MedicinskoOsoblje.Count == 0)
                 {
                     s.Delete(dz);
+                    s.Flush();
+                    s.Close();
+                    MessageBox.Show("Uspesno ste obrisali dom zdravlja");
+                    refreshDGVDomovi(dGV_brisanje_dz);
                 }
                 else
                 {
                     MessageBox.Show("Promenite dom zdravlja lekarima,medicinskim radnicima i administratorima");
                 }
             }
+            catch(Exception ex) {
+                MessageBox.Show("Promenite dom zdravlja lekarima,medicinskim radnicima i administratorima");
+            }
+            
             
         }
         private void dGV_brisanje_dz_SelectionChanged(object sender, EventArgs e)
@@ -1766,7 +1765,11 @@ namespace Hippocrates
                     string[] vakcinaSifra = cb_vakcina_brisanje.SelectedItem.ToString().Split(' ');
                     Vakcina v = s.Load<Vakcina>(vakcinaSifra[1]);
                     s.CreateSQLQuery("delete from PRIMIO_VAKCINU where SIFRA_VAKCINE=" + vakcinaSifra[1]).ExecuteUpdate();
+
+                    s.Close();
+                    s = DataLayer.GetSession();
                     s.Delete(v);
+                    s.Flush();
                     MessageBox.Show("Uspeno ste obrisali vakcinu. ");
                     cb_vakcina_brisanje.Text = string.Empty;
                 }
@@ -1794,9 +1797,9 @@ namespace Hippocrates
                 {
                     string[] dijagSifra = cb_brisanje_dijagnoze.SelectedItem.ToString().Split(' ');
                     Dijagnoza d = s.Load<Dijagnoza>(dijagSifra[0]);
-                    s.CreateSQLQuery("delete from DIJAGNOSTIFIKOVANO where ŠIFRA_DIJAGNOZE='" + dijagSifra[0]+"'").ExecuteUpdate();
-                    s.Delete(d);
-                    s.Flush();
+                    s.CreateSQLQuery("delete from DIJAGNOSTIFIKOVANO where ŠIFRA_DIJAGNOZE like '" + dijagSifra[0] + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from TERAPIJA where ŠIFRA_DIJAGNOZE like '" + dijagSifra[0] + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from DIJAGNOZA where ŠIFRA like '" + dijagSifra[0] + "'").ExecuteUpdate();
                     MessageBox.Show("Uspeno ste obrisali dijagnozu. ");
                     cb_brisanje_dijagnoze.Text = string.Empty;
                 }
