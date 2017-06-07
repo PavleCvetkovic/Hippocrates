@@ -1417,22 +1417,17 @@ namespace Hippocrates
             if (il.Pacijenti.Count == 0)
             {
                 s.Delete(il);
+                s.Flush();
+                MessageBox.Show("Uspesno ste obrisali lekara.");
             }
             else
             {
-                var result = MessageBox.Show("Lekar je izabran od strane pacijenata, ukoliko izvrsite opciju brisanja podaci o navedenim ce biti takodje obrisani kao i o terapijama i dijagnozama. \n Da li zelite da nastavite sa brisanjem? ", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    s.Delete(il);
-                }
-                else
-                {
-                    MessageBox.Show("Promenite izabranog lekara svim pacijentima kojima je izabran lekar oznacen u tabeli");
-                }
+                MessageBox.Show("Promenite izabranog lekara svim pacijentima kojima je izabran lekar oznacen u tabeli");
+                
             }
-            s.Flush();
+            
             s.Close();
-            MessageBox.Show("Uspesno ste obrisali lekara.");
+            
             refreshDGVLekari(dGV_lekar_brisanje,cB_odabriDZ_lekar_brisanje.SelectedItem.ToString());
             
         }
@@ -2833,7 +2828,7 @@ namespace Hippocrates
                 ISession s = DataLayer.GetSession();
                 Pacijent pac = s.Load<Pacijent>(pomIndex);
                 string dijagnozaIzCB = cB_Dijagnoze_pacijenta_azuriranje.SelectedItem.ToString();
-                string indexDijagnoze = dijagnozaIzCB.Substring(0, dijagnozaIzCB.IndexOf("-"));
+                string indexDijagnoze = dijagnozaIzCB.Substring(0, dijagnozaIzCB.IndexOf(" "));
                 Dijagnoza d = s.Load<Dijagnoza>(indexDijagnoze);
                 Terapija ter = new Terapija()
                 {
@@ -2936,7 +2931,17 @@ namespace Hippocrates
         }
         private void cB_Dijagnoze_pacijenta_azuriranje_Enter(object sender, EventArgs e)
         {
-
+            cB_Dijagnoze_pacijenta_azuriranje.Items.Clear();
+            cB_Dijagnoze_pacijenta_azuriranje.Text = string.Empty;
+            
+            ISession s = DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from Dijagnoza");
+            IList<Dijagnoza> dijag = iq.List<Dijagnoza>();
+            foreach (Dijagnoza d in dijag)
+            {
+                cB_Dijagnoze_pacijenta_azuriranje.Items.Add(d.Sifra + " " + d.Ime);
+            }
+            s.Close();
         }
         #endregion
 
