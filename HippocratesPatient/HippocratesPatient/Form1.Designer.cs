@@ -59,7 +59,8 @@
             this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBox1.CustomButton.UseSelectable = true;
             this.metroTextBox1.CustomButton.Visible = false;
-            this.metroTextBox1.Lines = new string[0];
+            this.metroTextBox1.Lines = new string[] {
+        "0110970112870"};
             this.metroTextBox1.Location = new System.Drawing.Point(88, 153);
             this.metroTextBox1.MaxLength = 13;
             this.metroTextBox1.Name = "metroTextBox1";
@@ -71,6 +72,7 @@
             this.metroTextBox1.ShortcutsEnabled = true;
             this.metroTextBox1.Size = new System.Drawing.Size(224, 23);
             this.metroTextBox1.TabIndex = 2;
+            this.metroTextBox1.Text = "0110970112870";
             this.metroTextBox1.UseSelectable = true;
             this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -90,7 +92,8 @@
             this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBox2.CustomButton.UseSelectable = true;
             this.metroTextBox2.CustomButton.Visible = false;
-            this.metroTextBox2.Lines = new string[0];
+            this.metroTextBox2.Lines = new string[] {
+        "2096979244"};
             this.metroTextBox2.Location = new System.Drawing.Point(88, 245);
             this.metroTextBox2.MaxLength = 10;
             this.metroTextBox2.Name = "metroTextBox2";
@@ -102,6 +105,7 @@
             this.metroTextBox2.ShortcutsEnabled = true;
             this.metroTextBox2.Size = new System.Drawing.Size(224, 23);
             this.metroTextBox2.TabIndex = 3;
+            this.metroTextBox2.Text = "2096979244";
             this.metroTextBox2.UseSelectable = true;
             this.metroTextBox2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);

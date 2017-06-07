@@ -221,6 +221,8 @@ namespace Hippocrates
         public bool SendEmailConfirmation(string termin_time, string termin_date)
         {
             // 587 port, smtp.gmail.com, tls (secure)
+            // Open new form with only progress bar
+
             bool success = true;
             if (pacijent_local.Email == null) // 
             {
@@ -228,6 +230,11 @@ namespace Hippocrates
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+
+
+            MetroMessageBox.Show(this, "Molimo sačekajte nekoliko sekundi da e-mail za potvrdu bude poslat", "Info!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Enabled = false;
 
             var fromAddress = new MailAddress("mshippocrates@gmail.com", "MS Hippocrates");
             var toAddress = new MailAddress(pacijent_local.Email, pacijent_local.Ime + " " + pacijent_local.Prezime);
@@ -269,6 +276,7 @@ namespace Hippocrates
                     success = false;
                 }
             }
+            this.Enabled = true;    
             return success;
         }
 

@@ -18,15 +18,9 @@ namespace HippocratesPatient
 {
     public partial class PacijentForm : MetroFramework.Forms.MetroForm//, View.IView
     {
-        //private string jmbg_pacijenta, jmbg_lekara;
-       // private string puno_ime;
         private Pacijent pacijent;
         private ISession session;
-        //private int pravo_da_zakaze;
-        //private byte pravo_da_zakaze;
-        //private string connection = "server=139.59.132.29;user=paja;charset=utf8;database=Hippocrates;port=3306;password=pajapro1234;protocol=TCP";
-        //private MySqlDataAdapter daCountry;
-        //private DataSet dsCountry;
+
         public PacijentForm(string jmbg, string lbo)
         {
             InitializeComponent();
@@ -44,17 +38,12 @@ namespace HippocratesPatient
             try
             {
                 session = DataLayer.GetSession();
-
-                //Ucitavaju se podaci o prodavnici za zadatim brojem
                 pacijent = session.Load<Pacijent>(jmbg_pacijenta);
-
-                //MessageBox.Show(p.Naziv);
-
-                //s.Close();
             }
             catch (Exception ec)
             {
-                MetroMessageBox.Show(this, "Greška prilikom učitavanja podataka o pacijentu iz baze " + ec.Message);
+                MetroMessageBox.Show(this, "Greška prilikom učitavanja podataka o pacijentu iz baze " + ec.Message,
+                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -65,7 +54,7 @@ namespace HippocratesPatient
                 metroLabelPravoZaZakazivanje.Text = "Imate pravo da zakazete termin";
                 metroLabelPravoZaZakazivanje.UseCustomForeColor = true;
                 metroLabelPravoZaZakazivanje.ForeColor = System.Drawing.Color.Aqua;
-                metroLabelPravoZaZakazivanje.BackColor = System.Drawing.Color.Aqua;
+                //metroLabelPravoZaZakazivanje.BackColor = System.Drawing.Color.Aqua;
                 metroButtonZakaziteTermin.Enabled = true;
                 metroButtonZakazaniTermini.Enabled = false; // Nema sta da otkaze (moze samo da zakaze)
             }
@@ -120,9 +109,9 @@ namespace HippocratesPatient
         {
             MetroFramework.Controls.MetroTabControl mtc = sender as MetroFramework.Controls.MetroTabControl;
 
-            //MessageBox.Show("Selected inex changed event" + mtc.SelectedIndex);
             switch(mtc.SelectedTab.Text)
             {
+                case "Izabrani Lekar": { metrolabInfoLekar.Text = pacijent.Lekar.Ime + " " + pacijent.Lekar.Prezime; break; } 
                 case "Vakcine" : { GetVakcineData(pacijent); break; }
                 case "Dijagnoze" : { GetDijagnozeData(pacijent); break; }
                 case "Terapije": { GetTerapijeData(pacijent); break; }
@@ -132,12 +121,12 @@ namespace HippocratesPatient
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
-            //MetroMessageBox.Show(this, "This is a message in MetroBox");
             if (pacijent.Pravo_da_zakaze == 0)
             {
                 MetroMessageBox.Show(this, "Nemate pravo da zakažete termin. Vaš lekar još uvek nije ubeležio Vaš prethodni dolazak", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             FormRaspored raspored_form = new FormRaspored(session, pacijent);
             raspored_form.StartPosition = FormStartPosition.CenterScreen;
             raspored_form.ShowDialog();
@@ -146,15 +135,13 @@ namespace HippocratesPatient
 
         private void PacijentForm_Load(object sender, EventArgs e)
         {
-            //this.Text = GetNameAndSurname(jmbg_pacijenta, lbo);
-            //UpdateAppointment(pravo_da_zakaze); // UpdateAppointment MORA ISPOD GetNameAndSurname jer se tu vrsi inicijalizacija za "pravo_da_zakaze"
-            //metrolabInfoLekar.Text = GetDoctorNameAndSurname(jmbg_lekara);
-            //metroTabGlobal.SelectedIndex = 0; // Show 'Izabrani Lekar' tab
+            // Empty
         }
 
         private void PacijentForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             session.Save(pacijent); // just in case
+            session.Flush(); // just in case (for appointment)
             session.Close();
         }
 
@@ -185,7 +172,6 @@ namespace HippocratesPatient
         {
             ZahtevZaIzborLekara zahtev_form = new ZahtevZaIzborLekara(session, pacijent);
             zahtev_form.StartPosition = FormStartPosition.CenterScreen;
-            //zahtev_form.MdiParent = this; // To make it impossible to NOT focus
             zahtev_form.ShowDialog();
         }
 
