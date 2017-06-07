@@ -594,7 +594,11 @@ namespace HippocratesDoctor
                 case 1: { RefreshVakcineData(aktivni_pacijent); break; }
                 case 2: { RefreshTerapijeData(aktivni_pacijent); break; }
                 case 3: { metroLabelOceniPacijentaInfo.Text = GetPatientBasicInfo(); break; }
-                case 4: { RefreshUputData(aktivni_pacijent); break; }
+                case 4: {
+                        metroGridKlinickiCentri.Rows.Clear();
+                        metroGridKlinike.Rows.Clear();
+                        metroGridSpecijaliste.Rows.Clear();
+                        RefreshUputData(aktivni_pacijent); break; }
             }
         }
 
@@ -769,9 +773,10 @@ namespace HippocratesDoctor
         {
             //metroGridKlinike.Rows.Clear();
             //metroGridSpecijaliste.Rows.Clear();
-
-            GetKlinikeData((KlinickiCentar)metroGridKlinickiCentri.SelectedRows[0].DataBoundItem);
-            GetSpecijalisteData((Klinika)metroGridKlinike.SelectedRows[0].DataBoundItem);
+            if (metroGridKlinickiCentri.Rows.Count > 0)
+                GetKlinikeData((KlinickiCentar)metroGridKlinickiCentri.SelectedRows[0].DataBoundItem);
+            if (metroGridKlinike.Rows.Count > 0)
+                GetSpecijalisteData((Klinika)metroGridKlinike.SelectedRows[0].DataBoundItem);
             //RefreshUputData(aktivni_pacijent);
         }
 
