@@ -1487,12 +1487,24 @@ namespace Hippocrates
                 var result = MessageBox.Show("Pacijent sadrzi informacije o vakcinama,terapijama,dijagnozama,ukoliko nastavite sa operacijom brisanja svi podaci o navedenim ce biti obrisani. \n Da li zelite da nastavite sa brisanjem? ", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    s.Delete(pac);
+                    s.CreateSQLQuery("delete from OCENA where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from PRIMIO_VAKCINU where JMBGP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from TERAPIJA where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from DIJAGNOSTIFIKOVANO where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from TERMIN_BOLNICA where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from TERMIN where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from ZAHTEV_ZA_PROMENU where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from PACIJENT where JMBG like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    
+                    //s.Close();
+                    //s = DataLayer.GetSession();
+                    //pac = s.Load<Pacijent>(pomIndex);
+                    //s.Delete(pac);
                 }
 
 
-                s.Flush();
-                
+                // s.Flush();
+
                 MessageBox.Show("Uspeno ste obrisali pacijenta");
                 string[] parametars = cB_izborLekara_pac_brisanje.SelectedItem.ToString().Split(' ');
                 refreshDGVPacijent(dGV_pacijent_brisanje, parametars[0], parametars[1]);
@@ -1503,6 +1515,8 @@ namespace Hippocrates
             }
             s.Close();
         }
+
+       
 
         private void cB_izborDZ_pac_brisanje_Enter(object sender, EventArgs e)
         {

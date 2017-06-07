@@ -203,6 +203,9 @@
             this.tb_jmbg_lekara = new System.Windows.Forms.TextBox();
             this.tab_za_brisanje_podataka = new MetroFramework.Controls.MetroTabPage();
             this.tabControl_za_brisanje = new MetroFramework.Controls.MetroTabControl();
+            this.tab_brisanje_dz = new MetroFramework.Controls.MetroTabPage();
+            this.btn_brisanje_dz = new System.Windows.Forms.Button();
+            this.dGV_brisanje_dz = new System.Windows.Forms.DataGridView();
             this.tab_brisanje_ter_dijag_vak = new MetroFramework.Controls.MetroTabPage();
             this.panel11 = new System.Windows.Forms.Panel();
             this.cb_brisanje_ter = new System.Windows.Forms.ComboBox();
@@ -225,9 +228,6 @@
             this.label124 = new System.Windows.Forms.Label();
             this.btn_brisanje_vakcine = new System.Windows.Forms.Button();
             this.label123 = new System.Windows.Forms.Label();
-            this.tab_brisanje_dz = new MetroFramework.Controls.MetroTabPage();
-            this.btn_brisanje_dz = new System.Windows.Forms.Button();
-            this.dGV_brisanje_dz = new System.Windows.Forms.DataGridView();
             this.tab_brisanje_medRad = new MetroFramework.Controls.MetroTabPage();
             this.label97 = new System.Windows.Forms.Label();
             this.cB_odabirDZ_medRad_brisanje = new System.Windows.Forms.ComboBox();
@@ -519,12 +519,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_lekar)).BeginInit();
             this.tab_za_brisanje_podataka.SuspendLayout();
             this.tabControl_za_brisanje.SuspendLayout();
+            this.tab_brisanje_dz.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_brisanje_dz)).BeginInit();
             this.tab_brisanje_ter_dijag_vak.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
             this.panel13.SuspendLayout();
-            this.tab_brisanje_dz.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_brisanje_dz)).BeginInit();
             this.tab_brisanje_medRad.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_medRad_brisanje)).BeginInit();
             this.tab_obrisi_lekara.SuspendLayout();
@@ -692,7 +692,7 @@
             this.GeneralControl.Controls.Add(this.tab_zakazi_spec);
             this.GeneralControl.Location = new System.Drawing.Point(200, 76);
             this.GeneralControl.Name = "GeneralControl";
-            this.GeneralControl.SelectedIndex = 3;
+            this.GeneralControl.SelectedIndex = 2;
             this.GeneralControl.Size = new System.Drawing.Size(801, 694);
             this.GeneralControl.TabIndex = 4;
             this.GeneralControl.UseSelectable = true;
@@ -2629,11 +2629,52 @@
             this.tabControl_za_brisanje.Controls.Add(this.tab_brisanje_admin_dZ);
             this.tabControl_za_brisanje.Location = new System.Drawing.Point(3, 3);
             this.tabControl_za_brisanje.Name = "tabControl_za_brisanje";
-            this.tabControl_za_brisanje.SelectedIndex = 1;
+            this.tabControl_za_brisanje.SelectedIndex = 4;
             this.tabControl_za_brisanje.Size = new System.Drawing.Size(787, 718);
             this.tabControl_za_brisanje.TabIndex = 3;
             this.tabControl_za_brisanje.UseSelectable = true;
             this.tabControl_za_brisanje.SelectedIndexChanged += new System.EventHandler(this.tabControl_za_brisanje_SelectedIndexChanged);
+            // 
+            // tab_brisanje_dz
+            // 
+            this.tab_brisanje_dz.Controls.Add(this.btn_brisanje_dz);
+            this.tab_brisanje_dz.Controls.Add(this.dGV_brisanje_dz);
+            this.tab_brisanje_dz.HorizontalScrollbarBarColor = true;
+            this.tab_brisanje_dz.HorizontalScrollbarHighlightOnWheel = false;
+            this.tab_brisanje_dz.HorizontalScrollbarSize = 10;
+            this.tab_brisanje_dz.Location = new System.Drawing.Point(4, 38);
+            this.tab_brisanje_dz.Name = "tab_brisanje_dz";
+            this.tab_brisanje_dz.Size = new System.Drawing.Size(779, 676);
+            this.tab_brisanje_dz.TabIndex = 0;
+            this.tab_brisanje_dz.Text = "Obrisi podatke o domu zdravlja";
+            this.tab_brisanje_dz.VerticalScrollbarBarColor = true;
+            this.tab_brisanje_dz.VerticalScrollbarHighlightOnWheel = false;
+            this.tab_brisanje_dz.VerticalScrollbarSize = 10;
+            // 
+            // btn_brisanje_dz
+            // 
+            this.btn_brisanje_dz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_brisanje_dz.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_brisanje_dz.Location = new System.Drawing.Point(538, 563);
+            this.btn_brisanje_dz.Name = "btn_brisanje_dz";
+            this.btn_brisanje_dz.Size = new System.Drawing.Size(157, 45);
+            this.btn_brisanje_dz.TabIndex = 3;
+            this.btn_brisanje_dz.Text = "Obrisi dom zdravlja";
+            this.btn_brisanje_dz.UseVisualStyleBackColor = true;
+            this.btn_brisanje_dz.Click += new System.EventHandler(this.btn_brisanje_dz_Click);
+            // 
+            // dGV_brisanje_dz
+            // 
+            this.dGV_brisanje_dz.AllowUserToAddRows = false;
+            this.dGV_brisanje_dz.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dGV_brisanje_dz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV_brisanje_dz.Location = new System.Drawing.Point(9, 51);
+            this.dGV_brisanje_dz.Name = "dGV_brisanje_dz";
+            this.dGV_brisanje_dz.Size = new System.Drawing.Size(686, 484);
+            this.dGV_brisanje_dz.TabIndex = 2;
+            this.dGV_brisanje_dz.SelectionChanged += new System.EventHandler(this.dGV_brisanje_dz_SelectionChanged);
             // 
             // tab_brisanje_ter_dijag_vak
             // 
@@ -2897,47 +2938,6 @@
             this.label123.Size = new System.Drawing.Size(146, 24);
             this.label123.TabIndex = 66;
             this.label123.Text = "Brisanje vakcine";
-            // 
-            // tab_brisanje_dz
-            // 
-            this.tab_brisanje_dz.Controls.Add(this.btn_brisanje_dz);
-            this.tab_brisanje_dz.Controls.Add(this.dGV_brisanje_dz);
-            this.tab_brisanje_dz.HorizontalScrollbarBarColor = true;
-            this.tab_brisanje_dz.HorizontalScrollbarHighlightOnWheel = false;
-            this.tab_brisanje_dz.HorizontalScrollbarSize = 10;
-            this.tab_brisanje_dz.Location = new System.Drawing.Point(4, 38);
-            this.tab_brisanje_dz.Name = "tab_brisanje_dz";
-            this.tab_brisanje_dz.Size = new System.Drawing.Size(779, 676);
-            this.tab_brisanje_dz.TabIndex = 0;
-            this.tab_brisanje_dz.Text = "Obrisi podatke o domu zdravlja";
-            this.tab_brisanje_dz.VerticalScrollbarBarColor = true;
-            this.tab_brisanje_dz.VerticalScrollbarHighlightOnWheel = false;
-            this.tab_brisanje_dz.VerticalScrollbarSize = 10;
-            // 
-            // btn_brisanje_dz
-            // 
-            this.btn_brisanje_dz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_brisanje_dz.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_brisanje_dz.Location = new System.Drawing.Point(538, 563);
-            this.btn_brisanje_dz.Name = "btn_brisanje_dz";
-            this.btn_brisanje_dz.Size = new System.Drawing.Size(157, 45);
-            this.btn_brisanje_dz.TabIndex = 3;
-            this.btn_brisanje_dz.Text = "Obrisi dom zdravlja";
-            this.btn_brisanje_dz.UseVisualStyleBackColor = true;
-            this.btn_brisanje_dz.Click += new System.EventHandler(this.btn_brisanje_dz_Click);
-            // 
-            // dGV_brisanje_dz
-            // 
-            this.dGV_brisanje_dz.AllowUserToAddRows = false;
-            this.dGV_brisanje_dz.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dGV_brisanje_dz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV_brisanje_dz.Location = new System.Drawing.Point(9, 51);
-            this.dGV_brisanje_dz.Name = "dGV_brisanje_dz";
-            this.dGV_brisanje_dz.Size = new System.Drawing.Size(686, 484);
-            this.dGV_brisanje_dz.TabIndex = 2;
-            this.dGV_brisanje_dz.SelectionChanged += new System.EventHandler(this.dGV_brisanje_dz_SelectionChanged);
             // 
             // tab_brisanje_medRad
             // 
@@ -3247,10 +3247,10 @@
             this.tab_azuriranje.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_pacijenata);
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_medRadnik);
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_lekara);
             this.tab_azuriranje.Controls.Add(this.Tab_za_upravljanje_zahtevima);
-            this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_pacijenata);
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_vak_dij_ter);
             this.tab_azuriranje.Controls.Add(this.tab_azuriranje_admin_dz);
             this.tab_azuriranje.Controls.Add(this.Tab_azuriranje_domaZdravlja);
@@ -6091,6 +6091,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dGV_unosenje_lekar)).EndInit();
             this.tab_za_brisanje_podataka.ResumeLayout(false);
             this.tabControl_za_brisanje.ResumeLayout(false);
+            this.tab_brisanje_dz.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dGV_brisanje_dz)).EndInit();
             this.tab_brisanje_ter_dijag_vak.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
@@ -6098,8 +6100,6 @@
             this.panel12.PerformLayout();
             this.panel13.ResumeLayout(false);
             this.panel13.PerformLayout();
-            this.tab_brisanje_dz.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dGV_brisanje_dz)).EndInit();
             this.tab_brisanje_medRad.ResumeLayout(false);
             this.tab_brisanje_medRad.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_medRad_brisanje)).EndInit();
