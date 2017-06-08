@@ -473,6 +473,7 @@ namespace HippocratesDoctor
            
                 case 1:
                     {
+                        //metroTabDijagnoza.Select();
                         GetAllPatientBasicInfo();
                         break;
                     }
@@ -480,6 +481,7 @@ namespace HippocratesDoctor
                     {
                         if (ActivePatientNotNull(aktivni_pacijent))
                         {
+                            metroTabPacijentInfo.SelectedIndex = 0; // Selektuj prvi (dijagnoze)
                             RefreshDijagnozeData(aktivni_pacijent);
                             metroLabelSelektovaniPacijentInfo.Text = "Selektovani pacijent: " + GetPatientBasicInfo();
                             metroLabelSelektovaniPacijentInfo.ForeColor = Color.DarkGreen;
@@ -499,7 +501,16 @@ namespace HippocratesDoctor
             MetroGrid mg = sender as MetroGrid;
             if (mg == null)
                 throw new Exception("Error in MetroGrid conversion");
-            MetroMessageBox.Show(this, "Selektovali ste " + mg.SelectedCells[0].Value.ToString() + " LBO " + mg.SelectedCells[1].Value.ToString(), "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            MetroMessageBox.Show(this,
+                "Selektovali ste " + mg.SelectedRows[0].Cells["Ime"].Value.ToString() + " " +
+                mg.SelectedRows[0].Cells["Prezime"].Value.ToString(),
+                "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+          //  MetroMessageBox.Show(this,
+            //    "Selektovali ste " + mg.SelectedCells[0].Value.ToString() + " " + mg.SelectedCells["Prezime"].Value.ToString() + 
+              //  " LBO " + mg.SelectedCells[1].Value.ToString(), "Info!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             aktivni_pacijent = (Pacijent)mg.SelectedRows[0].DataBoundItem;
             PacijentForm pf = new PacijentForm(session, aktivni_pacijent); // jmbg (from MetroGrid), lbo(not needed)
             pf.ShowDialog();
@@ -583,7 +594,11 @@ namespace HippocratesDoctor
                 case 1: { RefreshVakcineData(aktivni_pacijent); break; }
                 case 2: { RefreshTerapijeData(aktivni_pacijent); break; }
                 case 3: { metroLabelOceniPacijentaInfo.Text = GetPatientBasicInfo(); break; }
-                case 4: { RefreshUputData(aktivni_pacijent); break; }
+                case 4: {
+                        metroGridKlinickiCentri.Rows.Clear();
+                        metroGridKlinike.Rows.Clear();
+                        metroGridSpecijaliste.Rows.Clear();
+                        RefreshUputData(aktivni_pacijent); break; }
             }
         }
 
@@ -758,9 +773,10 @@ namespace HippocratesDoctor
         {
             //metroGridKlinike.Rows.Clear();
             //metroGridSpecijaliste.Rows.Clear();
-
-            GetKlinikeData((KlinickiCentar)metroGridKlinickiCentri.SelectedRows[0].DataBoundItem);
-            GetSpecijalisteData((Klinika)metroGridKlinike.SelectedRows[0].DataBoundItem);
+            if (metroGridKlinickiCentri.Rows.Count > 0)
+                GetKlinikeData((KlinickiCentar)metroGridKlinickiCentri.SelectedRows[0].DataBoundItem);
+            if (metroGridKlinike.Rows.Count > 0)
+                GetSpecijalisteData((Klinika)metroGridKlinike.SelectedRows[0].DataBoundItem);
             //RefreshUputData(aktivni_pacijent);
         }
 

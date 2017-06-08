@@ -1374,26 +1374,25 @@ namespace Hippocrates
             
             ISession s = DataLayer.GetSession();
             DomZdravlja dz = s.Load<DomZdravlja>(pomIndex);
-            if(dz.Lekari.Count == 0 && dz.Administratori.Count == 0 && dz.MedicinskoOsoblje.Count == 0)
+            try
             {
-                s.Delete(dz);
-                s.Flush();
-                s.Close();
-                MessageBox.Show("Uspesno ste obrisali dom zdravlja");
-                refreshDGVDomovi(dGV_brisanje_dz);
-            }
-            else
-            {
-                var result = MessageBox.Show("U domu zdravlja postoje medicinski radnici,administratori i lekari kao i njihovi pacijenti,terapije i dijagnoze,ako izvrsite opciju brisanja podaci o navedenim ce biti takodje obrisani. \n Da li zelite da nastavite sa brisanjem? ", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(result == DialogResult.Yes)
+                if (dz.Lekari.Count == 0 && dz.Administratori.Count == 0 && dz.MedicinskoOsoblje.Count == 0)
                 {
                     s.Delete(dz);
+                    s.Flush();
+                    s.Close();
+                    MessageBox.Show("Uspesno ste obrisali dom zdravlja");
+                    refreshDGVDomovi(dGV_brisanje_dz);
                 }
                 else
                 {
                     MessageBox.Show("Promenite dom zdravlja lekarima,medicinskim radnicima i administratorima");
                 }
             }
+            catch(Exception ex) {
+                MessageBox.Show("Promenite dom zdravlja lekarima,medicinskim radnicima i administratorima");
+            }
+            
             
         }
         private void dGV_brisanje_dz_SelectionChanged(object sender, EventArgs e)
@@ -1418,22 +1417,17 @@ namespace Hippocrates
             if (il.Pacijenti.Count == 0)
             {
                 s.Delete(il);
+                s.Flush();
+                MessageBox.Show("Uspesno ste obrisali lekara.");
             }
             else
             {
-                var result = MessageBox.Show("Lekar je izabran od strane pacijenata, ukoliko izvrsite opciju brisanja podaci o navedenim ce biti takodje obrisani kao i o terapijama i dijagnozama. \n Da li zelite da nastavite sa brisanjem? ", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    s.Delete(il);
-                }
-                else
-                {
-                    MessageBox.Show("Promenite izabranog lekara svim pacijentima kojima je izabran lekar oznacen u tabeli");
-                }
+                MessageBox.Show("Promenite izabranog lekara svim pacijentima kojima je izabran lekar oznacen u tabeli");
+                
             }
-            s.Flush();
+            
             s.Close();
-            MessageBox.Show("Uspesno ste obrisali lekara.");
+            
             refreshDGVLekari(dGV_lekar_brisanje,cB_odabriDZ_lekar_brisanje.SelectedItem.ToString());
             
         }
@@ -1493,12 +1487,24 @@ namespace Hippocrates
                 var result = MessageBox.Show("Pacijent sadrzi informacije o vakcinama,terapijama,dijagnozama,ukoliko nastavite sa operacijom brisanja svi podaci o navedenim ce biti obrisani. \n Da li zelite da nastavite sa brisanjem? ", " ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    s.Delete(pac);
+                    s.CreateSQLQuery("delete from OCENA where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from PRIMIO_VAKCINU where JMBGP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from TERAPIJA where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from DIJAGNOSTIFIKOVANO where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from TERMIN_BOLNICA where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from TERMIN where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from ZAHTEV_ZA_PROMENU where MATBRP like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from PACIJENT where JMBG like '" + pac.Jmbg + "'").ExecuteUpdate();
+                    
+                    //s.Close();
+                    //s = DataLayer.GetSession();
+                    //pac = s.Load<Pacijent>(pomIndex);
+                    //s.Delete(pac);
                 }
 
 
-                s.Flush();
-                
+                // s.Flush();
+
                 MessageBox.Show("Uspeno ste obrisali pacijenta");
                 string[] parametars = cB_izborLekara_pac_brisanje.SelectedItem.ToString().Split(' ');
                 refreshDGVPacijent(dGV_pacijent_brisanje, parametars[0], parametars[1]);
@@ -1509,6 +1515,8 @@ namespace Hippocrates
             }
             s.Close();
         }
+
+       
 
         private void cB_izborDZ_pac_brisanje_Enter(object sender, EventArgs e)
         {
@@ -1766,7 +1774,11 @@ namespace Hippocrates
                     string[] vakcinaSifra = cb_vakcina_brisanje.SelectedItem.ToString().Split(' ');
                     Vakcina v = s.Load<Vakcina>(vakcinaSifra[1]);
                     s.CreateSQLQuery("delete from PRIMIO_VAKCINU where SIFRA_VAKCINE=" + vakcinaSifra[1]).ExecuteUpdate();
+
+                    s.Close();
+                    s = DataLayer.GetSession();
                     s.Delete(v);
+                    s.Flush();
                     MessageBox.Show("Uspeno ste obrisali vakcinu. ");
                     cb_vakcina_brisanje.Text = string.Empty;
                 }
@@ -1794,9 +1806,9 @@ namespace Hippocrates
                 {
                     string[] dijagSifra = cb_brisanje_dijagnoze.SelectedItem.ToString().Split(' ');
                     Dijagnoza d = s.Load<Dijagnoza>(dijagSifra[0]);
-                    s.CreateSQLQuery("delete from DIJAGNOSTIFIKOVANO where ŠIFRA_DIJAGNOZE='" + dijagSifra[0]+"'").ExecuteUpdate();
-                    s.Delete(d);
-                    s.Flush();
+                    s.CreateSQLQuery("delete from DIJAGNOSTIFIKOVANO where ŠIFRA_DIJAGNOZE like '" + dijagSifra[0] + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from TERAPIJA where ŠIFRA_DIJAGNOZE like '" + dijagSifra[0] + "'").ExecuteUpdate();
+                    s.CreateSQLQuery("delete from DIJAGNOZA where ŠIFRA like '" + dijagSifra[0] + "'").ExecuteUpdate();
                     MessageBox.Show("Uspeno ste obrisali dijagnozu. ");
                     cb_brisanje_dijagnoze.Text = string.Empty;
                 }
@@ -2830,7 +2842,7 @@ namespace Hippocrates
                 ISession s = DataLayer.GetSession();
                 Pacijent pac = s.Load<Pacijent>(pomIndex);
                 string dijagnozaIzCB = cB_Dijagnoze_pacijenta_azuriranje.SelectedItem.ToString();
-                string indexDijagnoze = dijagnozaIzCB.Substring(0, dijagnozaIzCB.IndexOf("-"));
+                string indexDijagnoze = dijagnozaIzCB.Substring(0, dijagnozaIzCB.IndexOf(" "));
                 Dijagnoza d = s.Load<Dijagnoza>(indexDijagnoze);
                 Terapija ter = new Terapija()
                 {
@@ -2933,7 +2945,17 @@ namespace Hippocrates
         }
         private void cB_Dijagnoze_pacijenta_azuriranje_Enter(object sender, EventArgs e)
         {
-
+            cB_Dijagnoze_pacijenta_azuriranje.Items.Clear();
+            cB_Dijagnoze_pacijenta_azuriranje.Text = string.Empty;
+            
+            ISession s = DataLayer.GetSession();
+            IQuery iq = s.CreateQuery("from Dijagnoza");
+            IList<Dijagnoza> dijag = iq.List<Dijagnoza>();
+            foreach (Dijagnoza d in dijag)
+            {
+                cB_Dijagnoze_pacijenta_azuriranje.Items.Add(d.Sifra + " " + d.Ime);
+            }
+            s.Close();
         }
         #endregion
 
