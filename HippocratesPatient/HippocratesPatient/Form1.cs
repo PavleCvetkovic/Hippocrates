@@ -11,6 +11,7 @@ using MetroFramework.Forms;
 using Hippocrates.Data;
 using HippocratesPatient.Controller;
 using MetroFramework;
+using System.Net;
 
 namespace HippocratesPatient
 {
@@ -48,6 +49,13 @@ namespace HippocratesPatient
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
+            if (!CheckForInternetConnection())
+            {
+                MetroMessageBox.Show(this, "Nije dostupna internet konekcija. Molimo pokušajte nakon uspostavljanja " +
+                    "internet konekcije.", "Warning!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             metroButton1.Text = "Učitavanje u toku...";
 
             controller.OnLogin();
@@ -68,6 +76,24 @@ namespace HippocratesPatient
         {
             if (!(Char.IsDigit(e.KeyChar) || Char.IsControl(e.KeyChar)))
                 e.Handled = true;
+        }
+
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (var stream = client.OpenRead("http://www.google.com"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
