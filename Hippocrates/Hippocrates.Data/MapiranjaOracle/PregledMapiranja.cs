@@ -19,9 +19,11 @@ namespace Hippocrates.Data.MapiranjaOracle
             Map(x => x.Datum).Column("DATUM");
             Map(x => x.Vreme).Column("VREME");
             Map(x => x.Prostorija).Column("PROSTORIJA");
+            Map(x => x.IdIzabranogLekara).Column("ID_IZABRANOG_LEKARA");
 
             References(x => x.Specijalista).Column("ID_SPECIJALISTE");
             References(x => x.Pacijent).Column("ID_PACIJENTA");
+           
         }
     }
 }
